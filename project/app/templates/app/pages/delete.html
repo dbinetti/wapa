@@ -1,0 +1,21 @@
+{% extends 'app/pages/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Delete Account{% endblock title %}
+
+{% block content %}
+  <section>
+    <p class='lead'>
+      Deleting your account will remove you permanently from the system.  Please be certain you want to delete your account, as there is no undo!
+    </p>
+  </section>
+  <section class='my-5'>
+    <form method='post' role='form'>
+      {% csrf_token %}
+      {% bootstrap_form_errors form %}
+      {% bootstrap_field form.confirm %}
+      {% bootstrap_button "Delete My Account and All Related Data" button_type='submit' button_class='btn btn-danger btn-lg btn-block' %}
+    </form>
+  </section>
+{% endblock content %}

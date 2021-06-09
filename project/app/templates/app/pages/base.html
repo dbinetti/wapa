@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+{% load app_tags %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+  <script src="https://kit.fontawesome.com/1c8c066f08.js" crossorigin="anonymous"></script>
+  <script
+    src="https://browser.sentry-cdn.com/6.4.1/bundle.tracing.min.js"
+    integrity="sha384-hddl7X3flGhIMJgLUpwZDzLOWf8GDApKvKos/jS4z7Uz/sejXA0thkp9JCZgoDG4"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('{% get_env_var "POSTHOG_API_KEY" %}',{api_host:'{% get_env_var "POSTHOG_HOST" %}'});
+  </script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block metatags %}
+    {% endblock metatags %}
+
+    <link rel="shortcut icon" href="{%  static 'app/favicon.png' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+    {% block customstyles %}
+    {% endblock customstyles %}
+
+    {% block formmedia %}
+    {% endblock formmedia %}
+
+    <title>West Ada Parents Association {% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    {% block topnav %}
+      <nav class="navbar navbar-expand-sm navbar-light">
+        <a class="navbar-brand" href="{% url 'index' %}"><img class="d-inline-block mr-1" style='max-width:200px;' src='{% static "app/wide_logo.png" %}'></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
+              <li class='nav-item'>
+                <a href="{% url 'account' %}" class='align-bottom far fa-cog mr-3'>&nbsp;Account</a>
+              </li>
+
+              <span class="visible-xs-inline mb-3"></span>
+              <li class='nav-item'>
+                <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
+              </li>
+
+            {% else %}
+              <li class='nav-item'>
+                <a href="{% url 'login' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    {% endblock topnav %}
+
+    <div id="content" class='container'>
+      {% bootstrap_messages %}
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <br>
+      <nav class="navbar navbar-expand-sm navbar-light">
+        <ul class="nav nav-pills mr-auto">
+          <li class="nav-item ml-3">
+            <a href="{% url 'about' %}"><small>About</small></a>
+          </li>
+          <li class="nav-item ml-3">
+            <a href="{% url 'faq' %}"><small>FAQ</small></a>
+          </li>
+          <li class="nav-item ml-3">
+            <a href="{% url 'privacy' %}"><small>Privacy</small></a>
+          </li>
+          <li class="nav-item ml-3">
+            <a href="{% url 'terms' %}"><small>Terms</small></a>
+          </li>
+          <li class="nav-item ml-3">
+            <a href="{% url 'support' %}"><small>Support</small></a>
+          </li>
+        </ul>
+      </nav>
+    <br>
+    <br>
+    <br>
+
+    <script>
+      Sentry.init({
+        dsn: "{% get_env_var 'SENTRY_DSN' %}",
+        environment: 'production',
+      });
+    </script>
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+  </body>
+</html>

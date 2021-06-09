@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<script src="https://browser.sentry-cdn.com/5.20.1/bundle.min.js" integrity="O8HdAJg1h8RARFowXd2J/r5fIWuinSBtjhwQoPesfVILeXzGpJxvyY/77OaPPXUo" crossorigin="anonymous"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Page Not Found</title>
+  </head>
+  <body>
+    <div id="content" class='container'>
+      <div class='jumbotron my-5'>
+        <h1>Sorry!</h1>
+
+        <p class='lead'>
+          Sorry, we couldn't find that page.  Please return to the <a href='{% url "index" %}'>homepage</a>.
+        </p>
+      </div>
+    </div>
+    {% if sentry_event_id %}
+      <script>
+        Sentry.init({dsn: '{{sentry_dsn}}'});
+        Sentry.showReportDialog({ eventId: '{{sentry_event_id}}' });
+      </script>
+    {% endif %}
+  </body>
+</html>

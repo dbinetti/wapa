@@ -1,0 +1,49 @@
+{% extends 'app/pages/base.html' %}
+
+{% load bootstrap4 %}
+{% load humanize %}
+
+{% block formmedia %}
+  {{ form.media }}
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
+{% endblock formmedia %}
+
+{% block title %}Account Page{% endblock title %}
+
+{% block content %}
+  <section class='mt-5'>
+    <h2 class='my-3 col-md-12'>
+      Account
+    </h2>
+    <p class='lead col-md-8'>
+      Review/Update your Account Information Below
+    </p>
+  </section>
+  <section class='mt-5 col-md-8'>
+    <form method='post'>
+      {% csrf_token %}
+      <div class='card'>
+        <h4 class='card-header'>Personal Profile</h4>
+        <div class="card-body">
+          <div class='card-title'>
+            <p>
+              Update
+            </p>
+          </div>
+          <div class='card-text'>
+              {% bootstrap_form_errors form %}
+              {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
+          </div>
+        </div>
+        <div class='card-footer'>
+          {% bootstrap_button "Save" button_type='submit' size='large' %}
+          {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+        </div>
+      </form>
+    </div>
+    <div class='text-right'>
+      <a href='{% url "delete" %}'><span class='text-danger text-small'>Delete Account</span></a>
+    </div>
+  </section>
+{% endblock content %}

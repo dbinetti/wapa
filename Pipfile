@@ -1,0 +1,47 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+django-debug-toolbar = "*"
+django-querycount = "*"
+factory-boy = "*"
+faker = "*"
+pytest = "*"
+pytest-django = "*"
+pylint = "*"
+
+[packages]
+django = "*"
+django-environ = "*"
+psycopg2 = "*"
+whitenoise = "*"
+ipython = "*"
+brotli = "*"
+auth0-python = "*"
+gunicorn = "*"
+django-redis = "*"
+django-rq = "*"
+django-bootstrap4 = "*"
+requests = "*"
+sendgrid = "*"
+django-sendgrid-v5 = "*"
+django-model-utils = "*"
+mailchimp3 = "*"
+posthog = "*"
+sentry-sdk = "*"
+django-hashid-field = "*"
+phonenumberslite = "*"
+django-phonenumber-field = "*"
+django-address = "*"
+nameparser = "*"
+pyjwt = "*"
+django-reversion = "*"
+django-cloudinary-storage = "*"
+pillow = "*"
+django-fsm = "*"
+django-fsm-admin = "*"
+
+[requires]
+python_version = "3.9"

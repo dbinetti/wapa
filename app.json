@@ -1,0 +1,102 @@
+{
+  "name": "wapa",
+  "description": "",
+  "repository": "https://github.com/dbinetti/wapa",
+  "stack": "heroku-20",
+  "success_url": "/admin/",
+  "buildpacks": [{
+    "url": "heroku/python"
+  }],
+  "formation": {
+    "web": {
+      "quantity": "1",
+      "size": "hobby"
+    },
+    "worker": {
+      "quantity": "1",
+      "size": "hobby"
+    }
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev",
+    "heroku-redis:hobby-dev"
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": {
+      "description": "Configures which settings to use.  Do not edit.",
+      "value": "settings.prod",
+      "required": true
+    },
+    "PYTHONPATH": {
+      "description": "Configures the PYTHONPATH.  Do not edit.",
+      "value": "project",
+      "required": true
+    },
+    "SECRET_KEY": {
+      "description": "Required by Django.  Auto-generated.",
+      "generator": "secret",
+      "required": true
+    }
+  },
+  "environments": {
+    "test": {
+      "addons": [
+        "heroku-postgresql:in-dyno",
+        "heroku-redis:in-dyno"
+      ],
+      "env": {
+        "ACTIVE": "False",
+        "DJANGO_SETTINGS_MODULE": "settings.base",
+        "PYTHONPATH": "project",
+        "SECRET_KEY": {
+          "generator": "secret"
+        },
+        "HASHID_FIELD_SALT": {
+          "generator": "secret"
+        },
+        "AUTH0_CLIENT_ID": {
+          "generator": "secret"
+        },
+        "AUTH0_CLIENT_SECRET": {
+          "generator": "secret"
+        },
+        "AUTH0_DOMAIN": {
+          "value": "http://foo.com"
+        },
+        "AUTH0_TENANT": {
+          "value": "http://foo.com"
+        },
+        "MAILCHIMP_API_KEY": {
+          "generator": "secret"
+        },
+        "MAILCHIMP_AUDIENCE_ID": {
+          "generator": "secret"
+        },
+        "POSTHOG_API_KEY": {
+          "generator": "secret"
+        },
+        "POSTHOG_HOST": {
+          "generator": "secret"
+        },
+        "SENDGRID_API_KEY": {
+          "generator": "secret"
+        },
+        "GOOGLE_API_KEY": {
+          "generator": "secret"
+        },
+        "CLOUDINARY_URL": {
+          "value": "cloudinary://foo:bar@baz"
+        },
+        "SENTRY_ENVIRONMENT": {
+          "value": "Test"
+        },
+        "SENTRY_DSN": {
+          "value": "https://foo@sentry.io/123"
+        }
+      },
+      "scripts": {
+        "test": "pytest"
+      }
+    }
+  }
+}

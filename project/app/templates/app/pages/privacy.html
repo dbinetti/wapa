@@ -1,0 +1,31 @@
+{% extends 'app/pages/base.html' %}
+
+{% block title %}Privacy Policy{% endblock title %}
+
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Privacy Policy
+    </h2>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <p>
+        Our privacy policy is fairly simple:
+      </p>
+      <ul class='list-styled'>
+        <li>We don't share your information with any external persons or organizations &mdash; period.</li>
+        <li>Any personally-identifiable information you provide is kept private unless you expressly give permission to make it public.</li>
+        <li>If you choose to remove your account, all of your information is deleted immediately.</li>
+      </ul>
+      <p>
+        If you signed up using your Google, Facebook, or Apple account, that information is used solely for authentication.  We access your name and email once, at registration, and store it on our secured servers in case we need to reach you for adminstrative notices.  It is not used for any other purpose, and is not shared in any form.
+      </p>
+      <p>
+        To remove your account, simply log in and click the <a href='{% url "delete" %}'>Delete Account</a> link at the bottom of your account page.   This will fully delete all data (logins, personal information, history, etc.) from our system.
+      </p>
+    </div>
+  </section>
+{% endblock content %}

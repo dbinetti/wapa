@@ -1,0 +1,20 @@
+{% extends 'app/pages/base.html' %}
+
+{% block title %}Terms of Service{% endblock title %}
+
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Terms of Service
+    </h2>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <p>
+        This website is operated on a volunteer basis, and all serivces are provided on an as-is basis.  There are no warranties or guarantees.  We protect your data per our <a href='{% url "privacy" %}'>privacy policy</a>.
+      </p>
+    </div>
+  </section>
+{% endblock content %}
