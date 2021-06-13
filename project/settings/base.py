@@ -101,6 +101,7 @@ vars().update(EMAIL_CONFIG)
 STATIC_ROOT = root('staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+WHITENOISE_USE_FINDERS = True
 
 # Media File Management
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
