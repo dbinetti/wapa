@@ -1,4 +1,5 @@
 # First-Party
+from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from hashid_field import HashidAutoField
@@ -17,6 +18,11 @@ class Account(models.Model):
     name = models.CharField(
         max_length=100,
         blank=False,
+    )
+    address = AddressField(
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
     )
     notes = models.TextField(
         max_length=2000,

@@ -18,6 +18,7 @@ class AccountAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
+        'address',
         'notes',
     ]
     list_display = [

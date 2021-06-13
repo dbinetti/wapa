@@ -254,6 +254,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'django_rq',
     'reversion',
+    'address',
     'cloudinary',
     'bootstrap4',
     'phonenumber_field',
