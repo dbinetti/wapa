@@ -3,7 +3,7 @@ from .base import *
 # Core
 SECURE_SSL_REDIRECT = True
 ALLOWED_HOSTS = [
-    # '.westadapa.com',
+    '.westadaparents.com',
     '.herokuapp.com',
 ]
 
@@ -14,7 +14,7 @@ SENDGRID_TRACK_CLICKS_HTML = False
 SENDGRID_TRACK_CLICKS_PLAIN = False
 
 # Sentry
-# SENTY_RELEASE = env("HEROKU_SLUG_COMMIT")
+SENTY_RELEASE = env("HEROKU_SLUG_COMMIT")
 
 # Cloudinary
 CLOUDINARY_PREFIX = 'wapa'
