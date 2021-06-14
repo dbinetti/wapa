@@ -134,7 +134,7 @@ def logout(request):
     log_out(request)
     params = {
         'client_id': settings.AUTH0_CLIENT_ID,
-        'return_to': request.build_absolute_uri(reverse('index')),
+        'return_to': request.build_absolute_uri(reverse('goodbye')),
     }
     logout_url = requests.Request(
         'GET',
@@ -146,6 +146,14 @@ def logout(request):
         "You Have Been Logged Out!",
     )
     return redirect(logout_url)
+
+def goodbye(request):
+    return render(
+        request,
+        'app/pages/goodbye.html',
+        context={
+        },
+    )
 
 # Account
 @user_passes_test(is_verified, login_url='verify')
