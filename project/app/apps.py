@@ -21,5 +21,6 @@ class AppConfig(AppConfig):
             ],
             **settings.SENTRY_CONFIG,
         )
-        posthog.api_key = settings.POSTHOG_API_KEY
+        posthog.project_api_key = settings.POSTHOG_API_KEY
+        # posthog.disabled = settings.DEBUG
         import app.signals
