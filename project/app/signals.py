@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from .models import User
 from .tasks import create_account_from_user
 from .tasks import create_or_update_mailchimp_from_user
-from .tasks import delete_auth0_user
+from .tasks import delete_auth0_from_user
 from .tasks import delete_mailchimp_from_user
 from .tasks import update_auth0_from_user
 
@@ -21,6 +21,6 @@ def user_post_save(sender, instance, created, **kwargs):
 
 @receiver(pre_delete, sender=User)
 def user_pre_delete(sender, instance, **kwargs):
-    delete_auth0_user(instance.username)
-    delete_mailchimp_from_account(instance)
+    delete_auth0_user_from_user(instance)
+    delete_mailchimp_from_user(instance)
     return
