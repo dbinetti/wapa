@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -19,6 +20,9 @@ from .forms import DeleteForm
 
 log = logging.getLogger(__name__)
 
+# Verified Email
+def is_verified(user):
+    return True
 
 # Root
 def index(request):
@@ -69,6 +73,16 @@ def login(request):
         params=params,
     ).prepare().url
     return redirect(url)
+
+def verify(request):
+    email = request.user.email
+    return render(
+        request,
+        'app/pages/verify.html',
+        context={
+            'email': email,
+        },
+    )
 
 def callback(request):
     # Reject if state doesn't match
@@ -134,6 +148,7 @@ def logout(request):
     return redirect(logout_url)
 
 # Account
+@user_passes_test(is_verified, login_url='verify')
 @login_required
 def account(request):
     account = request.user.account

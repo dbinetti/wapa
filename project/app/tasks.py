@@ -73,7 +73,6 @@ def create_account_from_user(user):
 # Mailchimp
 def get_mailchimp_client():
     enabled = not settings.DEBUG
-    enabled = True
     return MailChimp(
         mc_api=settings.MAILCHIMP_API_KEY,
         enabled=enabled,
@@ -85,7 +84,6 @@ def create_or_update_mailchimp_from_user(user):
     list_id = settings.MAILCHIMP_AUDIENCE_ID
     email = user.email
     subscriber_hash = get_subscriber_hash(email)
-    zone = account.zone if account.zone else 0
     data = {
         'status_if_new': 'subscribed',
         'email_address': email,
