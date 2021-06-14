@@ -17,12 +17,13 @@ from django.utils.crypto import get_random_string
 
 from .forms import AccountForm
 from .forms import DeleteForm
+from .tasks import get_auth0_user
 
 log = logging.getLogger(__name__)
 
 # Verified Email
 def is_verified(user):
-    return getattr(user.data, 'email_verified', True)
+    return user.data.get('email_verified', False)
 
 # Root
 def index(request):
@@ -75,6 +76,9 @@ def login(request):
     return redirect(url)
 
 def verify(request):
+    next_url = request.GET.get('next', 'account')
+    if request.user.data.get('email_verified', False):
+        return redirect(next_url)
     email = request.user.email
     return render(
         request,
@@ -83,6 +87,18 @@ def verify(request):
             'email': email,
         },
     )
+
+def verified(request):
+    user = request.user
+    data = get_auth0_user(user.username)
+    user.data = data
+    user.save()
+    next_url = request.GET.get('next', 'account')
+    messages.success(
+        request,
+        "Your account has been verified!",
+    )
+    return redirect(next_url)
 
 def callback(request):
     # Reject if state doesn't match

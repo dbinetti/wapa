@@ -20,6 +20,7 @@ urlpatterns = [
     path('join', views.join, name='join'),
     path('callback', views.callback, name='callback'),
     path('verify', views.verify, name='verify'),
+    path('verified', views.verified, name='verified'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
     path('goodbye', views.goodbye, name='goodbye'),

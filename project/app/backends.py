@@ -1,9 +1,3 @@
-# Django
-import json
-import urllib
-
-import posthog
-from django.conf import settings
 from django.contrib.auth.backends import ModelBackend
 
 # Local
