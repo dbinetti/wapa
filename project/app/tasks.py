@@ -2,6 +2,7 @@
 import json
 import logging
 
+import posthog
 # First-Party
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
@@ -150,3 +151,24 @@ def build_email(template, subject, from_email, context=None, to=[], cc=[], bcc=[
 @job
 def send_email(email):
     return email.send()
+
+
+@job
+def identify_posthog_from_user(user):
+    payload = {
+        'name': user.name,
+        'email': user.email,
+    }
+    posthog.identify(
+        str(user.id),
+        payload,
+    )
+    return
+
+@job
+def alias_posthog_from_user(user, distinct_id):
+    posthog.alias(
+        distinct_id,
+        str(user.id),
+    )
+    return

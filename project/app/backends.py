@@ -29,21 +29,6 @@ class Auth0Backend(ModelBackend):
             )
             user.set_unusable_password()
             user.save()
-            posthog.capture(
-                str(user.id),
-                'Create Account',
-            )
-        encoded = request.COOKIES.get(f'ph_{settings.POSTHOG_API_KEY}_posthog', None)
-        if encoded:
-            decoded = json.loads(urllib.parse.unquote(encoded))
-            posthog.alias(
-                decoded['distinct_id'],
-                str(user.id),
-            )
-        posthog.identify(
-            str(user.id),
-            {'name': name, 'email': email,}
-        )
         return user
 
     def get_user(self, user_id):

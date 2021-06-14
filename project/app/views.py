@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 
 # Verified Email
 def is_verified(user):
-    return user.data['email_verified']
+    return getattr(user.data, 'email_verified', True)
 
 # Root
 def index(request):
@@ -36,7 +36,7 @@ def index(request):
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/account')
+    next_url = request.GET.get('next', 'account')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -56,7 +56,7 @@ def join(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/account')
+    next_url = request.GET.get('next', 'account')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -115,7 +115,6 @@ def callback(request):
         }
     )
     payload['username'] = payload.pop('sub')
-    log.info(payload)
     if not 'email' in payload:
         messages.error(
             request,
