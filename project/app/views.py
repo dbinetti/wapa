@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 
 # Verified Email
 def is_verified(user):
-    return True
+    return user.data['email_verified']
 
 # Root
 def index(request):
