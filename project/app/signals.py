@@ -35,8 +35,8 @@ def user_post_save(sender, instance, created, **kwargs):
 
 @receiver(pre_delete, sender=User)
 def user_pre_delete(sender, instance, **kwargs):
-    delete_auth0_from_user(instance)
-    delete_mailchimp_from_user(instance)
+    delete_auth0_from_user.delay(instance)
+    delete_mailchimp_from_user.delay(instance)
     return
 
 

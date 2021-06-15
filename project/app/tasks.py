@@ -132,6 +132,8 @@ def delete_mailchimp_from_user(user):
     except MailChimpError as err:
         # Skip if already deleted
         error = json.loads(str(err).replace("\'", "\""))
+        log.error(error)
+        log.error(err)
         if error['title'] == 'Resource Not Found':
             return
         raise err
