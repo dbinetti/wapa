@@ -94,11 +94,17 @@ def verified(request):
     user.data = data
     user.save()
     next_url = request.GET.get('next', 'account')
-    messages.success(
+    if data.email_verified:
+        messages.success(
+            request,
+            "Your account has been verified!",
+        )
+        return redirect(next_url)
+    messages.error(
         request,
-        "Your account has been verified!",
+        "Your account couldn't be verified; please try again or contact support.",
     )
-    return redirect(next_url)
+    return redirect('verify')
 
 def callback(request):
     # Reject if state doesn't match
