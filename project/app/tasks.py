@@ -181,7 +181,7 @@ def create_or_update_posthog_from_user(user):
 @job
 def identify_posthog_from_user(user):
     posthog.identify(
-        str(user.id)
+        str(user.username)
     )
     return
 
@@ -189,6 +189,6 @@ def identify_posthog_from_user(user):
 def alias_posthog_from_user(user, distinct_id):
     posthog.alias(
         distinct_id,
-        str(user.id),
+        str(user.username),
     )
     return
