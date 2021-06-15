@@ -17,12 +17,12 @@ class Auth0Backend(ModelBackend):
         except User.DoesNotExist:
             user = User(
                 username=username,
+                name=name,
+                email=email,
+                data=kwargs,
             )
             user.set_unusable_password()
-        user.name = name
-        user.email = email
-        user.data = kwargs
-        user.save()
+            user.save()
         return user
 
     def get_user(self, user_id):
