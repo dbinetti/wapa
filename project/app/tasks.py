@@ -130,12 +130,11 @@ def delete_mailchimp_from_user(user):
             subscriber_hash=subscriber_hash,
         )
     except MailChimpError as err:
-        # Skip if does not exist
+        # Skip if already deleted
         error = json.loads(str(err).replace("\'", "\""))
-        if not error['title'] == 'Method Not Allowed':
-            # Otherwise, raise original error
-            raise err
-    return
+        if error['title'] == 'Resource Not Found':
+            return
+        raise err
 
 
 # Utility
