@@ -6,6 +6,7 @@ from django.db.models import Q
 class Command(BaseCommand):
     def handle(self, *args, **options):
         users = User.objects.filter(
+            Q(email__endswith='westadaparents.com') |
             Q(email__endswith='tfbnw.net')
         )
         for user in users:
