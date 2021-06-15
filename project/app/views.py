@@ -23,7 +23,8 @@ log = logging.getLogger(__name__)
 
 # Verified Email
 def is_verified(user):
-    return user.data.get('email_verified', False)
+    return user.data.get('email_verified', False) if user.data else False
+
 
 # Root
 def index(request):
