@@ -153,15 +153,24 @@ def send_email(email):
     return email.send()
 
 
+
 @job
-def identify_posthog_from_user(user):
+def create_or_update_posthog_from_user(user):
     payload = {
         'name': user.name,
         'email': user.email,
     }
-    posthog.identify(
+    posthog.set(
         str(user.id),
         payload,
+    )
+    return
+
+
+@job
+def identify_posthog_from_user(user):
+    posthog.identify(
+        str(user.id)
     )
     return
 
