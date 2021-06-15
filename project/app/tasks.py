@@ -37,7 +37,7 @@ def get_auth0_client():
     )
     return client
 
-def get_auth0_user(user_id):
+def get_auth0_data(user_id):
     client = get_auth0_client()
     data = client.users.get(user_id)
     return data
@@ -47,6 +47,16 @@ def delete_auth0_from_user(user):
     client = get_auth0_client()
     response = client.users.delete(user.username)
     return response
+
+
+@job
+def update_user_from_auth0(user):
+    data = get_auth0_data(user.username)
+    user.name = data.get('name')
+    user.email = data.get('email')
+    user.data = data
+    user = user.save()
+    return user
 
 
 @job

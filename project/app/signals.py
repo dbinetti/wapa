@@ -17,6 +17,7 @@ from .tasks import delete_auth0_from_user
 from .tasks import delete_mailchimp_from_user
 from .tasks import identify_posthog_from_user
 from .tasks import update_auth0_from_user
+from .tasks import update_user_from_auth0
 
 log = logging.getLogger(__name__)
 
@@ -48,4 +49,5 @@ def user_logged_in(sender, request, user, **kwargs):
         alias_posthog_from_user.delay(user, distinct_id)
     else:
         log.error(f'Posthog: {user}')
+    update_user_from_auth0.delay(user)
     return

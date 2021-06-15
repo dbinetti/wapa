@@ -17,7 +17,7 @@ from django.utils.crypto import get_random_string
 
 from .forms import AccountForm
 from .forms import DeleteForm
-from .tasks import get_auth0_user
+from .tasks import update_user_from_auth0
 
 log = logging.getLogger(__name__)
 
@@ -89,12 +89,9 @@ def verify(request):
     )
 
 def verified(request):
-    user = request.user
-    data = get_auth0_user(user.username)
-    user.data = data
-    user.save()
+    user = update_user_from_auth0(request.user)
     next_url = request.GET.get('next', 'account')
-    if data.email_verified:
+    if user.data.email_verified:
         messages.success(
             request,
             "Your account has been verified!",
