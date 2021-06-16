@@ -58,17 +58,16 @@ class AccountForm(forms.ModelForm):
             'notes': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
-                    'placeholder': 'Anything else we should know? (Optional, Private)',
+                    'placeholder': 'Anything else we should know? (Optional, Always Private)',
                     'rows': 5,
                 }
             )
         }
         help_texts = {
-            'name': "Please provide your real full name, which remains private.",
+            'name': "Please provide your real full name, which remains private unless you explcitly choose to be public.",
             'notes': "Any notes to share.",
-            'is_public': "We may list your name publicly if the need arises.",
-            'address': "Address remains private regardless of public status.  \
-            We use this to determine your District Zone automatically.",
+            'is_public': "Making your name public encourages others to join.",
+            'address': "Address always remains private; we use this to determine your District Zone.",
         }
 
 

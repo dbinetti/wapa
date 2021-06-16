@@ -15,7 +15,7 @@
       Account
     </h2>
     <p class='lead col-md-8'>
-      Review/Update your Account Information Below
+      Please update your account information; as we grow we'll keep you up-to-date on District news and ways to get involved.
     </p>
   </section>
   <section class='mt-5 col-md-8'>
@@ -31,7 +31,7 @@
               {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
               {% bootstrap_field form.is_public show_help=True show_label=False %}
               {% bootstrap_field form.address show_help=True show_label=False %}
-              {% bootstrap_field form.notes show_help=True show_label=False %}
+              {% bootstrap_field form.notes show_help=False show_label=False %}
           </div>
         </div>
         <div class='card-footer'>
@@ -53,7 +53,7 @@
 
         <div class='card-title'>
           <p>
-            This information remains private regardless of public status.
+            Knowing which schools/grades your kids are in helps us tailor our efforts.  This information always remains private.
           </p>
         </div>
 
