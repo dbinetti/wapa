@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 
 # Local
 from .models import Account
+from .models import Student
 from .models import User
 
 
@@ -12,6 +13,30 @@ class DeleteForm(forms.Form):
     confirm = forms.BooleanField(
         required=True,
     )
+
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = [
+            'name',
+            'school',
+            'grade',
+        ]
+        widgets = {
+            # 'text': forms.Textarea(
+            #     attrs={
+            #         'class': 'form-control h-25',
+            #         'placeholder': 'Comments',
+            #         'rows': 5,
+            #     }
+            # ),
+        }
+        help_texts = {
+            'name': "Provide first name/initials.",
+            'school': "School attending 2021-22.",
+            'grade': "Grade for 2021-22.",
+        }
 
 
 class AccountForm(forms.ModelForm):

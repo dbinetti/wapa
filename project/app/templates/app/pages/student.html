@@ -1,0 +1,38 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+
+{% block title %}Edit Student{% endblock title %}
+
+{% block content %}
+  <section class='col-md-8'>
+    <form method='post'>
+      {% csrf_token %}
+      <div class='card'>
+        <div class='card-header'>
+          <h4>
+            Edit Student
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class='card-text'>
+            {% bootstrap_form_errors form %}
+            {% bootstrap_field form.name show_help=True show_label=False %}
+            {% bootstrap_field form.school show_help=True show_label=False %}
+            {% bootstrap_field form.grade show_help=True show_label=False %}
+          </div>
+        </div>
+        <div class='card-footer'>
+          <div class='list-inline'>
+            <li class='list-inline-item'>
+              {% bootstrap_button "Save" button_type='submit' size='large' %}</li>
+            <li class='list-inline-item'>
+          {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+            </li>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+{% endblock content %}

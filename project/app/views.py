@@ -10,6 +10,7 @@ from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -18,6 +19,8 @@ from django.utils.crypto import get_random_string
 
 from .forms import AccountForm
 from .forms import DeleteForm
+from .forms import StudentForm
+from .models import Student
 from .tasks import get_auth0_data
 
 log = logging.getLogger(__name__)
@@ -186,6 +189,10 @@ def goodbye(request):
 @login_required
 def account(request):
     account = request.user.account
+    students = account.students.order_by(
+        'grade',
+        'name',
+    )
     if request.POST:
         form = AccountForm(request.POST, instance=account)
         if form.is_valid():
@@ -202,7 +209,7 @@ def account(request):
         'app/pages/account.html',
         context={
             'form': form,
-            # 'comments': comments,
+            'students': students,
         },
     )
 
@@ -224,4 +231,83 @@ def delete(request):
         request,
         'app/pages/delete.html',
         {'form': form,},
+    )
+
+
+@login_required
+def delete_student(request, student_id):
+    try:
+        student = Student.objects.get(
+            id=student_id,
+            account=request.user.account,
+        )
+    except Student.DoesNotExist:
+        raise PermissionDenied("You can not delete another's student.")
+    if request.method == "POST":
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            student.delete()
+            messages.error(
+                request,
+                "Student Deleted!",
+            )
+            return redirect('account')
+    else:
+        form = DeleteForm()
+    return render(
+        request,
+        'app/pages/delete_student.html',
+        context = {
+            'form': form,
+            'student': student,
+        },
+    )
+
+@login_required
+def add_student(request):
+    account = request.user.account
+    form = StudentForm(request.POST or None)
+    if form.is_valid():
+        student = form.save(commit=False)
+        student.account = account
+        student.save()
+        messages.success(
+            request,
+            "Student Added!"
+        )
+        return redirect('account')
+    return render(
+        request,
+        'app/pages/add_student.html',
+        context = {
+            'form': form,
+        }
+    )
+
+@login_required
+def edit_student(request, student_id):
+    try:
+        student = Student.objects.get(
+            id=student_id,
+            account=request.user.account,
+        )
+    except Student.DoesNotExist:
+        raise PermissionDenied("You can not edit another's student.")
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            student.save()
+            messages.success(
+                request,
+                'Saved!',
+            )
+            return redirect('account')
+    form = StudentForm(instance=student)
+    return render(
+        request,
+        'app/pages/edit_student.html',
+        context = {
+            'form': form,
+            'student': student,
+        }
     )

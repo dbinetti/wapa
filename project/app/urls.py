@@ -27,6 +27,9 @@ urlpatterns = [
 
     # Account
     path('account', views.account, name='account',),
+    path('student/add', views.add_student, name='add-student',),
+    path('student/<str:student_id>/delete', views.delete_student, name='delete-student',),
+    path('student/<str:student_id>', views.edit_student, name='edit-student',),
 
     # Delete
     path('delete', views.delete, name='delete',),
