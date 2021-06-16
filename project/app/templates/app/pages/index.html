@@ -4,7 +4,15 @@
 {% load app_tags %}
 
 {% block metatags %}
+  <meta property="og:title" content="West Ada Parents Association" />
+  <meta property="og:image" content='{% static "app/poster.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/poster.png" %}' />
+  <meta property="og:url" content="https://www.westadaparents.com" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="1236648860100768" />
+  <meta property="og:description" content="The West Ada Parents Association is a community of well-informed citizens who support educational excellence and work in partnership with the school community to achieve quality educational results for all students." />
 {% endblock metatags %}
+
 
 {% block customstyles %}
 {% endblock customstyles %}
