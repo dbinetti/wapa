@@ -93,6 +93,9 @@ def verified(request):
     data = get_auth0_data(request.user.username)
     next_url = request.GET.get('next', 'account')
     if data.get('email_verified', False):
+        user = request.user
+        user.data = data
+        user.save()
         messages.success(
             request,
             "Your account has been verified!",
@@ -175,7 +178,7 @@ def goodbye(request):
     )
 
 # Account
-@user_passes_test(is_verified, login_url='verify')
+# @user_passes_test(is_verified, login_url='verify')
 @login_required
 def account(request):
     account = request.user.account
