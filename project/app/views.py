@@ -77,9 +77,6 @@ def login(request):
     return redirect(url)
 
 def verify(request):
-    next_url = request.GET.get('next', 'account')
-    if request.user.data.get('email_verified', False):
-        return redirect(next_url)
     email = request.user.email
     return render(
         request,
@@ -91,16 +88,16 @@ def verify(request):
 
 def verified(request):
     data = get_auth0_data(request.user.username)
-    next_url = request.GET.get('next', 'account')
-    if data.get('email_verified', False):
-        user = request.user
-        user.data = data
-        user.save()
+    email_verified = data.get('email_verified', False)
+    if email_verified:
+        request.user.data = data
+        request.user.save()
+        request.user.refresh_from_db()
         messages.success(
             request,
             "Your account has been verified!",
         )
-        return redirect(next_url)
+        return redirect('account')
     messages.error(
         request,
         "Your account couldn't be verified; please try again or contact support.",
@@ -178,7 +175,7 @@ def goodbye(request):
     )
 
 # Account
-# @user_passes_test(is_verified, login_url='verify')
+@user_passes_test(is_verified, login_url='verify')
 @login_required
 def account(request):
     account = request.user.account
