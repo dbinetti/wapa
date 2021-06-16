@@ -22,9 +22,12 @@ class AccountForm(forms.ModelForm):
         model = Account
         fields = [
             'name',
+            'is_public',
+            'address',
             'notes',
         ]
         labels = {
+            "is_public": "You May List Me Publicly",
         }
         widgets = {
             'notes': forms.Textarea(
@@ -38,6 +41,9 @@ class AccountForm(forms.ModelForm):
         help_texts = {
             'name': "Please provide your real full name, which remains private.",
             'notes': "Any notes to share.",
+            'is_public': "We may list your name publicly if the need arises.",
+            'address': "Address remains private regardless of public status.  \
+            We use this to determine your District Zone automatically.",
         }
 
 

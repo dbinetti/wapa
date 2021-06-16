@@ -17,12 +17,12 @@
     {% block customstyles %}
     {% endblock customstyles %}
 
-    {% block formmedia %}
-    {% endblock formmedia %}
 
     <title>West Ada Parents Association {% block title %}{% endblock %}</title>
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
+    {% block formmedia %}
+    {% endblock formmedia %}
     <script src="https://kit.fontawesome.com/1c8c066f08.js" crossorigin="anonymous"></script>
     <script
       src="https://browser.sentry-cdn.com/6.4.1/bundle.tracing.min.js"

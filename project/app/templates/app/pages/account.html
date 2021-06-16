@@ -5,8 +5,6 @@
 
 {% block formmedia %}
   {{ form.media }}
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
 {% endblock formmedia %}
 
 {% block title %}Account Page{% endblock title %}
@@ -31,7 +29,9 @@
           <div class='card-text'>
               {% bootstrap_form_errors form %}
               {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
-              {% bootstrap_field form.notes show_help=True show_label=False placeholder="Name" %}
+              {% bootstrap_field form.is_public show_help=True show_label=False %}
+              {% bootstrap_field form.address show_help=True show_label=False %}
+              {% bootstrap_field form.notes show_help=True show_label=False %}
           </div>
         </div>
         <div class='card-footer'>

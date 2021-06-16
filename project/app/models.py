@@ -3,6 +3,7 @@ from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from hashid_field import HashidAutoField
+from model_utils import Choices
 
 # Local
 from .managers import UserManager
@@ -18,6 +19,9 @@ class Account(models.Model):
     name = models.CharField(
         max_length=100,
         blank=False,
+    )
+    is_public = models.BooleanField(
+        default=False,
     )
     address = AddressField(
         null=True,
@@ -102,3 +106,76 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class School(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Student(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    GRADE = Choices(
+        (-1, 'prek', 'Pre-K'),
+        (0, 'kindergarten', 'Kindergarten'),
+        (1, 'first', 'First Grade'),
+        (2, 'second', 'Second Grade'),
+        (3, 'third', 'Third Grade'),
+        (4, 'fourth', 'Fourth Grade'),
+        (5, 'fifth', 'Fifth Grade'),
+        (6, 'sixth', 'Sixth Grade'),
+        (7, 'seventh', 'Seventh Grade'),
+        (8, 'eighth', 'Eighth Grade'),
+        (9, 'ninth', 'Ninth Grade'),
+        (10, 'tenth', 'Tenth Grade'),
+        (11, 'eleventh', 'Eleventh Grade'),
+        (12, 'twelfth', 'Twelfth Grade'),
+    )
+    grade = models.IntegerField(
+        choices=GRADE,
+        blank=True,
+        null=True,
+    )
+    account = models.ForeignKey(
+        'app.Account',
+        on_delete=models.CASCADE,
+        related_name='students',
+        null=False,
+        blank=False,
+    )
+    school = models.ForeignKey(
+        'app.School',
+        on_delete=models.CASCADE,
+        related_name='students',
+        null=False,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
