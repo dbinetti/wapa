@@ -92,7 +92,7 @@ def verify(request):
 def verified(request):
     data = get_auth0_data(request.user.username)
     next_url = request.GET.get('next', 'account')
-    if data.email_verified:
+    if data.get('email_verified', False):
         messages.success(
             request,
             "Your account has been verified!",
