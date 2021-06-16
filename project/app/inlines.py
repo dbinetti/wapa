@@ -12,6 +12,7 @@ class StudentInline(admin.TabularInline):
         'name',
         'account',
         'school',
+        'grade',
     ]
     readonly_fields = [
     ]
