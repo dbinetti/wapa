@@ -90,15 +90,14 @@ def verify(request):
     )
 
 def verified(request):
-    user = update_user_from_auth0(request.user)
+    data = get_auth0_data(request.user.username)
     next_url = request.GET.get('next', 'account')
-    if user.data:
-        if user.data.email_verified:
-            messages.success(
-                request,
-                "Your account has been verified!",
-            )
-            return redirect(next_url)
+    if data.email_verified:
+        messages.success(
+            request,
+            "Your account has been verified!",
+        )
+        return redirect(next_url)
     messages.error(
         request,
         "Your account couldn't be verified; please try again or contact support.",
