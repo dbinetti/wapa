@@ -16,6 +16,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
+from django.utils.safestring import mark_safe
 
 from .forms import AccountForm
 from .forms import DeleteForm
@@ -91,7 +92,15 @@ def verify(request):
     )
 
 def verified(request):
-    data = get_auth0_data(request.user.username)
+    try:
+        data = get_auth0_data(request.user.username)
+    except Exception as e:
+        log.error(e)
+        messages.error(
+            request,
+            mark_safe("Your account couldn't be verified; please try again or contact <a href='mailto:support@westadaparents.com'>support@westadaparents.com</a>."),
+        )
+        return redirect('account')
     email_verified = data.get('email_verified', False)
     if email_verified:
         request.user.data = data
