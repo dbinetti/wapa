@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 import jwt
@@ -146,6 +147,12 @@ def callback(request):
         log_in(request, user)
         if user.is_admin:
             return redirect('admin:index')
+        if (user.last_login - user.created) < datetime.timedelta(minutes=1):
+            messages.success(
+                request,
+                "Thanks for joining the West Ada Parents Association!  We'll be sending more updates soon; for now, please update your account information below."
+            )
+            return redirect('account')
         return redirect(next_url)
     return HttpResponse(status=403)
 
