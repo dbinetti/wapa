@@ -9,9 +9,31 @@ from reversion.admin import VersionAdmin
 # Local
 from .forms import UserChangeForm
 from .forms import UserCreationForm
+from .inlines import StudentInline
 from .models import Account
+from .models import School
 from .models import User
 
+
+@admin.register(School)
+class SchoolAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+    ]
+    list_display = [
+        'name',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+    ]
+    search_fields = [
+        'name',
+    ]
+    ordering = [
+        '-created',
+    ]
 
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
@@ -36,6 +58,7 @@ class AccountAdmin(VersionAdmin):
         'user',
     ]
     inlines = [
+        StudentInline,
     ]
     ordering = [
         '-created',
