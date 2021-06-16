@@ -45,6 +45,8 @@ class AccountAdmin(VersionAdmin):
     ]
     list_display = [
         'name',
+        'address',
+        'notes',
     ]
     list_editable = [
     ]
