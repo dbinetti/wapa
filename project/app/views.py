@@ -182,7 +182,7 @@ def goodbye(request):
     )
 
 # Account
-@user_passes_test(is_verified, login_url='verify')
+# @user_passes_test(is_verified, login_url='verify')
 @login_required
 def account(request):
     account = request.user.account
