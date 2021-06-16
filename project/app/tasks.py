@@ -59,19 +59,6 @@ def update_user_from_auth0(user):
     return user
 
 
-@job
-def update_auth0_from_user(user):
-    if not user.username.startswith('auth0|'):
-        return
-    client = get_auth0_client()
-    payload = {
-        'name': user.name,
-        'email': user.email,
-    }
-    response = client.users.update(user.username, payload)
-    return response
-
-
 # Account Creation Utility
 def create_account_from_user(user):
     account = Account.objects.create(

@@ -27,8 +27,6 @@ log = logging.getLogger(__name__)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
         create_account_from_user(instance)
-    else:
-        update_auth0_from_user.delay(instance)
     create_or_update_mailchimp_from_user.delay(instance)
     create_or_update_posthog_from_user.delay(instance)
     return
@@ -42,12 +40,12 @@ def user_pre_delete(sender, instance, **kwargs):
 
 @receiver(user_logged_in)
 def user_logged_in(sender, request, user, **kwargs):
-    identify_posthog_from_user.delay(user)
-    encoded = request.COOKIES.get(f'ph_{settings.POSTHOG_API_KEY}_posthog', None)
-    if encoded:
-        distinct_id = json.loads(urllib.parse.unquote(encoded))['distinct_id']
-        alias_posthog_from_user.delay(user, distinct_id)
-    else:
-        log.error(f'Posthog: {user}')
-    # update_user_from_auth0.delay(user)
+    update_user_from_auth0(user)
+    # identify_posthog_from_user.delay(user)
+    # encoded = request.COOKIES.get(f'ph_{settings.POSTHOG_API_KEY}_posthog', None)
+    # if encoded:
+    #     distinct_id = json.loads(urllib.parse.unquote(encoded))['distinct_id']
+    #     alias_posthog_from_user.delay(user, distinct_id)
+    # else:
+    #     log.error(f'Posthog: {user}')
     return

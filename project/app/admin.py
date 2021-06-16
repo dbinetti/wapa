@@ -100,7 +100,7 @@ class UserAdmin(UserAdminBase):
     ]
     readonly_fields = [
         'name',
-        # 'email',
+        'email',
     ]
 
 # Use Auth0 for login
