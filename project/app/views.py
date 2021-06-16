@@ -17,7 +17,7 @@ from django.utils.crypto import get_random_string
 
 from .forms import AccountForm
 from .forms import DeleteForm
-from .tasks import update_user_from_auth0
+from .tasks import get_auth0_data
 
 log = logging.getLogger(__name__)
 
