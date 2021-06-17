@@ -168,7 +168,10 @@ def create_or_update_posthog_from_user(user):
 @job
 def identify_posthog_from_user(user):
     posthog.identify(
-        str(user.username)
+        str(user.username), {
+            'name': user.name,
+            'email': user.email,
+        }
     )
     return
 
