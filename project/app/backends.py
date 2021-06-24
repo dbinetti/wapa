@@ -14,6 +14,9 @@ class Auth0Backend(ModelBackend):
             user = User.objects.get(
                 username=username,
             )
+            user.name = name
+            user.email = email
+            user.data = kwargs
         except User.DoesNotExist:
             user = User(
                 username=username,
@@ -22,7 +25,7 @@ class Auth0Backend(ModelBackend):
                 data=kwargs,
             )
             user.set_unusable_password()
-            user.save()
+        user.save()
         return user
 
     def get_user(self, user_id):

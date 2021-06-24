@@ -37,14 +37,14 @@ def user_pre_delete(sender, instance, **kwargs):
     return
 
 
-@receiver(user_logged_in)
-def user_logged_in(sender, request, user, **kwargs):
-    update_user_from_auth0.delay(user)
-    identify_posthog_from_user.delay(user)
-    encoded = request.COOKIES.get(f'ph_{settings.POSTHOG_API_KEY}_posthog', None)
-    if encoded:
-        distinct_id = json.loads(urllib.parse.unquote(encoded))['distinct_id']
-        alias_posthog_from_user.delay(user, distinct_id)
-    else:
-        log.error(f'Posthog: {user}')
-    return
+# @receiver(user_logged_in)
+# def user_logged_in(sender, request, user, **kwargs):
+#     update_user_from_auth0.delay(user)
+#     identify_posthog_from_user.delay(user)
+#     encoded = request.COOKIES.get(f'ph_{settings.POSTHOG_API_KEY}_posthog', None)
+#     if encoded:
+#         distinct_id = json.loads(urllib.parse.unquote(encoded))['distinct_id']
+#         alias_posthog_from_user.delay(user, distinct_id)
+#     else:
+#         log.error(f'Posthog: {user}')
+#     return
