@@ -92,30 +92,30 @@ def verify(request):
     )
 
 def verified(request):
-    try:
-        data = get_auth0_data(request.user.username)
-    except Exception as e:
-        log.error(e)
-        messages.error(
-            request,
-            mark_safe("Your account couldn't be verified; please try again or contact <a href='mailto:support@westadaparents.com'>support@westadaparents.com</a>."),
-        )
-        return redirect('account')
-    email_verified = data.get('email_verified', False)
-    if email_verified:
-        request.user.data = data
-        request.user.save()
-        request.user.refresh_from_db()
-        messages.success(
-            request,
-            "Your account has been verified!",
-        )
-        return redirect('account')
-    messages.error(
+    # try:
+    #     data = get_auth0_data(request.user.username)
+    # except Exception as e:
+    #     log.error(e)
+    #     messages.error(
+    #         request,
+    #         mark_safe("Your account couldn't be verified; please try again or contact <a href='mailto:support@westadaparents.com'>support@westadaparents.com</a>."),
+    #     )
+    #     return redirect('account')
+    # email_verified = data.get('email_verified', False)
+    # if email_verified:
+    #     request.user.data = data
+    #     request.user.save()
+    #     request.user.refresh_from_db()
+    messages.success(
         request,
-        "Your account couldn't be verified; please try again or contact support.",
+        "Thank you -- your account has been verified!",
     )
-    return redirect('verify')
+    return redirect('account')
+    # messages.error(
+    #     request,
+    #     "Your account couldn't be verified; please try again or contact support.",
+    # )
+    # return redirect('verify')
 
 def callback(request):
     # Reject if state doesn't match
@@ -155,6 +155,10 @@ def callback(request):
         )
         return redirect('logout')
     user = authenticate(request, **payload)
+
+    if user and user.is_active == False:
+       messages.warning(request, 'Please Confirm Your Email', extra_tags="")
+       return redirect('verify')
     if user:
         log_in(request, user)
         if user.is_admin:
