@@ -2,6 +2,35 @@
 
 {% block title %}Verify Account{% endblock title %}
 
+{% block topnav %}
+  <nav class="navbar navbar-expand-sm navbar-light">
+    <a class="navbar-brand" href="{% url 'index' %}"><img class="d-inline-block mr-1" style='max-width:200px;' src='{% static "app/wide_logo.png" %}'></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        {% comment %}
+        {% if request.user.is_authenticated %}
+          <li class='nav-item'>
+            <a href="{% url 'account' %}" class='align-bottom far fa-cog mr-3'>&nbsp;Account</a>
+          </li>
+
+          <span class="visible-xs-inline mb-3"></span>
+          <li class='nav-item'>
+            <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
+          </li>
+
+        {% else %}
+          <li class='nav-item'>
+            <a href="{% url 'login' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>
+          </li>
+        {% endif %}
+        {% endcomment %}
+      </ul>
+    </div>
+  </nav>
+{% endblock topnav %}
 
 {% block content %}
   <section class='my-5'>
@@ -15,7 +44,7 @@
         We sent you an email verification link; please click on it to continue.
       </p>
       <p>
-        If you haven't received an email please <a href='mailto:support@westadaparents.com'>contact support</a>.
+        If you haven't received an email please <a href='mailto:support@westadaparents.com'>contact support</a> and we'll do everything we can to help.
       </p>
     </div>
   </section>

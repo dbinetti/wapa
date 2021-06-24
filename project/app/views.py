@@ -124,14 +124,12 @@ def callback(request):
     if not 'email' in payload:
         messages.error(
             request,
-            "Email address is required",
+            "Email address is required.  Please try again.",
         )
-        return redirect('logout')
+        return redirect('index')
     user = authenticate(request, **payload)
-
-    if user and user.is_active == False:
-       messages.warning(request, 'Please Confirm Your Email', extra_tags="")
-       return redirect('verify')
+    if getattr(user, 'is_active', None):
+        return redirect('verify')
     if user:
         log_in(request, user)
         if user.is_admin:
