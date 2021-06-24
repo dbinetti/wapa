@@ -128,7 +128,7 @@ def callback(request):
         )
         return redirect('index')
     user = authenticate(request, **payload)
-    if getattr(user, 'is_active', None):
+    if not getattr(user, 'is_active', None):
         return redirect('verify')
     if user:
         log_in(request, user)
