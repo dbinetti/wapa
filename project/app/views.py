@@ -82,12 +82,12 @@ def login(request):
     return redirect(url)
 
 def verify(request):
-    email = request.user.email
+    # email = request.user.email
     return render(
         request,
         'app/pages/verify.html',
         context={
-            'email': email,
+            # 'email': email,
         },
     )
 
