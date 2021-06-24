@@ -23,7 +23,6 @@ urlpatterns = [
     path('verified', views.verified, name='verified'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
-    path('goodbye', views.goodbye, name='goodbye'),
 
     # Account
     path('account', views.account, name='account',),

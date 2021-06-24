@@ -9,26 +9,19 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
-from django.utils.safestring import mark_safe
 
 from .forms import AccountForm
 from .forms import DeleteForm
 from .forms import StudentForm
 from .models import Student
-from .tasks import get_auth0_data
 
 log = logging.getLogger(__name__)
-
-# Verified Email
-def is_verified(user):
-    return user.data.get('email_verified', False) if user.data else False
 
 
 # Root
@@ -82,40 +75,20 @@ def login(request):
     return redirect(url)
 
 def verify(request):
-    # email = request.user.email
     return render(
         request,
         'app/pages/verify.html',
         context={
-            # 'email': email,
         },
     )
 
 def verified(request):
-    # try:
-    #     data = get_auth0_data(request.user.username)
-    # except Exception as e:
-    #     log.error(e)
-    #     messages.error(
-    #         request,
-    #         mark_safe("Your account couldn't be verified; please try again or contact <a href='mailto:support@westadaparents.com'>support@westadaparents.com</a>."),
-    #     )
-    #     return redirect('account')
-    # email_verified = data.get('email_verified', False)
-    # if email_verified:
-    #     request.user.data = data
-    #     request.user.save()
-    #     request.user.refresh_from_db()
     messages.success(
         request,
         "Thank you -- your account has been verified!",
     )
     return redirect('account')
-    # messages.error(
-    #     request,
-    #     "Your account couldn't be verified; please try again or contact support.",
-    # )
-    # return redirect('verify')
+
 
 def callback(request):
     # Reject if state doesn't match
@@ -176,7 +149,7 @@ def logout(request):
     log_out(request)
     params = {
         'client_id': settings.AUTH0_CLIENT_ID,
-        'return_to': request.build_absolute_uri(reverse('goodbye')),
+        'return_to': request.build_absolute_uri(reverse('index')),
     }
     logout_url = requests.Request(
         'GET',
@@ -189,16 +162,7 @@ def logout(request):
     )
     return redirect(logout_url)
 
-def goodbye(request):
-    return render(
-        request,
-        'app/pages/goodbye.html',
-        context={
-        },
-    )
-
 # Account
-# @user_passes_test(is_verified, login_url='verify')
 @login_required
 def account(request):
     account = request.user.account
