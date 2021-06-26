@@ -49,7 +49,7 @@
               </li>
               {% if request.user.is_admin %}
                 <li class='nav-item'>
-                  <a href="{% url 'admin' %}" class='align-bottom far fa-columns mr-3'>&nbsp;Admin</a>
+                  <a href="{% url 'admin:index' %}" class='align-bottom far fa-columns mr-3'>&nbsp;Admin</a>
                 </li>
               {% endif %}
               <span class="visible-xs-inline mb-3"></span>
