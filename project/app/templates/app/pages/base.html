@@ -47,7 +47,11 @@
               <li class='nav-item'>
                 <a href="{% url 'account' %}" class='align-bottom far fa-cog mr-3'>&nbsp;Account</a>
               </li>
-
+              {% if request.user.is_authenticated %}
+                <li class='nav-item'>
+                  <a href="{% url 'admin' %}" class='align-bottom far fa-columns mr-3'>&nbsp;Admin</a>
+                </li>
+              {% endif %}
               <span class="visible-xs-inline mb-3"></span>
               <li class='nav-item'>
                 <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
