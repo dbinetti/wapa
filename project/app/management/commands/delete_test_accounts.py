@@ -1,6 +1,8 @@
-from app.models import User
+from django.apps import apps
 from django.core.management.base import BaseCommand
 from django.db.models import Q
+
+User = apps.get_model("app", "User")
 
 
 class Command(BaseCommand):
@@ -9,7 +11,8 @@ class Command(BaseCommand):
             Q(email__endswith='westadaparents.com') |
             Q(email__endswith='tfbnw.net')
         )
+        count = users.count()
         for user in users:
             user.delete()
-        self.stdout.write("Complete.")
+        self.stdout.write(f"{count} Test Accounts Deleted.")
         return
