@@ -41,16 +41,22 @@ class AccountAdmin(VersionAdmin):
     fields = [
         'name',
         'address',
+        'is_public',
+        'is_steering',
         'notes',
     ]
     list_display = [
         'name',
         'address',
+        'is_public',
+        'is_steering',
         'notes',
     ]
     list_editable = [
     ]
     list_filter = [
+        'is_public',
+        'is_steering',
     ]
     search_fields = [
         'name',
