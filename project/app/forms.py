@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
 # Local
 from .models import Account
@@ -95,10 +96,10 @@ class AccountForm(forms.ModelForm):
             )
         }
         help_texts = {
-            'name': "Please provide your real full name, which remains private unless you explcitly choose to be public.",
+            'name': mark_safe("Please provide your <strong>real full name</strong>, which remains private unless you explcitly choose to be public."),
             'notes': "Any notes to share.",
             'is_public': "Making your name public encourages others to join.",
-            'address': "Address always remains private; we use this to determine your District Zone.",
+            'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine your Board Member."),
         }
 
 

@@ -146,10 +146,28 @@ def callback(request):
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(
                 request,
-                "Thanks for joining the West Ada Parents Association!  We'll be sending more updates soon; for now, please update your account information below."
+                "Thanks for joining the West Ada Parents Association!  Please update your account information below."
             )
             return redirect('account')
-        return redirect(next_url)
+        if next_url != '/account':
+            return redirect(next_url)
+        if user.account.is_public:
+            if user.account.comments.count == 0:
+                messages.success(
+                    request,
+                    "Consider adding a public comment to give your voice more weight."
+                )
+            else:
+                messages.success(
+                    request,
+                    "You can add or delete your public comments below."
+                )
+            return redirect('comments')
+        messages.success(
+            request,
+            "Consider making your name public to encourage others to join."
+        )
+        return redirect('account')
     return HttpResponse(status=403)
 
 def logout(request):
@@ -183,7 +201,7 @@ def account(request):
             account = form.save()
             messages.success(
                 request,
-                "Saved!",
+                mark_safe("Saved!  You can also <a href='/comments'>review and make public comments</a>."),
             )
             return redirect('account')
     else:
