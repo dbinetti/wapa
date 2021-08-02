@@ -98,7 +98,7 @@ class AccountForm(forms.ModelForm):
         help_texts = {
             'name': mark_safe("Please provide your <strong>real full name</strong>, which remains private unless you explcitly choose to be public."),
             'notes': "Any notes to share.",
-            'is_public': "Making your name public encourages others to join.",
+            'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine your Board Member."),
         }
 

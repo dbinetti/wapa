@@ -24,48 +24,54 @@
         </div>
         {% endcomment %}
         <div class='card-text'>
-          <table class='table'>
-            <thead>
-              <tr>
-                <th>Comment</th>
-                <th>Status</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for personal in personals %}
+          {% if request.user.account.is_public %}
+            <table class='table'>
+              <thead>
                 <tr>
-                  {% if personal.polymorphic_ctype.name == 'Written Comment' %}
-                    <td>
-                      {{personal.text}}
-                    </td>
-                  {% else %}
-                    <td>
-                      <video
-                        id="{{personal.video.id}}"
-                        controls
-                        class="cld-video-player"
-                        data-cld-public-id="{{personal.video.name}}"
-                      >
-                      </video>
-                    </td>
-                  {% endif %}
-                  <td>
-                    {{ personal.get_state_display }}
-                  </td>
-                  <td>
-                    <a href='{% url "comment-delete" personal.id %}'><span class='text-danger'>Delete</span></a>
-                  </td>
+                  <th>Comment</th>
+                  <th>Status</th>
+                  <th>Delete</th>
                 </tr>
-              {% empty %}
-                <tr>
-                  <td colspan=3>
-                    Click one of the buttons below to make a public comment; once approved, it will appear on the website homepage.
-                  <td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {% for personal in personals %}
+                  <tr>
+                    {% if personal.polymorphic_ctype.name == 'Written Comment' %}
+                      <td>
+                        {{personal.text}}
+                      </td>
+                    {% else %}
+                      <td>
+                        <video
+                          id="{{personal.video.id}}"
+                          controls
+                          class="cld-video-player"
+                          data-cld-public-id="{{personal.video.name}}"
+                        >
+                        </video>
+                      </td>
+                    {% endif %}
+                    <td>
+                      {{ personal.get_state_display }}
+                    </td>
+                    <td>
+                      <a href='{% url "comment-delete" personal.id %}'><span class='text-danger'>Delete</span></a>
+                    </td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan=3>
+                      Click one of the buttons below to make a public comment; once approved, it will appear on the website homepage and be forwarded to the Superintendent.
+                    <td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>
+              (Your <a href='{% url "account" %}'>Account</a> must be public in order to make comments.)
+            </p>
+          {% endif %}
         </div>
       </div>
       <div class='card-footer'>
@@ -96,27 +102,27 @@
               {% for public in publics %}
                 <tr class='row'>
                   <td class='col-5'>
-                    {{public.account.name}}<br>
+                    {{account.name}}<br>
                     <ul class='list-inline'>
-                      {% if public.account.role == 1 %}
+                      {% if account.role == 1 %}
                         <li class='list-inline-item'>
                             <span class="badge badge-warning">Parent</span>
                         </li>
-                      {% elif public.account.role == 2 %}
+                      {% elif account.role == 2 %}
                         <li class='list-inline-item'>
                             <span class="badge badge-success">Student</span>
                         </li>
-                      {% elif public.account.role == 3 %}
+                      {% elif account.role == 3 %}
                         <li class='list-inline-item'>
                             <span class="badge badge-danger">Teacher</span>
                         </li>
                       {% endif %}
-                      {% if public.account.is_voter %}
+                      {% for student in students %}
                         <li class='list-inline-item'>
-                            <span class="badge badge-primary">Registered Voter</span>
+                            <small><span class="badge badge-warning">{{student.school.name}} {{student.get_grade_display}}</span></small>
                         </li>
-                      {% endif %}
-                      {% if public.account.zone %}
+                      {% endfor %}
+                      {% if account.zone %}
                         <li class='list-inline-item'>
                           <span class="badge badge-light">{{account.get_zone_display}}</span>
                         </li>

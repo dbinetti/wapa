@@ -45,7 +45,7 @@ def index(request):
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', 'account')
+    next_url = request.GET.get('next', '/account')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -65,7 +65,7 @@ def join(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', 'account')
+    next_url = request.GET.get('next', '/account')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -141,33 +141,13 @@ def callback(request):
         return redirect('verify')
     if user:
         log_in(request, user)
-        if user.is_admin:
-            return redirect('admin:index')
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(
                 request,
                 "Thanks for joining the West Ada Parents Association!  Please update your account information below."
             )
             return redirect('account')
-        if next_url != '/account':
-            return redirect(next_url)
-        if user.account.is_public:
-            if user.account.comments.count == 0:
-                messages.success(
-                    request,
-                    "Consider adding a public comment to give your voice more weight."
-                )
-            else:
-                messages.success(
-                    request,
-                    "You can add or delete your public comments below."
-                )
-            return redirect('comments')
-        messages.success(
-            request,
-            "Consider making your name public to encourage others to join."
-        )
-        return redirect('account')
+        return redirect(next_url)
     return HttpResponse(status=403)
 
 def logout(request):
@@ -199,10 +179,16 @@ def account(request):
         form = AccountForm(request.POST, instance=account)
         if form.is_valid():
             account = form.save()
-            messages.success(
-                request,
-                mark_safe("Saved!  You can also <a href='/comments'>review and make public comments</a>."),
-            )
+            if account.is_public:
+                messages.success(
+                    request,
+                    mark_safe("Saved!  You can now <a href='/comments'>make public comments</a>."),
+                )
+            else:
+                messages.success(
+                    request,
+                    mark_safe("Saved!  Please consider making your name Public so you can <a href='/comments'>make comments</a>."),
+                )
             return redirect('account')
     else:
         form = AccountForm(instance=account)
@@ -322,6 +308,12 @@ def comments(request):
     personals = account.comments.order_by(
         'created',
     )
+    students = account.students.order_by(
+        'grade',
+        'school__name',
+    ).select_related(
+        'school',
+    )
     publics = Comment.objects.filter(
         account__is_public=True,
         state=Comment.STATE.approved,
@@ -340,6 +332,8 @@ def comments(request):
         context={
             'personals': personals,
             'publics': publics,
+            'account': account,
+            'students': students,
         },
     )
 
