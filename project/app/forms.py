@@ -2,11 +2,13 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
+from django.core.exceptions import ValidationError
 
 # Local
 from .models import Account
 from .models import Student
 from .models import User
+from .models import WrittenComment
 
 
 class DeleteForm(forms.Form):
@@ -14,6 +16,35 @@ class DeleteForm(forms.Form):
         required=True,
     )
 
+
+class WrittenCommentForm(forms.ModelForm):
+    class Meta:
+        model = WrittenComment
+        fields = [
+            'text',
+        ]
+        widgets = {
+            'text': forms.Textarea(
+                attrs={
+                    'class': 'form-control h-25',
+                    'placeholder': 'Comments',
+                    'rows': 5,
+                }
+            ),
+        }
+
+    def clean_text(self):
+        text= self.cleaned_data['text']
+        words = text.split(" ")
+        for word in words:
+            if any([
+                word.startswith("http"),
+                word.startswith("www"),
+            ]):
+                raise ValidationError(
+                    "Links are not allowed in comments."
+                )
+        return text
 
 class StudentForm(forms.ModelForm):
     class Meta:

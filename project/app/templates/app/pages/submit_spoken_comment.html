@@ -1,0 +1,83 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+
+{% block title %}Submit Spoken Comment{% endblock title %}
+
+{% block content %}
+  <section class='my-5 col-md-8'>
+    <div class='card'>
+        <h4 class='card-header'>
+          Submit Spoken Comment
+        </h4>
+      <div class='card-body'>
+        <div class='card-title'>
+          <p class='lead'>
+            Here are the guidelines for leaving a video comment:
+          </p>
+        </div>
+        <div>
+          <ul class='list-styled'>
+            <li>It must be less than two minutes long.</li>
+            <li>It should start with who you are and your affiliation with the WASD.</li>
+            <li>It should remain respectful and on-topic.</li>
+            <li>It will be reviewed for appropriateness before posting.</li>
+            <li>It will <em>not</em> be cross-posted to YouTube, Facebook, etc.; you have complete control over your content.  However, it is nonetheless  public and should be treated as such.</li>
+            <li>Any students posting <strong>must receive express permission from parents</strong> and state so clearly at the beginning of their comment.</li>
+          </ul>
+          <p>
+            Note that there is no guarantee the Board of Trustees will hear your comments; this is not an official channel.
+          </p>
+        </div>
+      </div>
+      <div class='card-footer'>
+        <div class='list-inline'>
+          <li class='list-inline-item'>
+            {% bootstrap_button "Upload" button_type='button' size='large' button_class='btn-primary' id='upload-widget'%}
+          </li>
+          <li class='list-inline-item'>
+            {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+          </li>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+
+{% block scripts %}
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
+    let cloudPrefix = '{% get_env_var "CLOUDINARY_PREFIX" %}';
+    let uploadWidget = cloudinary.createUploadWidget({
+        cloudName: cloudName,
+        uploadPreset: 'comment_video',
+        sources: [
+          'local',
+          'url',
+        ],
+        multiple: false,
+        folder: `${cloudPrefix}/comments`,
+        resourceType: 'video',
+        clientAllowedFormats: [
+          'video',
+        ],
+        showPoweredBy: false,
+        showUploadMoreButton: false,
+      }, (error, result) => {
+        if (!error && result && result.event === "success") {
+          fetch("video-submission", {
+            method: 'POST',
+            body: JSON.stringify(result.info)
+          }).then(res => {
+            window.location.replace('{% url "comments" %}');
+          });
+        }
+      }
+    )
+    document.getElementById("upload-widget").addEventListener("click", function(){
+        uploadWidget.open();
+      }, false);
+  </script>
+{% endblock scripts %}

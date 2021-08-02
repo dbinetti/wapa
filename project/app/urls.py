@@ -30,6 +30,13 @@ urlpatterns = [
     path('student/<str:student_id>/delete', views.delete_student, name='delete-student',),
     path('student/<str:student_id>', views.edit_student, name='edit-student',),
 
+    # Comments
+    path('comments', views.comments, name='comments',),
+    path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
+    path('comment/submit-written', views.submit_written_comment, name='submit-written-comment'),
+    path('comment/submit-spoken', views.submit_spoken_comment, name='submit-spoken-comment'),
+    path('comment/video-submission', views.video_submission, name='video-submission'),
+
     # Delete
     path('delete', views.delete, name='delete',),
 

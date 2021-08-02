@@ -1,9 +1,16 @@
 # First-Party
+import datetime
+
 from address.models import AddressField
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
+from django_fsm import FSMIntegerField
+from django_fsm import transition
 from hashid_field import HashidAutoField
 from model_utils import Choices
+from polymorphic.models import PolymorphicModel
 
 # Local
 from .managers import UserManager
@@ -51,6 +58,126 @@ class Account(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Issue(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    STATE = Choices(
+        (-5, 'archived', 'Archived'),
+        (0, 'pending', 'Pending'),
+        (10, 'active', 'Active'),
+    )
+    state = FSMIntegerField(
+        choices=STATE,
+        default=STATE.pending,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    description = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Comment(PolymorphicModel):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    STATE = Choices(
+        (-10, 'denied', 'Denied'),
+        (-5, 'archived', 'Archived'),
+        (0, 'pending', 'Pending'),
+        (10, 'approved', 'Approved'),
+    )
+    state = FSMIntegerField(
+        choices=STATE,
+        default=STATE.pending,
+    )
+    is_featured = models.BooleanField(
+        default=False,
+    )
+    account = models.ForeignKey(
+        'app.Account',
+        on_delete=models.CASCADE,
+        related_name='comments',
+        null=False,
+        blank=False,
+    )
+    issue = models.ForeignKey(
+        'app.Issue',
+        on_delete=models.CASCADE,
+        related_name='comments',
+        null=False,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.account.name}"
+
+    @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
+    def approve(self):
+        from .tasks import send_approval_email
+        send_approval_email.delay(self.account)
+        return
+
+    @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
+    def deny(self):
+        from .tasks import send_denial_email
+        send_denial_email.delay(self.account)
+        return
+
+
+class WrittenComment(Comment):
+    text = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+
+    @property
+    def wordcount(self):
+        words = self.text.split(" ")
+        return len(words)
+
+    class Meta:
+        verbose_name = 'Written Comment'
+        verbose_name_plural = 'Written Comments'
+
+
+class SpokenComment(Comment):
+    video = models.FileField(
+        upload_to='videos/',
+        blank=True,
+        storage=VideoMediaCloudinaryStorage(),
+        validators=[validate_video],
+    )
+    # def __str__(self):
+    #     return f"{self.id}"
+    class Meta:
+        verbose_name = 'Spoken Comment'
+        verbose_name_plural = 'Spoken Comments'
 
 
 class User(AbstractBaseUser):

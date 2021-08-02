@@ -1,0 +1,43 @@
+{% extends 'app/pages/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Delete Comment{% endblock title %}
+
+{% block content %}
+  <section class='col-md-6'>
+    <h2>
+      Delete Comment
+    </h2>
+    <p class='lead my-5'>
+      Deleting your comment will remove it from our system entirely (including the website).
+    </p>
+    <div class='card'>
+      <div class='card-body'>
+        {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+
+          <p>
+            {{comment.text}}
+          </p>
+        {% else %}
+          <p>
+            <img src={{comment.video.url}}.jpg class='img-fluid'>
+          </p>
+        {% endif %}
+      </div>
+    </div>
+    <div class='mt-5'>
+      <p>
+        Please be certain you want to delete your comment, as there is no undo!
+      </p>
+    </div>
+  </section>
+  <section class='my-5'>
+    <form method='post' role='form'>
+      {% csrf_token %}
+      {% bootstrap_form_errors form %}
+      {% bootstrap_field form.confirm %}
+      {% bootstrap_button "Delete Comment" button_type='submit' button_class='btn btn-danger btn-lg btn-block' %}
+    </form>
+  </section>
+{% endblock content %}

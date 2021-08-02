@@ -47,6 +47,12 @@
               <li class='nav-item'>
                 <a href="{% url 'account' %}" class='align-bottom far fa-cog mr-3'>&nbsp;Account</a>
               </li>
+              {% comment %}
+              <span class="visible-xs-inline mb-3"></span>
+              <li class='nav-item'>
+                <a href="{% url 'comments' %}" class='align-bottom far fa-bullhorn mr-3'>&nbsp;Comments</a>
+              </li>
+              {% endcomment %}
               {% if request.user.is_admin %}
                 <li class='nav-item'>
                   <a href="{% url 'admin:index' %}" class='align-bottom far fa-columns mr-3'>&nbsp;Admin</a>

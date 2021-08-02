@@ -128,7 +128,7 @@ def delete_mailchimp_from_user(user):
 
 
 # Utility
-def build_email(template, subject, from_email, context=None, to=[], cc=[], bcc=[], attachments=[], html_content=None):
+def build_email(template, subject, from_email='David Binetti (WAPA) <dbinetti@westadaparents.com>', context=None, to=[], cc=[], bcc=[], attachments=[], html_content=None):
     body = render_to_string(template, context)
     if html_content:
         html_rendered = render_to_string(html_content, context)
@@ -183,3 +183,25 @@ def alias_posthog_from_user(user, distinct_id):
         str(user.username),
     )
     return
+
+@job
+def send_denial_email(account):
+    # comments = account.comments
+    email = build_email(
+        template='app/emails/denied.txt',
+        subject='Comment Denied',
+        # context={'comments': comments},
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
+def send_approval_email(account):
+    # comments = account.comments
+    email = build_email(
+        template='app/emails/approved.txt',
+        subject='Comment Approved!',
+        # context={'comments': comments},
+        to=[account.user.email],
+    )
+    return email.send()

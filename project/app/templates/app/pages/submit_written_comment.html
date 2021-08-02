@@ -1,0 +1,51 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+
+{% block title %}Submit Written Comment{% endblock title %}
+
+{% block content %}
+  <section class='col-md-8'>
+    <form method='post'>
+      {% csrf_token %}
+      <div class='card'>
+        <div class='card-header'>
+          <h4>
+            Submit Written Comment
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class='card-title'>
+            <p class='lead'>
+              We'll post your comment here and forward a copy to the Superintendent
+            </p>
+            <ul class='list-styled'>
+              <li>Remain respectful and on-topic.</li>
+              <li>Be concise.</li>
+              <li>Don't include links or attachments.</li>
+            </ul>
+          </div>
+          <div class='card-text'>
+              {% bootstrap_form_errors form %}
+
+              {% bootstrap_field form.text show_help=True show_label=False %}
+
+          </div>
+        </div>
+
+        <div class='card-footer'>
+          <div class='list-inline'>
+            <li class='list-inline-item'>
+              {% bootstrap_button "Save" button_type='submit' size='large' %}</li>
+            <li class='list-inline-item'>
+          {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+            </li>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+  </section>
+{% endblock content %}

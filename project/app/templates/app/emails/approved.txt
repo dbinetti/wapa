@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Your comment has been approved, and now appears on the West Ada Parents
+Association Homepage and has been forward to Superintendent Bub.
+
+Thank you for getting involved!
+
+Best, Dave
+
+
+{% endautoescape %}

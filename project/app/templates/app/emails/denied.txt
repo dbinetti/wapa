@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+I'm sorry, but I wasn't able to approve your comment.
+
+The system doesn't allow me to note the exact reasons why,
+but in general we only allow respectful, on-topic comments.
+
+If you want more detail, please respond to this email and
+I'll explain my reasoning in depth.  Sometimes all it takes
+is a minor tweak and I can approve it immediately.
+
+Many thanks for getting involved!
+
+Best, Dave
+
+
+{% endautoescape %}
