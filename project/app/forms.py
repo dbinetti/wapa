@@ -102,6 +102,19 @@ class AccountForm(forms.ModelForm):
             'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine your Board Member."),
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        is_public = cleaned_data.get("is_public")
+        name = cleaned_data.get("name")
+        last_name = name.partition(" ")[2]
+        full_name = False
+        if last_name:
+            if len(last_name) > 1:
+                full_name = True
+        if is_public and not full_name:
+            raise ValidationError(
+                "You must provide your full name to be public."
+            )
 
 
 class UserCreationForm(UserCreationFormBase):
