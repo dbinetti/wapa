@@ -213,13 +213,13 @@ def send_super_email(comment):
     from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
     email = build_email(
         template='app/emails/comment.txt',
-        subject='I Support You',
+        subject='We Support You',
         context={
             'comment': comment,
             'account': account,
         },
         from_email=from_email,
-        to=['dbinetti@gmail.com'],
+        to=['bub.derek@westada.org'],
         cc=[account.user.email],
     )
     return email.send()
