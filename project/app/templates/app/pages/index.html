@@ -69,11 +69,11 @@
                       <span class="badge badge-danger">Teacher</span>
                   </li>
                 {% endif %}
-                {% for student in comment.account.students.all %}
-                  <li class='list-inline-item'>
-                      <span class="badge badge-warning">{{student.school.name}} {{student.get_grade_display}}</span>
-                  </li>
-                {% endfor %}
+                  {% for student in comment.account.students.all %}
+                    <li class='list-inline-item'>
+                      <small>{{ student.school.name }}, {{student.get_grade_display }}</small>
+                    </li>
+                  {% endfor %}
                 {% if comment.account.is_voter %}
                   <li class='list-inline-item'>
                       <span class="badge badge-primary">Registered Voter</span>
