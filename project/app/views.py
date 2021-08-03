@@ -79,7 +79,7 @@ def join(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/account')
+    next_url = request.GET.get('next', '/comments')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
