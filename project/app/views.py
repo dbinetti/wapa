@@ -46,7 +46,7 @@ def index(request):
         'account',
         'account__user',
     ).order_by(
-        # '-is_featured',
+        '-is_featured',
         '-created',
     )
     count = Account.objects.all().count()
