@@ -24,6 +24,7 @@ from .forms import AccountForm
 from .forms import DeleteForm
 from .forms import StudentForm
 from .forms import WrittenCommentForm
+from .models import Account
 from .models import Comment
 from .models import Issue
 from .models import Student
@@ -48,11 +49,13 @@ def index(request):
         # '-is_featured',
         '-created',
     )
+    count = Account.objects.all().count()
     return render(
         request,
         'app/pages/index.html',
         context = {
             'comments': comments,
+            'count': count,
         },
     )
 
