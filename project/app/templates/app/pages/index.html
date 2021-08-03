@@ -37,7 +37,8 @@
       {% endcomment %}
       <div class='mt-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
-          <strong>Click to Join <span id='value'></span> Parents Who Want Smiling Kids in Open Schools</strong>
+          {# <strong>Click to Join <span id='value'></span> Parents Who Want Smiling Kids in Open Schools</strong> #}
+          Click Here to Write a Comment
         </a>
       </div>
     </div>
@@ -69,6 +70,11 @@
                       <span class="badge badge-danger">Teacher</span>
                   </li>
                 {% endif %}
+                {% for student in comment.account.students.all %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-warning">{{student.school.name}} {{student.get_grade_display}}</span>
+                  </li>
+                {% endfor %}
                 {% if comment.account.is_voter %}
                   <li class='list-inline-item'>
                       <span class="badge badge-primary">Registered Voter</span>
