@@ -139,7 +139,9 @@ class Comment(PolymorphicModel):
     @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
     def approve(self):
         from .tasks import send_approval_email
+        from .tasks import send_super_email
         send_approval_email.delay(self.account)
+        send_super_email.delay(self)
         return
 
     @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
