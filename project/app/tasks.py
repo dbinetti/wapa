@@ -205,3 +205,21 @@ def send_approval_email(account):
         to=[account.user.email],
     )
     return email.send()
+
+
+@job
+def send_super_email(comment):
+    account = comment.account
+    from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
+    email = build_email(
+        template='app/emails/comment.txt',
+        subject='I Support You',
+        context={
+            'comment': comment,
+            'account': account,
+        },
+        from_email=from_email,
+        to=['bub.derek@westada.org'],
+        cc=[account.user.email],
+    )
+    return email.send()

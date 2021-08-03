@@ -1,0 +1,13 @@
+{% autoescape off %}
+
+Dr. Bub, this message was sent by a West Ada Parent who supports your plan to keep schools open and masks optional.
+
+Parent: {{account.name}}
+{% if account.students.count %}
+Student(s) at:
+{% endif %}
+{% for student in account.students.all %}{{student.school}} {{student.get_grade_display}}, {% endfor %}
+
+Message: {{comment.text}}
+
+{% endautoescape %}
