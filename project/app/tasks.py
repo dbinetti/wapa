@@ -219,7 +219,7 @@ def send_super_email(comment):
             'account': account,
         },
         from_email=from_email,
-        to=['bub.derek@westada.org'],
+        to=['dbinetti@gmail.com'],
         cc=[account.user.email],
     )
     return email.send()
