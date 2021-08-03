@@ -166,7 +166,7 @@ class WrittenComment(Comment):
         verbose_name_plural = 'Written Comments'
 
 
-class SpokenComment(Comment):
+class VideoComment(Comment):
     video = models.FileField(
         upload_to='videos/',
         blank=True,
@@ -176,8 +176,8 @@ class SpokenComment(Comment):
     # def __str__(self):
     #     return f"{self.id}"
     class Meta:
-        verbose_name = 'Spoken Comment'
-        verbose_name_plural = 'Spoken Comments'
+        verbose_name = 'Video Comment'
+        verbose_name_plural = 'Video Comments'
 
 
 class User(AbstractBaseUser):

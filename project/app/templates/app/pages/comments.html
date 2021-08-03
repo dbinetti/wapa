@@ -76,8 +76,8 @@
       </div>
       <div class='card-footer'>
         <div class='list-inline'>
-          {% url 'submit-spoken-comment' as spoken_url_comment %}
-          <li class='list-inline-item'>{% bootstrap_button "Make Spoken Comment" button_type='link' href=spoken_url_comment size='large' button_class='btn-primary' extra_classes='m-2' %}</li>
+          {% url 'submit-video-comment' as video_url_comment %}
+          <li class='list-inline-item'>{% bootstrap_button "Make Video Comment" button_type='link' href=video_url_comment size='large' button_class='btn-primary' extra_classes='m-2' %}</li>
           {% url 'submit-written-comment' as written_url_comment %}
           <li class='list-inline-item'>{% bootstrap_button "Make Written Comment" button_type='link' href=written_url_comment size='large' button_class='btn-success' extra_classes='m-2'%}</li>
         </div>

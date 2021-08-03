@@ -19,8 +19,8 @@ from .models import Account
 from .models import Comment
 from .models import Issue
 from .models import School
-from .models import SpokenComment
 from .models import User
+from .models import VideoComment
 from .models import WrittenComment
 
 
@@ -136,7 +136,7 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     ]
     child_models = [
         WrittenComment,
-        SpokenComment,
+        VideoComment,
     ]
     autocomplete_fields = [
         'account',
@@ -174,8 +174,8 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
     base_model = Comment
 
 
-@admin.register(SpokenComment)
-class SpokenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
+@admin.register(VideoComment)
+class VideoCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
     save_on_top = True
     fields = [
         'state',

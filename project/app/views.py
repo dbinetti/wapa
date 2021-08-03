@@ -26,8 +26,8 @@ from .forms import StudentForm
 from .forms import WrittenCommentForm
 from .models import Comment
 from .models import Issue
-from .models import SpokenComment
 from .models import Student
+from .models import VideoComment
 from .models import WrittenComment
 
 log = logging.getLogger(__name__)
@@ -368,7 +368,7 @@ def comment_delete(request, comment_id):
 
 
 @login_required
-def submit_spoken_comment(request):
+def submit_video_comment(request):
     account = request.user.account
     if not account.is_public:
         messages.warning(
@@ -378,7 +378,7 @@ def submit_spoken_comment(request):
         return redirect('account')
     return render(
         request,
-        'app/pages/submit_spoken_comment.html',
+        'app/pages/submit_video_comment.html',
     )
 
 @csrf_exempt
@@ -388,7 +388,7 @@ def video_submission(request):
     if request.method == 'POST':
         issue = Issue.objects.latest('date')
         payload = json.loads(request.body)
-        comment = SpokenComment(
+        comment = VideoComment(
             account=request.user.account,
         )
         comment.video.name = payload['public_id']
