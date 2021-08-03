@@ -32,14 +32,14 @@ class AccountAdmin(VersionAdmin):
         'address',
         'is_public',
         'is_steering',
-        'notes',
+        # 'notes',
     ]
     list_display = [
         'name',
         'address',
         'is_public',
         'is_steering',
-        'notes',
+        # 'notes',
     ]
     list_editable = [
     ]
