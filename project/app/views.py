@@ -35,10 +35,24 @@ log = logging.getLogger(__name__)
 
 # Root
 def index(request):
+    issue = Issue.objects.latest('date')
+    comments = Comment.objects.filter(
+        account__is_public=True,
+        state=Comment.STATE.approved,
+        account__user__is_active=True,
+        issue=issue,
+    ).select_related(
+        'account',
+        'account__user',
+    ).order_by(
+        # '-is_featured',
+        '-created',
+    )
     return render(
         request,
         'app/pages/index.html',
         context = {
+            'comments': comments,
         },
     )
 

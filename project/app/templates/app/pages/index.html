@@ -4,13 +4,13 @@
 {% load app_tags %}
 
 {% block metatags %}
-  <meta property="og:title" content="West Ada Parents Association" />
-  <meta property="og:image" content='{% static "app/poster.png" %}' />
-  <meta property="og:image:secure_url" content='{% static "app/poster.png" %}' />
+  <meta property="og:title" content="West Ada Parents Support our Superintendent" />
+  <meta property="og:image" content='{% static "app/poster2.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/poster2.png" %}' />
   <meta property="og:url" content="https://www.westadaparents.com" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="1236648860100768" />
-  <meta property="og:description" content="The West Ada Parents Association is a community of well-informed citizens who support educational excellence and work in partnership with the school community to achieve quality educational results for all students." />
+  <meta property="og:description" content="West Ada Parents Support our Superintendent to keep Schools Open and Kids Smiling." />
 {% endblock metatags %}
 
 
@@ -23,23 +23,91 @@
 {% block content %}
   <section class 'mt-5'>
     <div id='id_wistia'>
-      <script src="https://fast.wistia.com/embed/medias/hpml7fy11t.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_hpml7fy11t popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
+      <script src="https://fast.wistia.com/embed/medias/twi5pl6yqf.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_twi5pl6yqf videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/twi5pl6yqf/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
     </div>
     <div class='jumbotron'>
       <div class='mb-3'>
           <div class='mb-3 mx-3'>
             <p>
-              <strong>The West Ada Parents Association</strong> a group of well-informed citizens who support our District in pursuing the best education possible for our students.  It's free to join, we protect your privacy, and have no political agenda beyond supporting our kids.  <a href='{% url "join" %}'>Join Us</a>!
+              <strong>West Ada Parents Support our Superintendent!</strong> <a href='{% url "join" %}'>Join Us</a> to show your support for Open Schools and Smiling Kids.
             </p>
           </div>
       </div>
       <div class='mt-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
-          <strong>Click Here to Join and Stay Informed</strong>
+          <strong>Click Here</strong>
         </a>
       </div>
     </div>
   </section>
+  <section class='m-3'>
+    <table class='table'>
+      <thead>
+        <tr class='row'>
+          <th scope='col' class='col-5'>Name</th>
+          <th scope='col' class='col-7'>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for comment in comments %}
+          <tr class='row'>
+            <td class='col-5'>
+              {{comment.account.name}}<br>
+              <ul class='list-inline'>
+                {% if comment.account.role == 1 %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-warning">Parent</span>
+                  </li>
+                {% elif comment.account.role == 2 %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-success">Student</span>
+                  </li>
+                {% elif comment.account.role == 3 %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-danger">Teacher</span>
+                  </li>
+                {% endif %}
+                {% if comment.account.is_voter %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-primary">Registered Voter</span>
+                  </li>
+                {% endif %}
+                {% if comment.account.zone %}
+                  <li class='list-inline-item'>
+                    <span class="badge badge-light">{{account.get_zone_display}}</span>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            <td class='col-7'>
+              {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+                {% if comment.wordcount < 31 %}
+                  {{comment.text}}
+                {% else %}
+                  <div class="collapse show" id="comment-{{comment.id}}">
+                    {{comment.text|truncatewords:30}}
+                  </div>
+                  <div class="collapse" id="comment-{{comment.id}}">
+                    {{comment.text}}
+                  </div>
+                  <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
+                {% endif %}
+              {% else %}
+                <video
+                  id="comment-player"
+                  controls
+                  class="cld-video-player"
+                  data-cld-public-id="{{comment.video.name}}"
+                >
+                </video>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
 {% endblock content %}
 
 {% block scripts %}
