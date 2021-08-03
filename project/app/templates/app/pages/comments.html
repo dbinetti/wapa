@@ -102,27 +102,29 @@
               {% for public in publics %}
                 <tr class='row'>
                   <td class='col-5'>
-                    {{account.name}}<br>
+                    {{public.account.name}}<br>
                     <ul class='list-inline'>
-                      {% if account.role == 1 %}
+                      {% if public.account.role == 1 %}
                         <li class='list-inline-item'>
                             <span class="badge badge-warning">Parent</span>
                         </li>
-                      {% elif account.role == 2 %}
+                      {% elif public.account.role == 2 %}
                         <li class='list-inline-item'>
                             <span class="badge badge-success">Student</span>
                         </li>
-                      {% elif account.role == 3 %}
+                      {% elif public.account.role == 3 %}
                         <li class='list-inline-item'>
                             <span class="badge badge-danger">Teacher</span>
                         </li>
                       {% endif %}
+                      {% comment %}
                       {% for student in students %}
                         <li class='list-inline-item'>
                             <small><span class="badge badge-warning">{{student.school.name}} {{student.get_grade_display}}</span></small>
                         </li>
                       {% endfor %}
-                      {% if account.zone %}
+                      {% endcomment %}
+                      {% if public.account.zone %}
                         <li class='list-inline-item'>
                           <span class="badge badge-light">{{account.get_zone_display}}</span>
                         </li>
