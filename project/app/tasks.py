@@ -89,7 +89,7 @@ def create_or_update_mailchimp_from_user(user):
         }
     }
     try:
-        client.lists.members.create_or_update(
+        result = client.lists.members.create_or_update(
             list_id=list_id,
             subscriber_hash=subscriber_hash,
             data=data,
@@ -106,7 +106,7 @@ def create_or_update_mailchimp_from_user(user):
         # else:
         #     raise e
         raise err
-    return
+    return result
 
 @job
 def delete_mailchimp_from_user(user):
