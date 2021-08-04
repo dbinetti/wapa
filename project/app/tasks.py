@@ -221,7 +221,7 @@ def send_super_email(comment):
             'account': account,
         },
         from_email=from_email,
-        to=['bub.derek@westada.org'],
+        to=comment.issue.recipient_emails,
         cc=[account.user.email],
     )
     return email.send()
