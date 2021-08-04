@@ -88,7 +88,7 @@
             </td>
             <td class='col-7'>
               {% if comment.polymorphic_ctype.name == 'Written Comment' %}
-                {% if comment.wordcount < 31 %}
+                {% if comment.wordcount < 60 %}
                   {{comment.text}}
                 {% else %}
                   <div class="collapse show" id="comment-{{comment.id}}">
