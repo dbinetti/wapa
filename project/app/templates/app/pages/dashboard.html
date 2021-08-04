@@ -1,0 +1,207 @@
+{% extends 'app/pages/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Dashboard
+    </h2>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <div class='card'>
+        <h4 class='card-header'>Metrics</h4>
+        <div class="card-body">
+          <div class='card-title'>
+          </div>
+          <div class='card-text'>
+            <dl class="row">
+              <dt class="col-sm-4">
+                Total Members
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.members}}
+              </dd>
+              <dt class="col-sm-4">
+                Messages Sent
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.comments}}
+              </dd>
+              <dt class="col-sm-4">
+                Event RSVPs
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.events}}
+              </dd>
+              <dt class="col-sm-4">
+                Schools Represented
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.schools}}
+              </dd>
+              <dt class="col-sm-4">
+                Students Represented
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.students}}
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <div class='card'>
+        <h4 class='card-header'>Account</h4>
+        <div class="card-body">
+          <div class='card-title'>
+          </div>
+          <div class='card-text'>
+            <dl class="row">
+              <dt class="col-sm-4">
+                Full Name
+              </dt>
+              <dd class="col-sm-8">
+                {{account.name}}
+              </dd>
+
+              <dt class="col-sm-4">
+                Listed Publicly?
+              </dt>
+              <dd class="col-sm-8">
+                {{account.is_public|yesno|title}}
+              </dd>
+              <dt class="col-sm-4">
+                Representing Spouse?
+              </dt>
+              <dd class="col-sm-8">
+                {{account.is_spouse|yesno|title}}
+              </dd>
+              <dt class="col-sm-4">
+                District Resident?
+              </dt>
+              <dd class="col-sm-8">
+                {{account.address|yesno|title}}
+              </dd>
+              <dt class="col-sm-4">
+                Students
+              </dt>
+              <dd class="col-sm-8">
+                {% for student in account.students.all %}
+                  <ul class='list-unstyled'>
+                    <li>{{student.school.name}}, {{student.get_grade_display}}</li>
+                  </ul>
+                {% empty %}
+                  (No Students in District Schools.)
+                {% endfor %}
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <div class='card-footer'>
+          Information Incorrect?  <a href='{% url "account" %}'>Click to Update</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <div class='card'>
+        <h4 class='card-header'>Comments</h4>
+        <div class="card-body">
+          <div class='card-title'>
+          </div>
+          <div class='card-text'>
+            {% for comment in comments %}
+              <dl class="row">
+                <dt class="col-sm-4">
+                  Issue
+                </dt>
+                <dd class="col-sm-8">
+                  {{comment.issue}}
+                </dd>
+                <dt class="col-sm-4">
+                  Recipient
+                </dt>
+                <dd class="col-sm-8">
+                  {{comment.issue.recipient_name}}
+                </dd>
+                <dt class="col-sm-4">
+                  Date Sent
+                </dt>
+                <dd class="col-sm-8">
+                  {{comment.created}}
+                </dd>
+                <dt class="col-sm-4">
+                  Content
+                </dt>
+                <dd class="col-sm-8">
+                  {{comment.text}}
+                </dd>
+              </dl>
+            {% empty %}
+              (No comments.)
+            {% endfor %}
+          </div>
+        </div>
+        <div class='card-footer'>
+          Delete/Send Comments?  <a href='{% url "comments" %}'>Click to Review</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <div class='card'>
+        <h4 class='card-header'>Events</h4>
+        <div class="card-body">
+          <div class='card-title'>
+          </div>
+          <div class='card-text'>
+            {% for attendee in attendees %}
+              <dl class="row">
+                <dt class="col-sm-4">
+                  Event
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.event}}
+                </dd>
+                <dt class="col-sm-4">
+                  Date
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.event.datetime}}
+                </dd>
+                <dt class="col-sm-4">
+                  Location
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.event.location}}
+                </dd>
+                <dt class="col-sm-4">
+                  Attending?
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.is_confirmed|yesno|title}}
+                </dd>
+              </dl>
+            {% empty %}
+              (No RSVPs for any Events.)
+            {% endfor %}
+          </div>
+        </div>
+        <div class='card-footer'>
+          Attending Events?  <a href='{% url "events" %}'>Click to RSVP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

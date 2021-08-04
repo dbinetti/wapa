@@ -198,6 +198,41 @@ def logout(request):
     )
     return redirect(logout_url)
 
+# Dashboard
+@login_required
+def dashboard(request):
+    account = request.user.account
+    comments = account.comments.all()
+    attendees = account.attendees.all()
+    metrics = {}
+    metrics['members'] = sum([
+        Account.objects.all().count(),
+        Account.objects.filter(is_spouse=True).count(),
+    ])
+    metrics['comments'] = Comment.objects.all(
+    ).count()
+    metrics['events'] = Attendee.objects.filter(
+        is_confirmed=True,
+    ).count()
+    metrics['schools'] = Student.objects.values(
+        'school',
+    ).distinct(
+    ).count()
+    metrics['students'] = Student.objects.all(
+    ).count()
+    return render(
+        request,
+        'app/pages/dashboard.html',
+        context={
+            'account': account,
+            'metrics': metrics,
+            'comments': comments,
+            # 'shares': shares,
+            'attendees': attendees,
+        },
+    )
+
+
 # Account
 @login_required
 def account(request):
