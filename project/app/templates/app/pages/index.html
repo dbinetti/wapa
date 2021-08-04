@@ -70,7 +70,7 @@
                   </li>
                 {% endif %}
                   {% for student in comment.account.students.all %}
-                    <li class='list-inline-item'>
+                    <li>
                       <small>{{ student.school.name }}, {{student.get_grade_display|default:"" }}</small>
                     </li>
                   {% endfor %}

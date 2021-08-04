@@ -12,6 +12,7 @@ from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -21,11 +22,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
+from .forms import AttendeeForm
 from .forms import DeleteForm
 from .forms import StudentForm
 from .forms import WrittenCommentForm
 from .models import Account
+from .models import Attendee
 from .models import Comment
+from .models import Event
 from .models import Issue
 from .models import Student
 from .models import VideoComment
@@ -444,6 +448,59 @@ def submit_written_comment(request):
         request,
         'app/pages/submit_written_comment.html',
         context = {
+            'form': form,
+        }
+    )
+
+
+@login_required
+def events(request):
+    events = Event.objects.filter(
+    ).order_by(
+        'date',
+    )
+    return render(
+        request,
+        'app/pages/events.html',
+        context = {
+            'events': events,
+        }
+    )
+
+@login_required
+def event(request, event_id):
+    event = get_object_or_404(
+        Event,
+        pk=event_id,
+    )
+    attendees = event.attendees.filter(
+        is_confirmed=True,
+    ).order_by(
+        '-created',
+    )
+    try:
+        attendee = event.attendees.get(account=request.user.account)
+    except Attendee.DoesNotExist:
+        attendee = None
+    if request.method == 'POST':
+        form = AttendeeForm(request.POST, instance=attendee)
+        if form.is_valid():
+            attendee = form.save(commit=False)
+            attendee.account = request.user.account
+            attendee.event = event
+            attendee.save()
+            messages.success(
+                request,
+                'Saved!',
+            )
+            return redirect('event', event_id)
+    form = AttendeeForm(instance=attendee)
+    return render(
+        request,
+        'app/pages/event.html',
+        context = {
+            'event': event,
+            'attendees': attendees,
             'form': form,
         }
     )

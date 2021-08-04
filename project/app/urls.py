@@ -37,6 +37,10 @@ urlpatterns = [
     path('comment/submit-video', views.submit_video_comment, name='submit-video-comment'),
     path('comment/video-submission', views.video_submission, name='video-submission'),
 
+    # Events
+    path('event/<str:event_id>', views.event, name='event',),
+    path('events', views.events, name='events',),
+
     # Delete
     path('delete', views.delete, name='delete',),
 

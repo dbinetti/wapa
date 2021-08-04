@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 
 # Local
 from .models import Account
+from .models import Attendee
 from .models import Student
 from .models import User
 from .models import WrittenComment
@@ -16,6 +17,19 @@ class DeleteForm(forms.Form):
     confirm = forms.BooleanField(
         required=True,
     )
+
+
+class AttendeeForm(forms.ModelForm):
+    class Meta:
+        model = Attendee
+        fields = [
+            'is_confirmed',
+            # 'account',
+            # 'event',
+        ]
+        labels = {
+            "is_confirmed": "Yes I'll Attend",
+        }
 
 
 class WrittenCommentForm(forms.ModelForm):

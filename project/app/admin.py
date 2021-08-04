@@ -13,15 +13,47 @@ from reversion.admin import VersionAdmin
 # Local
 from .forms import UserChangeForm
 from .forms import UserCreationForm
+from .inlines import AttendeeInline
 from .inlines import CommentInline
 from .inlines import StudentInline
 from .models import Account
 from .models import Comment
+from .models import Event
 from .models import Issue
 from .models import School
 from .models import User
 from .models import VideoComment
 from .models import WrittenComment
+
+
+@admin.register(Event)
+class EventAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+        'date',
+        'description',
+        'location',
+        'notes',
+    ]
+    list_display = [
+        'name',
+        'date',
+        'location',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+    ]
+    search_fields = [
+        'name',
+        'date',
+    ]
+    inlines = [
+        AttendeeInline,
+    ]
+    autocomplete_fields = [
+    ]
 
 
 def approve(modeladmin, request, queryset):

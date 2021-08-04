@@ -1,0 +1,74 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+
+{% load static %}
+{% block title %}{{event.name}}{% endblock title %}
+{% block metatags %}
+  <meta property="og:title" content="Hold a Sign for Smile West Ada" />
+  <meta property="og:image" content='{% static "app/signs.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/signs.png" %}' />
+  <meta property="og:url" content="https://www.smilewestada.com/sign" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="286973936371350" />
+  <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  Hold a sign at your school to spread the word!" />
+
+{% endblock metatags %}
+
+{% block content %}
+
+  <section class='my-5'>
+    <h2>
+      {{event.name}}
+    </h2>
+    <h6>
+      {{event.date}}<br>
+      {{event.location}}
+    </h6>
+    <p>
+      {% autoescape off %}
+      {{event.description}}
+      {% endautoescape %}
+    </p>
+  </section>
+
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <div class='card'>
+        <h4 class='card-header'>Event RSVP</h4>
+        <div class="card-body">
+          <div class='card-title'>
+          </div>
+          <div class='card-text'>
+            <form method='post'>
+              {% csrf_token %}
+              {% bootstrap_form_errors form %}
+              {% bootstrap_field form.is_confirmed show_help=True show_label=False %}
+              {% bootstrap_button "Save" button_type='submit' size='large' %}
+              {% bootstrap_button "Cancel" button_type='link' href="/events" size='large' button_class='btn-light' extra_classes='ml-3'%}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='my-5 col-md-8'>
+    <h4>
+      Event Attendees
+    </h4>
+    <table class='table table-sm table-hover'>
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attendee in attendees %}
+          <tr>
+            <td>{% if attendee.account.is_public %}{{attendee.account.name}}{% else %}(Private Attendee){% endif%}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock content %}

@@ -117,13 +117,13 @@
                             <span class="badge badge-danger">Teacher</span>
                         </li>
                       {% endif %}
-                      {% comment %}
-                      {% for student in students %}
-                        <li class='list-inline-item'>
-                            <small><span class="badge badge-warning">{{student.school.name}} {{student.get_grade_display}}</span></small>
+
+                      {% for student in public.account.students.all %}
+                        <li>
+                            <small>{{student.school.name}} {{student.get_grade_display}}</small>
                         </li>
                       {% endfor %}
-                      {% endcomment %}
+
                       {% if public.account.zone %}
                         <li class='list-inline-item'>
                           <span class="badge badge-light">{{account.get_zone_display}}</span>
