@@ -130,6 +130,7 @@ def callback(request):
     browser_state = request.session.get('state')
     server_state = request.GET.get('state')
     if browser_state != server_state:
+        log.error("state mismatch")
         return HttpResponse(status=400)
     next_url = server_state.partition('|')[2]
     # Get Auth0 Code
@@ -157,6 +158,7 @@ def callback(request):
     )
     payload['username'] = payload.pop('sub')
     if not 'email' in payload:
+        log.error("no email")
         messages.error(
             request,
             "Email address is required.  Please try again.",
@@ -167,13 +169,16 @@ def callback(request):
         return redirect('verify')
     if user:
         log_in(request, user)
+        # Check if first-time login and redirect to account page
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(
                 request,
                 "Thanks for joining the West Ada Parents Association!  Please update your account information below."
             )
             return redirect('account')
+        # Otherwise, redirect to next_url
         return redirect(next_url)
+    log.error("no user")
     return HttpResponse(status=403)
 
 def logout(request):
