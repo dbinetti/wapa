@@ -311,6 +311,11 @@ class Student(models.Model):
     updated = models.DateTimeField(
         auto_now=True,
     )
+    class Meta:
+        ordering = (
+            '-grade',
+        )
+
 
     def __str__(self):
         return f"{self.name}"
