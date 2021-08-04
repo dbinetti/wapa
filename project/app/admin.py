@@ -24,6 +24,13 @@ from .models import VideoComment
 from .models import WrittenComment
 
 
+def approve(modeladmin, request, queryset):
+    for comment in queryset:
+        comment.approve()
+        comment.save()
+approve.short_description = 'Approve Comment'
+
+
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
     save_on_top = True
@@ -64,6 +71,10 @@ class AccountAdmin(VersionAdmin):
     ordering = [
         '-created',
     ]
+    actions = [
+        approve,
+    ]
+
 
 @admin.register(Issue)
 class IssueAdmin(VersionAdmin):
