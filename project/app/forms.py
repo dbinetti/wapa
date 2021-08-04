@@ -105,7 +105,7 @@ class AccountForm(forms.ModelForm):
             'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
-            'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine your Board Member."),
+            'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine District Residency."),
         }
 
     def clean(self):

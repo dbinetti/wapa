@@ -17,6 +17,38 @@
           <div class='card-title'>
           </div>
           <div class='card-text'>
+            <dl class="row">
+              <dt class="col-sm-4">
+                Total Members
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.members}}
+              </dd>
+              <dt class="col-sm-4">
+                Messages Sent
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.comments}}
+              </dd>
+              <dt class="col-sm-4">
+                Event RSVPs
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.events}}
+              </dd>
+              <dt class="col-sm-4">
+                Schools Represented
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.schools}}
+              </dd>
+              <dt class="col-sm-4">
+                Students Represented
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.students}}
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -97,13 +129,13 @@
                   Recipient
                 </dt>
                 <dd class="col-sm-8">
-                  {{comment.recipient}}
+                  {{comment.issue.recipient_name}}
                 </dd>
                 <dt class="col-sm-4">
                   Date Sent
                 </dt>
                 <dd class="col-sm-8">
-                  {{comment.datetime}}
+                  {{comment.created}}
                 </dd>
                 <dt class="col-sm-4">
                   Content
@@ -117,21 +149,8 @@
             {% endfor %}
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class='my-5'>
-    <div class='col-lg-8'>
-      <div class='card'>
-        <h4 class='card-header'>Shares</h4>
-        <div class="card-body">
-          <div class='card-title'>
-          </div>
-          <div class='card-text'>
-            <p>
-              {{shares}}
-            </p>
-          </div>
+        <div class='card-footer'>
+          Delete/Send Comments?  <a href='{% url "comments" %}'>Click to Review</a>
         </div>
       </div>
     </div>
@@ -144,10 +163,40 @@
           <div class='card-title'>
           </div>
           <div class='card-text'>
-            <p>
-              {{account.name}}
-            </p>
+            {% for attendee in attendees %}
+              <dl class="row">
+                <dt class="col-sm-4">
+                  Event
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.event}}
+                </dd>
+                <dt class="col-sm-4">
+                  Date
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.event.datetime}}
+                </dd>
+                <dt class="col-sm-4">
+                  Location
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.event.location}}
+                </dd>
+                <dt class="col-sm-4">
+                  Attending?
+                </dt>
+                <dd class="col-sm-8">
+                  {{attendee.is_confirmed|yesno|title}}
+                </dd>
+              </dl>
+            {% empty %}
+              (No RSVPs for any Events.)
+            {% endfor %}
           </div>
+        </div>
+        <div class='card-footer'>
+          Attending Events?  <a href='{% url "events" %}'>Click to RSVP</a>
         </div>
       </div>
     </div>

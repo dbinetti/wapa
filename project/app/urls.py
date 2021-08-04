@@ -24,6 +24,9 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
 
+    # Dashboard
+    path('dashboard', views.dashboard, name='dashboard',),
+
     # Account
     path('account', views.account, name='account',),
     path('student/add', views.add_student, name='add-student',),
