@@ -337,6 +337,10 @@ class Event(models.Model):
     date = models.DateField(
         default=datetime.date.today,
     )
+    datetime = models.DateTimeField(
+        null=True,
+        blank=False,
+    )
     location = models.CharField(
         max_length=100,
         blank=True,
