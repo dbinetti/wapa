@@ -80,13 +80,13 @@ def get_mailchimp_client():
 def create_or_update_mailchimp_from_user(user):
     client = get_mailchimp_client()
     list_id = settings.MAILCHIMP_AUDIENCE_ID
-    email = user.email
-    name = user.name
-    subscriber_hash = get_subscriber_hash(email)
+    subscriber_hash = get_subscriber_hash(user.email)
     data = {
         'status_if_new': 'subscribed',
-        'email_address': email,
-        'name': name,
+        'email_address': user.email,
+        'merge_fields': {
+            'NAME': user.account.name,
+        }
     }
     try:
         client.lists.members.create_or_update(
