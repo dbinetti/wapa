@@ -313,7 +313,7 @@ class Student(models.Model):
     )
     class Meta:
         ordering = (
-            '-grade',
+            'grade',
         )
 
 
