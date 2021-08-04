@@ -71,7 +71,7 @@
                 {% endif %}
                   {% for student in comment.account.students.all %}
                     <li class='list-inline-item'>
-                      <small>{{ student.school.name }}, {{student.get_grade_display }}</small>
+                      <small>{{ student.school.name }}, {{student.get_grade_display|default:"" }}</small><br>
                     </li>
                   {% endfor %}
                 {% if comment.account.is_voter %}
