@@ -41,6 +41,9 @@ urlpatterns = [
     path('event/<str:event_id>', views.event, name='event',),
     path('events', views.events, name='events',),
 
+    # Share
+    path('share', views.share, name='share'),
+
     # Delete
     path('delete', views.delete, name='delete',),
 

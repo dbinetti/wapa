@@ -506,3 +506,10 @@ def event(request, event_id):
             'form': form,
         }
     )
+
+@login_required
+def share(request):
+    return render(
+        request,
+        'app/pages/share.html',
+    )
