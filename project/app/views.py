@@ -473,6 +473,7 @@ def event(request, event_id):
     )
     attendees = event.attendees.filter(
         is_confirmed=True,
+        account__is_public=True,
     ).order_by(
         '-created',
     )
