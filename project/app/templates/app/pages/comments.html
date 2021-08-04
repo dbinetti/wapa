@@ -133,11 +133,11 @@
                   </td>
                   <td class='col-7'>
                     {% if public.polymorphic_ctype.name == 'Written Comment' %}
-                      {% if public.wordcount < 31 %}
+                      {% if public.wordcount < 60 %}
                         {{public.text}}
                       {% else %}
                         <div class="collapse show" id="public-{{public.id}}">
-                          {{public.text|truncatewords:30}}
+                          {{public.text|truncatewords:60}}
                         </div>
                         <div class="collapse" id="public-{{public.id}}">
                           {{public.text}}
