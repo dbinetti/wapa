@@ -5,6 +5,7 @@ from address.models import AddressField
 from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 from cloudinary_storage.validators import validate_video
 from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django_fsm import FSMIntegerField
 from django_fsm import transition
@@ -84,6 +85,16 @@ class Issue(models.Model):
         max_length=2000,
         blank=True,
         default='',
+    )
+    recipient_name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    recipient_emails = ArrayField(
+        models.EmailField(
+        ),
+        null=True,
+        blank=False,
     )
     date = models.DateField(
         default=datetime.date.today,

@@ -112,6 +112,8 @@ class IssueAdmin(VersionAdmin):
         'name',
         'date',
         'description',
+        'recipient_name',
+        'recipient_emails',
     ]
     list_display = [
         'name',
