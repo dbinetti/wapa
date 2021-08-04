@@ -48,6 +48,9 @@ def index(request):
     ).select_related(
         'account',
         'account__user',
+    ).prefetch_related(
+        'account__students',
+        'account__students__school',
     ).order_by(
         '-is_featured',
         '-created',
