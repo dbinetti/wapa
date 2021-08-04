@@ -4,6 +4,7 @@
 {% load static %}
 {% block title %}{{event.name}}{% endblock title %}
 {% block metatags %}
+  {% comment %}
   <meta property="og:title" content="Hold a Sign for Smile West Ada" />
   <meta property="og:image" content='{% static "app/signs.png" %}' />
   <meta property="og:image:secure_url" content='{% static "app/signs.png" %}' />
@@ -11,28 +12,30 @@
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="286973936371350" />
   <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  Hold a sign at your school to spread the word!" />
-
+  {% endcomment %}
 {% endblock metatags %}
 
 {% block content %}
 
   <section class='my-5'>
-    <h2>
-      {{event.name}}
-    </h2>
-    <h6>
-      {{event.date}}<br>
-      {{event.location}}
-    </h6>
-    <p>
-      {% autoescape off %}
-      {{event.description}}
-      {% endautoescape %}
-    </p>
+    <div class='col-md-8'>
+      <h2>
+        {{event.name}}
+      </h2>
+      <h6>
+        {{event.date}}<br>
+        {{event.location}}
+      </h6>
+      <p>
+        {% autoescape off %}
+        {{event.description}}
+        {% endautoescape %}
+      </p>
+    </div>
   </section>
 
   <section class='my-5'>
-    <div class='col-lg-8'>
+    <div class='col-md-8'>
       <div class='card'>
         <h4 class='card-header'>Event RSVP</h4>
         <div class="card-body">

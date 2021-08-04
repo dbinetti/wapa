@@ -452,8 +452,6 @@ def submit_written_comment(request):
         }
     )
 
-
-@login_required
 def events(request):
     events = Event.objects.filter(
     ).order_by(
