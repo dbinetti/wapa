@@ -92,7 +92,7 @@
                   {{comment.text}}
                 {% else %}
                   <div class="collapse show" id="comment-{{comment.id}}">
-                    {{comment.text|truncatewords:30}}
+                    {{comment.text|truncatewords:60}}
                   </div>
                   <div class="collapse" id="comment-{{comment.id}}">
                     {{comment.text}}
@@ -147,7 +147,6 @@
       };
       window.requestAnimationFrame(step);
     }
-
     const obj = document.getElementById("value");
     animateValue(obj, 0, {{count}}, 2500);
   </script>
