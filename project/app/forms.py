@@ -72,33 +72,25 @@ class StudentForm(forms.ModelForm):
 
 
 class AccountForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     class Meta:
         model = Account
         fields = [
             'name',
             'is_public',
+            'is_spouse',
             'address',
-            'notes',
         ]
         labels = {
             "is_public": "You May List Me Publicly",
+            "is_spouse": "I Represent My Spouse",
         }
         widgets = {
-            'notes': forms.Textarea(
-                attrs={
-                    'class': 'form-control h-25',
-                    'placeholder': 'Anything else we should know? (Optional, Always Private)',
-                    'rows': 5,
-                }
-            )
         }
         help_texts = {
             'name': mark_safe("Please provide your <strong>real full name</strong>, which remains private unless you explcitly choose to be public."),
             'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
+            'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
             'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine your Board Member."),
         }
 

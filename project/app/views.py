@@ -29,7 +29,6 @@ from .models import Comment
 from .models import Issue
 from .models import Student
 from .models import VideoComment
-from .models import WrittenComment
 
 log = logging.getLogger(__name__)
 
@@ -49,7 +48,10 @@ def index(request):
         '-is_featured',
         '-created',
     )
-    count = Account.objects.all().count()
+    count = sum([
+        Account.objects.all().count(),
+        Account.objects.filter(is_spouse=True).count(),
+    ])
     return render(
         request,
         'app/pages/index.html',

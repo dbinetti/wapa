@@ -31,6 +31,7 @@ class AccountAdmin(VersionAdmin):
         'name',
         'address',
         'is_public',
+        'is_spouse',
         'is_steering',
         # 'notes',
     ]
@@ -38,6 +39,7 @@ class AccountAdmin(VersionAdmin):
         'name',
         'address',
         'is_public',
+        'is_spouse',
         'is_steering',
         # 'notes',
     ]
@@ -46,6 +48,7 @@ class AccountAdmin(VersionAdmin):
     list_filter = [
         'is_public',
         'is_steering',
+        'is_spouse',
     ]
     search_fields = [
         'name',
