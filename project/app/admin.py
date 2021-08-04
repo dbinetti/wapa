@@ -71,9 +71,6 @@ class AccountAdmin(VersionAdmin):
     ordering = [
         '-created',
     ]
-    actions = [
-        approve,
-    ]
 
 
 @admin.register(Issue)
@@ -176,7 +173,11 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
         'text',
     ]
     list_display = [
+        'account',
         'text',
+    ]
+    list_filter = [
+        'state',
     ]
     ordering = [
         '-created',
@@ -186,6 +187,10 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
         # 'issue',
     ]
     base_model = Comment
+    actions = [
+        approve,
+    ]
+
 
 
 @admin.register(VideoComment)
