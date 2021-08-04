@@ -9,7 +9,7 @@ def test_deploy():
 
 
 @pytest.mark.django_db
-def test_index(anon_client):
+def test_index(anon_client, issue):
     path = reverse('index')
     response = anon_client.get(path)
     assert response.status_code == 200

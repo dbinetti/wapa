@@ -4,6 +4,7 @@ from factory import PostGenerationMethodCall
 from factory.django import DjangoModelFactory
 
 # Local
+from .models import Issue
 from .models import User
 
 
@@ -14,3 +15,8 @@ class UserFactory(DjangoModelFactory):
     is_active = True
     class Meta:
         model = User
+
+class IssueFactory(DjangoModelFactory):
+    name = 'Issue One'
+    class Meta:
+        model = Issue

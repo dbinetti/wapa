@@ -1,4 +1,5 @@
 import pytest
+from app.factories import IssueFactory
 from app.factories import UserFactory
 from django.test.client import Client
 
@@ -8,6 +9,11 @@ def anon_client():
     client = Client()
     return client
 
+
+@pytest.fixture
+def issue():
+    issue = IssueFactory()
+    return issue
 
 @pytest.fixture
 def user():
