@@ -31,23 +31,23 @@ class EventAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
-        'date',
+        'datetime',
         'description',
         'location',
         'notes',
     ]
     list_display = [
         'name',
-        'date',
+        'datetime',
         'location',
     ]
     list_editable = [
     ]
     list_filter = [
+        'datetime',
     ]
     search_fields = [
         'name',
-        'date',
     ]
     inlines = [
         AttendeeInline,
