@@ -7,46 +7,43 @@
 {% block title %}Sharing{% endblock title %}
 
 {% block content %}
+  {% comment %}
   <section class='mt-5'>
     <h2 class='my-3 col-md-12'>
       Sharing
     </h2>
-    <p class='lead my-3 col-md-12'>
-      Please share this site because we need more support!
-    </p>
-    <div class='my-5 ml-3 col-md-12'>
-      <div class='row my-5'>
-        <div class='col-sm-2'>
-          Facebook Share:
+  </section>
+  {% endcomment %}
+  <section class='my-5'>
+    <div class='col-md-8'>
+      <div class='card'>
+        <h4 class='card-header'>Share</h4>
+        <div class="card-body">
+          <div class='card-title'>
+            <p>
+              Please share to site because we need more support!
+            </p>
+          </div>
+          <div class='card-text'>
+            <ul class='list-unstyled'>
+              <li class='list-item my-3'>
+                {% bootstrap_button "Share via Facebook" id='facebook-share-button' button_type='button' button_class='btn btn-primary btn-lg' %}
+              </li>
+              <li class='list-item my-3'>
+                {% bootstrap_button "Share via Text" id='text-share-button' button_type='button' button_class='btn btn-success btn-lg' %}
+              </li>
+              <li class='list-item my-3'>
+                Copy/Paste: <span>https://www.westadaparents.com</span>
+              </li>
+            </ul>
+          </div>
         </div>
-          {% bootstrap_button "Share via Facebook" id='facebook-share-button' button_type='button' button_class='btn btn-primary btn-sm' %}
-      </div>
-      <div class='row my-5'>
-        <div class='col-sm-2'>
-          Text Share:
-        </div>
-        <div class='col-sm-10'>
-          {% bootstrap_button "Share via Text" id='text-share-button' button_type='button' button_class='btn btn-primary btn-sm' %}
-        </div>
-      </div>
-      <div class='row my-5'>
-        <div class='col-sm-2'>
-          Copy/Paste:
-        </div>
-        <div class='col-sm-10'>
-          <span>https://www.westadaparents.com</span>
+        <div class='card-footer'>
+          <p>
+          </p>
         </div>
       </div>
     </div>
-    <p class='lead col-md-8 my-5'>
-      Lastly, If you need any other help, please don't hesitate to reach out at <a href='mailto:dbinetti@westadaparents.com'>dbinetti@westadaparents.com</a>.
-    </p>
-    <h4>
-      Thanks for supporting our kids!
-    </h4>
-    <p class='my-5'>
-      (Back to your <a href='{% url "account" %}'>Account Details</a>)
-    </p>
   </section>
 {% endblock content %}
 
