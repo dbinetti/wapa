@@ -124,8 +124,7 @@ class Comment(models.Model):
     )
     content = models.TextField(
         max_length=2000,
-        blank=True,
-        default='',
+        blank=False,
     )
     account = models.ForeignKey(
         'app.Account',

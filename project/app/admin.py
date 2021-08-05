@@ -106,6 +106,7 @@ class IssueAdmin(VersionAdmin):
     fields = [
         'name',
         'date',
+        'state',
         'description',
         'recipient_name',
         'recipient_emails',
@@ -123,7 +124,7 @@ class IssueAdmin(VersionAdmin):
         'date',
     ]
     inlines = [
-        CommentInline,
+        # CommentInline,
     ]
     autocomplete_fields = [
     ]

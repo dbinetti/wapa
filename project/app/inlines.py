@@ -56,6 +56,7 @@ class CommentInline(admin.TabularInline):
     fields = [
         'account',
         'issue',
+        'state',
     ]
     readonly_fields = [
     ]

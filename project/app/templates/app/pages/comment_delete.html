@@ -30,7 +30,11 @@
       {% csrf_token %}
       {% bootstrap_form_errors form %}
       {% bootstrap_field form.confirm %}
-      {% bootstrap_button "Delete Comment" button_type='submit' button_class='btn btn-danger btn-lg btn-block' %}
+      <ul class='list-inline'>
+      <li class='list-inline-item'>{% bootstrap_button "Delete Comment" button_type='submit' button_class='btn btn-danger btn-lg' extra_classes='ml-3'%}</li>
+      <li class='list-inline-item'>{% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+</li>
+      </ul>
     </form>
   </section>
 {% endblock content %}

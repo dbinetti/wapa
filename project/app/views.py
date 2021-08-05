@@ -367,17 +367,39 @@ def edit_student(request, student_id):
 @login_required
 def comments(request):
     account = request.user.account
-    issue = Issue.objects.latest('date')
-    personals = account.comments.order_by(
-        'created',
-    )
-    students = account.students.order_by(
-        'grade',
-        'school__name',
-    ).select_related(
-        'school',
-    )
-    publics = Comment.objects.filter(
+    issue = Issue.objects.get(state=10)
+    try:
+        comment = account.comments.get(
+            issue=issue,
+        )
+    except Comment.DoesNotExist:
+        comment = None
+    if comment:
+        if request.method == 'POST':
+            form = CommentForm(request.POST, instance=comment)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.state = 0
+                comment.save()
+                messages.success(
+                    request,
+                    'Saved!',
+                )
+                return redirect('comments')
+        form = CommentForm(instance=comment)
+    else:
+        form = CommentForm(request.POST or None)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.account = account
+            comment.issue = issue
+            comment.save()
+            messages.success(
+                request,
+                "Comment Submitted!  You'll receive an email once approved."
+            )
+            return redirect('comments')
+    comments = Comment.objects.filter(
         account__is_public=True,
         state=Comment.STATE.approved,
         account__user__is_active=True,
@@ -396,10 +418,10 @@ def comments(request):
         request,
         'app/pages/comments.html',
         context={
-            'personals': personals,
-            'publics': publics,
+            'comment': comment,
+            'comments': comments,
             'account': account,
-            'students': students,
+            'form': form,
         },
     )
 
