@@ -133,7 +133,6 @@ class Comment(models.Model):
         related_name='comments',
         null=False,
         blank=False,
-        unique=True,
     )
     issue = models.ForeignKey(
         'app.Issue',
