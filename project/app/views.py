@@ -547,6 +547,19 @@ def event(request, event_id):
         }
     )
 
+def comment(request, comment_id):
+    comment = get_object_or_404(
+        Comment,
+        pk=comment_id,
+    )
+    return render(
+        request,
+        'app/pages/comment.html',
+        context = {
+            'comment': comment,
+        }
+    )
+
 @login_required
 def share(request):
     return render(

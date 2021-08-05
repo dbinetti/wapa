@@ -1,0 +1,78 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+{% block metatags %}
+  <meta property="og:title" content="West Ada Parents Support our Superintendent" />
+  <meta property="og:image" content='{% static "app/poster2.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/poster2.png" %}' />
+  <meta property="og:url" content="https://www.westadaparents.com" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="1236648860100768" />
+  <meta property="og:description" content="Click to keep Schools Open and Kids Smiling." />
+{% endblock metatags %}
+
+{% block customstyles %}
+  <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+{% endblock customstyles %}
+
+
+{% block title %}Comment by {{comment.account.name}}{% endblock title %}
+
+{% block content %}
+  <section class='my-5 col-md-12'>
+    <div class='card'>
+      <div class='card-header'>
+        <h4>
+          Comment by {{comment.account.name}}
+        </h4>
+        <ul class='list-unstyled'>
+          {% for student in comment.account.students.all %}
+            <li><small>{{student.school.name}}, {{student.get_grade_display }}</small></li>
+          {% endfor %}
+          <li><small>Sent to {{comment.issue.recipient_name}}, {{comment.created}}</small></li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class='card-text'>
+          {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+            <h5 class='my-5'>
+              {{comment.text}}
+            </h5>
+          {% else %}
+            <video
+              id="{{comment.video.id}}"
+              controls
+              class="cld-video-player"
+              data-cld-public-id="{{comment.video.name}}"
+            >
+            </video>
+          {% endif %}
+        </div>
+      </div>
+      <div class='card-footer'>
+        Share This
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+{% block scripts %}
+  <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+  <script>
+    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
+    let cld = cloudinary.Cloudinary.new({
+      cloud_name: cloudName
+    });
+    let players = cld.videoPlayers('.cld-video-player', {
+      showLogo: false,
+      sourceTypes: ['hls', 'dash'],
+      sourceTransformation: {
+        'hls': [{ streaming_profile: 'hd' }],
+        'dash': [{ streaming_profile: 'hd' }],
+      }
+    });
+  </script>
+{% endblock scripts %}

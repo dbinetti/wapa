@@ -19,7 +19,6 @@ from .managers import UserManager
 # from model_utils import Choices
 
 
-
 class Account(models.Model):
     id = HashidAutoField(
         primary_key=True,
