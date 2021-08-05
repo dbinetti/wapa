@@ -106,7 +106,7 @@ class Issue(models.Model):
         return f"{self.name}"
 
 
-class Comment(PolymorphicModel):
+class Comment(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
