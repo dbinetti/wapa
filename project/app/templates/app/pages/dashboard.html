@@ -12,7 +12,7 @@
   <section class='my-5'>
     <div class='col-lg-8'>
       <div class='card'>
-        <h4 class='card-header'>Metrics</h4>
+        <h4 class='card-header'>Site Metrics</h4>
         <div class="card-body">
           <div class='card-title'>
           </div>
@@ -25,16 +25,10 @@
                 {{metrics.members}}
               </dd>
               <dt class="col-sm-4">
-                Messages Sent
+                Comments Made
               </dt>
               <dd class="col-sm-8">
                 {{metrics.comments}}
-              </dd>
-              <dt class="col-sm-4">
-                Event RSVPs
-              </dt>
-              <dd class="col-sm-8">
-                {{metrics.events}}
               </dd>
               <dt class="col-sm-4">
                 Schools Represented
@@ -43,11 +37,19 @@
                 {{metrics.schools}}
               </dd>
               <dt class="col-sm-4">
+                Event RSVPs
+              </dt>
+              <dd class="col-sm-8">
+                {{metrics.events}}
+              </dd>
+              {% comment %}
+              <dt class="col-sm-4">
                 Students Represented
               </dt>
               <dd class="col-sm-8">
                 {{metrics.students}}
               </dd>
+              {% endcomment %}
             </dl>
           </div>
         </div>

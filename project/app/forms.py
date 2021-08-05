@@ -95,7 +95,7 @@ class AccountForm(forms.ModelForm):
             'address',
         ]
         labels = {
-            "is_public": "You May List Me Publicly",
+            "is_public": "I Choose to be Public",
             "is_spouse": "I Represent My Spouse",
         }
         widgets = {
@@ -105,7 +105,7 @@ class AccountForm(forms.ModelForm):
             'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
-            'address': mark_safe("Address always <strong>remains private</strong>; we use this to determine District Residency."),
+            'address': mark_safe("We use this to show you're a District Resident (which increases your power.) Your address itself <strong>remains private and confidential</strong>."),
         }
 
     def clean(self):
