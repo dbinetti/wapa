@@ -163,12 +163,13 @@ class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     list_filter = [
         'state',
         'is_featured',
-        'issue',
+        # 'issue',
     ]
     list_display = [
         '__str__',
         'state',
         'issue',
+        'content',
     ]
     ordering = [
         '-created',
@@ -180,6 +181,9 @@ class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     list_select_related = [
         'account',
         'issue',
+    ]
+    actions = [
+        approve,
     ]
 
 
