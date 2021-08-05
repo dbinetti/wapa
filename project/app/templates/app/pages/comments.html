@@ -1,5 +1,6 @@
 {% extends 'app/pages/base.html' %}
 {% load bootstrap4 %}
+{% load app_tags %}
 
 {% block customstyles %}
 {% endblock customstyles %}
@@ -51,9 +52,13 @@
           </div>
         </div>
         <div class='card-footer'>
-          <ul class='list-inline'>
-            {% url 'comment-delete' comment.id as comment_delete %}
-            <li class='list-inline-item'>{% bootstrap_button "Delete This Comment" button_type='link' href=comment_delete size='large' button_class='btn-danger' extra_classes='ml-3'%}</li>
+          <ul class='list-inline '>
+            <li class='list-inline-item'>
+              {% bootstrap_button "Share Your Comment on Facebook" button_type='link' href=comment_delete size='large' button_class='btn-primary' extra_classes='ml-3' id='facebook-share-button'%}
+            </li>
+            <li class='list-inline-item float-right'>
+              <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'>Delete Comment</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -96,7 +101,6 @@
               <li class='list-inline-item float-right'>
                 <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'>Delete Comment</a>
               </li>
-
             </ul>
           </div>
         </div>
@@ -251,5 +255,31 @@
 
 {% endblock content %}
 
+{% block postbody %}
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '{% get_env_var "FACEBOOK_CLIENT_ID" %}',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v11.0'
+      });
+    };
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+  </script>
+{% endblock %}
+
 {% block scripts %}
+  <script>
+    const FBbutton = document.querySelector('#facebook-share-button');
+    FBbutton.addEventListener('click', async () => {
+      FB.ui({
+        method: 'share',
+        href: 'https://www.westadaparents.com',
+        quote: '{{comment.text}}',
+      }, function(response){});
+    });
+  </script>
 {% endblock scripts %}
