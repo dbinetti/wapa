@@ -3,13 +3,6 @@
 {% load bootstrap4 %}
 {% load app_tags %}
 
-{% comment %}
-{% block formmedia %}
-  {{ form.media }}
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
-{% endblock formmedia %}
-{% endcomment %}
 
 {% block title %}Sharing{% endblock title %}
 
@@ -26,16 +19,14 @@
         <div class='col-sm-2'>
           Facebook Share:
         </div>
-        {% comment %}
-        <div class="fb-share-button col-sm-3" data-href="https://www.westadaparents.com" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.westadaparents.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-        {% endcomment %}
+          {% bootstrap_button "Share via Facebook" id='facebook-share-button' button_type='button' button_class='btn btn-primary btn-sm' %}
       </div>
       <div class='row my-5'>
         <div class='col-sm-2'>
           Text Share:
         </div>
         <div class='col-sm-10'>
-          {% bootstrap_button "Share via Text" id='textbutton' button_type='button' button_class='btn btn-primary btn-sm' %}
+          {% bootstrap_button "Share via Text" id='text-share-button' button_type='button' button_class='btn btn-primary btn-sm' %}
         </div>
       </div>
       <div class='row my-5'>
@@ -68,11 +59,6 @@
         xfbml            : true,
         version          : 'v11.0'
       });
-      FB.ui({
-        method: 'share',
-        href: 'https://www.westadaparents.com',
-        quote: 'Smiling Students Support the Superintendent',
-      }, function(response){});
     };
   </script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
@@ -82,12 +68,23 @@
 
 {% block scripts %}
   <script>
+    const FBbutton = document.querySelector('#facebook-share-button');
+    FBbutton.addEventListener('click', async () => {
+      FB.ui({
+        method: 'share',
+        href: 'https://www.westadaparents.com',
+        quote: 'Smiling Students Support the Superintendent',
+      }, function(response){});
+    });
+
+  </script>
+  <script>
     const toShare = {
       title: "West Ada Parents!",
       text: "Please help us support the Superintendent and keep kids smiling in school!",
       url: "https://www.westadaparents.com"
     };
-    const button = document.querySelector('#textbutton');
+    const button = document.querySelector('#text-share-button');
     button.addEventListener('click', async () => {
       try {
         await navigator.share(toShare); // Will trigger the native "share" feature
