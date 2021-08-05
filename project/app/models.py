@@ -2,8 +2,6 @@
 import datetime
 
 from address.models import AddressField
-from cloudinary_storage.storage import VideoMediaCloudinaryStorage
-from cloudinary_storage.validators import validate_video
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
@@ -173,37 +171,6 @@ class Comment(PolymorphicModel):
         from .tasks import send_denial_email
         send_denial_email.delay(self.account)
         return
-
-
-class WrittenComment(Comment):
-    text = models.TextField(
-        max_length=2000,
-        blank=True,
-        default='',
-    )
-
-    @property
-    def wordcount(self):
-        words = self.text.split(" ")
-        return len(words)
-
-    class Meta:
-        verbose_name = 'Written Comment'
-        verbose_name_plural = 'Written Comments'
-
-
-class VideoComment(Comment):
-    video = models.FileField(
-        upload_to='videos/',
-        blank=True,
-        storage=VideoMediaCloudinaryStorage(),
-        validators=[validate_video],
-    )
-    # def __str__(self):
-    #     return f"{self.id}"
-    class Meta:
-        verbose_name = 'Video Comment'
-        verbose_name_plural = 'Video Comments'
 
 
 class User(AbstractBaseUser):

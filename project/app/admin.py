@@ -152,7 +152,6 @@ class SchoolAdmin(VersionAdmin):
 class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     save_on_top = True
     fields = [
-        # 'video',
         'state',
         'is_featured',
         'issue',

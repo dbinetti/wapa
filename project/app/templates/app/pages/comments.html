@@ -3,7 +3,6 @@
 {% load app_tags %}
 
 {% block customstyles %}
-  <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
 {% endblock customstyles %}
 
 
@@ -65,7 +64,7 @@
       <div class='card-footer'>
         <div class='list-inline'>
           {% url 'submit-written-comment' as written_url_comment %}
-          <li class='list-inline-item'>{% bootstrap_button "Make Written Comment" button_type='link' href=written_url_comment size='large' button_class='btn-success' extra_classes='m-2'%}</li>
+          <li class='list-inline-item'>{% bootstrap_button "Write Comment" button_type='link' href=written_url_comment size='large' button_class='btn-success' extra_classes='m-2'%}</li>
         </div>
       </div>
     </div>
@@ -118,26 +117,16 @@
                     </ul>
                   </td>
                   <td class='col-7'>
-                    {% if public.polymorphic_ctype.name == 'Written Comment' %}
-                      {% if public.wordcount < 60 %}
-                        {{public.content}}
-                      {% else %}
-                        <div class="collapse show" id="public-{{public.id}}">
-                          {{public.content|truncatewords:60}}
-                        </div>
-                        <div class="collapse" id="public-{{public.id}}">
-                          {{public.content}}
-                        </div>
-                        <a data-toggle="collapse" href="#public-{{public.id}}"><small>more</small></a>
-                      {% endif %}
+                    {% if public.wordcount < 60 %}
+                      {{public.content}}
                     {% else %}
-                      <video
-                        id="{{public.video.id}}"
-                        controls
-                        class="cld-video-player"
-                        data-cld-public-id="{{public.video.name}}"
-                      >
-                      </video>
+                      <div class="collapse show" id="public-{{public.id}}">
+                        {{public.content|truncatewords:60}}
+                      </div>
+                      <div class="collapse" id="public-{{public.id}}">
+                        {{public.content}}
+                      </div>
+                      <a data-toggle="collapse" href="#public-{{public.id}}"><small>more</small></a>
                     {% endif %}
                   </td>
                 </tr>
