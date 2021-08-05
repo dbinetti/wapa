@@ -278,7 +278,7 @@
       FB.ui({
         method: 'share',
         href: 'https://www.westadaparents.com',
-        quote: '{{comment.content|escape}}',
+        quote: '{{comment.content|safe}}',
       }, function(response){});
     });
   </script>
