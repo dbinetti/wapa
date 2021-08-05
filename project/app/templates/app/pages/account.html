@@ -99,3 +99,12 @@
     </div>
   </section>
 {% endblock content %}
+
+{% block scripts %}
+  <script>
+    posthog.identify(
+      "{{request.user.id|escapejs}}",
+      {email: "{{request.user.email|escapejs}}"},
+    );
+  </script>
+{% endblock scripts %}
