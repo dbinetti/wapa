@@ -540,11 +540,16 @@ def comment(request, comment_id):
         Comment,
         pk=comment_id,
     )
+    count = sum([
+        Account.objects.all().count(),
+        Account.objects.filter(is_spouse=True).count(),
+    ])
     return render(
         request,
         'app/pages/comment.html',
         context = {
             'comment': comment,
+            'count': count,
         }
     )
 
