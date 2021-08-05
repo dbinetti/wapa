@@ -1,13 +1,15 @@
 {% extends 'app/pages/base.html' %}
 
 {% load bootstrap4 %}
-{% load humanize %}
+{% load app_tags %}
 
+{% comment %}
 {% block formmedia %}
   {{ form.media }}
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
 {% endblock formmedia %}
+{% endcomment %}
 
 {% block title %}Sharing{% endblock title %}
 
@@ -24,7 +26,9 @@
         <div class='col-sm-2'>
           Facebook Share:
         </div>
+        {% comment %}
         <div class="fb-share-button col-sm-3" data-href="https://www.westadaparents.com" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.westadaparents.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+        {% endcomment %}
       </div>
       <div class='row my-5'>
         <div class='col-sm-2'>
@@ -54,10 +58,28 @@
     </p>
   </section>
 {% endblock content %}
-{% block scripts %}
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="S2yVNVmf">
+
+{% block postbody %}
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '{% get_env_var "FACEBOOK_CLIENT_ID" %}',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v11.0'
+      });
+      FB.ui({
+        method: 'share',
+        href: 'https://developers.facebook.com/docs/'
+      }, function(response){});
+    };
   </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+  </script>
+{% endblock %}
+
+{% block scripts %}
   <script>
     const toShare = {
       title: "West Ada Parents!",
