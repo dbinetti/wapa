@@ -125,6 +125,11 @@ class Comment(PolymorphicModel):
     is_featured = models.BooleanField(
         default=False,
     )
+    content = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
     account = models.ForeignKey(
         'app.Account',
         on_delete=models.CASCADE,
@@ -139,6 +144,12 @@ class Comment(PolymorphicModel):
         null=False,
         blank=False,
     )
+
+    @property
+    def wordcount(self):
+        words = self.text.split(" ")
+        return len(words)
+
     created = models.DateTimeField(
         auto_now_add=True,
     )
