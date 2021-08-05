@@ -14,16 +14,9 @@
     </p>
     <div class='card'>
       <div class='card-body'>
-        {% if comment.polymorphic_ctype.name == 'Written Comment' %}
-
-          <p>
-            {{comment.text}}
-          </p>
-        {% else %}
-          <p>
-            <img src={{comment.video.url}}.jpg class='img-fluid'>
-          </p>
-        {% endif %}
+        <p>
+          {{comment.content}}
+        </p>
       </div>
     </div>
     <div class='mt-5'>

@@ -87,26 +87,16 @@
               </ul>
             </td>
             <td class='col-7'>
-              {% if comment.polymorphic_ctype.name == 'Written Comment' %}
-                {% if comment.wordcount < 60 %}
-                  {{comment.text}}
-                {% else %}
-                  <div class="collapse show" id="comment-{{comment.id}}">
-                    {{comment.text|truncatewords:60}}
-                  </div>
-                  <div class="collapse" id="comment-{{comment.id}}">
-                    {{comment.text}}
-                  </div>
-                  <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
-                {% endif %}
+              {% if comment.wordcount < 60 %}
+                {{comment.content}}
               {% else %}
-                <video
-                  id="comment-player"
-                  controls
-                  class="cld-video-player"
-                  data-cld-public-id="{{comment.video.name}}"
-                >
-                </video>
+                <div class="collapse show" id="comment-{{comment.id}}">
+                  {{comment.content|truncatewords:60}}
+                </div>
+                <div class="collapse" id="comment-{{comment.id}}">
+                  {{comment.content}}
+                </div>
+                <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
               {% endif %}
             </td>
           </tr>
@@ -118,22 +108,6 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
-  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
-  <script>
-    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
-    let cld = cloudinary.Cloudinary.new({
-      cloud_name: cloudName
-    });
-    let  players = cld.videoPlayers('.cld-video-player', {
-      showLogo: false,
-      sourceTypes: ['hls', 'dash'],
-      sourceTransformation: {
-        'hls': [{ streaming_profile: 'hd' }],
-        'dash': [{ streaming_profile: 'hd' }],
-      }
-    });
-  </script>
   <script>
     function animateValue(obj, start, end, duration) {
       let startTimestamp = null;

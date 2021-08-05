@@ -18,21 +18,18 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import AttendeeForm
+from .forms import CommentForm
 from .forms import DeleteForm
 from .forms import StudentForm
-from .forms import WrittenCommentForm
 from .models import Account
 from .models import Attendee
 from .models import Comment
 from .models import Event
 from .models import Issue
 from .models import Student
-from .models import VideoComment
 
 log = logging.getLogger(__name__)
 
@@ -388,6 +385,9 @@ def comments(request):
     ).select_related(
         'account',
         'account__user',
+    ).prefetch_related(
+        'account__students',
+        'account__students__school',
     ).order_by(
         # '-is_featured',
         '-created',
@@ -432,40 +432,6 @@ def comment_delete(request, comment_id):
         },
     )
 
-
-@login_required
-def submit_video_comment(request):
-    account = request.user.account
-    if not account.is_public:
-        messages.warning(
-            request,
-            "You must make your name Public to make a comment",
-        )
-        return redirect('account')
-    return render(
-        request,
-        'app/pages/submit_video_comment.html',
-    )
-
-@csrf_exempt
-@require_POST
-@login_required
-def video_submission(request):
-    if request.method == 'POST':
-        issue = Issue.objects.latest('date')
-        payload = json.loads(request.body)
-        comment = VideoComment(
-            account=request.user.account,
-        )
-        comment.video.name = payload['public_id']
-        comment.issue = issue
-        comment.save()
-        messages.success(
-            request,
-            "Comment Submitted!  You'll receive an email once approved."
-        )
-    return HttpResponse()
-
 @login_required
 def submit_written_comment(request):
     account = request.user.account
@@ -475,7 +441,7 @@ def submit_written_comment(request):
             "You must make your name Public to make a comment",
         )
         return redirect('account')
-    form = WrittenCommentForm(request.POST or None)
+    form = CommentForm(request.POST or None)
     if form.is_valid():
         issue = Issue.objects.latest('date')
         comment = form.save(commit=False)

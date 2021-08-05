@@ -5,9 +5,6 @@ from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from fsm_admin.mixins import FSMTransitionMixin
-from polymorphic.admin import PolymorphicChildModelAdmin
-from polymorphic.admin import PolymorphicChildModelFilter
-from polymorphic.admin import PolymorphicParentModelAdmin
 from reversion.admin import VersionAdmin
 
 # Local
@@ -22,8 +19,6 @@ from .models import Event
 from .models import Issue
 from .models import School
 from .models import User
-from .models import VideoComment
-from .models import WrittenComment
 
 
 @admin.register(Event)
@@ -154,13 +149,14 @@ class SchoolAdmin(VersionAdmin):
     ]
 
 @admin.register(Comment)
-class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin):
+class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     save_on_top = True
     fields = [
         # 'video',
         'state',
         'is_featured',
         'issue',
+        'content',
     ]
     fsm_fields = [
         'state',
@@ -168,7 +164,6 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     list_filter = [
         'state',
         'is_featured',
-        PolymorphicChildModelFilter,
         'issue',
     ]
     list_display = [
@@ -179,10 +174,6 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     ordering = [
         '-created',
     ]
-    child_models = [
-        WrittenComment,
-        VideoComment,
-    ]
     autocomplete_fields = [
         'account',
         # 'issue',
@@ -191,68 +182,6 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
         'account',
         'issue',
     ]
-
-
-@admin.register(WrittenComment)
-class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
-    save_on_top = True
-    fsm_fields = [
-        'state',
-    ]
-    fields = [
-        'state',
-        'is_featured',
-        'account',
-        'issue',
-        'text',
-    ]
-    list_display = [
-        'account',
-        'text',
-    ]
-    list_filter = [
-        'state',
-    ]
-    ordering = [
-        '-created',
-    ]
-    autocomplete_fields = [
-        'account',
-        # 'issue',
-    ]
-    base_model = Comment
-    actions = [
-        approve,
-    ]
-
-
-
-@admin.register(VideoComment)
-class VideoCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
-    save_on_top = True
-    fields = [
-        'state',
-        'is_featured',
-        'account',
-        'issue',
-        'video',
-    ]
-    list_display = [
-        'account',
-        'state',
-        'video',
-    ]
-    list_filter = [
-        'state',
-    ]
-    ordering = [
-        '-created',
-    ]
-    autocomplete_fields = [
-        'account',
-        # 'issue',
-    ]
-    base_model = Comment
 
 
 @admin.register(User)

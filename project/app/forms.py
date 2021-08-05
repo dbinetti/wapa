@@ -8,9 +8,9 @@ from django.utils.safestring import mark_safe
 # Local
 from .models import Account
 from .models import Attendee
+from .models import Comment
 from .models import Student
 from .models import User
-from .models import WrittenComment
 
 
 class DeleteForm(forms.Form):
@@ -32,14 +32,14 @@ class AttendeeForm(forms.ModelForm):
         }
 
 
-class WrittenCommentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = WrittenComment
+        model = Comment
         fields = [
-            'text',
+            'content',
         ]
         widgets = {
-            'text': forms.Textarea(
+            'content': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
                     'placeholder': 'Comments',
@@ -48,9 +48,9 @@ class WrittenCommentForm(forms.ModelForm):
             ),
         }
 
-    def clean_text(self):
-        text= self.cleaned_data['text']
-        words = text.split(" ")
+    def clean_content(self):
+        content= self.cleaned_data['content']
+        words = content.split(" ")
         for word in words:
             if any([
                 word.startswith("http"),
@@ -59,7 +59,7 @@ class WrittenCommentForm(forms.ModelForm):
                 raise ValidationError(
                     "Links are not allowed in comments."
                 )
-        return text
+        return content
 
 class StudentForm(forms.ModelForm):
     class Meta:

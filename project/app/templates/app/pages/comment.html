@@ -35,19 +35,9 @@
       </div>
       <div class="card-body">
         <div class='card-text'>
-          {% if comment.polymorphic_ctype.name == 'Written Comment' %}
-            <h5 class='my-5'>
-              {{comment.text}}
-            </h5>
-          {% else %}
-            <video
-              id="{{comment.video.id}}"
-              controls
-              class="cld-video-player"
-              data-cld-public-id="{{comment.video.name}}"
-            >
-            </video>
-          {% endif %}
+          <h5 class='my-5'>
+            {{comment.content}}
+          </h5>
         </div>
       </div>
       <div class='card-footer'>
@@ -59,20 +49,4 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
-  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
-  <script>
-    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
-    let cld = cloudinary.Cloudinary.new({
-      cloud_name: cloudName
-    });
-    let players = cld.videoPlayers('.cld-video-player', {
-      showLogo: false,
-      sourceTypes: ['hls', 'dash'],
-      sourceTransformation: {
-        'hls': [{ streaming_profile: 'hd' }],
-        'dash': [{ streaming_profile: 'hd' }],
-      }
-    });
-  </script>
 {% endblock scripts %}

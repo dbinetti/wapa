@@ -35,11 +35,9 @@ urlpatterns = [
 
     # Comments
     path('comments', views.comments, name='comments',),
+    path('comment/submit-written', views.submit_written_comment, name='submit-written-comment'),
     path('comment/<str:comment_id>', views.comment, name='comment',),
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
-    path('comment/submit-written', views.submit_written_comment, name='submit-written-comment'),
-    path('comment/submit-video', views.submit_video_comment, name='submit-video-comment'),
-    path('comment/video-submission', views.video_submission, name='video-submission'),
 
     # Events
     path('event/<str:event_id>', views.event, name='event',),

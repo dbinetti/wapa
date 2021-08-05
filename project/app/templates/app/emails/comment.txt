@@ -8,6 +8,6 @@ Student(s) at:
 {% endif %}
 {% for student in account.students.all %}{{student.school}} {{student.get_grade_display}}, {% endfor %}
 
-Message: {{comment.text}}
+Message: {{comment.content}}
 
 {% endautoescape %}
