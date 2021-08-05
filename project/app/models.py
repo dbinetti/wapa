@@ -5,6 +5,7 @@ from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.db.models.constraints import UniqueConstraint
 from django_fsm import FSMIntegerField
 from django_fsm import transition
 from hashid_field import HashidAutoField
@@ -141,6 +142,17 @@ class Comment(models.Model):
         null=False,
         blank=False,
     )
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=[
+                    'account',
+                    'issue',
+                ],
+                name='unique_comment',
+            )
+        ]
 
     @property
     def wordcount(self):
