@@ -84,6 +84,9 @@
         "GOOGLE_API_KEY": {
           "generator": "secret"
         },
+        "FACEBOOK_CLIENT_ID": {
+          "generator": "secret"
+        },
         "CLOUDINARY_URL": {
           "value": "cloudinary://foo:bar@baz"
         },
