@@ -276,9 +276,9 @@
     const FBbutton = document.querySelector('#facebook-share-button');
     FBbutton.addEventListener('click', async () => {
       FB.ui({
-        method: 'share',
-        href: 'https://www.westadaparents.com',
-        quote: '{{comment.content|safe}}',
+        method: "share",
+        href: "https://www.westadaparents.com",
+        quote: "{{comment.content|escapejs}}"
       }, function(response){});
     });
   </script>
