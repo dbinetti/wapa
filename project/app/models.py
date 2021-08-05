@@ -390,3 +390,14 @@ class Attendee(models.Model):
     )
     def __str__(self):
         return f"{self.id}"
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=[
+                    'account',
+                    'event',
+                ],
+                name='unique_attendee',
+            )
+        ]
