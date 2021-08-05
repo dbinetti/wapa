@@ -42,7 +42,6 @@ django-cloudinary-storage = "*"
 pillow = "*"
 django-fsm = "*"
 django-fsm-admin = "*"
-django-polymorphic = "*"
 python-magic = "*"
 
 [requires]
