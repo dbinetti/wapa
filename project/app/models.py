@@ -106,6 +106,66 @@ class Issue(models.Model):
         return f"{self.name}"
 
 
+class Event(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    description = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    datetime = models.DateTimeField(
+        null=True,
+        blank=False,
+    )
+    location = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+    )
+    notes = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class School(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class Comment(models.Model):
     id = HashidAutoField(
         primary_key=True,
@@ -183,83 +243,6 @@ class Comment(models.Model):
         return
 
 
-class User(AbstractBaseUser):
-    id = HashidAutoField(
-        primary_key=True,
-    )
-    username = models.CharField(
-        max_length=150,
-        blank=False,
-        null=False,
-        unique=True,
-    )
-    data = models.JSONField(
-        null=True,
-        editable=False,
-    )
-    name = models.CharField(
-        max_length=100,
-        blank=True,
-        default='(Unknown)',
-        verbose_name="Name",
-        editable=False,
-    )
-    email = models.EmailField(
-        blank=False,
-        editable=True,
-    )
-    is_active = models.BooleanField(
-        default=True,
-    )
-    is_admin = models.BooleanField(
-        default=False,
-    )
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-    )
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = [
-    ]
-
-    objects = UserManager()
-
-    @property
-    def is_staff(self):
-        return self.is_admin
-
-    def __str__(self):
-        return str(self.name)
-
-    def has_perm(self, perm, obj=None):
-        return True
-
-    def has_module_perms(self, app_label):
-        return True
-
-
-class School(models.Model):
-    id = HashidAutoField(
-        primary_key=True,
-    )
-    name = models.CharField(
-        max_length=100,
-        blank=False,
-    )
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-    )
-
-    def __str__(self):
-        return f"{self.name}"
-
-
 class Student(models.Model):
     id = HashidAutoField(
         primary_key=True,
@@ -319,47 +302,6 @@ class Student(models.Model):
         return f"{self.name}"
 
 
-class Event(models.Model):
-    id = HashidAutoField(
-        primary_key=True,
-    )
-    name = models.CharField(
-        max_length=100,
-        blank=False,
-    )
-    description = models.TextField(
-        max_length=2000,
-        blank=True,
-        default='',
-    )
-    date = models.DateField(
-        default=datetime.date.today,
-    )
-    datetime = models.DateTimeField(
-        null=True,
-        blank=False,
-    )
-    location = models.CharField(
-        max_length=100,
-        blank=True,
-        default='',
-    )
-    notes = models.TextField(
-        max_length=2000,
-        blank=True,
-        default='',
-    )
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-    )
-
-    def __str__(self):
-        return f"{self.name}"
-
-
 class Attendee(models.Model):
     id = HashidAutoField(
         primary_key=True,
@@ -400,3 +342,61 @@ class Attendee(models.Model):
                 name='unique_attendee',
             )
         ]
+
+
+class User(AbstractBaseUser):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    username = models.CharField(
+        max_length=150,
+        blank=False,
+        null=False,
+        unique=True,
+    )
+    data = models.JSONField(
+        null=True,
+        editable=False,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=True,
+        default='(Unknown)',
+        verbose_name="Name",
+        editable=False,
+    )
+    email = models.EmailField(
+        blank=False,
+        editable=True,
+    )
+    is_active = models.BooleanField(
+        default=True,
+    )
+    is_admin = models.BooleanField(
+        default=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = [
+    ]
+
+    objects = UserManager()
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def __str__(self):
+        return str(self.name)
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
