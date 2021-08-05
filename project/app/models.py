@@ -144,7 +144,7 @@ class Comment(models.Model):
 
     @property
     def wordcount(self):
-        words = self.text.split(" ")
+        words = self.content.split(" ")
         return len(words)
 
     created = models.DateTimeField(
