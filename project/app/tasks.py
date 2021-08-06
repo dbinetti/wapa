@@ -76,12 +76,12 @@ def create_account_from_user(user):
                 file,
                 'picture',
                 folder=f'{settings.CLOUDINARY_PREFIX}/pictures/',
-                public_id=str(c.id),
+                public_id=str(user.account.id),
                 resource_type='image',
             )
         except Exception as e:
             log.error(e)
-            continue
+            return account
         account.picture.name = picture['public_id']
         account.save()
     return account
