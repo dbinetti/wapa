@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
+from django.forms import inlineformset_factory
+from django.forms import modelformset_factory
 from django.utils.safestring import mark_safe
 
 # Local
@@ -12,12 +14,22 @@ from .models import Comment
 from .models import Student
 from .models import User
 
+StudentFormSet = inlineformset_factory(
+    Account,
+    Student,
+    fields=[
+        'school',
+        'grade',
+    ],
+    can_delete=True,
+    extra=1,
+)
+
 
 class DeleteForm(forms.Form):
     confirm = forms.BooleanField(
         required=True,
     )
-
 
 class AttendeeForm(forms.ModelForm):
     class Meta:

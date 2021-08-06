@@ -26,6 +26,7 @@ from .forms import AttendeeForm
 from .forms import CommentForm
 from .forms import DeleteForm
 from .forms import StudentForm
+from .forms import StudentFormSet
 from .models import Account
 from .models import Attendee
 from .models import Comment
@@ -242,8 +243,15 @@ def account(request):
     )
     if request.POST:
         form = AccountForm(request.POST, instance=account)
-        if form.is_valid():
+        formset = StudentFormSet(request.POST, request.FILES, instance=account)
+        if form.is_valid() and formset.is_valid():
             account = form.save()
+            formset.save()
+            for student_form in formset:
+                if student_form.is_valid() and student_form.has_changed():
+                    student_form.save()
+            for obj in formset.deleted_objects:
+                obj.delete()
             if account.is_public:
                 messages.success(
                     request,
@@ -257,6 +265,7 @@ def account(request):
             return redirect('account')
     else:
         form = AccountForm(instance=account)
+        formset = StudentFormSet(instance=account)
     params = {
         'format': 'png',
         'default_image': "wapa-dev:avatar.png",
@@ -285,6 +294,7 @@ def account(request):
         context={
             'account': account,
             'form': form,
+            'formset': formset,
             'students': students,
             'params': params,
         },
