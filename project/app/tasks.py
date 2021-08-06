@@ -2,6 +2,7 @@
 import json
 import logging
 
+import cloudinary
 import posthog
 # First-Party
 from auth0.v3.authentication import GetToken
@@ -65,6 +66,16 @@ def create_account_from_user(user):
         user=user,
         name=user.name,
     )
+    file = user.data.get('picture', None)
+    if file:
+        picture = cloudinary.uploader.unsigned_upload(
+            file,
+            'picture',
+            folder=f'{settings.CLOUDINARY_PREFIX}/pictures/',
+            public_id=str(user.account.id),
+            resource_type='image',
+        )
+        account.picture.name = picture['public_id']
     return account
 
 

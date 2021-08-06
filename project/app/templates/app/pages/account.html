@@ -29,6 +29,14 @@
             {% cloudinary account.picture.name params %}
           </div>
           <div class='card-title'>
+            <ul class='list-inline'>
+              <li class='list-inline-item'>
+                <a href="#" id='upload-widget'><small>Replace Picture</small></a>
+              </li>
+              <li class='list-inline-item ml-5'>
+                <a href='{% url "delete-picture" %}' class='text-danger'><small>Default Picture</small></a>
+              </li>
+            </p>
           </div>
           <div class='card-text'>
               {% bootstrap_form_errors form %}
@@ -111,5 +119,43 @@
       "{{request.user.id|escapejs}}",
       {email: "{{request.user.email|escapejs}}"},
     );
+  </script>
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
+    let cloudPrefix = '{% get_env_var "CLOUDINARY_PREFIX" %}';
+    let uploadWidget = cloudinary.createUploadWidget({
+        cloudName: cloudName,
+        uploadPreset: 'picture',
+        sources: [
+          'local',
+          'camera',
+          'facebook',
+          'instagram',
+          'dropbox',
+          'url',
+        ],
+        multiple: false,
+        folder: `${cloudPrefix}/pictures`,
+        resourceType: 'image',
+        clientAllowedFormats: [
+          'image',
+        ],
+        showPoweredBy: false,
+        showUploadMoreButton: false,
+      }, (error, result) => {
+        if (!error && result && result.event === "success") {
+          fetch("upload-picture", {
+            method: 'POST',
+            body: JSON.stringify(result.info)
+          }).then(res => {
+            window.location.replace('{% url "account" %}');
+          });
+        }
+      }
+    )
+    document.getElementById("upload-widget").addEventListener("click", function(){
+        uploadWidget.open();
+      }, false);
   </script>
 {% endblock scripts %}

@@ -18,6 +18,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import AttendeeForm
@@ -257,8 +259,10 @@ def account(request):
         form = AccountForm(instance=account)
     params = {
         'format': 'png',
+        'default_image': "wapa-dev:avatar.png",
         'transformation': [
             {'height': 200, 'width': 200},
+            # {'default_image': 'wapa-dev/avatar.png',}
             # {
             #     'crop': 'fit',
             #     'color': "white",
@@ -475,6 +479,28 @@ def comment_delete(request, comment_id):
             'comment': comment,
         },
     )
+
+@csrf_exempt
+@require_POST
+@login_required
+def upload_picture(request):
+    if request.method == 'POST':
+        payload = json.loads(request.body)
+        account = request.user.account
+        account.picture.name = payload['public_id']
+        account.save()
+        messages.success(
+            request,
+            "Picture Saved!"
+        )
+    return HttpResponse()
+
+@login_required
+def delete_picture(request):
+    account = request.user.account
+    account.picture = "none"
+    account.save()
+    return redirect('account')
 
 @login_required
 def submit_written_comment(request):
