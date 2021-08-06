@@ -39,6 +39,10 @@ class Account(models.Model):
         blank=True,
         on_delete=models.SET_NULL
     )
+    picture = models.ImageField(
+        null=True,
+        blank=True,
+    )
     notes = models.TextField(
         max_length=2000,
         blank=True,

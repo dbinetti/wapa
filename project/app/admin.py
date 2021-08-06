@@ -63,6 +63,7 @@ class AccountAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
+        'picture',
         'address',
         'is_public',
         'is_spouse',

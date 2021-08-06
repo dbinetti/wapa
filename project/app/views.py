@@ -255,12 +255,34 @@ def account(request):
             return redirect('account')
     else:
         form = AccountForm(instance=account)
+    params = {
+        'format': 'png',
+        'transformation': [
+            {'height': 200, 'width': 200},
+            # {
+            #     'crop': 'fit',
+            #     'color': "white",
+            #     'overlay': {
+            #         'font_family': "Impact",
+            #         'font_size': 200,
+            #         'font_weight': "bold",
+            #         'text_align': 'center',
+            #         'text': "My Message \nto the Superintendent",
+            #         'effect': "colorize",
+            #     },
+            # }
+        ],
+    }
+
+
     return render(
         request,
         'app/pages/account.html',
         context={
+            'account': account,
             'form': form,
             'students': students,
+            'params': params,
         },
     )
 

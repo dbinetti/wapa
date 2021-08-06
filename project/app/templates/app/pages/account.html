@@ -1,6 +1,8 @@
 {% extends 'app/pages/base.html' %}
 
 {% load bootstrap4 %}
+{% load cloudinary %}
+{% load app_tags %}
 
 {% block formmedia %}
   {{ form.media }}
@@ -23,6 +25,9 @@
         {% csrf_token %}
         <h4 class='card-header'>Personal Profile</h4>
         <div class="card-body">
+          <div class='col-xl-6'>
+            {% cloudinary account.picture.name params %}
+          </div>
           <div class='card-title'>
           </div>
           <div class='card-text'>
