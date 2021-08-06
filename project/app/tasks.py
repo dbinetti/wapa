@@ -66,7 +66,10 @@ def create_account_from_user(user):
         user=user,
         name=user.name,
     )
-    file = user.data.get('picture', None)
+    try:
+        file = user.data.get('picture', None)
+    except AttributeError:
+        file = None
     if file:
         picture = cloudinary.uploader.unsigned_upload(
             file,
@@ -76,6 +79,7 @@ def create_account_from_user(user):
             resource_type='image',
         )
         account.picture.name = picture['public_id']
+        account.save()
     return account
 
 
