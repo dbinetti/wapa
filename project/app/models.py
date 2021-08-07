@@ -267,7 +267,8 @@ class Student(models.Model):
     )
     name = models.CharField(
         max_length=100,
-        blank=False,
+        blank=True,
+        default='',
     )
     GRADE = Choices(
         (-1, 'prek', 'Pre-K'),
@@ -287,8 +288,8 @@ class Student(models.Model):
     )
     grade = models.IntegerField(
         choices=GRADE,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
     account = models.ForeignKey(
         'app.Account',
@@ -310,10 +311,32 @@ class Student(models.Model):
     updated = models.DateTimeField(
         auto_now=True,
     )
+
+    @property
+    def ord(self):
+        mapping = {
+            -1: 'PK',
+            0: 'K',
+            1: '1st',
+            2: '2nd',
+            3: '3rd',
+            4: '4th',
+            5: '5th',
+            6: '6th',
+            7: '7th',
+            8: '8th',
+            9: '9th',
+            10: '10th',
+            11: '11th',
+            12: '12th',
+        }
+        return mapping[self]
+
     class Meta:
         ordering = (
             'grade',
         )
+
 
 
     def __str__(self):
