@@ -59,12 +59,21 @@ def index(request):
         Account.objects.all().count(),
         Account.objects.filter(is_spouse=True).count(),
     ])
+    params = {
+        'format': 'png',
+        'default_image': "wapa-dev:avatar.png",
+        'transformation': [
+            {'height': 80, 'width': 80},
+        ],
+    }
+
     return render(
         request,
         'app/pages/index.html',
         context = {
             'comments': comments,
             'count': count,
+            'params': params,
         },
     )
 
