@@ -95,6 +95,14 @@
     <br>
 
     <script src='https://js.sentry-cdn.com/43268a2325ad41519f7ac5ac1a4c4f9d.min.js' crossorigin="anonymous"></script>
+    <script>
+      Sentry.onLoad(function() {
+        Sentry.init({
+          release: '{% get_env_var "HEROKU_SLUG_COMMIT" %}',
+          environment: '{% get_env_var "SENTRY_ENVIRONMENT" %}'
+        });
+      });
+    </script>
 
     {% block scripts %}
     {% endblock scripts %}
