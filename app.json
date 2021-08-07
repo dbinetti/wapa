@@ -95,6 +95,9 @@
         },
         "SENTRY_DSN": {
           "value": "https://foo@sentry.io/123"
+        },
+        "HEROKU_SLUG_COMMIT": {
+          "value": "development"
         }
       },
       "scripts": {

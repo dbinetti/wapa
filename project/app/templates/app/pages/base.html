@@ -98,7 +98,7 @@
     <script>
       Sentry.onLoad(function() {
         Sentry.init({
-          release: '{% get_env_var "HEROKU_SLUG_COMMIT" %}',
+          release: '{% get_env_var "SENTRY_RELEASE" %}',
           environment: '{% get_env_var "SENTRY_ENVIRONMENT" %}'
         });
       });
