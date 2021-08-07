@@ -330,7 +330,7 @@ class Student(models.Model):
             11: '11th',
             12: '12th',
         }
-        return mapping[self]
+        return mapping[self.grade]
 
     class Meta:
         ordering = (
