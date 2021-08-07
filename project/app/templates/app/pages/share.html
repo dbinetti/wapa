@@ -47,7 +47,7 @@
   </section>
 {% endblock content %}
 
-{% block postbody %}
+{% block scripts %}
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -59,11 +59,6 @@
     };
   </script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-  <script>
-  </script>
-{% endblock %}
-
-{% block scripts %}
   <script>
     const FBbutton = document.querySelector('#facebook-share-button');
     FBbutton.addEventListener('click', async () => {
