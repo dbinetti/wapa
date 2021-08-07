@@ -8,9 +8,10 @@
   {{ form.media }}
 {% endblock formmedia %}
 
-{% block title %}Account Page{% endblock title %}
+{% block title %}Account{% endblock title %}
 
 {% block content %}
+  {% comment %}
   <section class='mt-5'>
     <h2 class='my-3 col-md-12'>
       Account
@@ -19,13 +20,14 @@
       Please review your information, then <a href='{% url "comments" %}'>Send a Comment to the Superintendent</a>.
     </p>
   </section>
+  {% endcomment %}
   <section class='mt-5 col-md-10'>
     <div class='card'>
       <form method='post' id='myForm'>
         {% csrf_token %}
         {{ formset.management_form }}
 
-        <h4 class='card-header'>Personal Profile</h4>
+        <h4 class='card-header'>Account</h4>
         <div class="card-body">
           <div class='col-xl-6'>
             {% cloudinary account.picture.name params %}

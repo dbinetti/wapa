@@ -52,7 +52,7 @@ def index(request):
         'account__students',
         'account__students__school',
     ).order_by(
-        '-is_featured',
+        # '-is_featured',
         '-created',
     )
     count = sum([
@@ -182,7 +182,11 @@ def callback(request):
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(
                 request,
-                "Thanks for joining the West Ada Parents Association!  Please update your account information below."
+                "Welcome and thanks for your support!"
+            )
+            messages.warning(
+                request,
+                "Next, review the below and click 'Save'."
             )
             return redirect('account')
         # Otherwise, redirect to next_url

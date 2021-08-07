@@ -183,6 +183,11 @@ class School(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta:
+        ordering = (
+            'name',
+        )
+
 
 class Comment(models.Model):
     id = HashidAutoField(
@@ -336,7 +341,6 @@ class Student(models.Model):
         ordering = (
             'grade',
         )
-
 
 
     def __str__(self):
