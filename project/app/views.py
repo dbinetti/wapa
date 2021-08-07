@@ -278,7 +278,7 @@ def account(request):
         'format': 'png',
         'default_image': "wapa-dev:avatar.png",
         'transformation': [
-            {'height': 200, 'width': 200},
+            {'height': 100, 'width': 100},
         ],
     }
 
