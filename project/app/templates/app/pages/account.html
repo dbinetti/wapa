@@ -38,7 +38,7 @@
               <li class='list-inline-item ml-5'>
                 <a href='{% url "delete-picture" %}' class='text-danger'><small>Default Picture</small></a>
               </li>
-            </p>
+            </ul>
           </div>
           <div class='card-text'>
               {% bootstrap_form_errors form %}
@@ -47,30 +47,34 @@
               {% bootstrap_field form.is_spouse show_help=True show_label=False %}
               {% bootstrap_field form.address show_help=True show_label=False %}
           </div>
-          <table class='table'>
-            <thead>
-              <tr>
-                <th>School</th>
-                <th>Grade</th>
-                <th>-</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for student_form in formset %}
-                {{student_form.id}}
+          <div class='table-responsive mt-4'>
+            <table class='table table-sm'>
+              <thead>
                 <tr>
-                  <td>
-
-                    {% bootstrap_field student_form.school show_help=True show_label=False %}
-                  </td>
-                  <td>
-                    {% bootstrap_field student_form.grade show_help=True show_label=False %}
-                  </td>
-                  <td>{% if student_form.instance.pk %}{{ student_form.DELETE }}{% endif %}</td>
+                  <th>School</th>
+                  <th>Grade</th>
+                  <th></th>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {% for student_form in formset %}
+                  {{student_form.id}}
+                  <tr>
+                    <td>
+                      {% bootstrap_field student_form.school size='small' show_help=True show_label=False %}
+                    </td>
+                    <td>
+                      {% bootstrap_field student_form.grade size='small' show_help=True show_label=False %}
+                    </td>
+                    <td>{% if student_form.instance.pk %}{{ student_form.DELETE }}{% endif %}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+                <p>
+                  <small class='text-muted'>Increase your impact by indicating the schools/grades your kids attend.</small>
+                </p>
+          </div>
         </div>
         <div class='card-footer'>
           {% bootstrap_button "Save" button_type='submit' size='large' %}
@@ -82,6 +86,7 @@
       <a href='{% url "delete" %}'><span class='text-danger text-small'>Delete Account</span></a>
     </div>
   </section>
+  {% comment %}
   <section class='my-5 col-md-8'>
     <div class='card'>
       <h4 class='card-header'>
@@ -136,6 +141,7 @@
       </div>
     </div>
   </section>
+  {% endcomment %}
 {% endblock content %}
 
 {% block scripts %}
@@ -420,12 +426,12 @@
         $.fn.formset.defaults = {
             prefix: 'form',                  // The form prefix for your django formset
             formTemplate: null,              // The jQuery selection cloned to generate new form instances
-            addText: 'add another',          // Text for the add link
-            deleteText: 'remove',            // Text for the delete link
+            addText: 'Add Student',          // Text for the add link
+            deleteText: '',            // Text for the delete link
             addContainerClass: null,         // Container CSS class for the add link
             deleteContainerClass: null,      // Container CSS class for the delete link
-            addCssClass: 'add-row',          // CSS class applied to the add link
-            deleteCssClass: 'delete-row',    // CSS class applied to the delete link
+            addCssClass: 'badge badge-success',          // CSS class applied to the add link
+            deleteCssClass: 'bi-x-circle-fill text-danger',    // CSS class applied to the delete link
             formCssClass: 'dynamic-form',    // CSS class applied to each form in a formset
             extraClasses: [],                // Additional CSS classes, which will be applied to each form in turn
             keepFieldValues: '',             // jQuery selector for fields whose values should be kept when the form is cloned
