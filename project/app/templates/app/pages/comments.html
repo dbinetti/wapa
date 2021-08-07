@@ -21,11 +21,13 @@
 
 {% block content %}
 
+  {% comment %}
   <section class='my-5'>
     <h2>
       Comments
     </h2>
   </section>
+  {% endcomment %}
   {% if not account.is_public %}
     <section class='col-md-12'>
       <div class='card'>

@@ -37,7 +37,6 @@ urlpatterns = [
 
     # Comments
     path('comments', views.comments, name='comments',),
-    path('comment/submit-written', views.submit_written_comment, name='submit-written-comment'),
     path('comment/<str:comment_id>', views.comment, name='comment',),
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
 

@@ -255,8 +255,16 @@ def account(request):
             if account.is_public:
                 messages.success(
                     request,
-                    mark_safe("Saved!  You can now <a href='/comments'>make public comments</a>."),
+                    mark_safe("Saved!"),
                 )
+                if account.comments.count() == 0:
+                    messages.warning(
+                        request,
+                        mark_safe("Next, please send a comment to the Superintendent!"),
+                    )
+                    return redirect('comments')
+                else:
+                    return redirect('account')
             else:
                 messages.success(
                     request,
@@ -271,19 +279,6 @@ def account(request):
         'default_image': "wapa-dev:avatar.png",
         'transformation': [
             {'height': 200, 'width': 200},
-            # {'default_image': 'wapa-dev/avatar.png',}
-            # {
-            #     'crop': 'fit',
-            #     'color': "white",
-            #     'overlay': {
-            #         'font_family': "Impact",
-            #         'font_size': 200,
-            #         'font_weight': "bold",
-            #         'text_align': 'center',
-            #         'text': "My Message \nto the Superintendent",
-            #         'effect': "colorize",
-            #     },
-            # }
         ],
     }
 
@@ -511,35 +506,6 @@ def delete_picture(request):
     account.picture = "none"
     account.save()
     return redirect('account')
-
-@login_required
-def submit_written_comment(request):
-    account = request.user.account
-    if not account.is_public:
-        messages.warning(
-            request,
-            "You must make your name Public to make a comment",
-        )
-        return redirect('account')
-    form = CommentForm(request.POST or None)
-    if form.is_valid():
-        issue = Issue.objects.latest('date')
-        comment = form.save(commit=False)
-        comment.account = account
-        comment.issue = issue
-        comment.save()
-        messages.success(
-            request,
-            "Comment Submitted!  You'll receive an email once approved."
-        )
-        return redirect('comments')
-    return render(
-        request,
-        'app/pages/submit_written_comment.html',
-        context = {
-            'form': form,
-        }
-    )
 
 def events(request):
     events = Event.objects.filter(
