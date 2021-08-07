@@ -156,9 +156,22 @@ class School(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
+    full = models.CharField(
+        max_length=100,
+        blank=False,
+    )
     name = models.CharField(
         max_length=100,
         blank=False,
+    )
+    KIND = Choices(
+        (10, 'elementary', 'Elementary School'),
+        (20, 'middle', 'Middle School'),
+        (30, 'high', 'High School'),
+    )
+    kind = models.IntegerField(
+        choices=KIND,
+        default=0,
     )
     created = models.DateTimeField(
         auto_now_add=True,

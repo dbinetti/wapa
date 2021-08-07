@@ -17,6 +17,7 @@ from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
 
 from .models import Account
+from .models import School
 
 log = logging.getLogger(__name__)
 
@@ -244,3 +245,39 @@ def send_super_email(comment):
         cc=[account.user.email],
     )
     return email.send()
+
+def denorm_students(account):
+    schools = School.objects.filter(
+        students__account=account
+    ).order_by(
+        'kind',
+    ).distinct()
+    output = []
+    mapping = {
+        -1: 'PK',
+        0: 'K',
+        1: '1st',
+        2: '2nd',
+        3: '3rd',
+        4: '4th',
+        5: '5th',
+        6: '6th',
+        7: '7th',
+        8: '8th',
+        9: '9th',
+        10: '10th',
+        11: '11th',
+        12: '12th',
+    }
+    for school in schools:
+        grades = school.students.filter(
+            account=account,
+        ).values_list('grade', flat=True)
+        try:
+            listed = ", ".join([mapping[x] for x in grades])
+        except KeyError:
+            continue
+        flat = f'{school.name} {listed}'
+        output.append(flat)
+    account.output = output
+    print(output)

@@ -135,18 +135,26 @@ class SchoolAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
+        'kind',
     ]
     list_display = [
+        'id',
         'name',
+        'kind',
     ]
     list_editable = [
+        'name',
+        'kind',
     ]
     list_filter = [
+        'kind',
     ]
     search_fields = [
         'name',
     ]
     ordering = [
+        'kind',
+        'name',
         '-created',
     ]
 
