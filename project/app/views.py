@@ -399,37 +399,22 @@ def edit_student(request, student_id):
 def comments(request):
     account = request.user.account
     issue = Issue.objects.get(state=10)
-    try:
-        comment = account.comments.get(
-            issue=issue,
-        )
-    except Comment.DoesNotExist:
-        comment = None
-    if comment:
-        if request.method == 'POST':
-            form = CommentForm(request.POST, instance=comment)
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.state = 0
-                comment.save()
-                messages.success(
-                    request,
-                    'Saved!',
-                )
-                return redirect('comments')
-        form = CommentForm(instance=comment)
-    else:
-        form = CommentForm(request.POST or None)
+    comment = account.comments.filter(issue=issue).first()
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.account = account
             comment.issue = issue
+            comment.approve()
             comment.save()
             messages.success(
                 request,
-                "Comment Submitted!  You'll receive an email once approved."
+                'Comment Sent to Superintendent Bub!',
             )
             return redirect('comments')
+    else:
+        form = CommentForm(instance=comment)
     comments = Comment.objects.filter(
         account__is_public=True,
         state=Comment.STATE.approved,

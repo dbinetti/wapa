@@ -237,7 +237,7 @@ class Comment(models.Model):
     def approve(self):
         from .tasks import send_approval_email
         from .tasks import send_super_email
-        send_approval_email.delay(self.account)
+        # send_approval_email.delay(self.account)
         send_super_email.delay(self)
         return
 
