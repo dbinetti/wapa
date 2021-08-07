@@ -67,14 +67,14 @@
         <div class='card-footer'>
           <ul class='list-inline '>
             <li class='list-inline-item'>
-              {% bootstrap_button "Share Your Comment on Facebook" button_type='link' href=comment_delete size='large' button_class='btn-primary' extra_classes='ml-3' id='facebook-share-button'%}
-            </li>
-            <li class='list-inline-item float-right'>
-              <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'>Delete Comment</a>
+              {% bootstrap_button "Share Your Comment on Facebook" button_type='link' size='large' button_class='btn-primary' extra_classes='ml-3' id='facebook-share-button'%}
             </li>
           </ul>
         </div>
       </div>
+      <p class='float-right'>
+        <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
+      </p>
     </section>
   {% elif comment.get_state_display == 'Denied' %}
     <section class='col-md-12'>
@@ -111,13 +111,13 @@
               <li class='list-inline-item'>
                 {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
               </li>
-              <li class='list-inline-item float-right'>
-                <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'>Delete Comment</a>
-              </li>
             </ul>
           </div>
         </div>
       </form>
+      <p class='float-right'>
+        <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
+      </p>
     </section>
   {% elif comment.get_state_display == 'Archived' %}
   {% elif comment.get_state_display == 'Pending' %}
@@ -144,20 +144,20 @@
           </div>
           <div class='card-footer'>
             <div class='col-md-12'>
-            <ul class='list-inline'>
-              <li class='list-inline-item'>
-                {% bootstrap_button "Save Edits" button_type='submit' size='large' %}</li>
-              <li class='list-inline-item'>
-            {% bootstrap_button "Cancel Edits" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
-              </li>
-              <li class='list-inline-item float-right'>
-                <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'>Delete Comment</a>
-              </li>
-            </ul>
-          </div>
+              <ul class='list-inline'>
+                <li class='list-inline-item'>
+                  {% bootstrap_button "Save Edits" button_type='submit' size='large' %}</li>
+                <li class='list-inline-item'>
+              {% bootstrap_button "Cancel Edits" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </form>
+      <p class='float-right'>
+        <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
+      </p>
     </section>
   {% else %}
     <section class='col-md-12'>
