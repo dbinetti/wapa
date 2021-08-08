@@ -430,6 +430,12 @@ def events(request):
     ).order_by(
         'date',
     )
+    if events.count() == 1:
+        event = events.first()
+        return redirect(
+            'event',
+            event.id,
+        )
     return render(
         request,
         'app/pages/events.html',
