@@ -29,7 +29,7 @@
   </section>
   {% endcomment %}
   {% if not account.is_public %}
-    <section class='col-md-12'>
+    <section class='col-md-12 mt-5'>
       <div class='card'>
         <h4 class='card-header'>
           Private Account
@@ -47,7 +47,7 @@
     </section>
 
   {% elif comment.get_state_display == 'Approved' %}
-    <section class='col-md-12'>
+    <section class='col-md-12 mt-5'>
       <div class='card'>
         <h4 class='card-header'>
           Your Comment
@@ -77,7 +77,7 @@
       </p>
     </section>
   {% elif comment.get_state_display == 'Denied' %}
-    <section class='col-md-12'>
+    <section class='col-md-12 mt-5'>
       <form method='post'>
         {% csrf_token %}
         <div class='card'>
@@ -121,7 +121,7 @@
     </section>
   {% elif comment.get_state_display == 'Archived' %}
   {% elif comment.get_state_display == 'Pending' %}
-    <section class='col-md-12'>
+    <section class='col-md-12 mt-5'>
       <form method='post'>
         {% csrf_token %}
         <div class='card'>
@@ -160,7 +160,7 @@
       </p>
     </section>
   {% else %}
-    <section class='col-md-12'>
+    <section class='col-md-12 mt-5'>
       <form method='post'>
         {% csrf_token %}
         <div class='card'>
