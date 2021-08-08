@@ -483,7 +483,6 @@ def event(request, event_id):
         }
     )
 
-@login_required
 def comment(request, comment_id):
     comment = get_object_or_404(
         Comment,
