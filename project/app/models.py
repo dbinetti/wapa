@@ -42,7 +42,7 @@ class Account(models.Model):
     picture = models.ImageField(
         null=False,
         blank=False,
-        default='avatar.png',
+        default='wapa/avatar',
     )
     notes = models.TextField(
         max_length=2000,
