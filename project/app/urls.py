@@ -31,9 +31,6 @@ urlpatterns = [
     path('account', views.account, name='account',),
     path('upload-picture', views.upload_picture, name='upload-picture',),
     path('delete-picture', views.delete_picture, name='delete-picture',),
-    path('student/add', views.add_student, name='add-student',),
-    path('student/<str:student_id>/delete', views.delete_student, name='delete-student',),
-    path('student/<str:student_id>', views.edit_student, name='edit-student',),
 
     # Comments
     path('comments', views.comments, name='comments',),

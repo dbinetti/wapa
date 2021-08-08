@@ -216,33 +216,6 @@
                 <tr class='row'>
                   <td class='col-5'>
                     {{comment.account.name}}<br>
-                    <ul class='list-unstyled'>
-                      {% if comment.account.role == 1 %}
-                        <li class='list-inline-item'>
-                            <span class="badge badge-warning">Parent</span>
-                        </li>
-                      {% elif comment.account.role == 2 %}
-                        <li class='list-inline-item'>
-                            <span class="badge badge-success">Student</span>
-                        </li>
-                      {% elif comment.account.role == 3 %}
-                        <li class='list-inline-item'>
-                            <span class="badge badge-danger">Teacher</span>
-                        </li>
-                      {% endif %}
-
-                      {% for student in comment.account.students.all %}
-                        <li>
-                            <small>{{student.school.name}} {{student.get_grade_display}}</small>
-                        </li>
-                      {% endfor %}
-
-                      {% if comment.account.zone %}
-                        <li class='list-inline-item'>
-                          <span class="badge badge-light">{{account.get_zone_display}}</span>
-                        </li>
-                      {% endif %}
-                    </ul>
                   </td>
                   <td class='col-7'>
                     {% if comment.wordcount < 60 %}
@@ -289,6 +262,23 @@
           href: "https://www.westadaparents.com",
           quote: "{{comment.content|escapejs}}"
         }, function(response){});
+      });
+    </script>
+    <script>
+      const toShare = {
+        title: "West Ada Parents",
+        text: "Support the Superintendent and See Smiles in School!",
+        url: "https://www.westadaparents.com"
+      };
+      const button = document.querySelector('#text-share-button');
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.share(toShare); // Will trigger the native "share" feature
+          button.textContent = 'Thank You -- Share Again!';
+        }
+        catch(err) {
+          button.textContent = 'Something went wrong:  copy and paste the URL below';
+        }
       });
     </script>
   {% endif %}

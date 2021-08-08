@@ -25,7 +25,6 @@ from .forms import AccountForm
 from .forms import AttendeeForm
 from .forms import CommentForm
 from .forms import DeleteForm
-from .forms import StudentForm
 from .forms import StudentFormSet
 from .models import Account
 from .models import Attendee
@@ -245,7 +244,6 @@ def dashboard(request):
         },
     )
 
-
 # Account
 @login_required
 def account(request):
@@ -326,85 +324,6 @@ def delete(request):
         request,
         'app/pages/delete.html',
         {'form': form,},
-    )
-
-
-@login_required
-def delete_student(request, student_id):
-    try:
-        student = Student.objects.get(
-            id=student_id,
-            account=request.user.account,
-        )
-    except Student.DoesNotExist:
-        raise PermissionDenied("You can not delete another's student.")
-    if request.method == "POST":
-        form = DeleteForm(request.POST)
-        if form.is_valid():
-            student.delete()
-            messages.error(
-                request,
-                "Student Deleted!",
-            )
-            return redirect('account')
-    else:
-        form = DeleteForm()
-    return render(
-        request,
-        'app/pages/delete_student.html',
-        context = {
-            'form': form,
-            'student': student,
-        },
-    )
-
-@login_required
-def add_student(request):
-    account = request.user.account
-    form = StudentForm(request.POST or None)
-    if form.is_valid():
-        student = form.save(commit=False)
-        student.account = account
-        student.save()
-        messages.success(
-            request,
-            "Student Added!"
-        )
-        return redirect('account')
-    return render(
-        request,
-        'app/pages/add_student.html',
-        context = {
-            'form': form,
-        }
-    )
-
-@login_required
-def edit_student(request, student_id):
-    try:
-        student = Student.objects.get(
-            id=student_id,
-            account=request.user.account,
-        )
-    except Student.DoesNotExist:
-        raise PermissionDenied("You can not edit another's student.")
-    if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
-        if form.is_valid():
-            student.save()
-            messages.success(
-                request,
-                'Saved!',
-            )
-            return redirect('account')
-    form = StudentForm(instance=student)
-    return render(
-        request,
-        'app/pages/edit_student.html',
-        context = {
-            'form': form,
-            'student': student,
-        }
     )
 
 
@@ -505,6 +424,7 @@ def delete_picture(request):
     account.save()
     return redirect('account')
 
+@login_required
 def events(request):
     events = Event.objects.filter(
     ).order_by(
@@ -557,6 +477,7 @@ def event(request, event_id):
         }
     )
 
+@login_required
 def comment(request, comment_id):
     comment = get_object_or_404(
         Comment,
