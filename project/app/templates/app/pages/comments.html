@@ -215,6 +215,7 @@
               {% for comment in comments %}
                 <tr class='row'>
                   <td class='col-5'>
+                    {# <a href='{% url "comment" comment.id %}'>{{comment.account.name}}</a><br> #}
                     {{comment.account.name}}<br>
                   </td>
                   <td class='col-7'>

@@ -2,6 +2,7 @@
 {% load bootstrap4 %}
 {% load static %}
 {% load app_tags %}
+{% load cloudinary %}
 
 {% block metatags %}
   <meta property="og:title" content="Support the Superintendent" />
@@ -23,18 +24,37 @@
   <section class='my-5 col-md-12'>
     <div class='card'>
       <h4 class='card-header'>
-        Comment from {{comment.account.name}} to {{comment.issue.recipient_name}}
+        Comment to {{comment.issue.recipient_name}}
       </h4>
       <div class="card-body">
-        <div class='card-title'>
-        </div>
         <div class='card-text'>
-          <blockquote class="blockquote mb-0">
-            <p>
-              "{{comment.content}}"
-            </p>
-            <footer class="blockquote-footer">Sent on {{comment.updated}}</footer>
-          </blockquote>
+          <div class='row'>
+            <div class='col-md-3'>
+              {% cloudinary comment.account.picture.name params %}
+              <p>
+                <strong>{{comment.account.name}}</strong>
+              </p>
+              <p>
+                {% for student in comment.account.students.all %}
+                  {% if student.school.get_kind_display == 'Elementary School' %}
+                    <span class='badge badge-warning badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                  {% elif student.school.get_kind_display == 'Middle School' %}
+                    <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                  {% elif student.school.get_kind_display == 'High School' %}
+                    <span class='badge badge-info badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                  {% endif %}
+                {% endfor %}
+              </p>
+            </div>
+            <div class='col-md-9'>
+              <blockquote class="blockquote mb-0">
+                <p>
+                  "{{comment.content}}"
+                </p>
+                <footer class="blockquote-footer">Sent on {{comment.updated}}</footer>
+              </blockquote>
+            </div>
+          </div>
         </div>
       </div>
       <div class='card-footer'>
