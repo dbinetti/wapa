@@ -3,7 +3,7 @@ def avatar(request):
         'AVATAR': {
             'format': 'png',
             'transformation': [
-                {'height': 100, 'width': 100},
+                {'height': 80, 'width': 80},
             ],
         }
     }
