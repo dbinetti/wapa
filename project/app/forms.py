@@ -127,7 +127,7 @@ class AccountForm(forms.ModelForm):
         last_name = name.partition(" ")[2]
         full_name = False
         if last_name:
-            if len(last_name) > 1:
+            if len(last_name) > 1 and not last_name.endswith('.'):
                 full_name = True
         if is_public and not full_name:
             raise ValidationError(
