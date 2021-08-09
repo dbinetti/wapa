@@ -420,6 +420,9 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(
         default=False,
     )
+    is_verified = models.BooleanField(
+        default=False,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )

@@ -214,6 +214,7 @@ class UserAdmin(UserAdminBase):
             'fields': [
                 'name',
                 'email',
+                'is_verified',
             ]
         }
         ),
@@ -223,12 +224,14 @@ class UserAdmin(UserAdminBase):
         # 'username',
         'name',
         'email',
+        'is_verified',
         'created',
         'last_login'
     ]
     list_filter = [
         'is_active',
         'is_admin',
+        'is_verified',
         'created',
         'last_login',
     ]
@@ -247,6 +250,7 @@ class UserAdmin(UserAdminBase):
                 'username',
                 'is_admin',
                 'is_active',
+                'is_verified',
             ]
         }
         ),

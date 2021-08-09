@@ -56,9 +56,19 @@ def update_user_from_auth0(user):
     data = get_auth0_data(user.username)
     user.name = data.get('name')
     user.email = data.get('email')
+    user.is_verified = data.get('email_verified')
     user.data = data
     user = user.save()
     return user
+
+
+@job
+def send_verification_email(user):
+    client = get_auth0_client()
+    response = client.jobs.send_verification_email({
+        'user_id': user.username,
+    })
+    return response
 
 
 # Account Creation Utility
