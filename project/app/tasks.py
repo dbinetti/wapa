@@ -16,8 +16,6 @@ from django_rq import job
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
-from PyPDF2 import PdfFileMerger
-from PyPDF2 import PdfFileReader
 
 from .models import Account
 from .models import School
