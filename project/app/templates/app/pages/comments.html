@@ -65,9 +65,12 @@
           </div>
         </div>
         <div class='card-footer'>
-          <ul class='list-inline '>
+          <ul class='list-inline'>
             <li class='list-inline-item'>
-              {% bootstrap_button "Share Your Comment on Facebook" button_type='link' size='large' button_class='btn-primary' extra_classes='ml-3' id='facebook-share-button'%}
+              {% bootstrap_button "Share Your Comment on Facebook" button_type='link' size='small' button_class='btn-primary' extra_classes='ml-3 mt-3' id='facebook-share-button'%}
+            </li>
+            <li class='list-inline-item'>
+              {% bootstrap_button "Share Your Comment via Text" button_type='link' size='small' button_class='btn-success' extra_classes='ml-3 mt-3' id='text-share-button'%}
             </li>
           </ul>
         </div>
@@ -269,10 +272,11 @@
         }, function(response){});
       });
     </script>
-    {% comment %}
+
     <script>
       const toShare = {
         title: "West Ada Parents",
+        text: "{{comment.content|escapejs}}",
         url: "https://www.westadaparents.com",
       };
       const button = document.querySelector('#text-share-button');
@@ -282,10 +286,11 @@
           button.textContent = 'Thank You -- Share Again!';
         }
         catch(err) {
-          button.textContent = 'Something went wrong:  copy and paste the URL below';
+          Sentry.captureException(err);
+          $("#text-share-button").replaceWith( "<p class='align-middle ml-3 mt-3'>Copy/Paste '<strong>https://www.westadaparents.com</strong>' in your Text or Email</p>" );
         }
       });
     </script>
-    {% endcomment %}
+
   {% endif %}
 {% endblock scripts %}
