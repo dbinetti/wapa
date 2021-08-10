@@ -321,12 +321,19 @@ def comments(request):
             comment = form.save(commit=False)
             comment.account = account
             comment.issue = issue
-            comment.approve()
+            if account.user.is_verified:
+                comment.approve()
             comment.save()
-            messages.success(
-                request,
-                'Comment Sent to Superintendent Bub!',
-            )
+            if comment.state == Comment.STATE.approved:
+                messages.success(
+                    request,
+                    'Comment Sent to Superintendent Bub!',
+                )
+            else:
+                messages.success(
+                    request,
+                    'Saved!',
+                )
             return redirect('comments')
     else:
         form = CommentForm(instance=comment)
