@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "acbedf5c547b9161de8db8f69d5489836522633916e156ab33a625986dc8cfb4"
+            "sha256": "0478c7d842a2c8c9ff7f4333bee354f00d4b90b47f93771dbada0c7d6bbeadf6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -191,6 +191,8 @@
                 "sha256:3d8427734c781ea5f1b41d6589c293089704d4759e34597dce91014ac125aad1",
                 "sha256:7ec5d3b029f5fa2b179325908b9cd93db28ab7b85bb6c1db56b10e0b54235177",
                 "sha256:8e56e16617872b0957d1c9742a3f94b43533447fd78321514abbe7db216aa250",
+                "sha256:b01fd6f2737816cb1e08ed4807ae194404790eac7ad030b34f2ce72b332f5586",
+                "sha256:bf40af59ca2465b24e54f671b2de2c59257ddc4f7e5706dbd6930e26823668d3",
                 "sha256:de4e5f7f68220d92b7637fc99847475b59154b7a1b3868fb7385337af54ac9ca",
                 "sha256:eb8cc2afe8b05acbd84a43905832ec78e7b3873fb124ca190f574dca7389a87d",
                 "sha256:ee77aa129f481be46f8d92a1a7db57269a2f23052d5f2433b4621bb457081cc9"
@@ -418,11 +420,11 @@
         },
         "phonenumberslite": {
             "hashes": [
-                "sha256:21c6384a015f1fe24c4aa0f8fe088b031ed43c8db6a5d010fd648ac381404d47",
-                "sha256:6d9f1d2708818ef57ee99435ab3172a2dc01a82a659b2e34e33cea85342ab302"
+                "sha256:8089a3567ed2b682c0d4c69429e58a95db1ab80842d040c0a79a487ac968b8a5",
+                "sha256:d638f5d6fd233be215435791ef7fa9fd8ea5a5485d219ba1f9e95ed5c5ee45e0"
             ],
             "index": "pypi",
-            "version": "==8.12.28"
+            "version": "==8.12.29"
         },
         "pickleshare": {
             "hashes": [
@@ -563,6 +565,14 @@
             ],
             "index": "pypi",
             "version": "==0.4.24"
+        },
+        "python-pdf": {
+            "hashes": [
+                "sha256:8c61b777541f1076e9de8f28473f8954269815c3b8dd6858a7c8b3ce526162da",
+                "sha256:a6055955c93c0a7b6b9777df3dbe78532c6ec6fb972fe1c08fb4f003def173ad"
+            ],
+            "index": "pypi",
+            "version": "==0.38"
         },
         "pytz": {
             "hashes": [
