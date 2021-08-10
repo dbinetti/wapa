@@ -43,6 +43,8 @@ pillow = "*"
 django-fsm = "*"
 django-fsm-admin = "*"
 python-magic = "*"
+python-pdf = "*"
+
 
 [requires]
 python_version = "3.9"

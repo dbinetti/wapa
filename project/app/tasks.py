@@ -4,6 +4,7 @@ import logging
 
 import cloudinary
 import posthog
+import pydf
 # First-Party
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
@@ -291,3 +292,37 @@ def denorm_students(account):
         output.append(flat)
     account.output = output
     print(output)
+
+
+def get_letter_from_comment(comment):
+    context={
+        'comment': comment,
+    }
+    rendered = render_to_string('app/pdfs/letter.html', context)
+    pdf = pydf.generate_pdf(
+        rendered,
+        enable_smart_shrinking=False,
+        orientation='Portrait',
+        margin_top='10mm',
+        margin_bottom='10mm',
+    )
+    return pdf
+
+def merge_letter_from_comments(comments):
+    output = ''
+    for comment in comments:
+        context={
+            'comment': comment,
+        }
+        rendered = render_to_string('app/pdfs/letter.html', context)
+        output += rendered
+    pdf = pydf.generate_pdf(
+        output,
+        enable_smart_shrinking=False,
+        orientation='Portrait',
+        margin_top='10mm',
+        margin_bottom='10mm',
+        margin_right='20mm',
+        margin_left='20mm',
+    )
+    return pdf
