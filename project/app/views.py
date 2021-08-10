@@ -522,7 +522,6 @@ def comment(request, comment_id):
         }
     )
 
-@login_required
 def share(request):
     return render(
         request,
