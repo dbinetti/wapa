@@ -3,9 +3,9 @@
 {% load cloudinary %}
 
 {% block metatags %}
-  <meta property="og:title" content="Support the Superintendent" />
-  <meta property="og:image" content='{% static "app/supportbub.png" %}' />
-  <meta property="og:image:secure_url" content='{% static "app/supportbub.png" %}' />
+  <meta property="og:title" content="Click to Support the Masks-Optional Plan" />
+  <meta property="og:image" content='{% cloudinary "wapa/poster" POSTER %}' />
+  <meta property="og:image:secure_url" content='{% cloudinary "wapa/poster" POSTER %}' />  
   <meta property="og:url" content="https://www.westadaparents.com" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="1236648860100768" />
