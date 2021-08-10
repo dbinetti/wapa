@@ -270,7 +270,11 @@ def account(request):
             else:
                 messages.success(
                     request,
-                    mark_safe("Saved!  Please consider making your name Public so you can <a href='/comments'>make comments</a>."),
+                    mark_safe("Saved!"),
+                )
+                messages.warning(
+                    request,
+                    mark_safe("Please consider making your name Public so you can <a href='/comments'>make comments</a>."),
                 )
             return redirect('account')
     else:
