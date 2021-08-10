@@ -59,35 +59,13 @@ def index(request):
         Account.objects.all().count(),
         Account.objects.filter(is_spouse=True).count(),
     ])
-    POSTER = {
-        'format': 'png',
-        'transformation': [
-            {
-                'color': 'yellow',
-                'overlay': {
-                    'font_family': "Impact",
-                    'font_size': 200,
-                    'text': f"   Join {count} Parents\nSupporting Dr. Bub's\n Mask-Optional Plan",
-                    'line_spacing': 120,
-                },
-            },
-            {
-                'flags': "relative",
-                'width': "0.8",
-                'crop': "scale"
-            },
-            {
-                'flags': "layer_apply",
-            },
-        ],
-    }
+
     return render(
         request,
         'app/pages/index.html',
         context = {
             'comments': comments,
             'count': count,
-            'POSTER': POSTER,
         },
     )
 
