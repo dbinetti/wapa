@@ -20,6 +20,7 @@ from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django_fsm import TransitionNotAllowed
 
 from .forms import AccountForm
 from .forms import AttendeeForm
@@ -326,7 +327,10 @@ def comments(request):
             comment.account = account
             comment.issue = issue
             if account.user.is_verified:
-                comment.approve()
+                try:
+                    comment.approve()
+                except TransitionNotAllowed:
+                    pass
             comment.save()
             if comment.state == Comment.STATE.approved:
                 messages.success(
