@@ -25,7 +25,7 @@
   <section>
     {% cloudinary account.picture.name AVATAR %}
     <h2>
-      Letter from {{comment.account.name}}
+      Letter from {{comment.account.name}}{% if comment.account.is_spouse %} and Spouse{% endif %}
     </h2>
 
   </section>
