@@ -1,6 +1,7 @@
 {% autoescape off %}
 
-Dr. Bub, this message was sent by a West Ada Parent who supports your plan to keep schools open and masks optional.
+Dr. Bub, this message was sent by a West Ada Parent who supports
+your commitment to parent choice.
 
 Parent: {{account.name}}
 {% if account.students.count %}
