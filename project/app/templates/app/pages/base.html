@@ -46,9 +46,11 @@
               <li class='nav-item'>
                 <a href="{% url 'comments' %}" class='align-bottom bi-megaphone mr-3'>&nbsp;Comments</a>
               </li>
+              {% comment %}
               <li class='nav-item'>
                 <a href="{% url 'events' %}" class='align-bottom bi-calendar-event mr-3'>&nbsp;Events</a>
               </li>
+              {% endcomment %}
               {% if request.user.is_admin %}
                 <li class='nav-item'>
                   <a href="{% url 'admin:index' %}" class='align-bottom bi-layout-text-window mr-3'>&nbsp;Admin</a>
