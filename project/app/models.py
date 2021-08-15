@@ -426,7 +426,7 @@ class Voter(models.Model):
     age = models.IntegerField(
         blank=False,
     )
-    address = models.CharField(
+    street = models.CharField(
         max_length=100,
         blank=False,
     )

@@ -356,7 +356,7 @@ def import_voters(filename):
                 'middle_name': row[4].strip(),
                 'suffix': row[1].strip(),
                 'age': int(row[6]),
-                'address': row[8].strip(),
+                'street': row[8].strip(),
                 'city': row[10].strip(),
                 'st': 'ID',
                 'zipcode': row[12].strip(),

@@ -145,7 +145,7 @@ class VoterForm(forms.ModelForm):
             'middle_name',
             'suffix',
             'age',
-            'address',
+            'street',
             'city',
             'st',
             'zipcode',
