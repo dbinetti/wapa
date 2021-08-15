@@ -374,14 +374,20 @@ def import_voters(filename):
 def match_zone(account):
     address_dict = account.address.as_dict()
     address_line_1 = f"{address_dict['street_number']} {address_dict['route']}"
-    mapping = {
-        'address_line_1': address_line_1,
-        'address_line_2': None,
-        'city': address_dict['locality'],
-        'state': address_dict['state_code'],
-        'postal_code': address_dict['postal_code'],
-    }
-    address = normalize_address_record(mapping)
+    try:
+        mapping = {
+            'address_line_1': address_line_1,
+            'address_line_2': None,
+            'city': address_dict['locality'],
+            'state': address_dict['state_code'],
+            'postal_code': address_dict['postal_code'],
+        }
+    except Exception as e:
+        return
+    try:
+        address = normalize_address_record(mapping)
+    except Exception as e:
+        return
     vs = Voter.objects.filter(
         street=address['address_line_1'],
         city=address['city'],
