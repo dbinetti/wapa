@@ -32,7 +32,7 @@ class VoterAdmin(VersionAdmin):
         'middle_name',
         'suffix',
         'age',
-        'address',
+        'street',
         'city',
         'st',
         'zipcode',

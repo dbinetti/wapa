@@ -445,6 +445,11 @@ class Voter(models.Model):
     zone = models.IntegerField(
         blank=False,
     )
+    address = AddressField(
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
