@@ -389,6 +389,73 @@ class Attendee(models.Model):
         ]
 
 
+class Voter(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    ZONE = Choices(
+        (1, 'one', 'Zone One'),
+        (2, 'two', 'Zone Two'),
+        (3, 'three', 'Zone Three'),
+        (4, 'four', 'Zone Four'),
+        (5, 'five', 'Zone Five'),
+    )
+    voter_id = models.IntegerField(
+        blank=False,
+    )
+    prefix = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+    last_name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    first_name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    middle_name = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+    suffix = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+    age = models.IntegerField(
+        blank=False,
+    )
+    address = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    city = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    st = models.CharField(
+        max_length=2,
+        blank=False,
+    )
+    zipcode = models.CharField(
+        max_length=5,
+        blank=False,
+    )
+    zone = models.IntegerField(
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.get_zone_display()}"
+
+
 class User(AbstractBaseUser):
     id = HashidAutoField(
         primary_key=True,

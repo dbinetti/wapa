@@ -1,4 +1,5 @@
 # Standard Libary
+import csv
 import json
 import logging
 
@@ -17,6 +18,7 @@ from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
 
+from .forms import VoterForm
 from .models import Account
 from .models import School
 
@@ -291,7 +293,6 @@ def denorm_students(account):
         flat = f'{school.name} {listed}'
         output.append(flat)
     account.output = output
-    print(output)
 
 
 def get_letter_from_comment(comment):
@@ -326,3 +327,40 @@ def merge_letter_from_comments(comments):
         margin_left='20mm',
     )
     return pdf
+
+@job
+def import_voter(voter):
+    form = VoterForm(voter)
+    if form.is_valid():
+        return form.save()
+    raise ValueError(form.errors.as_json())
+
+def import_voters(filename):
+    with open(filename) as f:
+        reader = csv.reader(
+            f,
+            skipinitialspace=True,
+        )
+        next(reader)
+        rows = [row for row in reader]
+        i = 0
+        t = len(rows)
+        for row in rows:
+            i += 1
+            log.info(f'{i}/{t}')
+            voter = {
+                'voter_id': int(row[0]),
+                'prefix': row[2].strip(),
+                'last_name': row[2].strip(),
+                'first_name': row[3].strip(),
+                'middle_name': row[4].strip(),
+                'suffix': row[1].strip(),
+                'age': int(row[6]),
+                'address': row[8].strip(),
+                'city': row[10].strip(),
+                'st': 'ID',
+                'zipcode': row[12].strip(),
+                'zone': int(row[27][-1]),
+            }
+            import_voter.delay(voter)
+    return

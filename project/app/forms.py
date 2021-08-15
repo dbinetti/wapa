@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
 from django.forms import inlineformset_factory
-from django.forms import modelformset_factory
 from django.utils.safestring import mark_safe
 
 # Local
@@ -13,6 +12,7 @@ from .models import Attendee
 from .models import Comment
 from .models import Student
 from .models import User
+from .models import Voter
 
 StudentFormSet = inlineformset_factory(
     Account,
@@ -133,6 +133,24 @@ class AccountForm(forms.ModelForm):
             raise ValidationError(
                 "You must provide your full name to be public."
             )
+
+
+class VoterForm(forms.ModelForm):
+    class Meta:
+        model = Voter
+        fields = [
+            'voter_id',
+            'last_name',
+            'first_name',
+            'middle_name',
+            'suffix',
+            'age',
+            'address',
+            'city',
+            'st',
+            'zipcode',
+            'zone',
+        ]
 
 
 class UserCreationForm(UserCreationFormBase):
