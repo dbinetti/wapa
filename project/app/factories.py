@@ -18,5 +18,6 @@ class UserFactory(DjangoModelFactory):
 
 class IssueFactory(DjangoModelFactory):
     name = 'Issue One'
+    state = Issue.STATE.active
     class Meta:
         model = Issue
