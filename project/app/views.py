@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
 
 # Root
 def index(request):
-    issue = Issue.objects.filter(state=Issue.STATE.active) or None
+    issue = Issue.objects.get(state=Issue.STATE.active)
     comments = Comment.objects.filter(
         account__is_public=True,
         state=Comment.STATE.approved,
@@ -319,7 +319,7 @@ def delete(request):
 @login_required
 def comments(request):
     account = request.user.account
-    issue = Issue.objects.filter(state=Issue.STATE.active) or None
+    issue = Issue.objects.get(state=Issue.STATE.active)
     comment = account.comments.filter(issue=issue).first()
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
