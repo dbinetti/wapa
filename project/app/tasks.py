@@ -362,5 +362,8 @@ def import_voters(filename):
                 'zipcode': row[12].strip(),
                 'zone': int(row[27][-1]),
             }
-            import_voter.delay(voter)
+            try:
+                import_voter(voter)
+            except Exception as e:
+                log.error(e)
     return
