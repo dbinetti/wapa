@@ -61,6 +61,13 @@ class Account(models.Model):
         related_name='account',
         unique=True,
     )
+    voter = models.OneToOneField(
+        'app.Voter',
+        on_delete=models.SET_NULL,
+        related_name='account',
+        unique=True,
+        null=True,
+    )
 
     def __str__(self):
         return f"{self.name}"
