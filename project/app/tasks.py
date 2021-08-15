@@ -17,10 +17,12 @@ from django_rq import job
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
+from scourgify import normalize_address_record
 
 from .forms import VoterForm
 from .models import Account
 from .models import School
+from .models import Voter
 
 log = logging.getLogger(__name__)
 
@@ -367,3 +369,24 @@ def import_voters(filename):
             except Exception as e:
                 log.error(e)
     return
+
+
+def match_zone(account):
+    address_dict = account.address.as_dict()
+    address_line_1 = f"{address_dict['street_number']} {address_dict['route']}"
+    mapping = {
+        'address_line_1': address_line_1,
+        'address_line_2': None,
+        'city': address_dict['locality'],
+        'state': address_dict['state_code'],
+        'postal_code': address_dict['postal_code'],
+    }
+    address = normalize_address_record(mapping)
+    vs = Voter.objects.filter(
+        street=address['address_line_1'],
+        city=address['city'],
+        st=address['state'],
+        zipcode=address['postal_code'],
+    )
+    if vs:
+        return vs.first().zone
