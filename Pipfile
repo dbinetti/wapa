@@ -44,7 +44,7 @@ django-fsm = "*"
 django-fsm-admin = "*"
 python-magic = "*"
 python-pdf = "*"
-
+usaddress-scourgify = "*"
 
 [requires]
 python_version = "3.9"
