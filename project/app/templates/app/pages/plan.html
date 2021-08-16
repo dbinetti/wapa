@@ -183,3 +183,46 @@
   </section>
 
 {% endblock content %}
+{% block scripts %}
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '{% get_env_var "FACEBOOK_CLIENT_ID" %}',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v11.0'
+      });
+    };
+  </script>
+  <script>
+    const FBbutton = document.querySelector('#facebook-share-button');
+    FBbutton.addEventListener('click', async () => {
+      FB.ui({
+        method: "share",
+        href: "https://www.westadaparents.com/compare",
+        quote: "Compare the two plans for West Ada School District."
+      }, function(response){});
+    });
+  </script>
+
+  <script>
+    const toShare = {
+      title: "Click to Support Parent Choice",
+      // text: "{{comment.content|escapejs}}",
+      text: "Compare the two plans for West Ada School District.",
+      url: "https://www.westadaparents.com/compare",
+    };
+    const button = document.querySelector('#text-share-button');
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.share(toShare); // Will trigger the native "share" feature
+        button.textContent = 'Thank You -- Share Again!';
+      }
+      catch(err) {
+        Sentry.captureException(err);
+        $("#text-share-button").replaceWith( "<p class='align-middle ml-3 mt-3'>Copy/Paste '<strong>https://www.westadaparents.com</strong>' in your Text or Email</p>" );
+      }
+    });
+  </script>
+{% endblock scripts %}

@@ -4,6 +4,19 @@
 
 {% block title %}Compare Plans{% endblock title %}
 
+{% block metatags %}
+  <meta property="og:title" content="Compare West Ada Plans" />
+  {% comment %}
+  <meta property="og:image" content='http://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
+  <meta property="og:image:secure_url" content='https://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
+  {% endcomment %}
+  <meta property="og:image" content='{% static "app/compare.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/compare.png" %}' />
+  <meta property="og:url" content="https://www.westadaparents.com/compare" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="1236648860100768" />
+  <meta property="og:description" content="Let Dr. Bub know which plan you prefer." />
+{% endblock metatags %}
 
 
 {% block content %}
@@ -21,27 +34,17 @@
         <thead class='thead'>
           <tr>
             <th>
+              Focus
             </th>
             <th>
-              <a href='https://www.westada.org/domain/11845'>Current</a>
+              <a href='https://www.westada.org/domain/11845'>Community Spread</a>
             </th>
             <th>
-              <a href='{% url "plan" %}'>Proposed</a>
+              <a href='{% url "plan" %}'>Educational Safety</a>
             </th>
           </tr>
         </thead>
         <tbody class='tbody'>
-          <tr>
-            <th>
-              Primary Concern
-            </th>
-            <td>
-              Community Spread
-            </td>
-            <td>
-              Safe Education
-            </td>
-          </tr>
           <tr>
             <th>
               Metrics
@@ -50,7 +53,29 @@
               Case Numbers, Positivity Rates
             </td>
             <td>
-              Mortality and Morbidity
+              Hospitalization, Mortality
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Masks
+            </th>
+            <td>
+              Mandatory If Spreading
+            </td>
+            <td>
+              Always Optional If Safe
+            </td>
+          </tr>
+          <tr>
+            <th>
+              School
+            </th>
+            <td>
+              Remote-Learning If Spread Increases
+            </td>
+            <td>
+              Always In-Person If Remains Safe
             </td>
           </tr>
           <tr>
@@ -61,7 +86,7 @@
               Undefined
             </td>
             <td>
-              Safe, Happy, Well-Educated Kids
+              Safe, Happy, Well-Educated Students
             </td>
           </tr>
           <tr>
@@ -69,7 +94,7 @@
               Constituency
             </th>
             <td>
-              Medical Professionals
+              Public Health Officials, Media
             </td>
             <td>
               Parents, Teachers, Students
@@ -77,10 +102,10 @@
           </tr>
           <tr>
             <th>
-              At School
+              Process
             </th>
             <td>
-              Mandatory Test, Trace, Isolate, Quarantine
+              Test, Trace, Isolate, Quarantine by School
             </td>
             <td>
               Stay Home if Sick
@@ -91,7 +116,7 @@
               Sports/Extracirricular
             </th>
             <td>
-              Cancelled
+              Potentially Cancelled
             </td>
             <td>
               Sit Out if Sick
@@ -110,7 +135,7 @@
           </tr>
           <tr>
             <th>
-              Variant Focus
+              Judge Variants by
             </th>
             <td>
               Contagiousness

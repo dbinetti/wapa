@@ -16,7 +16,7 @@
     </p>
   </section>
   <section class='my-5'>
-    <div class='tableauPlaceholder' id='viz1629120748971' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NewWorkbook_16291205500070&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='NewWorkbook_16291205500070&#47;Sheet1' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NewWorkbook_16291205500070&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1629120748971');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class='tableauPlaceholder' id='viz1629131550013' style='position: relative'><noscript><a href='#'><img alt='Proposed West Ada Safety Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;ProposedSafetyMetricsDashboard&#47;ProposedWestAdaSafetyDashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ProposedSafetyMetricsDashboard&#47;ProposedWestAdaSafetyDashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;ProposedSafetyMetricsDashboard&#47;ProposedWestAdaSafetyDashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1629131550013');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
   </section>
   <section class='my-5'>
     <ul class='list-inline'>
@@ -29,3 +29,46 @@
     </ul>
   </section>
 {% endblock content %}
+{% block scripts %}
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '{% get_env_var "FACEBOOK_CLIENT_ID" %}',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v11.0'
+      });
+    };
+  </script>
+  <script>
+    const FBbutton = document.querySelector('#facebook-share-button');
+    FBbutton.addEventListener('click', async () => {
+      FB.ui({
+        method: "share",
+        href: "https://www.westadaparents.com/compare",
+        quote: "Compare the two plans for West Ada School District."
+      }, function(response){});
+    });
+  </script>
+
+  <script>
+    const toShare = {
+      title: "Click to Support Parent Choice",
+      // text: "{{comment.content|escapejs}}",
+      text: "Compare the two plans for West Ada School District.",
+      url: "https://www.westadaparents.com/compare",
+    };
+    const button = document.querySelector('#text-share-button');
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.share(toShare); // Will trigger the native "share" feature
+        button.textContent = 'Thank You -- Share Again!';
+      }
+      catch(err) {
+        Sentry.captureException(err);
+        $("#text-share-button").replaceWith( "<p class='align-middle ml-3 mt-3'>Copy/Paste '<strong>https://www.westadaparents.com</strong>' in your Text or Email</p>" );
+      }
+    });
+  </script>
+{% endblock scripts %}
