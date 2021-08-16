@@ -5,14 +5,14 @@
 
 {% block title %}Metrics{% endblock title %}
 {% block metatags %}
-  <meta property="og:title" content="Read the Educational Safety Plan" />
+  <meta property="og:title" content="View the Educational Safety Metrics Dashboard" />
   {% comment %}
   <meta property="og:image" content='http://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
   <meta property="og:image:secure_url" content='https://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
   {% endcomment %}
   <meta property="og:image" content='{% static "app/metrics.png" %}' />
   <meta property="og:image:secure_url" content='{% static "app/metrics.png" %}' />
-  <meta property="og:url" content="https://www.westadaparents.com/plan" />
+  <meta property="og:url" content="{% url 'metrics' %}" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="1236648860100768" />
   <meta property="og:description" content="Read the plan and let Dr. Bub which you prefer." />
