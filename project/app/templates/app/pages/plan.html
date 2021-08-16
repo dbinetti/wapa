@@ -1,13 +1,139 @@
 {% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+{% load static %}
 
 {% block title %}Educate Safely Plan{% endblock title %}
 
+
+{% block metatags %}
+  <meta property="og:title" content="Read the Educational Safety Plan" />
+  {% comment %}
+  <meta property="og:image" content='http://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
+  <meta property="og:image:secure_url" content='https://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
+  {% endcomment %}
+  <meta property="og:image" content='{% static "app/compare.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/compare.png" %}' />
+  <meta property="og:url" content="https://www.westadaparents.com/plan" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="1236648860100768" />
+  <meta property="og:description" content="Read the plan and let Dr. Bub which you prefer." />
+{% endblock metatags %}
 
 
 {% block content %}
   <section class='my-5'>
     <h2>
-      Revisions to In-Person Safe Instruction Plan
+      Educational Safety Plan
+    </h2>
+    <p class='lead col-md-8'>
+      The following plan emphasizes student and vaccinated staff safety in order to maximize in-person learning.  It was based on other school districts that have successfully conducted masks-optional, in-person learning with minimal impact to students or staff.
+    </p>
+  </section>
+
+  <section class='my-5 col-lg-8'>
+    <div class='card'>
+      <div class='card-body'>
+        <section class='my-3'>
+        <h3>Approach</h3>
+        <p>
+          Revisions to individual school building health and safety plans will be based upon an in-depth review of Hospitalization and mortality rates for 1) students and 2) vaccinated staff.  The in-depth review is conducted by the Operational COVID 19 Response Team.
+        </p>
+        <p>
+          This team is a partnership between the West Ada Executive Team, school administrators, parent representatives, staff representatives, mental health services, and CDH. The team determines the appropriate response based on the metrics indicated below.
+        </p>
+        <p>
+          Revisions or additions to mitigating measures may include but are not limited to use of masks, distancing/podding in the classroom, increased sanitizing protocols, changes in schedules to limit class size, or shifts to remote instruction as needed to protect student and staff safety.  It is explicitly acknowledged that managing community spread is a public health concern best managed by public health officials; the West Ada School District is responsible for managing a safe educational environment for students and staff.
+        </p>
+      </section>
+        <section class='my-3'>
+        <h3>Metrics</h3>
+        <ul class='list-styled'>
+          <li>Impact on Students, as measured by:</li>
+            <ul class-'list-styled'>
+              <li>Mortality Rates*</li>
+              <li>Hospitalization Rates*</li>
+              <li>Academic Achievement Rates (ISAT Metrics primarily)</li>
+              <li>Social-Emotional Well-being Rates (Suicide Rates, Mental Health Caseload)</li>
+            </ul>
+          <li>Impact on Vaccinated Staff**, as measured by:</li>
+            <ul class-'list-styled'>
+              <li>Mortality Rates*</li>
+              <li>Hospitalization Rates*</li>
+              <li>Job Satisfaction Rates</li>
+            </ul>
+        </ul>
+        <p>
+          <a href='{% url "metrics" %}'>View Current Metrics</a>
+        </p>
+      </section>
+        <section class='my-3'>
+        <h3>
+          Process
+        </h3>
+        <ul class='list-styled'>
+          <li>
+            The Covid-19 Response Team will review Hospitalization and Mortality Rates on a daily basis.  Any appreciable changes in the danger of any variant to students or vaccinated staff will prompt an immediate implementation of mitigation responses.
+          </li>
+          <li>
+            The response team will consider other measures (ISAT, SEL, Satisfaction) on an as-needed basis, and will review mitigation responses accordingly, but Hospitalization and Mortality rates will be prioritized.
+          </li>
+          <li>
+            Any student or staff member who is sick, either indicated symptomatically or through a positive test for any communicable disease (including Covid-19) will be required to remain home for the duration of the illness.
+          </li>
+          <li>
+            Any unvaccinated student/staff in close contact with an individual who indicated symptomatically or through a positive test for any communicable disease (including Covid-19) must adhere to one of the following conditions:
+            <ul class='list-styled'>
+              <li>
+                Remain home for 10 days <strong>OR</strong>
+              </li>
+              <li>
+                Show a negative test for the communicable disease <strong>OR</strong>
+              </li>
+              <li>
+                Have worn a N-95 or KN-95 properly and consistently during the entire period of close contact <strong>OR</strong>
+              </li>
+              <li>
+                Attend school or extracurricular activities wearing an N-95 or KN-95 mask properly when unable to maintain a minimum six-foot distance from others, inside or out.  If the student is of insufficient maturity to guarantee proper mask-protocol, that student will be expected to remain home for the ten day period <strong>OR</strong>
+              </li>
+              <li>
+                Participate in sports without masks when on the field of play, provided that the athelete was wearing a N-95 or KN-95 mask properly for the entirety of close-contact.  When off the field of play, an N-95 or KN-95 mask will be worn as soon as possible.  Those who were not wearing a N-95 or KN-95 properly for the extent of close-contact will not be allowed to participate in sports until the 10 day period is over.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Masks are strongly recommended, but are not required unless the danger increases.
+          </li>
+          <li>
+            The Virtual Schoolhouse will be maintained for those uncomfortable with this operational plan.
+          </li>
+          <li>
+            Parent Volunteers are considered staff for the purposes of this plan.
+          </li>
+        </ul>
+      </section>
+        <p>
+          * Measured at four levels: local, statewide, national and global.
+        </p>
+        <p>
+          ** This plan specifically excludes unvaccinated staff from consideration.  Neither testing nor vaccination will be mandated; those individuals accept personal responsibility for the consequences of their decisions.  We state unequivocally that student education will not be sacrificed to improve vaccination rates among adults.
+        </p>
+
+      </div>
+    </div>
+  </section>
+  <section>
+    Download PDF
+  </section>
+
+  <section class='my-5'>
+    <small>Version 1.3, Updated 16 August 05:50</small>
+  </section>
+  {% comment %}
+
+  <section class='my-5'>
+    <h2>
+      Revisions from In-Person Safe Instruction Plan
     </h2>
   </section>
   <section class='my-5'>
@@ -15,7 +141,7 @@
     <div class='col-lg-8'>
       <h3>School Operational Decisions</h3>
       <p>
-        Revisions to individual school building health and safety plans will be based upon an in-depth review of <strike>the school’s last 14 days positive cases in conjunction with a review of the data provided on the Leadership Dashboard</strike> <span class='text-primary'>morbidity and mortality rates for 1) students and 2) vaccinated staff</span>.  The in-depth review is conducted by the Operational COVID 19 Response Team.
+        Revisions to individual school building health and safety plans will be based upon an in-depth review of <strike>the school’s last 14 days positive cases in conjunction with a review of the data provided on the Leadership Dashboard</strike> <span class='text-primary'>Hospitalization and mortality rates for 1) students and 2) vaccinated staff</span>.  The in-depth review is conducted by the Operational COVID 19 Response Team.
       </p>
       <p>
         This team is a partnership between the West Ada Executive Team, school administrators, <span class='text-primary'>parent representatives, staff representatives</span>, health services, and CDH <strike>and local health providers</strike>. The team determines the appropriate response based on <strike> the 7 data points used for decision making on the administration’s enhanced dashboard (see below), if an individual school needs to revise or add mitigating measures to the current Health and Safety Plan</strike>.  <span class='text-primary'> the metrics indicated below.  </span>
@@ -42,14 +168,14 @@
         <li>Impact on Students, as measured by:</li>
           <ul class-'list-styled'>
             <li>Mortality Rates*</li>
-            <li>Morbidity Rates* (Hospitalization)</li>
+            <li>Hospitalization Rates* (Hospitalization)</li>
             <li>Academic Achievement Rates (ISAT Metrics primarily)</li>
             <li>Social-Emotional Well-being Rates (Suicide Rates, Mental Health Caseload)</li>
           </ul>
         <li>Impact on Vaccinated Staff**, as measured by:</li>
           <ul class-'list-styled'>
             <li>Mortality Rates*</li>
-            <li>Morbidity Rates* (Hospitalization)</li>
+            <li>Hospitalization Rates* (Hospitalization)</li>
             <li>Job Satisfaction Rates</li>
           </ul>
       </ul>
@@ -61,53 +187,6 @@
       </p>
       </span>
     </div>
-  </section>
-  <section class='col-md-8'>
-    <span class='text-primary'>
-    <h3>
-      Process
-    </h3>
-    <ul class='list-styled'>
-      <li>
-        The Covid-19 Response Team will review Morbidity and Mortality Rates on a daily basis.  Any appreciable changes in the danger of any variant to students or vaccinated staff will prompt an immediate implementation of mitigation responses.
-      </li>
-      <li>
-        The response team will consider other measures (ISAT, SEL, Satisfaction) on an as-needed basis, and will review mitigation responses accordingly, but Morbidity and Mortality rates will be prioritized.
-      </li>
-      <li>
-        Any student or staff member who is sick, either indicated symptomatically or through a positive test for any communicable disease (including Covid-19) will be required to remain home for the duration of the illness.
-      </li>
-      <li>
-        Any unvaccinated student/staff in close contact with an individual who indicated symptomatically or through a positive test for any communicable disease (including Covid-19) must adhere to one of the following conditions:
-        <ul class='list-styled'>
-          <li>
-            Remain home for 10 days <strong>OR</strong>
-          </li>
-          <li>
-            Show a negative test for the communicable disease <strong>OR</strong>
-          </li>
-          <li>
-            Have worn a N-95 or KN-95 properly and consistently during the entire period of close contact <strong>OR</strong>
-          </li>
-          <li>
-            Attend school or extracurricular activities wearing an N-95 or KN-95 mask properly when unable to maintain a minimum six-foot distance from others, inside or out.  If the student is of insufficient maturity to guarantee proper mask-protocol, that student will be expected to remain home for the ten day period <strong>OR</strong>
-          </li>
-          <li>
-            Participate in sports without masks when on the field of play, provided that the athelete was wearing a N-95 or KN-95 mask properly for the entirety of close-contact.  When off the field of play, an N-95 or KN-95 mask will be worn as soon as possible.  Those who were not wearing a N-95 or KN-95 properly for the extent of close-contact will not be allowed to participate in sports until the 10 day period is over.
-          </li>
-        </ul>
-      </li>
-      <li>
-        Masks are strongly recommended, but are not required unless the danger increases.
-      </li>
-      <li>
-        The Virtual Schoolhouse will be maintained for those uncomfortable with this operational plan.
-      </li>
-      <li>
-        Parent Volunteers are considered staff for the purposes of this plan.
-      </li>
-    </ul>
-    </span>
   </section>
   <section class='col-md-8'>
     <strike>
@@ -178,10 +257,54 @@
     </ul>
     </strike>
   </section>
-  <section class='my-5'>
-    <small>Version 1.3, Updated 16 August 05:50</small>
+  <section class='col-md-8'>
+    <span class='text-primary'>
+    <h3>
+      Process
+    </h3>
+    <ul class='list-styled'>
+      <li>
+        The Covid-19 Response Team will review Hospitalization and Mortality Rates on a daily basis.  Any appreciable changes in the danger of any variant to students or vaccinated staff will prompt an immediate implementation of mitigation responses.
+      </li>
+      <li>
+        The response team will consider other measures (ISAT, SEL, Satisfaction) on an as-needed basis, and will review mitigation responses accordingly, but Hospitalization and Mortality rates will be prioritized.
+      </li>
+      <li>
+        Any student or staff member who is sick, either indicated symptomatically or through a positive test for any communicable disease (including Covid-19) will be required to remain home for the duration of the illness.
+      </li>
+      <li>
+        Any unvaccinated student/staff in close contact with an individual who indicated symptomatically or through a positive test for any communicable disease (including Covid-19) must adhere to one of the following conditions:
+        <ul class='list-styled'>
+          <li>
+            Remain home for 10 days <strong>OR</strong>
+          </li>
+          <li>
+            Show a negative test for the communicable disease <strong>OR</strong>
+          </li>
+          <li>
+            Have worn a N-95 or KN-95 properly and consistently during the entire period of close contact <strong>OR</strong>
+          </li>
+          <li>
+            Attend school or extracurricular activities wearing an N-95 or KN-95 mask properly when unable to maintain a minimum six-foot distance from others, inside or out.  If the student is of insufficient maturity to guarantee proper mask-protocol, that student will be expected to remain home for the ten day period <strong>OR</strong>
+          </li>
+          <li>
+            Participate in sports without masks when on the field of play, provided that the athelete was wearing a N-95 or KN-95 mask properly for the entirety of close-contact.  When off the field of play, an N-95 or KN-95 mask will be worn as soon as possible.  Those who were not wearing a N-95 or KN-95 properly for the extent of close-contact will not be allowed to participate in sports until the 10 day period is over.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Masks are strongly recommended, but are not required unless the danger increases.
+      </li>
+      <li>
+        The Virtual Schoolhouse will be maintained for those uncomfortable with this operational plan.
+      </li>
+      <li>
+        Parent Volunteers are considered staff for the purposes of this plan.
+      </li>
+    </ul>
+    </span>
   </section>
-
+  {% endcomment %}
 {% endblock content %}
 {% block scripts %}
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
