@@ -16,8 +16,11 @@ urlpatterns = [
     path('terms/', TemplateView.as_view(template_name='app/pages/terms.html'), name='terms',),
     path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
     path('transcript/', TemplateView.as_view(template_name='app/pages/transcript.html'), name='transcript',),
+
+    # Plan
     path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
-    path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='compare',),
+    path('metrics/', TemplateView.as_view(template_name='app/pages/metrics.html'), name='metrics',),
+    path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='plan',),
 
     # Authentication
     path('join', views.join, name='join'),

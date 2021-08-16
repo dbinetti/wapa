@@ -1,4 +1,6 @@
 {% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
 
 {% block title %}Compare Plans{% endblock title %}
 
@@ -14,120 +16,187 @@
     </p>
   </section>
   <section class='my-5'>
-    <table class='table'>
-      <thead class='thead'>
-        <tr>
-          <th>
-          </th>
-          <th>
-            Current
-          </th>
-          <th>
-            Proposed
-          </th>
-        </tr>
-      </thead>
-      <tbody class='tbody'>
-        <tr>
-          <th>
-            Primary Concern
-          </th>
-          <td>
-            Community Spread
-          </td>
-          <td>
-            Safe Education
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Metrics
-          </th>
-          <td>
-            Case Numbers, Positivity-Rates
-          </td>
-          <td>
-            Mortality and Morbidity
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Constituency
-          </th>
-          <td>
-            Medical Professionals
-          </td>
-          <td>
-            Parents, Teachers, Students
-          </td>
-        </tr>
-        <tr>
-          <th>
-            End Goal
-          </th>
-          <td>
-            Undefined (Stop All Transmission?)
-          </td>
-          <td>
-            Safely Educated Kids
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Sports/Extracirricular
-          </th>
-          <td>
-            Cancelled
-          </td>
-          <td>
-            Sit Out if Sick
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Teachers/Staff
-          </th>
-          <td>
-            Mandatory Vaccination/Testing
-          </td>
-          <td>
-            Personal Responsibility
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Adjustment Criterion
-          </th>
-          <td>
-            Contagiousness
-          </td>
-          <td>
-            Dangerousness
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Emotional Appeal
-          </th>
-          <td>
-            Fear
-          </td>
-          <td>
-            Hope
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Normalcy
-          </th>
-          <td>
-            Never
-          </td>
-          <td>
-            Now
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class='table-responsive'>
+      <table class='table table-sm'>
+        <thead class='thead'>
+          <tr>
+            <th>
+            </th>
+            <th>
+              <a href='https://www.westada.org/domain/11845'>Current</a>
+            </th>
+            <th>
+              <a href='{% url "plan" %}'>Proposed</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody class='tbody'>
+          <tr>
+            <th>
+              Primary Concern
+            </th>
+            <td>
+              Community Spread
+            </td>
+            <td>
+              Safe Education
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Metrics
+            </th>
+            <td>
+              Case Numbers, Positivity Rates
+            </td>
+            <td>
+              Mortality and Morbidity
+            </td>
+          </tr>
+          <tr>
+            <th>
+              End Goal
+            </th>
+            <td>
+              Undefined
+            </td>
+            <td>
+              Safe, Happy, Well-Educated Kids
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Constituency
+            </th>
+            <td>
+              Medical Professionals
+            </td>
+            <td>
+              Parents, Teachers, Students
+            </td>
+          </tr>
+          <tr>
+            <th>
+              At School
+            </th>
+            <td>
+              Mandatory Test, Trace, Isolate, Quarantine
+            </td>
+            <td>
+              Stay Home if Sick
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Sports/Extracirricular
+            </th>
+            <td>
+              Cancelled
+            </td>
+            <td>
+              Sit Out if Sick
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Teachers/Staff
+            </th>
+            <td>
+              Vaccination/Testing
+            </td>
+            <td>
+              Personal Responsibility
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Variant Focus
+            </th>
+            <td>
+              Contagiousness
+            </td>
+            <td>
+              Dangerousness
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Emotional Appeal
+            </th>
+            <td>
+              Fear
+            </td>
+            <td>
+              Hope
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Normalcy
+            </th>
+            <td>
+              Never
+            </td>
+            <td>
+              Now
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class='my-5'>
+    <ul class='list-inline'>
+      <li class='list-inline-item'>
+        {% bootstrap_button "Share on Facebook" button_type='link' size='large' button_class='btn-primary' extra_classes='ml-3 mt-3' id='facebook-share-button'%}
+      </li>
+      <li class='list-inline-item'>
+        {% bootstrap_button "Share via Text" button_type='link' size='large' button_class='btn-success' extra_classes='ml-3 mt-3' id='text-share-button'%}
+      </li>
+    </ul>
   </section>
 {% endblock content %}
+
+{% block scripts %}
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '{% get_env_var "FACEBOOK_CLIENT_ID" %}',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v11.0'
+      });
+    };
+  </script>
+  <script>
+    const FBbutton = document.querySelector('#facebook-share-button');
+    FBbutton.addEventListener('click', async () => {
+      FB.ui({
+        method: "share",
+        href: "https://www.westadaparents.com/compare",
+        quote: "Compare the two plans for West Ada School District."
+      }, function(response){});
+    });
+  </script>
+
+  <script>
+    const toShare = {
+      title: "Click to Support Parent Choice",
+      // text: "{{comment.content|escapejs}}",
+      text: "Compare the two plans for West Ada School District.",
+      url: "https://www.westadaparents.com/compare",
+    };
+    const button = document.querySelector('#text-share-button');
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.share(toShare); // Will trigger the native "share" feature
+        button.textContent = 'Thank You -- Share Again!';
+      }
+      catch(err) {
+        Sentry.captureException(err);
+        $("#text-share-button").replaceWith( "<p class='align-middle ml-3 mt-3'>Copy/Paste '<strong>https://www.westadaparents.com</strong>' in your Text or Email</p>" );
+      }
+    });
+  </script>
+{% endblock scripts %}

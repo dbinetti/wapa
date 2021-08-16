@@ -1,0 +1,31 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+{% block title %}Metrics{% endblock title %}
+
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Metrics
+    </h2>
+    <p class='lead'>
+      The Educate Safely Plan will use these metrics primarily when considering mitigation.
+    </p>
+  </section>
+  <section class='my-5'>
+    <div class='tableauPlaceholder' id='viz1629120748971' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NewWorkbook_16291205500070&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='NewWorkbook_16291205500070&#47;Sheet1' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NewWorkbook_16291205500070&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1629120748971');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+  </section>
+  <section class='my-5'>
+    <ul class='list-inline'>
+      <li class='list-inline-item'>
+        {% bootstrap_button "Share on Facebook" button_type='link' size='large' button_class='btn-primary' extra_classes='ml-3 mt-3' id='facebook-share-button'%}
+      </li>
+      <li class='list-inline-item'>
+        {% bootstrap_button "Share via Text" button_type='link' size='large' button_class='btn-success' extra_classes='ml-3 mt-3' id='text-share-button'%}
+      </li>
+    </ul>
+  </section>
+{% endblock content %}
