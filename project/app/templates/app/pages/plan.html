@@ -27,7 +27,7 @@
       Educational Safety Plan
     </h2>
     <p class='lead col-md-8'>
-      The following plan emphasizes safety in order to maximize in-person learning, rather than focusing on reducing Community Spread.  <a href='{% url "compare" %}'>Compare the two approaches</a>.
+      The following plan emphasizes safety in order to maximize in-person learning, rather than reducing Community Spread.  <a href='{% url "compare" %}'>Compare the two approaches</a>.
     </p>
   </section>
 
@@ -37,13 +37,16 @@
         <section class='my-3'>
         <h3>Approach</h3>
         <p>
-          Revisions to individual school building health and safety plans will be based upon an in-depth review of Hospitalization and mortality rates for 1) students and 2) vaccinated staff.  The in-depth review is conducted by the Operational COVID 19 Response Team.
+          Revisions to individual school building health and safety plans will be based upon an in-depth review of Hospitalization and Mortality rates for 1) students and 2) vaccinated staff.  The in-depth review is conducted by the Operational COVID 19 Response Team.
         </p>
         <p>
           This team is a partnership between the West Ada Executive Team, school administrators, parent representatives, staff representatives, mental health services, and CDH. The team determines the appropriate response based on the metrics indicated below.
         </p>
         <p>
-          Revisions or additions to mitigating measures may include but are not limited to use of masks, distancing/podding in the classroom, increased sanitizing protocols, changes in schedules to limit class size, or shifts to remote instruction as needed to protect student and staff safety.  It is explicitly acknowledged that managing community spread is a public health concern best managed by public health officials; the West Ada School District is responsible for managing a safe educational environment for students and staff.
+          Revisions or additions to mitigating measures may include but are not limited to use of masks, distancing/podding in the classroom, increased sanitizing protocols, changes in schedules to limit class size, or shifts to remote instruction as needed to protect student and staff safety.
+        </p>
+        <p>
+          It is explicitly recognized that managing community spread is a public health concern best managed by public health officials; the West Ada School District is responsible for managing a safe educational environment for students and staff.
         </p>
       </section>
         <section class='my-3'>
@@ -137,8 +140,8 @@
   </section>
 
   <section class='my-5'>
-    <small>Version 1.3, Updated 16 August 05:50</small>
-    <small>See Revisions</small>
+    <small>Version 1.3, Updated 16 August 05:50</small><br>
+    <small><a href='{% url "revisions" %}'>See Revisions from Current Plan</a></small>
   </section>
 {% endblock content %}
 {% block scripts %}
@@ -159,7 +162,7 @@
       FB.ui({
         method: "share",
         href: "https://www.westadaparents.com/plan",
-        quote: "Read the Educational Safety Plan."
+        quote: "Compare the two return to school plans."
       }, function(response){});
     });
   </script>
@@ -168,7 +171,7 @@
     const toShare = {
       title: "Safety First",
       // text: "{{comment.content|escapejs}}",
-      text: "Read the Educational Safety Plan.",
+      text: "Compare the two return to school plans.",
       url: "https://www.westadaparents.com/plan",
     };
     const button = document.querySelector('#text-share-button');

@@ -21,6 +21,7 @@ urlpatterns = [
     path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
     path('metrics/', TemplateView.as_view(template_name='app/pages/metrics.html'), name='metrics',),
     path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='plan',),
+    path('revisions/', TemplateView.as_view(template_name='app/pages/revisions.html'), name='revisions',),
 
     # Authentication
     path('join', views.join, name='join'),
