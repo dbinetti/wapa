@@ -250,7 +250,7 @@ def send_super_email(comment):
     from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
     email = build_email(
         template='app/emails/comment.txt',
-        subject='Thank You for Supporting Parent Choice',
+        subject='Please support Educational Safety',
         context={
             'comment': comment,
             'account': account,
