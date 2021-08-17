@@ -20,7 +20,7 @@ urlpatterns = [
     # Plan
     path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
     path('metrics/', TemplateView.as_view(template_name='app/pages/metrics.html'), name='metrics',),
-    path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='plan',),
+    # path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='plan',),
     path('revisions/', TemplateView.as_view(template_name='app/pages/revisions.html'), name='revisions',),
 
     # Authentication
@@ -47,11 +47,12 @@ urlpatterns = [
     # Events
     path('event/<str:event_id>', views.event, name='event',),
     path('events', views.events, name='events',),
+    path('plan/', views.plan, name='plan',),
 
     # Share
-    path('share', views.share, name='share'),
+    path('share/', views.share, name='share'),
 
     # Delete
-    path('delete', views.delete, name='delete',),
+    path('delete/', views.delete, name='delete',),
 
 ]
