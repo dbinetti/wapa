@@ -50,24 +50,33 @@
         </p>
       </section>
         <section class='my-3'>
-        <h3>Metrics</h3>
+        <h3>Core Metrics</h3>
         <ul class='list-styled'>
           <li>Impact on Students, as measured by:</li>
             <ul class-'list-styled'>
-              <li>Hospitalization Rates*</li>
-              <li>Mortality Rates*</li>
+              <li>Hospitalization Rates</li>
+              <li>Mortality Rates</li>
+            </ul>
+          <li>Impact on Vaccinated Staff*, as measured by:</li>
+            <ul class-'list-styled'>
+              <li>Hospitalization Rates</li>
+              <li>Mortality Rates</li>
+            </ul>
+        </ul>
+        <h3>Secondary Metrics</h3>
+        <ul class='list-styled'>
+          <li>Impact on Students, as measured by:</li>
+            <ul class-'list-styled'>
               <li>Academic Achievement Rates (ISAT Metrics primarily)</li>
               <li>Social-Emotional Well-being Rates (Suicide Rates, Mental Health Caseload)</li>
             </ul>
-          <li>Impact on Vaccinated Staff**, as measured by:</li>
+          <li>Impact on Staff, as measured by:</li>
             <ul class-'list-styled'>
-              <li>Hospitalization Rates*</li>
-              <li>Mortality Rates*</li>
               <li>Job Satisfaction Rates</li>
             </ul>
         </ul>
         <p>
-          <a href='{% url "metrics" %}'>View Current Metrics</a>
+          <a href='{% url "metrics" %}'>View Core Metrics</a>
         </p>
       </section>
         <section class='my-3'>
@@ -116,12 +125,8 @@
         </ul>
       </section>
         <p>
-          * Measured at four levels: local, statewide, national and global.
+          * This plan specifically excludes unvaccinated staff from the core metrics.  Neither testing nor vaccination will be mandated; those individuals accept personal responsibility for the consequences of their decisions.  We state unequivocally that student education will not be sacrificed to improve vaccination rates among adults who have free will.
         </p>
-        <p>
-          ** This plan specifically excludes unvaccinated staff from consideration.  Neither testing nor vaccination will be mandated; those individuals accept personal responsibility for the consequences of their decisions.  We state unequivocally that student education will not be sacrificed to improve vaccination rates among adults who have free will.
-        </p>
-
       </div>
     </div>
   </section>
@@ -140,7 +145,7 @@
   </section>
 
   <section class='my-5'>
-    <small>Version 1.4, Updated 16 August 22:43</small><br>
+    <small>Version 1.41, Updated 17 August 11:38</small><br>
     <small><a href='{% url "revisions" %}'>See Revisions from Current Plan</a></small>
   </section>
 {% endblock content %}
