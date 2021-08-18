@@ -3,7 +3,7 @@
 {% load app_tags %}
 {% load static %}
 
-{% block title %}Education Safety Plan{% endblock title %}
+{% block title %}Parents Plan for Educational Safety{% endblock title %}
 
 
 {% block metatags %}
@@ -24,7 +24,7 @@
 {% block content %}
   <section class='my-5'>
     <h2>
-      Educational Safety Plan
+      The Parents Plan for Educational Safety
     </h2>
     <p class='lead col-md-8'>
       The following plan emphasizes Educational Safety, rather than Community Spread.  <a href='{% url "compare" %}'>Compare the two approaches</a>.
@@ -33,7 +33,7 @@
   {% if not request.user.is_authenticated %}
   <div class='my-3 col-md-8'>
     <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
-      <strong>Join <span id='value'></span> Parents Who Prioritize Educational Safety</strong>
+      <strong>Join <span id='value'></span> Others in Supporting the Parents Plan</strong>
     </a>
   </div>
   {% endif %}

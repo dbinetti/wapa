@@ -1,7 +1,7 @@
 {% autoescape off %}
 
 Dr. Bub, this message was sent by a West Ada Parent who supports
-the Educational Safety Plan.
+the Parents Plan.
 
 Parent: {{account.name}}
 {% if account.students.count %}
