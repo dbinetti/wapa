@@ -41,14 +41,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
               <li class='nav-item'>
-                <a href="{% url 'plan' %}" class='align-bottom bi-file-text mr-3'>&nbsp;Parents Plan</a>
+                <a href="{% url 'compare' %}" class='align-bottom bi-file-text mr-3'>&nbsp;Compare Plans</a>
               </li>
               {% if request.user.is_authenticated %}
               <li class='nav-item'>
-                <a href="{% url 'account' %}" class='align-bottom bi-gear mr-3'>&nbsp;Account</a>
+                <a href="{% url 'comments' %}" class='align-bottom bi-megaphone mr-3'>&nbsp;Comments</a>
               </li>
               <li class='nav-item'>
-                <a href="{% url 'comments' %}" class='align-bottom bi-megaphone mr-3'>&nbsp;Comments</a>
+                <a href="{% url 'account' %}" class='align-bottom bi-gear mr-3'>&nbsp;Account</a>
               </li>
               {% comment %}
               <li class='nav-item'>
