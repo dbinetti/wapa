@@ -18,7 +18,7 @@ urlpatterns = [
     path('transcript/', TemplateView.as_view(template_name='app/pages/transcript.html'), name='transcript',),
 
     # Plan
-    path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
+    # path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
     path('metrics/', TemplateView.as_view(template_name='app/pages/metrics.html'), name='metrics',),
     # path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='plan',),
     path('revisions/', TemplateView.as_view(template_name='app/pages/revisions.html'), name='revisions',),
@@ -48,6 +48,7 @@ urlpatterns = [
     path('event/<str:event_id>', views.event, name='event',),
     path('events', views.events, name='events',),
     path('plan/', views.plan, name='plan',),
+    path('compare/', views.compare, name='compare',),
 
     # Share
     path('share/', views.share, name='share'),

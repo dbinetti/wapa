@@ -83,6 +83,20 @@ def plan(request):
         },
     )
 
+def compare(request):
+    count = sum([
+        Account.objects.all().count(),
+        Account.objects.filter(is_spouse=True).count(),
+    ])
+
+    return render(
+        request,
+        'app/pages/compare.html',
+        context = {
+            'count': count,
+        },
+    )
+
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
