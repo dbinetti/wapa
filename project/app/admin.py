@@ -16,10 +16,44 @@ from .inlines import StudentInline
 from .models import Account
 from .models import Comment
 from .models import Event
+from .models import Isat
 from .models import Issue
 from .models import School
 from .models import User
 from .models import Voter
+
+
+@admin.register(Isat)
+class IsatAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'school_id',
+        'school_name',
+        'subject_name',
+        'grade',
+        'population',
+        'advanced',
+        'proficient',
+        'basic',
+        'below',
+        'date',
+        'year',
+    ]
+    list_display = [
+        'id',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+        'school_name',
+        'year',
+    ]
+    search_fields = [
+    ]
+    inlines = [
+    ]
+    ordering = [
+    ]
 
 
 @admin.register(Voter)
@@ -177,16 +211,22 @@ class SchoolAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
+        'full',
         'kind',
+        'school_id',
     ]
     list_display = [
         'id',
         'name',
+        'full',
+        'school_id',
         'kind',
     ]
     list_editable = [
         'name',
+        'full',
         'kind',
+        'school_id',
     ]
     list_filter = [
         'kind',

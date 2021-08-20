@@ -129,6 +129,63 @@ class Issue(models.Model):
         return f"{self.name}"
 
 
+class Isat(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    school_id = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    school_name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    subject_name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    grade = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    population = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    advanced = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    proficient = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    basic = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    below = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    year = models.IntegerField(
+        null=False,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    def __str__(self):
+        return f"{self.id}"
+
+
 class Event(models.Model):
     id = HashidAutoField(
         primary_key=True,
@@ -181,6 +238,10 @@ class School(models.Model):
     name = models.CharField(
         max_length=100,
         blank=False,
+    )
+    school_id = models.IntegerField(
+        null=True,
+        blank=True,
     )
     KIND = Choices(
         (10, 'elementary', 'Elementary School'),
