@@ -8,7 +8,7 @@ from app.models import School
 
 def clean_stat(stat):
     try:
-        clean = float(stat.replace('<','').replace('>',''))
+        clean = round(float(stat.replace('<','').replace('>','').replace('%', '').strip()),1)
     except ValueError:
         clean = None
     return clean
@@ -16,18 +16,20 @@ def clean_stat(stat):
 def clean_note(stat):
     try:
         float(stat)
-    except ValueError:
+    except ValueError as e:
         if '<' in stat:
             return '<'
         if '>' in stat:
             return '>'
+        if '***' in stat:
+            return 'N/A'
         if 'N/A' in stat:
             return 'N/A'
         if 'NSIZE' in stat:
             return 'NSIZE'
         return ''
 
-def import_isat(filename='isat.csv'):
+def import_isat(filename, year):
     with open(filename) as f:
         reader = csv.reader(
             f,
@@ -51,7 +53,7 @@ def import_isat(filename='isat.csv'):
                 'Grade 8': 8,
                 'High School': 10,
             }
-            if row[1] == 'JOINT SCHOOL DISTRICT NO. 2':
+            if row[1] == 'JOINT SCHOOL DISTRICT NO. 2' and row[6].strip() == 'All Students':
                 school_id = int(row[2])
                 try:
                     school = School.objects.get(
@@ -70,11 +72,13 @@ def import_isat(filename='isat.csv'):
                     'proficient_note': clean_note(row[8]),
                     'basic_note': clean_note(row[9]),
                     'below_note': clean_note(row[10]),
-                    'year': 2021,
+                    'year': year,
                     'school': school,
                 }
                 form = IsatForm(data=data)
                 if form.is_valid():
                     form.save()
-
+                else:
+                    # print(form.errors.as_json())
+                    continue
     return

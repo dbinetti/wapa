@@ -42,6 +42,18 @@ class IsatAdmin(VersionAdmin):
     ]
     list_display = [
         'id',
+        'subject',
+        'grade',
+        'year',
+        'advanced_note',
+        'proficient_note',
+        'basic_note',
+        'below_note',
+        'advanced',
+        'proficient',
+        'basic',
+        'below',
+        'school',
     ]
     list_editable = [
     ]
