@@ -156,6 +156,22 @@ class Isat(models.Model):
         choices=GRADE,
         null=True,
     )
+    advanced_note = models.CharField(
+        max_length=10,
+        blank=True,
+    )
+    proficient_note = models.CharField(
+        max_length=10,
+        blank=True,
+    )
+    basic_note = models.CharField(
+        max_length=10,
+        blank=True,
+    )
+    below_note = models.CharField(
+        max_length=10,
+        blank=True,
+    )
     advanced = models.FloatField(
         null=True,
         blank=True,

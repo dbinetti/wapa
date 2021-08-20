@@ -13,6 +13,20 @@ def clean_stat(stat):
         clean = None
     return clean
 
+def clean_note(stat):
+    try:
+        float(stat)
+    except ValueError:
+        if '<' in stat:
+            return '<'
+        if '>' in stat:
+            return '>'
+        if 'N/A' in stat:
+            return 'N/A'
+        if 'NSIZE' in stat:
+            return 'NSIZE'
+        return ''
+
 def import_isat(filename='isat.csv'):
     with open(filename) as f:
         reader = csv.reader(
@@ -22,7 +36,6 @@ def import_isat(filename='isat.csv'):
         next(reader)
         rows = [row for row in reader]
         for row in rows:
-            # print(row)
             subject_reduce = {
                 'ELA': 10,
                 'Math': 20,
@@ -53,6 +66,10 @@ def import_isat(filename='isat.csv'):
                     'proficient': clean_stat(row[8]),
                     'basic': clean_stat(row[9]),
                     'below': clean_stat(row[10]),
+                    'advanced_note': clean_note(row[7]),
+                    'proficient_note': clean_note(row[8]),
+                    'basic_note': clean_note(row[9]),
+                    'below_note': clean_note(row[10]),
                     'year': 2021,
                     'school': school,
                 }
