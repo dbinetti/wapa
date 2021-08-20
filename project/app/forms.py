@@ -10,6 +10,7 @@ from django.utils.safestring import mark_safe
 from .models import Account
 from .models import Attendee
 from .models import Comment
+from .models import Isat
 from .models import Student
 from .models import User
 from .models import Voter
@@ -42,6 +43,21 @@ class AttendeeForm(forms.ModelForm):
         labels = {
             "is_confirmed": "Yes I'll Attend",
         }
+
+
+class IsatForm(forms.ModelForm):
+    class Meta:
+        model = Isat
+        fields = [
+            'subject',
+            'grade',
+            'year',
+            'advanced',
+            'proficient',
+            'basic',
+            'below',
+            'school',
+        ]
 
 
 class CommentForm(forms.ModelForm):

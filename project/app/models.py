@@ -133,25 +133,28 @@ class Isat(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
-    school_id = models.CharField(
-        max_length=100,
-        blank=False,
+    SUBJECT = Choices(
+        (10, 'english', 'English'),
+        (20, 'math', 'Math'),
+        (30, 'science', 'Science'),
     )
-    school_name = models.CharField(
-        max_length=100,
-        blank=False,
+    subject = models.IntegerField(
+        choices=SUBJECT,
+        null=True,
     )
-    subject_name = models.CharField(
-        max_length=100,
-        blank=False,
+    GRADE = Choices(
+        (1, 'all', 'All'),
+        (3, 'third', 'Third'),
+        (4, 'fourth', 'Fourth Grade'),
+        (5, 'fifth', 'Fifth Grade'),
+        (6, 'sixth', 'Sixth Grade'),
+        (7, 'seventh', 'Seventh Grade'),
+        (8, 'eighth', 'Eighth Grade'),
+        (10, 'high', 'High School'),
     )
-    grade = models.CharField(
-        max_length=100,
-        blank=False,
-    )
-    population = models.CharField(
-        max_length=100,
-        blank=False,
+    grade = models.IntegerField(
+        choices=GRADE,
+        null=True,
     )
     advanced = models.FloatField(
         null=True,
@@ -169,11 +172,15 @@ class Isat(models.Model):
         null=True,
         blank=True,
     )
-    date = models.DateField(
-        default=datetime.date.today,
-    )
     year = models.IntegerField(
         null=False,
+        blank=False,
+    )
+    school = models.ForeignKey(
+        'app.School',
+        on_delete=models.CASCADE,
+        related_name='isats',
+        null=True,
         blank=False,
     )
     created = models.DateTimeField(

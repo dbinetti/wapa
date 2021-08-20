@@ -27,17 +27,14 @@ from .models import Voter
 class IsatAdmin(VersionAdmin):
     save_on_top = True
     fields = [
-        'school_id',
-        'school_name',
-        'subject_name',
+        'subject',
         'grade',
-        'population',
+        'year',
         'advanced',
         'proficient',
         'basic',
         'below',
-        'date',
-        'year',
+        'school',
     ]
     list_display = [
         'id',
@@ -45,7 +42,9 @@ class IsatAdmin(VersionAdmin):
     list_editable = [
     ]
     list_filter = [
-        'school_name',
+        'subject',
+        'grade',
+        'school',
         'year',
     ]
     search_fields = [
