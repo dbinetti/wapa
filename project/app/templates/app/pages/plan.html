@@ -22,13 +22,14 @@
 
 
 {% block content %}
-  <section class='my-5'>
+  <section class='my-5 col-md-8'>
     <h2>
       The Parents Plan for Educational Safety
     </h2>
-    <p class='lead col-md-8'>
-      The following plan emphasizes Educational Safety, rather than Community Spread.  <a href='{% url "compare" %}'>Compare the two approaches</a>.
+    <p class='lead'>
+        This plan is based on the following core principle:  Student education should not be sacrificed to improve vaccination rates among adults who have free will.  Public Health concerns are vitally important, but our schools have neither the expertise nor the resources to serve as proxy public health officers.  The job of our schools is to educate full-time, in-person, without encumberances, and as long as the danger remains exceedingly low that should be their top priority.
     </p>
+
   </section>
   {% if not request.user.is_authenticated %}
   <div class='my-3 col-md-8'>
@@ -82,9 +83,9 @@
               <li>Job Satisfaction Rates</li>
             </ul>
         </ul>
-        <p>
-          <a href='{% url "metrics" %}'>View Core Metrics</a>
-        </p>
+        {# <p> #}
+          {# <a href='{% url "metrics" %}'>View Core Metrics</a> #}
+        {# </p> #}
       </section>
         <section class='my-3'>
         <h3>
@@ -101,19 +102,16 @@
             Any student or staff member who is sick, either indicated symptomatically or through a positive test for any communicable disease (including Covid-19) will be required to remain home for the duration of the illness.
           </li>
           <li>
-            Any unvaccinated student/staff in close contact with an individual who indicated symptomatically or through a positive test for any communicable disease (including Covid-19) must adhere to one of the following conditions:
+            Any unvaccinated student/staff in close contact with an individual who indicated symptomatically or through a positive test for any communicable disease (including Covid-19) must quarantine at home for 10 calendar days or may be released under the following conditions:
             <ul class='list-styled'>
-              <li>
-                Remain home for 10 days <strong>OR</strong>
-              </li>
               <li>
                 Show a negative test for the communicable disease <strong>OR</strong>
               </li>
               <li>
-                Attend school or extracurricular activities wearing an N-95 or KN-95 mask properly when unable to maintain a minimum six-foot distance from others, inside or out.  If the student is of insufficient maturity to guarantee proper mask-protocol, that student will be expected to remain home for the ten day period <strong>OR</strong>
+                Attend indoor school or extracurricular activities wearing a mask properly when unable to maintain a minimum six-foot distance from others.  <strong>OR</strong>
               </li>
               <li>
-                Participate in sports without masks when on the field of play, provided that the athelete was wearing a N-95 or KN-95 mask properly for the entirety of close-contact.  When off the field of play, an N-95 or KN-95 mask will be worn as soon as possible.  Those who were not wearing a N-95 or KN-95 properly for the extent of close-contact will not be allowed to participate in sports until the 10 day period is over.
+                Participate in sports indoors or out without masks when on the field of play.  For indoor sports, when off the field of play a mask will be worn when the athlete has recovered from extertion.
               </li>
             </ul>
           </li>
@@ -129,7 +127,7 @@
         </ul>
       </section>
         <p>
-          * This plan specifically excludes unvaccinated staff from the core metrics.  Neither testing nor vaccination will be mandated; those individuals accept personal responsibility for the consequences of their decisions.  We state unequivocally that student education will not be sacrificed to improve vaccination rates among adults who have free will.
+          * This plan specifically excludes unvaccinated staff from the core metrics.  Neither testing nor vaccination will be mandated; those individuals accept personal responsibility for the consequences of their decisions.
         </p>
       </div>
     </div>
@@ -145,15 +143,15 @@
     </ul>
   </section>
   <section>
-    <a href='https://res.cloudinary.com/dyvz0sbfw/image/upload/v1629325810/wapa/West_Ada_Parents_Association_Parents_Plan_for_Educational_Safety.pdf'>Download PDF</a>
+    {# <a href='https://res.cloudinary.com/dyvz0sbfw/image/upload/v1629325810/wapa/West_Ada_Parents_Association_Parents_Plan_for_Educational_Safety.pdf'>Download PDF</a> #}
   </section>
 
   <section class='my-5'>
     <p>
-      Version 1.7.0, Updated 20 August 14:49
+      Version 1.7.5, Updated 26 August 12:26
     </p>
     <p>
-      <small><a href='{% url "revisions" %}'>See Side-by-Side from Current Plan</a></small>
+      {# <small><a href='{% url "revisions" %}'>See Side-by-Side from Current Plan</a></small> #}
     </p>
   </section>
 {% endblock content %}
