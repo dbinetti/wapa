@@ -25,9 +25,155 @@
 
 {% block content %}
   <section class 'mt-5'>
-    <div id='id_wistia'>
-<script src="https://fast.wistia.com/embed/medias/4gyx407q64.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_4gyx407q64 videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/4gyx407q64/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>    </div>
+    {# <div id='id_wistia'> #}
+{# <script src="https://fast.wistia.com/embed/medias/4gyx407q64.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_4gyx407q64 videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/4gyx407q64/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>    </div> #}
     <div class='jumbotron'>
+        <section class=''>
+
+    <h3 class='mb-3'>
+      Compare the WASD and WAPA Plans
+    </h3>
+    <div class='table-responsive'>
+      <table class='table table-sm'>
+        <thead class='thead'>
+          <tr>
+            <th>
+
+            </th>
+            <th>
+              <a href='https://www.westada.org/Page/87078'>Aug 24 Board Plan</a>
+            </th>
+            <th>
+              <a href='{% url "plan" %}'>Parents Plan</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody class='tbody'>
+          <tr>
+            <th>
+              Focus
+            </th>
+            <td>
+              Community Spread
+            </td>
+            <td>
+              Educational Safety
+            </td>
+          </tr>
+            <th>
+              Concern
+            </th>
+            <td>
+              How Contagious
+            </td>
+            <td>
+              How Dangerous
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Metrics
+            </th>
+            <td>
+              Case Counts, Positivity
+            </td>
+            <td>
+              Hospitalization, Mortality
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Masks
+            </th>
+            <td>
+              Mandated, with Opt-Out
+            </td>
+            <td>
+              Parental/Staff Choice
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Remote-Learning
+            </th>
+            <td>
+              Based on Cases
+            </td>
+            <td>
+              Based on Danger
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Goal
+            </th>
+            <td>
+              Prevent All Illness
+            </td>
+            <td>
+              Prevent Serious Illness
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Isolation
+            </th>
+            <td>
+              If Sick/ Positive
+            </td>
+            <td>
+              If Sick/ Positive
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Quarantine Release
+            </th>
+            <td>
+              10 Days OR 5-Day Negative
+            </td>
+            <td>
+              10 Days OR 0-Day Negative OR Masked
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Constituency
+            </th>
+            <td>
+              Public Health Officials, Media
+            </td>
+            <td>
+              Parents, Teachers, Students
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Sports/ Extracirricular
+            </th>
+            <td>
+              Sit if Unmasked or Sick
+            </td>
+            <td>
+              Sit if Sick
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Classroom
+            </th>
+            <td>
+              Teach and Trace
+            </td>
+            <td>
+              Teach
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
       {% comment %}
       <div class='mb-3'>
           <div class='mb-3 mx-3'>
@@ -39,14 +185,16 @@
       {% endcomment %}
       <div class='mt-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
-          Click to <strong>Join <span id='value'></span> Parents<br>Supporting Parental Choice</strong>
+          Click to <strong>Join <span id='value'></span> Parents<br>Supporting The Parents Plan</strong>
         </a>
       </div>
+      {% comment %}
       <div class='mt-3'>
         <a href='{% url "compare" %}' class="btn btn-light btn-block btn-lg p-3 shadow-lg">
           Or Compare the Plans
         </a>
       </div>
+      {% endcomment %}
     </div>
   </section>
   <section class='m-3'>

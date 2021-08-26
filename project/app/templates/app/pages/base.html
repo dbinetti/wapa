@@ -40,9 +40,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
+              {% comment %}
               <li class='nav-item'>
                 <a href="{% url 'compare' %}" class='align-bottom bi-file-text mr-3'>&nbsp;Compare Plans</a>
               </li>
+              {% endcomment %}
               {% if request.user.is_authenticated %}
               <li class='nav-item'>
                 <a href="{% url 'comments' %}" class='align-bottom bi-megaphone mr-3'>&nbsp;Comments</a>

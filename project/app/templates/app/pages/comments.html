@@ -215,8 +215,23 @@
               {% for comment in comments %}
                 <tr class='row'>
                   <td class='col-5'>
-                    {# <a href='{% url "comment" comment.id %}'>{{comment.account.name}}</a><br> #}
-                    {{comment.account.name}}<br>
+                    <ul class='list-inline'>
+                      <li class='list-inline-item align-top'>
+                        {% cloudinary comment.account.picture.name AVATAR %}
+                      </li>
+                      <li class='list-inline-item'>
+                        <strong>{{comment.account.name}}</strong><br>
+                        {% for student in comment.account.students.all %}
+                          {% if student.school.get_kind_display == 'Elementary School' %}
+                            <span class='badge badge-warning badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                          {% elif student.school.get_kind_display == 'Middle School' %}
+                            <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                          {% elif student.school.get_kind_display == 'High School' %}
+                            <span class='badge badge-info badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                          {% endif %}
+                        {% endfor %}
+                      </li>
+                    </ul>
                   </td>
                   <td class='col-7'>
                     {% if comment.wordcount < 60 %}
