@@ -289,14 +289,16 @@ def account(request):
                     request,
                     mark_safe("Saved!"),
                 )
-                if account.comments.count() == 0:
-                    messages.warning(
-                        request,
-                        mark_safe("Next, please send a comment to the Superintendent!"),
-                    )
-                    return redirect('comments')
-                else:
-                    return redirect('account')
+
+                # if account.comments.count() == 0:
+                #     messages.warning(
+                #         request,
+                #         mark_safe("Next, please send a comment to the Superintendent!"),
+                #     )
+                #     return redirect('comments')
+                # else:
+                #     return redirect('account')
+                return redirect('account')
             else:
                 messages.success(
                     request,
