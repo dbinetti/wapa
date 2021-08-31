@@ -50,11 +50,11 @@
               </li>
 
               {% if request.user.is_authenticated %}
-              {% comment %}
+
               <li class='nav-item'>
                 <a href="{% url 'comments' %}" class='align-bottom bi-megaphone mr-3'>&nbsp;Comments</a>
               </li>
-              {% endcomment %}
+
               <li class='nav-item'>
                 <a href="{% url 'account' %}" class='align-bottom bi-gear mr-3'>&nbsp;Account</a>
               </li>

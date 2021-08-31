@@ -1,14 +1,15 @@
 {% autoescape off %}
 
-Dr. Bub, this message was sent by a West Ada Parent who supports
-the Parents Plan.
+Dr. Bub, this message was sent by a Member of the
+West Ada Parents Association.
 
-Parent: {{account.name}}
+Parent: {{account.name}} {% if account.is_spouse %}+ Spouse{%endif%}
 {% if account.students.count %}
 Student(s) at:
 {% endif %}
 {% for student in account.students.all %}{{student.school}} {{student.get_grade_display}}, {% endfor %}
 
+Issue: {{comment.issue.name}}
 Message: {{comment.content}}
 
 {% endautoescape %}
