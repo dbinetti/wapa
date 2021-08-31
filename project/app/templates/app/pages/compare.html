@@ -21,23 +21,9 @@
 
 
 {% block content %}
-  <section class='my-5'>
-    <h2>
-      Compare Plans
-    </h2>
-    <p class='lead'>
-      Compare the Two Return-to-School Plans for the District
-    </p>
-  </section>
-
-
-  <section class='my-5'>
-    <h3>
-      Compare Approaches
+    <h3 class='mb-3'>
+      Compare the WASD and WAPA Plans
     </h3>
-    <p class='lead'>
-      This chart compares the main differences between the 8/24 Board Plan, and the WAPA Plan.
-    </p>
     <div class='table-responsive'>
       <table class='table table-sm'>
         <thead class='thead'>
@@ -46,7 +32,7 @@
 
             </th>
             <th>
-              <a href='https://www.westada.org/Page/87078'>Board Plan</a>
+              <a href='https://www.westada.org/Page/87078'>8/24 Board Plan</a>
             </th>
             <th>
               <a href='{% url "plan" %}'>Parents Plan</a>
@@ -135,10 +121,14 @@
               Quarantine Release
             </th>
             <td>
-              10 Days OR 5-Day Negative
+              10 Days OR<br>
+              Masked Before Contact OR<br>
+              Vaccinated Before Contact
             </td>
             <td>
-              10 Days OR 0-Day Negative OR Masked
+              10 Days OR<br>
+              0-Day Negative OR<br>
+              Wear Mask 10 Days After Contact
             </td>
           </tr>
           <tr>
@@ -154,7 +144,7 @@
           </tr>
           <tr>
             <th>
-              Sports/ Extracirricular
+              Sports/ Extracurricular
             </th>
             <td>
               Sit if Unmasked or Sick
@@ -163,10 +153,20 @@
               Sit if Sick
             </td>
           </tr>
+          <tr>
+            <th>
+              Classroom
+            </th>
+            <td>
+              Count Masks, Measure Distance, Trace Contacts, Teach
+            </td>
+            <td>
+              Just Teach
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
-  </section>
   <section class='my-3'>
     {% if not request.user.is_authenticated %}
       <div class='my-3 col-md-8'>

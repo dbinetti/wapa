@@ -16,6 +16,7 @@ urlpatterns = [
     path('terms/', TemplateView.as_view(template_name='app/pages/terms.html'), name='terms',),
     path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
     path('transcript/', TemplateView.as_view(template_name='app/pages/transcript.html'), name='transcript',),
+    path('truenorth/', TemplateView.as_view(template_name='app/pages/north.html'), name='truenorth',),
 
     # Plan
     # path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),

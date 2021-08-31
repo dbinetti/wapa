@@ -1,0 +1,60 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load app_tags %}
+{% load cloudinary %}
+
+{% block metatags %}
+  <meta property="og:title" content="Support the Superintendent" />
+  <meta property="og:image" content='{% static "app/compare3.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/compare3.png" %}' />
+  <meta property="og:url" content="https://www.westadaparents.com" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="1236648860100768" />
+  <meta property="og:description" content="Send a Message to Dr. Bub to keep schools open and masks-optional." />
+{% endblock metatags %}
+
+{% block customstyles %}
+{% endblock customstyles %}
+
+
+{% block title %}The True North Quarantine Release{% endblock title %}
+
+{% block content %}
+<div class='col-md-8 my-5'>
+<h3>The True North Quarantine Release Approach</h3>
+<p></p>
+<p>Below I have a full analysis of the quarantine release policy, but here is the TL;DR:</p>
+
+<div class='card mb-3'><div class='card-body'><p class='lead'>If you opted-out of the mandate, your child likely will be sent home for ten days with zero notice at some point this week or next. Prepare accordingly, and see below for a way out.</p></div></div>
+
+<p>In greater depth, those who attended or watched the Board Meeting last Tuesday may have noticed that I didn’t cheer when the Trustees voted 3-2 to provide an option for parents to ‘opt-out’ of the mask mandate. That’s because I knew the more important vote was yet to come — that of the quarantine release policy. And sadly, my worry was justified when the Board adopted a convoluted set of quarantine rules designed specifically at those who opted-out.</p>
+
+<p>You can read the full <a href='https://www.westada.org/domain/11845'>Safe Return to In-Person Instruction Plan</a> for yourself, but it’s difficult to read so I’ve produced a quick flow chart below which makes it easier to follow:</p>
+
+
+<p></p>
+  <img src='{% static "app/board_plan_8_24.png" %}' class='img-fluid'>
+
+<p>Basically, the left side of the flow chart is geared towards those who are vaccinated, follow the mandate, or can provide proof of a prior recovery. The right side is for students who opt-out. And while the process is complicated, the bottom line is: if you follow the mandate, you stay in school. Opt-out of the mandate, you stay home for ten days and skip sports.</p>
+<p>As you know, the West Ada Parents Association saw this coming and proposed a <a href='{% url "plan" %}'>Parents Plan</a> to avoid this “back-door mandate”. Dr. Bub did too: that’s why he proposed that kids who opt-out can remain in school if they choose to mask for ten days following close contact as a quarantine release. He recognized this as the best way to keep kids safely in school while maintaining the spirit of parental choice.</p>
+<p>
+  Still, the Board decided otherwise, and that’s why the more than 12,000 parents who filled out the opt-out form, drove the district office on short notice, waited in line, and submitted their form with identification in-person are going to be very surprised when they learn their kids are still going to miss school and sports. This was by design: give the illusion of choice, when really for athletes or parents who can’t have kids at home suddenly for ten days, it’s no choice at all.</p>
+
+<p></p>
+<p>The way out of this mess in the near-term is for Dr. Bub to implement his original recommendation that kids be allowed to stay in school if they wear a mask for ten days following close contact exposure. We call this the <strong>True North</strong> quarantine release approach.</p>
+
+<p>To understand the name, some explanation: at the Board meeting Chair Amy Johnson articulated what she called her “North Star” principle for the District: focusing on the importance of full-time, in-person instruction for all students — which she assumed could be accomplished through a mask-mandate. However, that assumption was obliterated when her own invited guest, Dr. Souza of St. Luke’s, admitted that a mask-mandate can not provide such a guarantee. If someone were offered that promise, his frank advice was, “Run.”</p>
+
+<p>And Dr. Souza was not the only one who realized how untrustworthy Amy Johnson’s “North Star” promise was. Trustee Rusty Coffeldt submitted a motion supporting Dr. Bub’s proposal to allow mask-wearing for ten days as an alternative quarantine release method. After some excruciatingly difficult word-smithing of his motion more than five hours into the meeting and nearing midnight, it was rejected and they eventually decided on the approach that we have today.</p>
+
+<p>And that’s why we call it the <strong>True North</strong> approach: because Chair Amy Johnson’s North Star principle to keep kids in school only extends to those who follow the mandate — and kids that don’t are sent home or sidelined. The <strong>True North</strong> approach doesn’t discriminate; it extends truly to all students, regardless of whether or not they follow the mandate or opt-out.
+</p>
+<p>While it is unclear just how much operational power the Board took away from the Superintendent at the last Board meeting, they did express he had authority to make changes as he saw fit. Now this will be incredibly difficult for him to do — after all, technically he answers to the Board — but with enough parent support he can do the right thing and stop this intensely divisive and segregated quarantine policy from going into full operation. For comparison to the above flowchart, this is what the True North process looks like:</p>
+  <img src='{% static "app/true_north_plan.png" %}' class='img-fluid'>
+<p></p>
+<p>It’s simple to implement, doesn't segregate, and most importantly keeps healthy kids in school where they can continue to learn. You may feel that no-masks is the only acceptable policy and I respect that position, but the True North approach is a reasonable compromise which demonstrates clearly that we are not against masks — we are equal treatment of all students, regardless of their choice.</p>
+
+<p>Join us, and ask the Superintendent to: Keep Healthy Kids in School. Don’t Segregate the District. <strong>Follow the True North.</strong></p>
+</div>
+{% endblock %}
