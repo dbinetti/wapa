@@ -153,7 +153,6 @@ def verified(request):
     )
     return redirect('account')
 
-
 def callback(request):
     # Reject if state doesn't match
     browser_state = request.session.get('state')
@@ -273,6 +272,9 @@ def account(request):
         'grade',
         'name',
     )
+    comments = account.comments.filter(
+        issue__state=10,
+    ).count()
     if request.POST:
         form = AccountForm(request.POST, instance=account)
         formset = StudentFormSet(request.POST, request.FILES, instance=account)
@@ -289,15 +291,14 @@ def account(request):
                     request,
                     mark_safe("Saved!"),
                 )
-
-                # if account.comments.count() == 0:
-                #     messages.warning(
-                #         request,
-                #         mark_safe("Next, please send a comment to the Superintendent!"),
-                #     )
-                #     return redirect('comments')
-                # else:
-                #     return redirect('account')
+                if comments:
+                    return redirect('account')
+                else:
+                    messages.warning(
+                        request,
+                        mark_safe("Next, please send a comment to the Superintendent!"),
+                    )
+                    return redirect('comments')
                 return redirect('account')
             else:
                 messages.success(
