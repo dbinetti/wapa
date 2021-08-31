@@ -3,12 +3,7 @@
 {% load cloudinary %}
 
 {% block metatags %}
-
   <meta property="og:title" content="Follow the True North " />
-  {% comment %}
-  <meta property="og:image" content='http://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
-  <meta property="og:image:secure_url" content='https://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
-  {% endcomment %}
   <meta property="og:image" content='{% static "app/true_north_plan.png" %}' />
   <meta property="og:image:secure_url" content='{% static "app/true_north_plan.png" %}' />
   <meta property="og:url" content="https://www.westadaparents.com" />
@@ -17,201 +12,82 @@
   <meta property="og:description" content="Ask Dr. Bub to keep healthy kids in school and sports!" />
 {% endblock metatags %}
 
-
 {% block customstyles %}
 {% endblock customstyles %}
-
 
 {% block title %}{% endblock title%}
 
 {% block content %}
-  <section class 'mt-5'>
-    {# <div id='id_wistia'> #}
-{# <script src="https://fast.wistia.com/embed/medias/4gyx407q64.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_4gyx407q64 videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/4gyx407q64/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>    </div> #}
-    <div class='jumbotron'>
-        <section class=''>
-          <h3 class='mb-3'>
-            Keep Healthy Kids in School
-          </h3>
-          <p>
-            Ask Dr. Bub to Follow the <a href='{% url "truenorth" %}'>True North</a> Quarantine Release approach.
-          </p>
-        </section>
-
-
-    {% comment %}
+  <section class='jumbotron'>
     <h3 class='mb-3'>
-      Compare the WASD and WAPA Plans
+      Keep Healthy Kids in School
     </h3>
-    <div class='table-responsive'>
-      <table class='table table-sm'>
-        <thead class='thead'>
-          <tr>
-            <th>
-
-            </th>
-            <th>
-              <a href='https://www.westada.org/Page/87078'>8/24 Board Plan</a>
-            </th>
-            <th>
-              <a href='{% url "plan" %}'>Parents Plan</a>
-            </th>
-          </tr>
-        </thead>
-        <tbody class='tbody'>
-          <tr>
-            <th>
-              Focus
-            </th>
-            <td>
-              Community Spread
-            </td>
-            <td>
-              Educational Safety
-            </td>
-          </tr>
-            <th>
-              Concern
-            </th>
-            <td>
-              How Contagious
-            </td>
-            <td>
-              How Dangerous
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Metrics
-            </th>
-            <td>
-              Case Counts, Positivity
-            </td>
-            <td>
-              Hospitalization, Mortality
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Masks
-            </th>
-            <td>
-              Mandated, with Opt-Out
-            </td>
-            <td>
-              Parental/Staff Choice
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Remote-Learning
-            </th>
-            <td>
-              Based on Cases
-            </td>
-            <td>
-              Based on Danger
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Goal
-            </th>
-            <td>
-              Prevent All Illness
-            </td>
-            <td>
-              Prevent Serious Illness
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Isolation
-            </th>
-            <td>
-              If Sick/ Positive
-            </td>
-            <td>
-              If Sick/ Positive
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Quarantine Release
-            </th>
-            <td>
-              10 Days OR<br>
-              5-Day Negative OR<br>
-              Vaccinated
-            </td>
-            <td>
-              10 Days OR<br>
-              0-Day Negative OR<br>
-              Wear Mask 10 Days
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Constituency
-            </th>
-            <td>
-              Public Health Officials, Media
-            </td>
-            <td>
-              Parents, Teachers, Students
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Sports/ Extracurricular
-            </th>
-            <td>
-              Sit if Unmasked or Sick
-            </td>
-            <td>
-              Sit if Sick
-            </td>
-          </tr>
-          <tr>
-            <th>
-              Classroom
-            </th>
-            <td>
-              Count Masks, Measure Distance, Trace Contacts, Teach
-            </td>
-            <td>
-              Just Teach
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-  {% endcomment %}
-
-
-      {% comment %}
-      <div class='mb-3'>
-          <div class='mb-3 mx-3'>
-            <p>
-              <strong>West Ada Parents Support our Superintendent!</strong> <a href='{% url "join" %}'>Join Us</a> to show your support for Open Schools and Smiling Kids.
-            </p>
-          </div>
+    <p>
+      Ask Dr. Bub to Follow the <a href='#truenorth' data-toggle='collapse'>True North</a> Quarantine Release approach.
+    </p>
+    <section class="collapse col-md-8 my-5" id="truenorth">
+      <h6>
+        The True North Quarantine Release Approach
+      </h6>
+      <p>
+        Below I have a full analysis of why the current quarantine release approach is problematic and how to solve it, but here is the TL;DR:
+      </p>
+      <div class='card mb-3'>
+        <div class='card-body'>
+          <p class='lead'>
+            If you opted-out of the mandate, your child likely will be sent home for ten days with zero notice at some point this week or next.
+          </p>
+        </div>
       </div>
-      {% endcomment %}
-      <div class='mt-3'>
-        <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
-          Click to <strong>Join <span id='value'></span> Other Parents<br>in the West Ada Parents Association</strong>
-        </a>
-      </div>
-      {% comment %}
-      <div class='mt-3'>
-        <a href='{% url "compare" %}' class="btn btn-light btn-block btn-lg p-3 shadow-lg">
-          Or Compare the Plans
-        </a>
-      </div>
-      {% endcomment %}
-    </div>
+      <p>
+        In greater depth, those who attended or watched the Board Meeting last Tuesday may have noticed that I didn’t cheer when the Trustees voted 3-2 to provide an option for parents to ‘opt-out’ of the mask mandate. That’s because I knew the more important vote was yet to come — that of the quarantine release policy. And sadly, my worry was justified when the Board adopted a convoluted set of quarantine rules designed specifically at those who opted-out.
+      </p>
+      <p>
+        You can read the full <a href='https://www.westada.org/domain/11845'>Safe Return to In-Person Instruction Plan</a> for yourself, but it’s difficult to read so I’ve produced a quick flow chart below which makes it easier to follow:
+      </p>
+      <img src='{% static "app/board_plan_8_24.png" %}' class='img-fluid my-3'>
+      <p>
+        Basically, the left side of the flow chart is geared towards those who are vaccinated, follow the mandate, or can provide proof of a prior recovery. The right side is for students who opt-out. And while the process is complicated, the bottom line is: if you follow the mandate, you stay in school. Opt-out of the mandate, and you stay home for ten days and skip sports when exposed &mdash; and everyone will be exposed eventually, many times this year.
+      </p>
+      <p>
+        As you know, the West Ada Parents Association saw this coming and proposed a <a href='{% url "plan" %}'>Parents Plan</a> to avoid this “back-door mandate”. Dr. Bub did too: that’s why he proposed that kids who opt-out can remain in school if they choose to mask for ten days following close contact as a quarantine release. He recognized this as the best way to keep kids safely in school while maintaining the spirit of parental choice.
+      </p>
+      <p>
+        Still, the Board decided otherwise, and that’s why the more than 12,000 parents who filled out the opt-out form, drove the district office on short notice, waited in line, and submitted their form with identification in-person are going to be very surprised when they learn their kids are still going to miss school and sports. This was by design: give the illusion of choice, when really for athletes or parents who can’t have kids at home suddenly for ten days, it’s no choice at all.
+      </p>
+      <p>
+        The way out of this mess in the near-term is for Dr. Bub to implement his original recommendation that kids be allowed to stay in school if they wear a mask for ten days following close contact exposure. We call this the <strong>True North</strong> quarantine release approach.
+      </p>
+      <p>
+        To understand the name, some explanation: at the Board meeting Chair Amy Johnson articulated what she called her “North Star” principle for the District: focusing on the importance of full-time, in-person instruction for all students — which she assumed could be accomplished through a mask-mandate. However, that assumption was negated when her own invited guest, Dr. Souza of St. Luke’s, admitted that a mask-mandate can not provide such a guarantee. If someone were offered that promise, his frank advice was: “Run.”
+      </p>
+      <p>
+        And Dr. Souza was not the only one who realized how untrustworthy Amy Johnson’s “North Star” promise was. Trustee Rusty Coffeldt submitted a motion supporting Dr. Bub’s proposal to allow mask-wearing for ten days as an alternative quarantine release method. After some excruciatingly difficult word-smithing of his motion more than five hours into the meeting and nearing midnight, it was rejected and they eventually decided on the approach that we have today.
+      </p>
+      <p>
+        And that’s why we call it the <strong>True North</strong> approach: because Chair Amy Johnson’s North Star principle to keep kids in school only extends to those who follow the mandate — and kids that don’t are sent home and sidelined. The <strong>True North</strong> approach doesn’t discriminate; it extends truly to all students, regardless of whether or not they follow the mandate or opt-out.
+      </p>
+      <p>
+        While it is unclear just how much operational power the Board took away from the Superintendent at the last Board meeting, they did express he had authority to make changes as he saw fit. Now this will be incredibly difficult for him to do — after all, technically he answers to the Board — but with enough parent support he can do the right thing and stop this intensely divisive and segregated quarantine policy from going into full operation. For comparison to the above flowchart, this is what the <Strong>True North</Strong> process looks like:
+      </p>
+      <img src='{% static "app/true_north_plan.png" %}' class='img-fluid my-3'>
+      <p>
+        It’s simple to implement, doesn't segregate, and most importantly <strong>keeps healthy kids in school where they can continue to learn</strong>. You may feel that no-masks is the only acceptable policy and I respect that position, but the True North approach is a reasonable compromise which demonstrates clearly that we are not against masks — we are for equal treatment of all students, regardless of their choice.
+      </p>
+      <p class='lead'>
+        Join us, and tell the Superintendent:
+        <ul class='list-unstyled'>
+          <li>Keep Healthy Kids in School.</li>
+          <li>Don’t Segregate the District. </li>
+          <li><strong>Follow the True North.</strong></li>
+        </ul>
+      </p>
+    </section>
+    <section>
+      <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
+        Click to <strong>Join <span id='value'></span> Parents<br>in the West Ada Parents Association</strong>
+      </a>
+    </section>
   </section>
   <section class='m-3'>
     <table class='table'>
@@ -261,8 +137,8 @@
       </tbody>
     </table>
   </section>
-
 {% endblock content %}
+
 {% block scripts %}
   <script>
     function animateValue(obj, start, end, duration) {
