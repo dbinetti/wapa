@@ -45,6 +45,10 @@
                 <a href="{% url 'compare' %}" class='align-bottom bi-file-text mr-3'>&nbsp;Compare Plans</a>
               </li>
               {% endcomment %}
+              <li class='nav-item'>
+                <a href="{% url 'truenorth' %}" class='bi-arrow-up-circle mr-3'> True North</a>
+              </li>
+
               {% if request.user.is_authenticated %}
               {% comment %}
               <li class='nav-item'>
