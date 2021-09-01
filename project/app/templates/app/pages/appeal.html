@@ -1,0 +1,163 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load app_tags %}
+{% load cloudinary %}
+
+{% block metatags %}
+  <meta property="og:title" content="Support the Superintendent" />
+  <meta property="og:image" content='{% static "app/compare3.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/compare3.png" %}' />
+  <meta property="og:url" content="https://www.westadaparents.com" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="1236648860100768" />
+  <meta property="og:description" content="Send a Message to Dr. Bub to keep schools open and masks-optional." />
+{% endblock metatags %}
+
+{% block customstyles %}
+{% endblock customstyles %}
+
+
+{% block title %}WASD Quarantine Appeal Process{% endblock title %}
+
+{% block content %}
+  <section class="col-lg-6 my-5">
+    <h2>
+      West Ada School District Quarantine Appeal Process
+    </h2>
+    <p class='lead my-3'>
+      Following is the official quarantine appeal process as related to the West Ada Parents Association by Superintendent Bub:
+    </p>
+    <p class='my-3'>
+      We've received many reports of students being sent home for ten days despite remaining masked at school because they were on file as having "opted-out" of the mandate.  However, the Superintendent clarified that the opt-out itself is <strong>not the criterion</strong> for quarantine; the criterion for avoiding quarantine is proper and consistent mask-wearing during close contact (see <a href='https://www.westada.org/Page/87075'>definitions</a>.)
+    </p>
+    <p class='my-3'>
+      <em>Example:</em> many students who officially opted-out of the mandate chose to wear their mask in class anyway (sometimes as a personal choice, sometimes in response to social pressure, etc.)  These students <strong>are not subject to the quarantine</strong>.  Inversely, many students who did not officially opt-out of the mandate yet are not wearing masks <strong>are subject to the quarantine.</strong>  Again, it's not about what's in PowerSchool, it's about what's on the face.
+    </p>
+    <p class='my-3 lead'>
+      If your child was sent home as a result of close contact exposure, and he/she wore the mask during the period of exposure, you should:
+      <ul class='list-unstyled ml-5'>
+        <li class='my-3'>
+          First, notify the Principal that your student was in fact masked and ask for an official quarantine release.  If the Principal's response is unsatisfactory, then, and only then, you may,
+        </li>
+        <li class='my-3'>
+          Escalate to your Regional Director.  The Regional Directors are listed below by school.
+        </li>
+      </ul>
+    </p>
+    <p>
+      Please note that disagreement with the quarantine policy itself is not sufficient reason to contact the Principal/Regional Director.  It is appropriate to ask who made the contact tracing assessment and how it was deterimined, but do not abuse this process if you know that your student was in fact not masked in class.
+    </p>
+    <p class='my-3'>
+      If you have other incidents or concerns you wish to share, please send them to <a href='mailto:support@westadaparents.com'>support@westadaparents.com</a> and we'll do everything we can to investigate, answer, or advocate on your behalf.
+    </p>
+  </section>
+  <section>
+    <h1>
+      West Ada Regional Directors
+    </h1>
+    <h2>North Region - <a href='mailto:stands.geoff@westada.org'>Geoff Stands</a></h2>
+    <h3>Elementary Schools:</h3>
+    <ul>
+    <li>Andrus</li>
+    <li>Eagle Elementary School</li>
+    <li>Eagle Hills</li>
+    <li>Galileo STEM Academy</li>
+    <li>Pleasant View</li>
+    <li>Seven Oaks</li>
+    <li>Star</li>
+    <li>Willow Creek</li>
+    </ul>
+    <h3>Middle Schools:</h3>
+    <ul>
+    <li>Eagle</li>
+    <li>Star</li>
+    </ul>
+    <h3>High Schools:</h3>
+    <ul>
+    <li>Eagle Academy</li>
+    <li>Eagle</li>
+    <li>Idaho Fine Arts Academy</li>
+    <li>Owyhee&nbsp;</li>
+    </ul>
+    <hr>
+    <h2>West Region&nbsp;-&nbsp;<a href='mailto:moser.david@westada.org'>Dave Moser</a></h2>
+    <h3>Elementary Schools:</h3>
+    <ul>
+    <li>Barbara Morgan STEM Academy</li>
+    <li>Chaparral</li>
+    <li>Hunter</li>
+    <li>Meridian</li>
+    <li>Paramount</li>
+    <li>Peregrine</li>
+    <li>Ponderosa</li>
+    <li>Prospect</li>
+    </ul>
+    <h3>Middle Schools:</h3>
+    <ul>
+    <li>Heritage</li>
+    <li>Meridian</li>
+    <li>Sawtooth</li>
+    </ul>
+    <h3>High Schools:</h3>
+    <ul>
+    <li>Meridian Academy</li>
+    <li>Meridian</li>
+    <li>Rebound School of Opportunity</li>
+    <li>Rocky Mountain</li>
+    </ul>
+    <hr>
+    <h2>East Region&nbsp;-&nbsp;<a href='mailto:hahle.lisa@westada.org'>Lisa Hahle</a>&nbsp;</h2>
+    <h3>Elementary Schools:</h3>
+    <ul>
+    <li>Chief Joseph School of the Arts</li>
+    <li>Discovery</li>
+    <li>Frontier</li>
+    <li>Joplin</li>
+    <li>McMillan</li>
+    <li>Pioneer School of the Arts</li>
+    <li>River Valley</li>
+    <li>Summerwind STEM Academy</li>
+    <li>Ustick</li>
+    </ul>
+    <h3>Middle Schools:</h3>
+    <ul>
+    <li>Lewis and Clark</li>
+    <li>Lowell Scott</li>
+    <li>Pathways</li>
+    </ul>
+    <h3>High Schools:</h3>
+    <ul>
+    <li>Centennial</li>
+    <li>Central Academy</li>
+    <li>Virtual School House</li>
+    </ul>
+    <hr>
+    <h2>South Region&nbsp;-&nbsp;<a href='mailto:roberts.buffy@westada.org'>Buffy Roberts</a></h2>
+    <h3>Elementary Schools:</h3>
+    <ul>
+    <li>Christine Donnell School of the Arts</li>
+    <li>Desert Sage</li>
+    <li>Hillsdale</li>
+    <li>Lake Hazel</li>
+    <li>Mary McPherson</li>
+    <li>Pepper Ridge</li>
+    <li>Siena</li>
+    <li>Silver Sage</li>
+    <li>Spalding STEM Academy</li>
+    </ul>
+    <h3>Middle Schools:</h3>
+    <ul>
+    <li>Crossroads</li>
+    <li>Lake Hazel</li>
+    <li>Victory</li>
+    </ul>
+    <h3>High Schools:</h3>
+    <ul>
+    <li>Mountain View</li>
+    <li>Renaissance</li>
+    </ul>
+
+  </section>
+
+{% endblock %}
