@@ -17,7 +17,6 @@ urlpatterns = [
     path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
     path('transcript/', TemplateView.as_view(template_name='app/pages/transcript.html'), name='transcript',),
     path('truenorth/', TemplateView.as_view(template_name='app/pages/north.html'), name='truenorth',),
-    path('appeal/', TemplateView.as_view(template_name='app/pages/appeal.html'), name='appeal',),
 
     # Plan
     # path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
@@ -35,6 +34,9 @@ urlpatterns = [
 
     # Dashboard
     path('dashboard', views.dashboard, name='dashboard',),
+
+
+    path('appeal/', views.appeal, name='appeal'),
 
     # Account
     path('account', views.account, name='account',),

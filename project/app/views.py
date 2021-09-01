@@ -146,6 +146,19 @@ def verify(request):
         },
     )
 
+def appeal(request):
+    count = sum([
+        Account.objects.all().count(),
+        Account.objects.filter(is_spouse=True).count(),
+    ])
+    return render(
+        request,
+        'app/pages/appeal.html',
+        context={
+            'count': count,
+        },
+    )
+
 def verified(request):
     messages.success(
         request,
