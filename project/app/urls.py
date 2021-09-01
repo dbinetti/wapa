@@ -36,7 +36,7 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard',),
 
 
-    path('appeal/', views.appeal, name='appeal'),
+    path('appeal', views.appeal, name='appeal'),
 
     # Account
     path('account', views.account, name='account',),
