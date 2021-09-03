@@ -40,18 +40,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-              {% comment %}
               <li class='nav-item'>
-                <a href="{% url 'compare' %}" class='align-bottom bi-file-text mr-3'>&nbsp;Compare Plans</a>
+                <a href="{% url 'resources' %}" class='mr-3'><span class='bi-book'></span>&nbsp;&nbsp;Resources</a>
               </li>
-              {% endcomment %}
-              <li class='nav-item'>
-                <a href="{% url 'appeal' %}" class='bi-bank mr-3'> Appeal Process</a>
-              </li>
-              <li class='nav-item'>
-                <a href="{% url 'truenorth' %}" class='bi-arrow-up-circle mr-3'> True North</a>
-              </li>
-
               {% if request.user.is_authenticated %}
 
               <li class='nav-item'>

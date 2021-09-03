@@ -9,21 +9,6 @@ urlpatterns = [
     # Root
     path('', views.index, name='index',),
 
-    # Footer
-    path('about/', TemplateView.as_view(template_name='app/pages/about.html'), name='about',),
-    path('faq/', TemplateView.as_view(template_name='app/pages/faq.html'), name='faq',),
-    path('privacy/', TemplateView.as_view(template_name='app/pages/privacy.html'), name='privacy',),
-    path('terms/', TemplateView.as_view(template_name='app/pages/terms.html'), name='terms',),
-    path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
-    path('transcript/', TemplateView.as_view(template_name='app/pages/transcript.html'), name='transcript',),
-    path('truenorth/', TemplateView.as_view(template_name='app/pages/north.html'), name='truenorth',),
-
-    # Plan
-    # path('compare/', TemplateView.as_view(template_name='app/pages/compare.html'), name='compare',),
-    path('metrics/', TemplateView.as_view(template_name='app/pages/metrics.html'), name='metrics',),
-    # path('plan/', TemplateView.as_view(template_name='app/pages/plan.html'), name='plan',),
-    path('revisions/', TemplateView.as_view(template_name='app/pages/revisions.html'), name='revisions',),
-
     # Authentication
     path('join', views.join, name='join'),
     path('callback', views.callback, name='callback'),
@@ -35,8 +20,13 @@ urlpatterns = [
     # Dashboard
     path('dashboard', views.dashboard, name='dashboard',),
 
-
+    # Pages
+    path('truenorth/', TemplateView.as_view(template_name='pages/north.html'), name='truenorth',),
+    path('resources/', TemplateView.as_view(template_name='pages/resources.html'), name='resources',),
+    path('quarantine/', TemplateView.as_view(template_name='pages/quarantine.html'), name='quarantine',),
     path('appeal', views.appeal, name='appeal'),
+
+
 
     # Account
     path('account', views.account, name='account',),
@@ -63,4 +53,10 @@ urlpatterns = [
     # Delete
     path('delete/', views.delete, name='delete',),
 
+    # Footer
+    path('about/', TemplateView.as_view(template_name='footer/about.html'), name='about',),
+    path('faq/', TemplateView.as_view(template_name='footer/faq.html'), name='faq',),
+    path('privacy/', TemplateView.as_view(template_name='footer/privacy.html'), name='privacy',),
+    path('terms/', TemplateView.as_view(template_name='footer/terms.html'), name='terms',),
+    path('support/', TemplateView.as_view(template_name='footer/support.html'), name='support',),
 ]

@@ -1,31 +1,27 @@
-{% extends 'app/pages/base.html' %}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
 {% load static %}
+{% load app_tags %}
 {% load cloudinary %}
 
 {% block metatags %}
-  <meta property="og:title" content="Follow the True North " />
-  <meta property="og:image" content='{% static "app/true_north_plan.png" %}' />
-  <meta property="og:image:secure_url" content='{% static "app/true_north_plan.png" %}' />
+  <meta property="og:title" content="Support the Superintendent" />
+  <meta property="og:image" content='{% static "app/compare3.png" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/compare3.png" %}' />
   <meta property="og:url" content="https://www.westadaparents.com" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="1236648860100768" />
-  <meta property="og:description" content="Ask Dr. Bub to keep healthy kids in school and sports!" />
+  <meta property="og:description" content="Send a Message to Dr. Bub to keep schools open and masks-optional." />
 {% endblock metatags %}
 
 {% block customstyles %}
 {% endblock customstyles %}
 
-{% block title %}{% endblock title%}
+
+{% block title %}The True North Quarantine Release{% endblock title %}
 
 {% block content %}
-  <section class='jumbotron'>
-    <p class='lead'>
-      Ask Dr. Bub to Follow the <a href='#truenorth' data-toggle='collapse'>True North</a> Quarantine Release approach.
-    </p>
-    <div class='wistia mb-5'>
-<script src="https://fast.wistia.com/embed/medias/oww1wc3avq.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_oww1wc3avq popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
-    </div>
-    <section class="collapse col-md-8 my-5" id="truenorth">
+    <section class="col-md-8 my-5" id="truenorth">
       <h6>
         The True North Quarantine Release Approach
       </h6>
@@ -83,78 +79,4 @@
         </ul>
       </p>
     </section>
-    <section>
-      <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
-        Click to <strong>Join <span id='value'></span> Parents<br>in the West Ada Parents Association</strong>
-      </a>
-    </section>
-  </section>
-  <section class='m-3'>
-    <table class='table'>
-      <thead>
-        <tr class='row'>
-          <th scope='col' class='col-5'>Name</th>
-          <th scope='col' class='col-7'>Comments</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for comment in comments %}
-          <tr class='row'>
-            <td class='col-5'>
-              <ul class='list-inline'>
-                <li class='list-inline-item align-top'>
-                  {% cloudinary comment.account.picture.name AVATAR %}
-                </li>
-                <li class='list-inline-item'>
-                  <strong>{{comment.account.name}}</strong><br>
-                  {% for student in comment.account.students.all %}
-                    {% if student.school.get_kind_display == 'Elementary School' %}
-                      <span class='badge badge-warning badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
-                    {% elif student.school.get_kind_display == 'Middle School' %}
-                      <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
-                    {% elif student.school.get_kind_display == 'High School' %}
-                      <span class='badge badge-info badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
-                    {% endif %}
-                  {% endfor %}
-                </li>
-              </ul>
-            </td>
-            <td class='col-7'>
-              {% if comment.wordcount < 60 %}
-                {{comment.content}}
-              {% else %}
-                <div class="collapse show" id="comment-{{comment.id}}">
-                  {{comment.content|truncatewords:60}}
-                </div>
-                <div class="collapse" id="comment-{{comment.id}}">
-                  {{comment.content}}
-                </div>
-                <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
-{% endblock content %}
-
-{% block scripts %}
-  <script>
-    function animateValue(obj, start, end, duration) {
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    }
-    const obj = document.getElementById("value");
-    animateValue(obj, 0, {{count}}, 2500);
-  </script>
-{% endblock scripts %}
-
+{% endblock %}

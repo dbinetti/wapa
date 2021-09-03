@@ -1,3 +1,6 @@
+from .models import Account
+
+
 def avatar(request):
     return {
         'AVATAR': {
@@ -8,3 +11,10 @@ def avatar(request):
             ],
         }
     }
+
+def member_count(request):
+    count = sum([
+        Account.objects.all().count(),
+        Account.objects.filter(is_spouse=True).count(),
+    ])
+    return count

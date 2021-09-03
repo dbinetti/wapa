@@ -63,7 +63,7 @@ def index(request):
 
     return render(
         request,
-        'app/pages/index.html',
+        'pages/index.html',
         context = {
             'comments': comments,
             'count': count,
@@ -78,7 +78,7 @@ def plan(request):
 
     return render(
         request,
-        'app/pages/plan.html',
+        'pages/plan.html',
         context = {
             'count': count,
         },
@@ -92,7 +92,7 @@ def compare(request):
 
     return render(
         request,
-        'app/pages/compare.html',
+        'pages/compare.html',
         context = {
             'count': count,
         },
@@ -142,7 +142,7 @@ def login(request):
 def verify(request):
     return render(
         request,
-        'app/pages/verify.html',
+        'pages/verify.html',
         context={
         },
     )
@@ -154,7 +154,7 @@ def appeal(request):
     ])
     return render(
         request,
-        'app/pages/appeal.html',
+        'pages/appeal.html',
         context={
             'count': count,
         },
@@ -268,7 +268,7 @@ def dashboard(request):
     ).count()
     return render(
         request,
-        'app/pages/dashboard.html',
+        'pages/dashboard.html',
         context={
             'account': account,
             'metrics': metrics,
@@ -331,7 +331,7 @@ def account(request):
 
     return render(
         request,
-        'app/pages/account.html',
+        'pages/account.html',
         context={
             'account': account,
             'form': form,
@@ -356,7 +356,7 @@ def delete(request):
         form = DeleteForm()
     return render(
         request,
-        'app/pages/delete.html',
+        'pages/delete.html',
         {'form': form,},
     )
 
@@ -378,7 +378,7 @@ def story(request):
 
     return render(
         request,
-        'app/pages/story.html',
+        'pages/story.html',
         context={
             'form': form,
         },
@@ -431,7 +431,7 @@ def comments(request):
     )
     return render(
         request,
-        'app/pages/comments.html',
+        'pages/comments.html',
         context={
             'comment': comment,
             'comments': comments,
@@ -462,7 +462,7 @@ def comment_delete(request, comment_id):
         form = DeleteForm()
     return render(
         request,
-        'app/pages/comment_delete.html',
+        'pages/comment_delete.html',
         context = {
             'form': form,
             'comment': comment,
@@ -481,12 +481,12 @@ def story_delete(request):
                 request,
                 "Story Deleted!",
             )
-            return redirect('account')
+            return redirect('story')
     else:
         form = DeleteForm()
     return render(
         request,
-        'app/pages/story_delete.html',
+        'pages/story_delete.html',
         context = {
             'form': form,
         },
@@ -528,7 +528,7 @@ def events(request):
         )
     return render(
         request,
-        'app/pages/events.html',
+        'pages/events.html',
         context = {
             'events': events,
         }
@@ -565,7 +565,7 @@ def event(request, event_id):
     form = AttendeeForm(instance=attendee)
     return render(
         request,
-        'app/pages/event.html',
+        'pages/event.html',
         context = {
             'event': event,
             'attendees': attendees,
@@ -584,7 +584,7 @@ def comment(request, comment_id):
     ])
     return render(
         request,
-        'app/pages/comment.html',
+        'pages/comment.html',
         context = {
             'comment': comment,
             'count': count,
@@ -594,5 +594,5 @@ def comment(request, comment_id):
 def share(request):
     return render(
         request,
-        'app/pages/share.html',
+        'pages/share.html',
     )

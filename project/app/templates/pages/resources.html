@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+{% load static %}
+
+{% block title %}Parent Resources{% endblock title %}
+
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Parent Resources
+    </h2>
+  </section>
+  <section class='my-5 col-lg-8'>
+    <p class='lead'>
+      Below is a list of parent resources related to the West Ada School District's Covid-19 policies.
+    </p>
+    <div class='table-responsive'>
+      <table class='table table-borderless'>
+        <tr>
+          <td>
+            <a href='{% url "compare" %}'>Comparison Chart</a>
+          </td>
+          <td>
+            A simple comparison chart of the WASD and WAPA plans.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='https://www.westada.org/domain/11845'>WASD Plan</a>
+          </td>
+          <td>
+            The pandemic operating plan of the West Ada School District.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='{% url "plan" %}'>WAPA Plan</a>
+          </td>
+          <td>
+            The alternative approach proposed by the West Ada Parents Association.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='{% url "quarantine" %}'>WASD Quarantine Plan</a>
+          </td>
+          <td>
+            The current quarantine release process as adopted by the Board on 8/24.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='{% url "truenorth" %}'>True North</a>
+          </td>
+          <td>
+            The West Ada Parent Association's alternative quarantine release process.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='{% url "appeal" %}'>WASD Quarantine Appeal Process</a>
+          </td>
+          <td>
+            The process by which quarantine notices may be appealed.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='https://www.rev.com/transcript-editor/shared/ZK7GzaBNyzUuzxSMAsq-K2QEUREyvm0etm7T5D25XB4sO1qDJh7SHd8LG2P1kiC4yFwJ_SUliJT8g4Z5dABTSSBBMn0?loadFrom=SharedLink'>Transcript of 8/24 Board Meeting</a>
+          </td>
+          <td>
+            The transcript of the Board's August 24th meeting where the current opt-out and quarantine potrcies were adopted.
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+{% endblock content %}
