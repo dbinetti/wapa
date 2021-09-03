@@ -21,9 +21,9 @@ urlpatterns = [
     path('truenorth/', TemplateView.as_view(template_name='pages/truenorth.html'), name='truenorth',),
     path('resources/', TemplateView.as_view(template_name='pages/resources.html'), name='resources',),
     path('quarantine/', TemplateView.as_view(template_name='pages/quarantine.html'), name='quarantine',),
-    path('appeal', views.appeal, name='appeal'),
-    path('plan/', views.plan, name='plan',),
-    path('compare/', views.compare, name='compare',),
+    path('appeal', TemplateView.as_view(template_name='pages/appeal.html'), name='appeal'),
+    path('plan/', TemplateView.as_view(template_name='pages/truenorth.html'), name='plan',),
+    path('compare/', TemplateView.as_view(template_name='pages/compare.html'), name='compare',),
 
 
     # Account
@@ -45,7 +45,7 @@ urlpatterns = [
     path('events', views.events, name='events',),
 
     # Share
-    path('share/', views.share, name='share'),
+    path('share/', TemplateView.as_view(template_name='pages/share.html'), name='share'),
 
     # Delete
     path('delete/', views.delete, name='delete',),

@@ -53,48 +53,13 @@ def index(request):
         'account__students',
         'account__students__school',
     ).order_by(
-        # '-is_featured',
         '-created',
     )
-    count = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
-
     return render(
         request,
         'pages/index.html',
         context = {
             'comments': comments,
-            'count': count,
-        },
-    )
-
-def plan(request):
-    count = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
-
-    return render(
-        request,
-        'pages/plan.html',
-        context = {
-            'count': count,
-        },
-    )
-
-def compare(request):
-    count = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
-
-    return render(
-        request,
-        'pages/compare.html',
-        context = {
-            'count': count,
         },
     )
 
@@ -144,19 +109,6 @@ def verify(request):
         request,
         'pages/verify.html',
         context={
-        },
-    )
-
-def appeal(request):
-    count = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
-    return render(
-        request,
-        'pages/appeal.html',
-        context={
-            'count': count,
         },
     )
 
@@ -448,7 +400,7 @@ def comment_delete(request, comment_id):
             account=request.user.account,
         )
     except Comment.DoesNotExist:
-        raise PermissionDenied("You can not delete others' comments")
+        return PermissionDenied("You can not delete others' comments")
     if request.method == "POST":
         form = DeleteForm(request.POST)
         if form.is_valid():
@@ -571,28 +523,4 @@ def event(request, event_id):
             'attendees': attendees,
             'form': form,
         }
-    )
-
-def comment(request, comment_id):
-    comment = get_object_or_404(
-        Comment,
-        pk=comment_id,
-    )
-    count = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
-    return render(
-        request,
-        'pages/comment.html',
-        context = {
-            'comment': comment,
-            'count': count,
-        }
-    )
-
-def share(request):
-    return render(
-        request,
-        'pages/share.html',
     )
