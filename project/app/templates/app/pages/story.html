@@ -1,0 +1,43 @@
+{% extends 'app/pages/base.html' %}
+
+{% load bootstrap4 %}
+{% load cloudinary %}
+{% load app_tags %}
+
+
+{% block title %}Your Story{% endblock title %}
+
+{% block content %}
+  <section class='mt-5 col-md-10'>
+    <div class='card'>
+      <form method='post'>
+        {% csrf_token %}
+        <h4 class='card-header'>Tell Your Quarantine Story</h4>
+        <div class="card-body">
+          <p class='card-title'>
+            We are gathering stories about students' quarantine experiences.  We will use these stories to demonstrate the very real costs associated with the current Quarantine Policy.
+          </p>
+          <p>
+            Keep in mind these guidelines:
+          </p>
+          <ul class='list-styled'>
+            <li>This must be your story as you and your children experienced it, not hearsay.</li>
+            <li>Your story here will respect the same privacy setting as your main account; meaning, if you're public this story may be public.  If not, it will stay private.  If private, be sure not to include any personally identifiable information in the story itself.</li>
+            <li>Do not include attacks of any kind on teachers, adminstrators, or staff.</li>
+          </ul>
+          <div class='card-text'>
+            {% bootstrap_form_errors form %}
+            {% bootstrap_field form.story show_help=False show_label=False %}
+          </div>
+        </div>
+        <div class='card-footer'>
+          {% bootstrap_button "Save" button_type='submit' size='large' %}
+          {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+        </div>
+      </form>
+    </div>
+    <div class='text-right'>
+      <a href='{% url "story-delete" %}'><span class='text-danger text-small'>Delete Story</span></a>
+    </div>
+  </section>
+{% endblock content %}

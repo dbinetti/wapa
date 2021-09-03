@@ -117,6 +117,25 @@ class StudentForm(forms.ModelForm):
         }
 
 
+class StoryForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = [
+            'story',
+        ]
+        widgets = {
+            'text': forms.Textarea(
+                attrs={
+                    'class': 'form-control h-25',
+                    'placeholder': 'Your story.',
+                    'rows': 5,
+                }
+            ),
+        }
+        help_texts = {
+        }
+
+
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account

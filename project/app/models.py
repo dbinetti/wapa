@@ -60,6 +60,11 @@ class Account(models.Model):
         blank=True,
         default='',
     )
+    story = models.TextField(
+        max_length=5000,
+        blank=True,
+        default='',
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
