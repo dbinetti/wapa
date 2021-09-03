@@ -21,7 +21,7 @@ urlpatterns = [
     path('truenorth/', TemplateView.as_view(template_name='pages/truenorth.html'), name='truenorth',),
     path('resources/', TemplateView.as_view(template_name='pages/resources.html'), name='resources',),
     path('quarantine/', TemplateView.as_view(template_name='pages/quarantine.html'), name='quarantine',),
-    path('appeal', TemplateView.as_view(template_name='pages/appeal.html'), name='appeal'),
+    path('appeal/', TemplateView.as_view(template_name='pages/appeal.html'), name='appeal'),
     path('plan/', TemplateView.as_view(template_name='pages/plan.html'), name='plan',),
     path('compare/', TemplateView.as_view(template_name='pages/compare.html'), name='compare',),
 
