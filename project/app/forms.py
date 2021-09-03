@@ -127,7 +127,7 @@ class StoryForm(forms.ModelForm):
             'text': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
-                    'placeholder': 'Your story.',
+                    'placeholder': 'Write your story here in your own words.',
                     'rows': 5,
                 }
             ),
