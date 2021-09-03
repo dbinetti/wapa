@@ -10,7 +10,10 @@
     </h2>
   </section>
   <section class='my-5'>
-    <div class='col-lg-8'>
+    <a href='{% url "story" %}' class='btn btn-lg btn-success'>New &mdash; Tell Your Quarantine Story!</a>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-12'>
       <div class='card'>
         <h4 class='card-header'>Site Metrics</h4>
         <div class="card-body">
@@ -22,34 +25,26 @@
                 Total Members
               </dt>
               <dd class="col-sm-8">
-                {{metrics.members}}
+                {{METRICS.members}}
               </dd>
               <dt class="col-sm-4">
-                Comments Made
+                Total Comments
               </dt>
               <dd class="col-sm-8">
-                {{metrics.comments}}
+                {{METRICS.comments}}
+              </dd>
+              <dt class="col-sm-4">
+                Students Represented
+              </dt>
+              <dd class="col-sm-8">
+                {{METRICS.students}}
               </dd>
               <dt class="col-sm-4">
                 Schools Represented
               </dt>
               <dd class="col-sm-8">
-                {{metrics.schools}}
+                59/59
               </dd>
-              <dt class="col-sm-4">
-                Event RSVPs
-              </dt>
-              <dd class="col-sm-8">
-                {{metrics.events}}
-              </dd>
-              {% comment %}
-              <dt class="col-sm-4">
-                Students Represented
-              </dt>
-              <dd class="col-sm-8">
-                {{metrics.students}}
-              </dd>
-              {% endcomment %}
             </dl>
           </div>
         </div>
@@ -57,9 +52,9 @@
     </div>
   </section>
   <section class='my-5'>
-    <div class='col-lg-8'>
+    <div class='col-lg-12'>
       <div class='card'>
-        <h4 class='card-header'>Account</h4>
+        <h4 class='card-header'>Account&nbsp;&nbsp;<a href='{% url "account" %}' class='btn btn-primary btn-sm'>Update</a></h4>
         <div class="card-body">
           <div class='card-title'>
           </div>
@@ -85,7 +80,7 @@
                 {{account.is_spouse|yesno|title}}
               </dd>
               <dt class="col-sm-4">
-                District Resident?
+                Address Provided?
               </dt>
               <dd class="col-sm-8">
                 {{account.address|yesno|title}}
@@ -95,43 +90,50 @@
               </dt>
               <dd class="col-sm-8">
                 {% for student in account.students.all %}
-                  <ul class='list-unstyled'>
-                    <li>{{student.school.name}}, {{student.get_grade_display}}</li>
-                  </ul>
+                  {{student.school.name}}, {{student.get_grade_display}}<br>
                 {% empty %}
-                  (No Students in District Schools.)
+                  (No Students in District Schools)
                 {% endfor %}
               </dd>
             </dl>
           </div>
         </div>
-        <div class='card-footer'>
-          Information Incorrect?  <a href='{% url "account" %}'>Click to Update</a>
-        </div>
       </div>
     </div>
   </section>
   <section class='my-5'>
-    <div class='col-lg-8'>
+    <div class='col-lg-12'>
       <div class='card'>
-        <h4 class='card-header'>Comments</h4>
+        <h4 class='card-header'>Comments&nbsp;&nbsp;<a href='{% url "comments" %}' class='btn btn-primary btn-sm'>Update</a></h4>
         <div class="card-body">
           <div class='card-title'>
           </div>
           <div class='card-text'>
-            {% for comment in comments %}
-              <dl class="row">
-                <dt class="col-sm-4">
-                  Issue
-                </dt>
-                <dd class="col-sm-8">
-                  {{comment.issue}}
-                </dd>
+            <dl class="row">
+              <dt class="col-sm-4">
+                Current on Comments?
+              </dt>
+              <dd class="col-sm-8">
+                {% if is_current %}
+                  Yes!  Thank You for Being Involved
+                {% else %}
+                  <a role='button' class='btn-success btn btm-small' href='{% url "comments" %}'>Make a New Comment</a>
+                {% endif %}
+              </dd>
+              <p class='my-5'>
+              </p>
+              {% for comment in comments %}
                 <dt class="col-sm-4">
                   Recipient
                 </dt>
                 <dd class="col-sm-8">
                   {{comment.issue.recipient_name}}
+                </dd>
+                <dt class="col-sm-4">
+                  Issue
+                </dt>
+                <dd class="col-sm-8">
+                  {{comment.issue}}
                 </dd>
                 <dt class="col-sm-4">
                   Date Sent
@@ -142,21 +144,19 @@
                 <dt class="col-sm-4">
                   Content
                 </dt>
-                <dd class="col-sm-8">
+                <dd class="col-sm-8 mb-5">
                   {{comment.content}}
                 </dd>
-              </dl>
-            {% empty %}
-              (No comments.)
-            {% endfor %}
+              {% empty %}
+                (No comments.)
+              {% endfor %}
+            </dl>
           </div>
-        </div>
-        <div class='card-footer'>
-          Delete/Send Comments?  <a href='{% url "comments" %}'>Click to Review</a>
         </div>
       </div>
     </div>
   </section>
+  {% comment %}
   <section class='my-5'>
     <div class='col-lg-8'>
       <div class='card'>
@@ -199,6 +199,23 @@
         </div>
         <div class='card-footer'>
           Attending Events?  <a href='{% url "events" %}'>Click to RSVP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endcomment %}
+  <section class='my-5'>
+    <div class='col-lg-12'>
+      <div class='card'>
+        <h4 class='card-header'>Quarantine Story&nbsp;&nbsp;<a href='{% url "story" %}' class='btn btn-primary btn-sm'>Update</a></h4>
+        <div class="card-body">
+          <p class='card-text'>
+            {% if account.story %}
+              {{account.story}}
+            {% else %}
+              No story provided.
+            {% endif %}
+          </p>
         </div>
       </div>
     </div>

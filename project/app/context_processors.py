@@ -1,7 +1,5 @@
 from django.core.cache import cache
 
-from .models import Account
-
 
 def avatar(request):
     return {
@@ -14,10 +12,15 @@ def avatar(request):
         }
     }
 
-def member_count(request):
-    # count = sum([
-    #     Account.objects.all().count(),
-    #     Account.objects.filter(is_spouse=True).count(),
-    # ])
-    count = cache.get('member_count')
-    return {'MEMBER_COUNT': count }
+def metrics(request):
+    member_count = cache.get('member_count')
+    comment_count = cache.get('comment_count')
+    student_count = cache.get('student_count')
+    metrics = {
+        'METRICS' : {
+            'members': member_count,
+            'comments': comment_count,
+            'students': student_count,
+        }
+    }
+    return metrics

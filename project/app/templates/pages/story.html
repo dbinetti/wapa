@@ -16,15 +16,15 @@
         <h4 class='card-header'>Tell Your Quarantine Story</h4>
         <div class="card-body">
           <p class='card-title'>
-            We are gathering stories about students' quarantine experiences.  We will use these stories to demonstrate the very real costs associated with the current Quarantine Policy.
+            We are gathering stories about students' quarantine experiences.  We will use these stories to demonstrate the very real costs associated with the current <a href='{% url "quarantine" %}'>Quarantine Policy</a> and why we should instead follow the <a href='{% url "truenorth" %}'>True North</a>.
           </p>
           <p>
             Keep in mind these guidelines:
           </p>
           <ul class='list-styled mb-5'>
-            <li>This must be your story as you and your children experienced it, not hearsay.</li>
-            <li>Your story here will respect the same privacy setting as your main account; meaning, if you're public this story may be public.  If not, it will stay private.  If private, be sure not to include any personally identifiable information in the story itself.</li>
-            <li>Do not include attacks of any kind on teachers, adminstrators, or staff.</li>
+            <li>This must be your story as your family experienced it, not hearsay.</li>
+            <li>Your story here will respect the same privacy setting as your main account; meaning, if you're public this story may be associated with your name.  If not, it will stay private.  If private, be sure not to include any personally identifiable information in the story itself.</li>
+            <li>Do not include personal attacks of any kind on teachers, adminstrators, or staff.</li>
           </ul>
           <div class='card-text'>
             {% bootstrap_form_errors form %}

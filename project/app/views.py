@@ -66,7 +66,7 @@ def index(request):
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/account')
+    next_url = request.GET.get('next', '/dashboard')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -86,7 +86,7 @@ def join(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/comments')
+    next_url = request.GET.get('next', '/dashboard')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -124,12 +124,18 @@ def callback(request):
     browser_state = request.session.get('state')
     server_state = request.GET.get('state')
     if browser_state != server_state:
-        log.error("state mismatch")
-        return HttpResponse(status=400)
+        del request.session['state']
+        log.error('state mismatch')
+        messages.error(
+            request,
+            "Sorry, there was a problem.  Please try again or contact support."
+        )
+        return redirect('index')
     next_url = server_state.partition('|')[2]
     # Get Auth0 Code
     code = request.GET.get('code', None)
     if not code:
+        log.error('no code')
         return HttpResponse(status=400)
     token_url = f'https://{settings.AUTH0_DOMAIN}/oauth/token'
     redirect_uri = request.build_absolute_uri(reverse('callback'))
@@ -159,11 +165,11 @@ def callback(request):
         )
         return redirect('index')
     user = authenticate(request, **payload)
-    if not getattr(user, 'is_active', None):
-        return redirect('verify')
+    # if not getattr(user, 'is_verified', None):
+    #     return redirect('verify')
     if user:
         log_in(request, user)
-        # Check if first-time login and redirect to account page
+        # Always redirect first-time users to account page
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(
                 request,
@@ -171,12 +177,12 @@ def callback(request):
             )
             messages.warning(
                 request,
-                "Next, review the below and click 'Save'."
+                "Next, review the below and click 'Save'.  Then you can send comments."
             )
             return redirect('account')
-        # Otherwise, redirect to next_url
+        # Otherwise, redirect to next_url, defaults to 'account'
         return redirect(next_url)
-    log.error("no user")
+    log.error('callback fallout')
     return HttpResponse(status=403)
 
 def logout(request):
@@ -200,33 +206,23 @@ def logout(request):
 @login_required
 def dashboard(request):
     account = request.user.account
-    comments = account.comments.all()
-    attendees = account.attendees.all()
-    metrics = {}
-    metrics['members'] = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
-    metrics['comments'] = Comment.objects.all(
-    ).count()
-    metrics['events'] = Attendee.objects.filter(
-        is_confirmed=True,
-    ).count()
-    metrics['schools'] = Student.objects.values(
-        'school',
-    ).distinct(
-    ).count()
-    metrics['students'] = Student.objects.all(
-    ).count()
+    comments = account.comments.order_by(
+        '-created',
+    )
+    issue = Issue.objects.get(
+        state=Issue.STATE.active,
+    )
+    is_current = comments.filter(
+        issue=issue,
+    )
     return render(
         request,
         'pages/dashboard.html',
         context={
             'account': account,
-            'metrics': metrics,
             'comments': comments,
-            # 'shares': shares,
-            'attendees': attendees,
+            'issue': issue,
+            'is_current': is_current,
         },
     )
 
@@ -311,7 +307,6 @@ def delete(request):
         'pages/delete.html',
         {'form': form,},
     )
-
 
 @login_required
 def story(request):

@@ -47,18 +47,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-            <li class='nav-item'>
+            <li class='nav-item mt-1'>
               <a href="{% url 'resources' %}" class='mr-3'><span class='bi-book'></span>&nbsp;&nbsp;Resources</a>
             </li>
             {% if request.user.is_authenticated %}
-              <li class='nav-item'>
-                <a href="{% url 'comments' %}" class='align-bottom bi-megaphone mr-3'>&nbsp;Comments</a>
-              </li>
-              <li class='nav-item'>
-                <a href="{% url 'account' %}" class='align-bottom bi-gear mr-3'>&nbsp;Account</a>
+              <li class='nav-item mt-1'>
+                <a href="{% url 'dashboard' %}" class='align-bottom bi-speedometer2 mr-3'>&nbsp;Dashboard</a>
               </li>
               {% if request.user.is_admin %}
-                <li class='nav-item'>
+                <li class='nav-item mt-1'>
                   <a href="{% url 'admin:index' %}" class='align-bottom bi-layout-text-window mr-3'>&nbsp;Admin</a>
                 </li>
               {% endif %}
@@ -66,10 +63,10 @@
                 <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
               </li>
             {% else %}
-              <li class='nav-item'>
+              <li class='nav-item mb-3'>
                 <a href="{% url 'login' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>
               </li>
-              <li class='nav-item'>
+              <li class='nav-item mb-3'>
                 <a href="{% url 'join' %}" role='button' class='btn btn-sm btn-success ml-3'>Join</a>
               </li>
             {% endif %}
