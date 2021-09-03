@@ -11,5 +11,5 @@ class Command(BaseCommand):
             Account.objects.all().count(),
             Account.objects.filter(is_spouse=True).count(),
         ])
-        cache.set('member_count', count)
+        cache.set('member_count', count, timeout=None)
         return

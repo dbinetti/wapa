@@ -2,18 +2,8 @@
 {% load bootstrap4 %}
 
 {% load static %}
+
 {% block title %}{{event.name}}{% endblock title %}
-{% block metatags %}
-  {% comment %}
-  <meta property="og:title" content="Hold a Sign for Smile West Ada" />
-  <meta property="og:image" content='{% static "app/signs.png" %}' />
-  <meta property="og:image:secure_url" content='{% static "app/signs.png" %}' />
-  <meta property="og:url" content="https://www.smilewestada.com/sign" />
-  <meta property="og:type" content="website" />
-  <meta property="fb:app_id" content="286973936371350" />
-  <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  Hold a sign at your school to spread the word!" />
-  {% endcomment %}
-{% endblock metatags %}
 
 {% block content %}
 

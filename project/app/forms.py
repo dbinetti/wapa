@@ -124,11 +124,11 @@ class StoryForm(forms.ModelForm):
             'story',
         ]
         widgets = {
-            'text': forms.Textarea(
+            'story': forms.Textarea(
                 attrs={
-                    'class': 'form-control h-25',
+                    'class': 'form-control h-50',
                     'placeholder': 'Write your story here in your own words.',
-                    'rows': 5,
+                    'rows': 20,
                 }
             ),
         }
