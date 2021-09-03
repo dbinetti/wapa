@@ -187,6 +187,7 @@
 {% endblock content %}
 
 {% block scripts %}
+{% comment %}
 <script>
   function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
@@ -203,6 +204,7 @@
   const obj = document.getElementById("member-count");
   animateValue(obj, 0, {{MEMBER_COUNT}}, 2500);
 </script>
+{% endcomment %}
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
   <script>
     window.fbAsyncInit = function() {
