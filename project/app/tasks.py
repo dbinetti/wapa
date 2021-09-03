@@ -225,7 +225,7 @@ def alias_posthog_from_user(user, distinct_id):
 def send_denial_email(account):
     # comments = account.comments
     email = build_email(
-        template='app/emails/denied.txt',
+        template='emails/denied.txt',
         subject='Comment Denied',
         # context={'comments': comments},
         to=[account.user.email],
@@ -236,7 +236,7 @@ def send_denial_email(account):
 def send_approval_email(account):
     # comments = account.comments
     email = build_email(
-        template='app/emails/approved.txt',
+        template='emails/approved.txt',
         subject='Comment Approved!',
         # context={'comments': comments},
         to=[account.user.email],
@@ -249,7 +249,7 @@ def send_super_email(comment):
     account = comment.account
     from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
     email = build_email(
-        template='app/emails/comment.txt',
+        template='emails/comment.txt',
         subject='Follow the True North!',
         context={
             'comment': comment,
