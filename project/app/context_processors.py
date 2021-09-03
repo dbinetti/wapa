@@ -1,3 +1,5 @@
+from django.core.cache import cache
+
 from .models import Account
 
 
@@ -13,8 +15,9 @@ def avatar(request):
     }
 
 def member_count(request):
-    count = sum([
-        Account.objects.all().count(),
-        Account.objects.filter(is_spouse=True).count(),
-    ])
+    # count = sum([
+    #     Account.objects.all().count(),
+    #     Account.objects.filter(is_spouse=True).count(),
+    # ])
+    count = cache.get('member_count')
     return {'MEMBER_COUNT': count }

@@ -18,7 +18,7 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
 
     # Pages
-    path('truenorth/', TemplateView.as_view(template_name='pages/north.html'), name='truenorth',),
+    path('truenorth/', TemplateView.as_view(template_name='pages/truenorth.html'), name='truenorth',),
     path('resources/', TemplateView.as_view(template_name='pages/resources.html'), name='resources',),
     path('quarantine/', TemplateView.as_view(template_name='pages/quarantine.html'), name='quarantine',),
     path('appeal', views.appeal, name='appeal'),

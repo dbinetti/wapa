@@ -60,7 +60,7 @@ def handler404(request, *args, **argv):
 def handler500(request, *args, **argv):
     return render(
         request,
-        '500.html',
+        'root/500.html',
         {
             'sentry_dsn': settings.SENTRY_DSN,
             'sentry_event_id': last_event_id(),
