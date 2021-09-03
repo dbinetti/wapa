@@ -201,6 +201,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
                 'app.context_processors.avatar',
+                'app.context_processors.member_count',
             ],
         },
     },

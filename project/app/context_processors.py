@@ -17,4 +17,4 @@ def member_count(request):
         Account.objects.all().count(),
         Account.objects.filter(is_spouse=True).count(),
     ])
-    return count
+    return {'MEMBER_COUNT': count }

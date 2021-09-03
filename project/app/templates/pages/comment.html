@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load bootstrap4 %}
 {% load static %}
 {% load app_tags %}
@@ -111,6 +111,6 @@
       window.requestAnimationFrame(step);
     }
     const obj = document.getElementById("value");
-    animateValue(obj, 0, {{count}}, 2500);
+    animateValue(obj, 0, {{MEMBER_COUNT}}, 2500);
   </script>
 {% endblock scripts %}

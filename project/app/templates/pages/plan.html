@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load bootstrap4 %}
 {% load app_tags %}
 {% load static %}
@@ -9,8 +9,8 @@
 {% block metatags %}
   <meta property="og:title" content="Compare the Return to School Plans" />
   {% comment %}
-  <meta property="og:image" content='http://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
-  <meta property="og:image:secure_url" content='https://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{count}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
+  <meta property="og:image" content='http://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{MEMBER_COUNT}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
+  <meta property="og:image:secure_url" content='https://res.cloudinary.com/dyvz0sbfw/image/upload/co_yellow,l_text:Impact_200_line_spacing_120:%20%20%20Join%20{{MEMBER_COUNT}}%20Parents%0ASupporting%20Dr.%20Bub%27s%0A%20Mask-Optional%20Plan/c_scale,fl_relative,w_0.8/fl_layer_apply/v1/wapa/poster.png' />
   {% endcomment %}
   <meta property="og:image" content='{% static "app/compare3.png" %}' />
   <meta property="og:image:secure_url" content='{% static "app/compare3.png" %}' />
@@ -319,7 +319,7 @@
       window.requestAnimationFrame(step);
     }
     const obj = document.getElementById("value");
-    animateValue(obj, 0, {{count}}, 2500);
+    animateValue(obj, 0, {{MEMBER_COUNT}}, 2500);
   </script>
 
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
