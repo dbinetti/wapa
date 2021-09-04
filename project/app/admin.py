@@ -23,6 +23,39 @@ from .models import User
 from .models import Voter
 
 
+class StoryFilter(admin.SimpleListFilter):
+    title = ('Is Story')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'is_story'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return (
+            ('is_story', ('Is Story')),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+        if self.value() == 'is_story':
+            return queryset.exclude(
+                story='',
+            )
+
+
+
 @admin.register(Isat)
 class IsatAdmin(VersionAdmin):
     save_on_top = True
@@ -157,6 +190,7 @@ class AccountAdmin(VersionAdmin):
         'is_spouse',
         'is_steering',
         'zone',
+        'story',
         # 'notes',
     ]
     list_display = [
@@ -171,6 +205,7 @@ class AccountAdmin(VersionAdmin):
     list_editable = [
     ]
     list_filter = [
+        StoryFilter,
         'is_public',
         'is_steering',
         'is_spouse',
