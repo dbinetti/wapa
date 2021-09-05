@@ -1,5 +1,6 @@
 # Django
 from django.urls import path
+from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
 # Local
@@ -10,12 +11,12 @@ urlpatterns = [
     path('', views.index, name='index',),
 
     # Authentication
-    path('join', views.join, name='join'),
     path('callback', views.callback, name='callback'),
     path('verify', views.verify, name='verify'),
     path('verified', views.verified, name='verified'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('join', RedirectView.as_view(url='login'), name='join'),
 
     # Pages
     path('truenorth/', TemplateView.as_view(template_name='pages/truenorth.html'), name='truenorth',),

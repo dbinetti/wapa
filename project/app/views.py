@@ -28,12 +28,10 @@ from .forms import CommentForm
 from .forms import DeleteForm
 from .forms import StoryForm
 from .forms import StudentFormSet
-from .models import Account
 from .models import Attendee
 from .models import Comment
 from .models import Event
 from .models import Issue
-from .models import Student
 
 log = logging.getLogger(__name__)
 
@@ -64,9 +62,6 @@ def index(request):
     )
 
 # Authentication
-def join(request):
-    return redirect('login')
-
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
     next_url = request.GET.get('next', '/dashboard')
