@@ -65,24 +65,7 @@ def index(request):
 
 # Authentication
 def join(request):
-    redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/dashboard')
-    state = f"{get_random_string()}|{next_url}"
-    request.session['state'] = state
-    params = {
-        'client_id': settings.AUTH0_CLIENT_ID,
-        'response_type': 'code',
-        'scope': 'openid profile email',
-        'state': state,
-        'redirect_uri': redirect_uri,
-        'initScreen': 'signUp',
-    }
-    url = requests.Request(
-        'GET',
-        f'https://{settings.AUTH0_DOMAIN}/authorize',
-        params=params,
-    ).prepare().url
-    return redirect(url)
+    return redirect('login')
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
@@ -95,7 +78,7 @@ def login(request):
         'scope': 'openid profile email',
         'state': state,
         'redirect_uri': redirect_uri,
-        'initScreen': 'login',
+        'screen_hint': 'signup',
     }
     url = requests.Request(
         'GET',
