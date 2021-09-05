@@ -127,16 +127,16 @@
     const obj = document.getElementById("member-count");
     function animateValue(obj, start, end, duration) {
       let startTimestamp = null;
-      const step = (timestamp) => {
+      let step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        let progress = Math.min((timestamp - startTimestamp) / duration, 1);
         obj.innerHTML = Math.floor(progress * (end - start) + start);
         if (progress < 1) {
           window.requestAnimationFrame(step);
         }
       };
       window.requestAnimationFrame(step);
-    }
-    animateValue(obj, 0, {{METRICS.members}}, 2500);
+    };
+    animateValue(obj, 0, '{{METRICS.members}}', 2500);
   </script>
 {% endblock scripts %}
