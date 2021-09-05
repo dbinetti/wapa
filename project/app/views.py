@@ -88,10 +88,15 @@ def login(request):
     return redirect(url)
 
 def verify(request):
+    email = request.user.email
+    is_verified = request.user.is_verified
+    if is_verified:
+        return redirect('verified')
     return render(
         request,
         'pages/verify.html',
         context={
+            'email': email,
         },
     )
 
@@ -99,6 +104,10 @@ def verified(request):
     messages.success(
         request,
         "Thank you -- your account has been verified!",
+    )
+    messages.warning(
+        request,
+        "Next, review the below and click 'Save'.  Then you can send comments."
     )
     return redirect('account')
 
@@ -148,10 +157,10 @@ def callback(request):
         )
         return redirect('index')
     user = authenticate(request, **payload)
-    # if not getattr(user, 'is_verified', None):
-    #     return redirect('verify')
     if user:
         log_in(request, user)
+        if not getattr(user, 'is_verified', None):
+            return redirect('verify')
         # Always redirect first-time users to account page
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(
