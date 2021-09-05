@@ -25,3 +25,9 @@ def test_comments(user_client, issue):
     path = reverse('comments')
     response = user_client.get(path)
     assert response.status_code == 200
+
+@pytest.mark.django_db
+def test_dashboard(user_client, issue):
+    path = reverse('dashboard')
+    response = user_client.get(path)
+    assert response.status_code == 200
