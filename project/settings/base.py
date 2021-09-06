@@ -1,12 +1,9 @@
 import logging.config
-from os import environ
 
 from django.utils.log import DEFAULT_LOGGING
 from environ import Env
 from environ import Path
 
-GEOS_LIBRARY_PATH = environ.get('GEOS_LIBRARY_PATH')
-GDAL_LIBRARY_PATH = environ.get('GDAL_LIBRARY_PATH')
 # Set Environment
 env = Env(
     DEBUG=(bool, False),
@@ -15,8 +12,8 @@ env = Env(
     EMAIL_URL=(str, 'smtp://localhost:1025'),
     REDIS_URL=(str, 'redis://localhost:6379/0'),
     LOGLEVEL=(str, 'INFO'),
-    # GEOS_LIBRARY_PATH=(str, 'FOOBAR'),
-    # GDAL_LIBRARY_PATH=(str, 'FOOBAR'),
+    GEOS_LIBRARY_PATH=(str, '/app/.heroku/vendor/lib/libgdal.so'),
+    GDAL_LIBRARY_PATH=(str, '/app/.heroku/vendor/lib/libgeos_c.so'),
 )
 
 root = Path(__file__) - 2
