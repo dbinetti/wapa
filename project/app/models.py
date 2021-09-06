@@ -81,8 +81,8 @@ class Account(models.Model):
         'app.Zone',
         on_delete=models.SET_NULL,
         related_name='account',
-        unique=True,
         null=True,
+        blank=True,
     )
 
     def __str__(self):
