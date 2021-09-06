@@ -1,5 +1,7 @@
 # Django
 # First-Party
+from address.models import AddressField
+from address.widgets import AddressWidget
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
@@ -139,6 +141,15 @@ class AccountAdmin(VersionAdmin):
     ordering = [
         '-created',
     ]
+    formfield_overrides = {
+        AddressField: {
+            'widget': AddressWidget(
+                attrs={
+                    'size':'50',
+                },
+            )
+        },
+    }
 
 
 @admin.register(Zone)
