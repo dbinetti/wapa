@@ -18,6 +18,7 @@ from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
 from scourgify import normalize_address_record
+from scourgify.exceptions import UnParseableAddressError
 
 from .forms import VoterForm
 from .models import Account
@@ -396,3 +397,33 @@ def match_zone(account):
     )
     if vs:
         return vs.first().zone
+
+@job
+def normalize_address(account):
+    try:
+        address = normalize_address_record(str(account.address))
+    except UnParseableAddressError as e:
+        log.error(e)
+        return
+    address_json = json.dumps(address)
+    account.address_json = address_json
+    account.save()
+    return
+
+@job
+def normalize_voter_address(voter):
+    try:
+        address = normalize_address_record({
+            'address_line_1': voter.street,
+            'address_line_2': '',
+            'city': voter.city,
+            'state': 'ID',
+            'postal_code': voter.zipcode,
+        })
+    except Exception as e:
+        log.error(e)
+        return
+    address_json = json.dumps(address)
+    voter.address_json = address_json
+    voter.save()
+    return

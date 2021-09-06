@@ -44,6 +44,10 @@ class Account(models.Model):
         blank=True,
         default='',
     )
+    address_json = models.JSONField(
+        blank=True,
+        null=True,
+    )
     point = models.PointField(
         null=True,
         blank=True,
@@ -584,6 +588,10 @@ class Voter(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL
+    )
+    address_json = models.JSONField(
+        blank=True,
+        null=True,
     )
     created = models.DateTimeField(
         auto_now_add=True,
