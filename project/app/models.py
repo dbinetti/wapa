@@ -496,6 +496,29 @@ class Attendee(models.Model):
         ]
 
 
+class Zone(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    poly = models.PolygonField(
+        null=True,
+        blank=True,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    def __str__(self):
+        return f"{self.name}"
+
+
+
 class Voter(models.Model):
     id = HashidAutoField(
         primary_key=True,

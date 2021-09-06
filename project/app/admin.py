@@ -21,6 +21,7 @@ from .models import Issue
 from .models import School
 from .models import User
 from .models import Voter
+from .models import Zone
 
 
 class StoryFilter(admin.SimpleListFilter):
@@ -55,6 +56,10 @@ class StoryFilter(admin.SimpleListFilter):
             )
 
 
+
+@admin.register(Zone)
+class ZoneAdmin(VersionAdmin):
+    pass
 
 @admin.register(Isat)
 class IsatAdmin(VersionAdmin):
