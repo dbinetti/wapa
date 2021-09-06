@@ -77,6 +77,13 @@ class Account(models.Model):
         unique=True,
         null=True,
     )
+    zone = models.OneToOneField(
+        'app.Zone',
+        on_delete=models.SET_NULL,
+        related_name='account',
+        unique=True,
+        null=True,
+    )
 
     def __str__(self):
         return f"{self.name}"
