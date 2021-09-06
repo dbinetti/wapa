@@ -39,6 +39,11 @@ class Account(models.Model):
         blank=True,
         on_delete=models.SET_NULL
     )
+    address_raw = models.CharField(
+        max_length=512,
+        blank=True,
+        default='',
+    )
     point = models.PointField(
         null=True,
         blank=True,

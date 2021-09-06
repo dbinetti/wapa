@@ -55,6 +55,89 @@ class StoryFilter(admin.SimpleListFilter):
                 story='',
             )
 
+class AddressFilter(admin.SimpleListFilter):
+    title = ('Is Address')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'is_address'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return (
+            ('is_address', ('Is Address')),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+        if self.value() == 'is_address':
+            return queryset.filter(
+                address__isnull=False,
+                point__isnull=True,
+            )
+
+
+
+@admin.register(Account)
+class AccountAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+        'picture',
+        'address',
+        # 'point',
+        'is_public',
+        'is_spouse',
+        'is_steering',
+        'story',
+        'zone',
+        # 'notes',
+    ]
+    list_display = [
+        'name',
+        'address',
+        # 'is_public',
+        # 'is_spouse',
+        # 'is_steering',
+        # 'zone',
+        # 'notes',
+    ]
+    list_editable = [
+        'address',
+    ]
+    list_filter = [
+        AddressFilter,
+        StoryFilter,
+        'is_public',
+        'is_steering',
+        'is_spouse',
+        'zone',
+    ]
+    search_fields = [
+        'name',
+        'user__email',
+    ]
+    autocomplete_fields = [
+        'user',
+    ]
+    inlines = [
+        StudentInline,
+        CommentInline,
+    ]
+    ordering = [
+        '-created',
+    ]
 
 
 @admin.register(Zone)
@@ -182,55 +265,6 @@ def approve(modeladmin, request, queryset):
         comment.approve()
         comment.save()
 approve.short_description = 'Approve Comment'
-
-
-@admin.register(Account)
-class AccountAdmin(VersionAdmin):
-    save_on_top = True
-    fields = [
-        'name',
-        'picture',
-        'address',
-        # 'point',
-        'is_public',
-        'is_spouse',
-        'is_steering',
-        'story',
-        'zone',
-        # 'notes',
-    ]
-    list_display = [
-        'name',
-        'address',
-        'is_public',
-        'is_spouse',
-        'is_steering',
-        'zone',
-        # 'notes',
-    ]
-    list_editable = [
-    ]
-    list_filter = [
-        StoryFilter,
-        'is_public',
-        'is_steering',
-        'is_spouse',
-        'zone',
-    ]
-    search_fields = [
-        'name',
-        'user__email',
-    ]
-    autocomplete_fields = [
-        'user',
-    ]
-    inlines = [
-        StudentInline,
-        CommentInline,
-    ]
-    ordering = [
-        '-created',
-    ]
 
 
 @admin.register(Issue)
