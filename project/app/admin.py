@@ -194,7 +194,6 @@ class AccountAdmin(VersionAdmin):
         'is_public',
         'is_spouse',
         'is_steering',
-        'zone',
         'story',
         # 'notes',
     ]
@@ -204,7 +203,6 @@ class AccountAdmin(VersionAdmin):
         'is_public',
         'is_spouse',
         'is_steering',
-        'zone',
         # 'notes',
     ]
     list_editable = [
@@ -214,7 +212,6 @@ class AccountAdmin(VersionAdmin):
         'is_public',
         'is_steering',
         'is_spouse',
-        'zone',
     ]
     search_fields = [
         'name',

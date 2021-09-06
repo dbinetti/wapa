@@ -39,21 +39,14 @@ class Account(models.Model):
         blank=True,
         on_delete=models.SET_NULL
     )
+    point = models.PointField(
+        null=True,
+        blank=True,
+    )
     picture = models.ImageField(
         null=False,
         blank=False,
         default='wapa/avatar',
-    )
-    ZONE = Choices(
-        (1, 'one', 'Zone One'),
-        (2, 'two', 'Zone Two'),
-        (3, 'three', 'Zone Three'),
-        (4, 'four', 'Zone Four'),
-        (5, 'five', 'Zone Five'),
-    )
-    zone = models.IntegerField(
-        blank=True,
-        null=True,
     )
     notes = models.TextField(
         max_length=2000,
