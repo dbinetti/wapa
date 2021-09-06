@@ -12,6 +12,8 @@ env = Env(
     EMAIL_URL=(str, 'smtp://localhost:1025'),
     REDIS_URL=(str, 'redis://localhost:6379/0'),
     LOGLEVEL=(str, 'INFO'),
+    GEOS_LIBRARY_PATH=(str, 'FOOBAR'),
+    GDAL_LIBRARY_PATH=(str, 'FOOBAR'),
 )
 
 root = Path(__file__) - 2
