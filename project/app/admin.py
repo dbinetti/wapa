@@ -107,6 +107,7 @@ class AccountAdmin(VersionAdmin):
     list_display = [
         'name',
         'address',
+        'address_raw',
         # 'is_public',
         # 'is_spouse',
         # 'is_steering',
