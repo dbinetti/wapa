@@ -77,7 +77,7 @@ class Account(models.Model):
         unique=True,
         null=True,
     )
-    zone = models.OneToOneField(
+    zone = models.ForeignKey(
         'app.Zone',
         on_delete=models.SET_NULL,
         related_name='account',
