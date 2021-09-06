@@ -119,6 +119,7 @@ class AccountAdmin(VersionAdmin):
     list_editable = [
         'address',
     ]
+    list_per_page = 10
     list_filter = [
         AddressFilter,
         StoryFilter,
