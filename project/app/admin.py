@@ -354,6 +354,7 @@ class SchoolAdmin(VersionAdmin):
         'point',
         'address_raw',
         'phone_raw',
+        'zone',
     ]
     list_display = [
         'id',

@@ -303,6 +303,13 @@ class School(models.Model):
         null=True,
         blank=True,
     )
+    zone = models.ForeignKey(
+        'app.Zone',
+        on_delete=models.SET_NULL,
+        related_name='school',
+        null=True,
+        blank=True,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
