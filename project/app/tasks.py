@@ -298,6 +298,34 @@ def denorm_students(account):
     account.output = output
 
 
+@job
+def send_review_from_account(account):
+    from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
+    need_student = bool(account.students.count())
+    need_address = bool(account.address)
+    students_raw = account.students.order_by(
+        'school__kind',
+        'school__name',
+        'grade',
+    )
+    students_comp = [f"{x.school.name} {x.get_grade_display()}" for x in students_raw]
+    students = "; ".join(list(students_comp))
+    email = build_email(
+        template='emails/review.txt',
+        subject='Administrative: Account Review',
+        context={
+            'account': account,
+            'need_student': need_student,
+            'need_address': need_address,
+            'students': students,
+        },
+        from_email=from_email,
+        to=[f'{account.name} <{account.user.email}>'],
+    )
+    return email.send()
+
+
+
 def get_letter_from_comment(comment):
     context={
         'comment': comment,
@@ -337,6 +365,7 @@ def import_voter(voter):
     if form.is_valid():
         return form.save()
     raise ValueError(form.errors.as_json())
+
 
 def import_voters(filename):
     with open(filename) as f:

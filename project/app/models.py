@@ -481,7 +481,7 @@ class Student(models.Model):
 
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.school.name} {self.get_grade_display()} Grade"
 
 
 class Attendee(models.Model):

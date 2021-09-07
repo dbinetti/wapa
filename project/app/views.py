@@ -65,7 +65,7 @@ def index(request):
 # Authentication
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/dashboard')
+    next_url = request.GET.get('next', '/account')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
