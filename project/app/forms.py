@@ -1,5 +1,7 @@
 # Django
 from django import forms
+from django.contrib import admin
+from django.contrib.admin.widgets import AutocompleteSelect
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
@@ -25,6 +27,20 @@ StudentFormSet = inlineformset_factory(
     can_delete=True,
     extra=1,
 )
+
+
+class AdminAccountForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = '__all__'
+
+        widgets = {
+            'voter': AutocompleteSelect(
+                Account._meta.get_field('voter'),
+                admin.site,
+                attrs={'style': "width: 400px;"}
+            ),
+        }
 
 
 class DeleteForm(forms.Form):
@@ -148,8 +164,6 @@ class AccountForm(forms.ModelForm):
         labels = {
             "is_public": "I Choose to be Public",
             "is_spouse": "I Represent My Spouse",
-        }
-        widgets = {
         }
         help_texts = {
             'name': mark_safe("Please provide your <strong>real full name</strong>, which remains private unless you explcitly choose to be public."),

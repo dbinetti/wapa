@@ -5,13 +5,12 @@ from address.widgets import AddressWidget
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.admin.widgets import AutocompleteSelect
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
-from django.db.models import ForeignKey
 from fsm_admin.mixins import FSMTransitionMixin
 from reversion.admin import VersionAdmin
 
 # Local
+from .forms import AdminAccountForm
 from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .inlines import AttendeeInline
@@ -93,6 +92,7 @@ class AddressFilter(admin.SimpleListFilter):
 
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
+    form = AdminAccountForm
     save_on_top = True
     fields = [
         'name',

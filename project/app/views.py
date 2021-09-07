@@ -228,7 +228,9 @@ def account(request):
         form = AccountForm(request.POST, instance=account)
         formset = StudentFormSet(request.POST, request.FILES, instance=account)
         if form.is_valid() and formset.is_valid():
-            account = form.save()
+            account = form.save(commit=False)
+            account.address_raw = str(form.cleaned_data['address'])
+            account.save()
             formset.save()
             for student_form in formset:
                 if student_form.is_valid() and student_form.has_changed():
@@ -242,22 +244,19 @@ def account(request):
                 )
                 if comments:
                     return redirect('account')
-                else:
-                    messages.warning(
-                        request,
-                        mark_safe("Next, please send a comment to the Superintendent!"),
-                    )
-                    return redirect('comments')
-                return redirect('account')
-            else:
-                messages.success(
-                    request,
-                    mark_safe("Saved!"),
-                )
                 messages.warning(
                     request,
-                    mark_safe("Please consider making your name Public so you can <a href='/comments'>make comments</a>."),
+                    mark_safe("Next, please send a comment to the Superintendent!"),
                 )
+                return redirect('comments')
+            messages.success(
+                request,
+                mark_safe("Saved!"),
+            )
+            messages.warning(
+                request,
+                mark_safe("Please consider making your name Public so you can <a href='/comments'>make comments</a>."),
+            )
             return redirect('account')
     else:
         form = AccountForm(instance=account)
