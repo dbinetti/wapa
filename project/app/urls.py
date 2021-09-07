@@ -14,6 +14,7 @@ urlpatterns = [
     path('callback', views.callback, name='callback'),
     path('verify', views.verify, name='verify'),
     path('verified', views.verified, name='verified'),
+    path('reverify', views.reverify, name='reverify'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
     path('join', RedirectView.as_view(url='login'), name='join'),

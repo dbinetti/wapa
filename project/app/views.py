@@ -32,6 +32,7 @@ from .models import Attendee
 from .models import Comment
 from .models import Event
 from .models import Issue
+from .tasks import send_verification_email
 
 log = logging.getLogger(__name__)
 
@@ -105,6 +106,14 @@ def verified(request):
         "Next, review the below and click 'Save'.  Then you can send comments."
     )
     return redirect('account')
+
+def reverify(request):
+    send_verification_email.delay(request.user)
+    messages.success(
+        request,
+        "Verification email sent!",
+    )
+    return redirect('verify')
 
 def callback(request):
     # Reject if state doesn't match

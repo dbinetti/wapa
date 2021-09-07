@@ -42,13 +42,13 @@
   <section class='my-5'>
     <div class='col-lg-8'>
       <p>
-        We sent a verification link to this address: <strong>{{email}}</strong>
-      </p>
-      <p>
-        Please click on it to continue.
+        Click on the verification link in the email we sent to this address: <strong>{{email}}</strong>
       </p>
       <p>
         If you typed in the wrong email, please <a href='{% url "logout" %}'>Logout</a> and join again with the correct email.
+      </p>
+      <p>
+        If you did not receive a verification email, you can <a href='{% url "reverify" %}'>send another</a>.
       </p>
       <p>
         If the address is correct and you haven't received a verification email after a minute or so, please <a href='mailto:support@westadaparents.com'>contact support</a> and we'll verify you manually.
