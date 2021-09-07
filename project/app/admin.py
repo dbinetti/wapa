@@ -95,15 +95,15 @@ class AccountAdmin(VersionAdmin):
     form = AdminAccountForm
     save_on_top = True
     fields = [
-        'name',
         'picture',
+        'name',
         'address',
+        'voter',
         # 'point',
         'is_public',
         'is_spouse',
         'is_steering',
         'zone',
-        'voter',
         'story',
         # 'notes',
     ]
