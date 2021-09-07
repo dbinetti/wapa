@@ -116,6 +116,12 @@
               <dd class="col-sm-8">
                 <a href='mailto:{{account.trustee_email}}'>{{account.trustee_name}}</a>
               </dd>
+              <dt class="col-sm-4">
+                Registered Voter?
+              </dt>
+              <dd class="col-sm-8">
+                {{account.voter|yesno|title}}
+              </dd>
             </dl>
           </div>
         </div>

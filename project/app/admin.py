@@ -5,7 +5,9 @@ from address.widgets import AddressWidget
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.admin.widgets import AutocompleteSelect
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
+from django.db.models import ForeignKey
 from fsm_admin.mixins import FSMTransitionMixin
 from reversion.admin import VersionAdmin
 
@@ -89,8 +91,6 @@ class AddressFilter(admin.SimpleListFilter):
                 point__isnull=True,
             )
 
-
-
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
     save_on_top = True
@@ -102,8 +102,9 @@ class AccountAdmin(VersionAdmin):
         'is_public',
         'is_spouse',
         'is_steering',
-        'story',
         'zone',
+        'voter',
+        'story',
         # 'notes',
     ]
     list_display = [
@@ -134,6 +135,7 @@ class AccountAdmin(VersionAdmin):
     ]
     autocomplete_fields = [
         'user',
+        'voter',
     ]
     inlines = [
         StudentInline,
@@ -180,7 +182,9 @@ class ZoneAdmin(VersionAdmin):
     ]
     autocomplete_fields = [
     ]
-
+    ordering = [
+        'name',
+    ]
 @admin.register(Isat)
 class IsatAdmin(VersionAdmin):
     save_on_top = True
@@ -244,6 +248,7 @@ class VoterAdmin(VersionAdmin):
         'st',
         'zipcode',
         'zone',
+        'address',
     ]
     list_display = [
         'last_name',
@@ -256,16 +261,21 @@ class VoterAdmin(VersionAdmin):
     list_filter = [
         'zone',
     ]
-    search_fields = [
-        'first_name',
-        'last_name',
-    ]
     inlines = [
     ]
     ordering = [
         'last_name',
         'first_name',
     ]
+    search_fields = [
+        'last_name',
+        'first_name',
+        'street',
+        'city',
+        'st',
+        'zipcode',
+    ]
+
 
 @admin.register(Event)
 class EventAdmin(VersionAdmin):

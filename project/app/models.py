@@ -610,7 +610,7 @@ class Voter(models.Model):
     )
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.ZONE[self.zone]}"
+        return f"{self.first_name} {self.last_name} - {self.address}"
 
 
 class User(AbstractBaseUser):
