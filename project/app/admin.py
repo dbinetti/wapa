@@ -351,6 +351,9 @@ class SchoolAdmin(VersionAdmin):
         'full',
         'kind',
         'school_id',
+        'point',
+        'address_raw',
+        'phone_raw',
     ]
     list_display = [
         'id',
@@ -358,6 +361,7 @@ class SchoolAdmin(VersionAdmin):
         'full',
         'school_id',
         'kind',
+        'address_raw'
     ]
     list_editable = [
         'name',

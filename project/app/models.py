@@ -289,6 +289,20 @@ class School(models.Model):
         choices=KIND,
         default=0,
     )
+    address_raw = models.CharField(
+        max_length=512,
+        blank=True,
+        default='',
+    )
+    phone_raw = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+    )
+    point = models.PointField(
+        null=True,
+        blank=True,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
@@ -515,12 +529,12 @@ class Zone(models.Model):
     )
     trustee_name = models.CharField(
         max_length=100,
-        blank=False,
+        blank=True,
         default='',
     )
     trustee_email = models.EmailField(
         max_length=100,
-        blank=False,
+        blank=True,
         default='',
     )
     poly = models.PolygonField(
