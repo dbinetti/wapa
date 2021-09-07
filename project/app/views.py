@@ -237,9 +237,7 @@ def account(request):
         form = AccountForm(request.POST, instance=account)
         formset = StudentFormSet(request.POST, request.FILES, instance=account)
         if form.is_valid() and formset.is_valid():
-            account = form.save(commit=False)
-            account.address_raw = str(form.cleaned_data['address'])
-            account.save()
+            form.save()
             formset.save()
             for student_form in formset:
                 if student_form.is_valid() and student_form.has_changed():

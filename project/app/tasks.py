@@ -11,6 +11,7 @@ from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
 # Django
 from django.conf import settings
+from django.contrib.gis.geos import Point
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django_rq import job
@@ -24,6 +25,7 @@ from .forms import VoterForm
 from .models import Account
 from .models import School
 from .models import Voter
+from .models import Zone
 
 log = logging.getLogger(__name__)
 
@@ -455,4 +457,41 @@ def normalize_voter_address(voter):
     address_json = json.dumps(address)
     voter.address_json = address_json
     voter.save()
+    return
+
+
+@job
+def update_address_from_account(account):
+    if not account.address:
+        return
+    account.address_raw = str(account.address)
+    account.save()
+    return
+
+@job
+def update_point_from_account(account):
+    if not account__address__latitude or not acccount__address_longitude:
+        return
+    point = Point(
+        c.address.longitude,
+        c.address.latitude,
+    )
+    account.point = point
+    account.save()
+    return
+
+@job
+def update_zone_from_account(account):
+    if not account.point:
+        return
+    try:
+        zone = Zone.objects.get(
+            poly__contains=account.point,
+        )
+    except Zone.DoesNotExist:
+        zone = Zone.objects.get(
+            name='Not in District',
+        )
+    account.zone = zone
+    account.save()
     return
