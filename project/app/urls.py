@@ -41,6 +41,7 @@ urlpatterns = [
     # Story
     path('story/', views.story, name='story',),
     path('story/delete/', views.story_delete, name='story-delete',),
+    path('stories/', views.stories, name='stories',),
 
     # Events
     path('event/<str:event_id>', views.event, name='event',),

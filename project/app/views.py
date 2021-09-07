@@ -28,6 +28,7 @@ from .forms import CommentForm
 from .forms import DeleteForm
 from .forms import StoryForm
 from .forms import StudentFormSet
+from .models import Account
 from .models import Attendee
 from .models import Comment
 from .models import Event
@@ -510,5 +511,20 @@ def event(request, event_id):
             'event': event,
             'attendees': attendees,
             'form': form,
+        }
+    )
+
+
+def stories(request):
+    stories = Account.objects.exclude(
+        story='',
+    ).order_by(
+        'updated',
+    ).values_list('story', flat=True)
+    return render(
+        request,
+        'pages/stories.html',
+        context = {
+            'stories': stories,
         }
     )

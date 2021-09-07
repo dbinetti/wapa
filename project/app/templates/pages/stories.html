@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% load bootstrap4 %}
+{% load cloudinary %}
+{% load app_tags %}
+
+
+{% block title %}Quarantine STories{% endblock title %}
+
+
+{% block content %}
+  <section class='my-5'>
+    <h3>
+      Quarantine Stories
+    </h3>
+  </section>
+  <section class='mt-5 col-md-8'>
+    {% for story in stories %}
+      <div class='card'>
+        <div class="card-body">
+          <p>
+            {{story}}
+          </p>
+        </div>
+      </div>
+
+    {% endfor %}
+{% endblock content %}
