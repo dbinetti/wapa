@@ -155,7 +155,31 @@ class AccountAdmin(VersionAdmin):
 
 @admin.register(Zone)
 class ZoneAdmin(VersionAdmin):
-    pass
+    save_on_top = True
+    fields = [
+        'name',
+        'trustee_name',
+        'trustee_email',
+    ]
+    list_display = [
+        'name',
+        'trustee_name',
+        'trustee_email',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+        'name',
+    ]
+    search_fields = [
+        'name',
+        'trustee_name',
+        'trustee_email',
+    ]
+    inlines = [
+    ]
+    autocomplete_fields = [
+    ]
 
 @admin.register(Isat)
 class IsatAdmin(VersionAdmin):

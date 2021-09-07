@@ -80,12 +80,6 @@
                 {{account.is_spouse|yesno|title}}
               </dd>
               <dt class="col-sm-4">
-                Address Provided?
-              </dt>
-              <dd class="col-sm-8">
-                {{account.address|yesno|title}}
-              </dd>
-              <dt class="col-sm-4">
                 Students
               </dt>
               <dd class="col-sm-8">
@@ -94,6 +88,33 @@
                 {% empty %}
                   (No Students in District Schools)
                 {% endfor %}
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-12'>
+      <div class='card'>
+        <h4 class='card-header'>District Information</h4>
+        <div class="card-body">
+          <div class='card-title'>
+          </div>
+          <div class='card-text'>
+            <dl class="row">
+              <dt class="col-sm-4">
+                Zone
+              </dt>
+              <dd class="col-sm-8">
+                {{account.zone.name}}
+              </dd>
+              <dt class="col-sm-4">
+                Trustee Representative
+              </dt>
+              <dd class="col-sm-8">
+                <a href='mailto:{{account.trustee_email}}'>{{account.trustee_name}}</a>
               </dd>
             </dl>
           </div>

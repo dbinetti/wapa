@@ -513,6 +513,16 @@ class Zone(models.Model):
         max_length=100,
         blank=False,
     )
+    trustee_name = models.CharField(
+        max_length=100,
+        blank=False,
+        default='',
+    )
+    trustee_email = models.EmailField(
+        max_length=100,
+        blank=False,
+        default='',
+    )
     poly = models.PolygonField(
         null=True,
         blank=True,
@@ -525,7 +535,6 @@ class Zone(models.Model):
     )
     def __str__(self):
         return f"{self.name}"
-
 
 
 class Voter(models.Model):
