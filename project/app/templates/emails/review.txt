@@ -19,7 +19,7 @@ Name: {{account.name}}
 Listed Publicly? {{account.is_public|yesno|title}}
 Representing Spouse? {{account.is_spouse|yesno|title}}
 Address (PRIVATE AND CONFIDENTIAL):  {{account.address|default:'(No Address Provided)'}}
-Zone: {{account.zone}}, Trustee {{account.trustee_name}}
+Zone: {{account.zone}}
 Students:  {{students}}
 
 To update this information, please click on the following link:

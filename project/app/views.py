@@ -163,8 +163,8 @@ def callback(request):
     user = authenticate(request, **payload)
     if user:
         log_in(request, user)
-        if not getattr(user, 'is_verified', None):
-            return redirect('verify')
+        # if not getattr(user, 'is_verified', None):
+        #     return redirect('verify')
         # Always redirect first-time users to account page
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
             messages.success(

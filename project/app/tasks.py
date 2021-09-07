@@ -314,7 +314,7 @@ def send_review_from_account(account):
     students = "; ".join(list(students_comp))
     email = build_email(
         template='emails/review.txt',
-        subject='Administrative: Account Review',
+        subject='Administrative Request: Account Review',
         context={
             'account': account,
             'need_student': need_student,
