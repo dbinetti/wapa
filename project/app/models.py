@@ -85,6 +85,7 @@ class Account(models.Model):
         related_name='account',
         unique=True,
         null=True,
+        blank=True,
     )
     zone = models.ForeignKey(
         'app.Zone',
