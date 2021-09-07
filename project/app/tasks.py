@@ -470,11 +470,17 @@ def update_address_from_account(account):
 
 @job
 def update_point_from_account(account):
-    if not account__address__latitude or not acccount__address_longitude:
+    if not account.address:
+        return
+    try:
+        account.address.longitude
+        account.address.latitude
+    except KeyError:
+        log.error(f'{account.id} lon/lat')
         return
     point = Point(
-        c.address.longitude,
-        c.address.latitude,
+        account.address.longitude,
+        account.address.latitude,
     )
     account.point = point
     account.save()
