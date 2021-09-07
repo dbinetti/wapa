@@ -98,6 +98,7 @@ class AccountAdmin(VersionAdmin):
         'picture',
         'name',
         'address',
+        'address_raw',
         'voter',
         # 'point',
         'is_public',
