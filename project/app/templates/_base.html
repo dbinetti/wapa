@@ -47,6 +47,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
+            {% comment %}
             <li class='nav-item mt-1'>
               <a href="{% url 'resources' %}" class='mr-3'><span class='bi-book'></span>&nbsp;&nbsp;Resources</a>
             </li>
@@ -70,6 +71,7 @@
                 <a href="{% url 'login' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>
               </li>
             {% endif %}
+            {% endcomment %}
           </ul>
         </div>
       </nav>
