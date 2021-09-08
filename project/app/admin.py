@@ -249,7 +249,6 @@ class VoterAdmin(VersionAdmin):
         'st',
         'zipcode',
         'zone',
-        'address',
     ]
     list_display = [
         'last_name',

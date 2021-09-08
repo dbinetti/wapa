@@ -615,11 +615,6 @@ class Voter(models.Model):
     zone = models.IntegerField(
         blank=False,
     )
-    address = AddressField(
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL
-    )
     address_json = models.JSONField(
         blank=True,
         null=True,
