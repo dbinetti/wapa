@@ -133,7 +133,6 @@ SENTRY_ENVIRONMENT = env("SENTRY_ENVIRONMENT")
 SENTRY_RELEASE = env("HEROKU_SLUG_COMMIT")
 SENTRY_CONFIG = {
     'send_default_pii': True,
-    'traces_sample_rate': 1,
 }
 
 # PostHog
