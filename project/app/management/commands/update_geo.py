@@ -3,6 +3,7 @@ from app.tasks import update_point_from_account
 from app.tasks import update_zone_from_account
 from django.apps import apps
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 
 Account = apps.get_model("app", "Account")
 
@@ -12,8 +13,8 @@ class Command(BaseCommand):
 
         # Set address raw for logging
         cs = Account.objects.filter(
+            Q(address_raw='') | Q(address_raw='None'),
             address__isnull=False,
-            address_raw='',
         )
         csc = cs.count()
         for c in cs:
