@@ -3,6 +3,7 @@
 from django.contrib import admin
 
 # Local
+from .models import Account
 from .models import Attendee
 from .models import Comment
 from .models import School
@@ -88,7 +89,27 @@ class SchoolInline(admin.TabularInline):
     show_change_link = True
     extra = 0
     classes = [
-        # 'collapse',
+        'collapse',
+    ]
+    autocomplete_fields = [
+        'zone',
+        # 'issue',
+    ]
+
+class AccountInline(admin.TabularInline):
+    model = Account
+    fields = [
+        'name',
+    ]
+    readonly_fields = [
+    ]
+    ordering = (
+        'name',
+    )
+    show_change_link = True
+    extra = 0
+    classes = [
+        'collapse',
     ]
     autocomplete_fields = [
         'zone',

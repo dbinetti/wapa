@@ -13,6 +13,7 @@ from reversion.admin import VersionAdmin
 from .forms import AdminAccountForm
 from .forms import UserChangeForm
 from .forms import UserCreationForm
+from .inlines import AccountInline
 from .inlines import AttendeeInline
 from .inlines import CommentInline
 from .inlines import SchoolInline
@@ -28,36 +29,12 @@ from .models import Voter
 from .models import Zone
 
 
-class StoryFilter(admin.SimpleListFilter):
-    title = ('Is Story')
+def approve(modeladmin, request, queryset):
+    for comment in queryset:
+        comment.approve()
+        comment.save()
+approve.short_description = 'Approve Comment'
 
-    # Parameter for the filter that will be used in the URL query.
-    parameter_name = 'is_story'
-
-    def lookups(self, request, model_admin):
-        """
-        Returns a list of tuples. The first element in each
-        tuple is the coded value for the option that will
-        appear in the URL query. The second element is the
-        human-readable name for the option that will appear
-        in the right sidebar.
-        """
-        return (
-            ('is_story', ('Is Story')),
-        )
-
-    def queryset(self, request, queryset):
-        """
-        Returns the filtered queryset based on the value
-        provided in the query string and retrievable via
-        `self.value()`.
-        """
-        # Compare the requested value (either '80s' or '90s')
-        # to decide how to filter the queryset.
-        if self.value() == 'is_story':
-            return queryset.exclude(
-                story='',
-            )
 
 class AddressFilter(admin.SimpleListFilter):
     title = ('Is Address')
@@ -125,7 +102,6 @@ class AccountAdmin(VersionAdmin):
     list_per_page = 10
     list_filter = [
         AddressFilter,
-        StoryFilter,
         'is_public',
         'is_steering',
         'is_spouse',
@@ -182,6 +158,7 @@ class ZoneAdmin(VersionAdmin):
     ]
     inlines = [
         SchoolInline,
+        AccountInline,
     ]
     autocomplete_fields = [
     ]
@@ -309,13 +286,6 @@ class EventAdmin(VersionAdmin):
     ]
     autocomplete_fields = [
     ]
-
-
-def approve(modeladmin, request, queryset):
-    for comment in queryset:
-        comment.approve()
-        comment.save()
-approve.short_description = 'Approve Comment'
 
 
 @admin.register(Issue)
