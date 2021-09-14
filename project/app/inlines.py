@@ -5,6 +5,7 @@ from django.contrib import admin
 # Local
 from .models import Attendee
 from .models import Comment
+from .models import School
 from .models import Student
 
 
@@ -69,5 +70,27 @@ class CommentInline(admin.TabularInline):
     ]
     autocomplete_fields = [
         'account',
+        # 'issue',
+    ]
+
+
+class SchoolInline(admin.TabularInline):
+    model = School
+    fields = [
+        'zone',
+        'name',
+        'kind',
+    ]
+    readonly_fields = [
+    ]
+    ordering = (
+    )
+    show_change_link = True
+    extra = 0
+    classes = [
+        # 'collapse',
+    ]
+    autocomplete_fields = [
+        'zone',
         # 'issue',
     ]

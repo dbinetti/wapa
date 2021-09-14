@@ -15,6 +15,7 @@ from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .inlines import AttendeeInline
 from .inlines import CommentInline
+from .inlines import SchoolInline
 from .inlines import StudentInline
 from .models import Account
 from .models import Comment
@@ -180,12 +181,15 @@ class ZoneAdmin(VersionAdmin):
         'trustee_email',
     ]
     inlines = [
+        SchoolInline,
     ]
     autocomplete_fields = [
     ]
     ordering = [
         'name',
     ]
+
+
 @admin.register(Isat)
 class IsatAdmin(VersionAdmin):
     save_on_top = True
