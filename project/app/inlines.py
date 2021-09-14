@@ -100,6 +100,7 @@ class AccountInline(admin.TabularInline):
     model = Account
     fields = [
         'name',
+        'is_vip',
     ]
     readonly_fields = [
     ]

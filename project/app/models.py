@@ -25,6 +25,9 @@ class Account(models.Model):
         max_length=100,
         blank=False,
     )
+    is_vip = models.BooleanField(
+        default=False,
+    )
     is_steering = models.BooleanField(
         default=False,
     )
