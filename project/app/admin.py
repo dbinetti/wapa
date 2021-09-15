@@ -79,7 +79,7 @@ class AccountAdmin(VersionAdmin):
         'address_raw',
         'voter',
         # 'point',
-        'is_influential',
+        # 'is_influential',
         'is_public',
         'is_spouse',
         'is_steering',
