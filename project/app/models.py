@@ -583,6 +583,27 @@ class Voter(models.Model):
     name = models.CharField(
         max_length=255,
         blank=True,
+        default='',
+        editable=False,
+    )
+    address = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        editable=False,
+    )
+    place = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        editable=False,
+    )
+    point = models.PointField(
+        null=True,
+        blank=True,
+    )
+    is_precise = models.BooleanField(
+        default=False,
     )
     prefix = models.CharField(
         max_length=100,

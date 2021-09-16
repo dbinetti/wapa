@@ -222,6 +222,12 @@ class VoterAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'voter_id',
+        'name',
+        'address',
+        'point',
+        'place',
+        'geocode',
+        'is_precise',
         'last_name',
         'first_name',
         'middle_name',
@@ -243,6 +249,7 @@ class VoterAdmin(VersionAdmin):
     ]
     list_filter = [
         'zone',
+        'is_precise',
     ]
     inlines = [
     ]
@@ -258,7 +265,13 @@ class VoterAdmin(VersionAdmin):
         'st',
         'zipcode',
     ]
-
+    readonly_fields = [
+        'name',
+        'address',
+        'point',
+        'place',
+        'geocode',
+    ]
 
 @admin.register(Event)
 class EventAdmin(VersionAdmin):
