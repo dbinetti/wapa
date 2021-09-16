@@ -538,6 +538,10 @@ class Zone(models.Model):
         max_length=100,
         blank=False,
     )
+    num = models.IntegerField(
+        null=True,
+        blank=False,
+    )
     trustee_name = models.CharField(
         max_length=100,
         blank=True,
@@ -575,6 +579,10 @@ class Voter(models.Model):
     )
     voter_id = models.IntegerField(
         blank=False,
+    )
+    name = models.CharField(
+        max_length=255,
+        blank=True,
     )
     prefix = models.CharField(
         max_length=100,
