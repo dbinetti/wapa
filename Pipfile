@@ -45,6 +45,7 @@ django-fsm-admin = "*"
 python-magic = "*"
 python-pdf = "*"
 usaddress-scourgify = "*"
+googlemaps = "*"
 
 [requires]
 python_version = "3.9"

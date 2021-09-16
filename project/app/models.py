@@ -630,6 +630,10 @@ class Voter(models.Model):
         blank=True,
         null=True,
     )
+    geocode = models.JSONField(
+        blank=True,
+        null=True,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
@@ -638,7 +642,10 @@ class Voter(models.Model):
     )
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.address}"
+        return f"{self.first_name} {self.last_name}"
+
+    def natural_key(self):
+        return (self.voter_id)
 
 
 class User(AbstractBaseUser):
