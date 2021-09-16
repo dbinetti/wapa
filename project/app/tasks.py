@@ -4,6 +4,7 @@ import json
 import logging
 
 import cloudinary
+import geocoder
 import posthog
 import pydf
 # First-Party
@@ -500,4 +501,12 @@ def update_zone_from_account(account):
         )
     account.zone = zone
     account.save()
+    return
+
+
+@job
+def geocode_voter(voter):
+    result = geocoder.google(f'{voter.street}, {voter.city}, {voter.st} {voter.zipcode}')
+    voter.geocode = result.json
+    voter.save()
     return
