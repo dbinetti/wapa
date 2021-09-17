@@ -80,6 +80,10 @@ class AccountAdmin(VersionAdmin):
         'voter',
         # 'point',
         # 'is_influential',
+        'geocode',
+        'is_precise',
+        'place',
+        'point',
         'is_public',
         'is_spouse',
         'is_steering',
@@ -106,6 +110,7 @@ class AccountAdmin(VersionAdmin):
         AddressFilter,
         'is_public',
         'is_steering',
+        'is_precise',
         'is_spouse',
         'zone',
     ]
@@ -133,7 +138,9 @@ class AccountAdmin(VersionAdmin):
             )
         },
     }
-
+    readonly_fields = [
+        'place',
+    ]
 
 @admin.register(Zone)
 class ZoneAdmin(VersionAdmin):

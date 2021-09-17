@@ -510,3 +510,10 @@ def geocode_voter(voter):
     voter.geocode = result.json
     voter.save()
     return
+
+@job
+def geocode_account(account):
+    result = geocoder.google(str(account.address))
+    account.geocode = result.json
+    account.save()
+    return

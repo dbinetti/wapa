@@ -51,9 +51,22 @@ class Account(models.Model):
         blank=True,
         null=True,
     )
+    place = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        editable=False,
+    )
+    is_precise = models.BooleanField(
+        default=False,
+    )
     point = models.PointField(
         null=True,
         blank=True,
+    )
+    geocode = models.JSONField(
+        blank=True,
+        null=True,
     )
     picture = models.ImageField(
         null=False,
