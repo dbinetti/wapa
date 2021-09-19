@@ -148,7 +148,6 @@ def create_or_update_mailchimp_from_user(user):
     return result
 
 @job
-def delete_mailchimp_from_user(user):
 def delete_mailchimp_from_email(email):
     client = get_mailchimp_client()
     subscriber_hash = get_subscriber_hash(email)
