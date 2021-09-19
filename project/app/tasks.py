@@ -149,8 +149,9 @@ def create_or_update_mailchimp_from_user(user):
 
 @job
 def delete_mailchimp_from_user(user):
+def delete_mailchimp_from_email(email):
     client = get_mailchimp_client()
-    subscriber_hash = get_subscriber_hash(user.email)
+    subscriber_hash = get_subscriber_hash(email)
     client = MailChimp(mc_api=settings.MAILCHIMP_API_KEY)
     try:
         client.lists.members.delete(
@@ -161,9 +162,10 @@ def delete_mailchimp_from_user(user):
         # Skip if already deleted
         error = json.loads(str(err).replace("\'", "\""))
         if error['title'] == 'Resource Not Found':
+            log.error(err)
             return
         if error['title'] == 'Method Not Allowed':
-            return
+            raise err
         # else raise err
         raise err
 
