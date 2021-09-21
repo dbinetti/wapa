@@ -22,10 +22,8 @@ from mailchimp3.mailchimpclient import MailChimpError
 from scourgify import normalize_address_record
 from scourgify.exceptions import UnParseableAddressError
 
-from .forms import VoterForm
 from .models import Account
 from .models import School
-from .models import Voter
 from .models import Zone
 
 log = logging.getLogger(__name__)
@@ -363,48 +361,6 @@ def merge_letter_from_comments(comments):
     )
     return pdf
 
-@job
-def import_voter(voter):
-    form = VoterForm(voter)
-    if form.is_valid():
-        return form.save()
-    raise ValueError(form.errors.as_json())
-
-
-def import_voters(filename):
-    with open(filename) as f:
-        reader = csv.reader(
-            f,
-            skipinitialspace=True,
-        )
-        next(reader)
-        rows = [row for row in reader]
-        i = 0
-        t = len(rows)
-        for row in rows:
-            i += 1
-            log.info(f'{i}/{t}')
-            voter = {
-                'voter_id': int(row[0]),
-                'prefix': row[2].strip(),
-                'last_name': row[2].strip(),
-                'first_name': row[3].strip(),
-                'middle_name': row[4].strip(),
-                'suffix': row[1].strip(),
-                'age': int(row[6]),
-                'street': row[8].strip(),
-                'city': row[10].strip(),
-                'st': 'ID',
-                'zipcode': row[12].strip(),
-                'zone': int(row[27][-1]),
-            }
-            try:
-                import_voter(voter)
-            except Exception as e:
-                log.error(e)
-    return
-
-
 def match_zone(account):
     address_dict = account.address.as_dict()
     address_line_1 = f"{address_dict['street_number']} {address_dict['route']}"
@@ -442,25 +398,6 @@ def normalize_address(account):
     account.address_json = address_json
     account.save()
     return
-
-@job
-def normalize_voter_address(voter):
-    try:
-        address = normalize_address_record({
-            'address_line_1': voter.street,
-            'address_line_2': '',
-            'city': voter.city,
-            'state': 'ID',
-            'postal_code': voter.zipcode,
-        })
-    except Exception as e:
-        log.error(e)
-        return
-    address_json = json.dumps(address)
-    voter.address_json = address_json
-    voter.save()
-    return
-
 
 @job
 def update_address_from_account(account):
@@ -504,13 +441,6 @@ def update_zone_from_account(account):
     account.save()
     return
 
-
-@job
-def geocode_voter(voter):
-    result = geocoder.google(f'{voter.street}, {voter.city}, {voter.st} {voter.zipcode}')
-    voter.geocode = result.json
-    voter.save()
-    return
 
 @job
 def geocode_account(account):

@@ -273,4 +273,5 @@ INSTALLED_APPS = [
     'bootstrap4',
     'phonenumber_field',
     'app',
+    'votapi',
 ]

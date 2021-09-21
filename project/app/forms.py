@@ -15,7 +15,6 @@ from .models import Comment
 from .models import Isat
 from .models import Student
 from .models import User
-from .models import Voter
 
 StudentFormSet = inlineformset_factory(
     Account,
@@ -42,7 +41,6 @@ class AdminAccountForm(forms.ModelForm):
             ),
         }
 
-
 class DeleteForm(forms.Form):
     confirm = forms.BooleanField(
         required=True,
@@ -59,7 +57,6 @@ class AttendeeForm(forms.ModelForm):
         labels = {
             "is_confirmed": "Yes I'll Attend",
         }
-
 
 class IsatForm(forms.ModelForm):
     class Meta:
@@ -78,7 +75,6 @@ class IsatForm(forms.ModelForm):
             'below',
             'school',
         ]
-
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -131,7 +127,6 @@ class StudentForm(forms.ModelForm):
             'school': "School attending 2021-22.",
             'grade': "Grade for 2021-22.",
         }
-
 
 class StoryForm(forms.ModelForm):
     class Meta:
@@ -186,24 +181,6 @@ class AccountForm(forms.ModelForm):
             raise ValidationError(
                 "You must provide your full name to be public."
             )
-
-
-class VoterForm(forms.ModelForm):
-    class Meta:
-        model = Voter
-        fields = [
-            'voter_id',
-            'last_name',
-            'first_name',
-            'middle_name',
-            'suffix',
-            'age',
-            'street',
-            'city',
-            'st',
-            'zipcode',
-            'zone',
-        ]
 
 
 class UserCreationForm(UserCreationFormBase):
