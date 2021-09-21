@@ -44,9 +44,7 @@ django-fsm = "*"
 django-fsm-admin = "*"
 python-magic = "*"
 python-pdf = "*"
-usaddress-scourgify = "*"
-googlemaps = "*"
-django-votapi = {editable = false, git = "https://github.com/dbinetti/votapi.git"}
+geocoder = "*"
 
 [requires]
 python_version = "3.9"

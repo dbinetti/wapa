@@ -272,6 +272,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'bootstrap4',
     'phonenumber_field',
+    'voterapi',
     'app',
-    'votapi',
 ]

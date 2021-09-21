@@ -34,11 +34,11 @@ class AdminAccountForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'voter': AutocompleteSelect(
-                Account._meta.get_field('voter'),
-                admin.site,
-                attrs={'style': "width: 400px;"}
-            ),
+            # 'voter': AutocompleteSelect(
+            #     Account._meta.get_field('voter'),
+            #     admin.site,
+            #     attrs={'style': "width: 400px;"}
+            # ),
         }
 
 class DeleteForm(forms.Form):
