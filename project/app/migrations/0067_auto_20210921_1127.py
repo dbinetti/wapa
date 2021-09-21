@@ -14,7 +14,4 @@ class Migration(migrations.Migration):
             model_name='account',
             name='voter',
         ),
-        migrations.DeleteModel(
-            name='Voter',
-        ),
     ]
