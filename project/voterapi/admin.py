@@ -39,6 +39,7 @@ class VoterAdmin(VersionAdmin):
     list_display = [
         'last_name',
         'first_name',
+        'phone',
         'age',
         'zone',
     ]
@@ -46,6 +47,8 @@ class VoterAdmin(VersionAdmin):
     ]
     list_filter = [
         'zone',
+        'party',
+        'gender',
         'is_precise',
     ]
     inlines = [

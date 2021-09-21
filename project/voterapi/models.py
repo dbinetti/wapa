@@ -38,6 +38,12 @@ class Voter(models.Model):
         default='',
         editable=True,
     )
+    location = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        editable=True,
+    )
     phone = PhoneNumberField(
         blank=False,
         null=True,

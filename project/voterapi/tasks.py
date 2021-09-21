@@ -65,6 +65,7 @@ def extract_file(filename='voters.csv'):
         rows = list(reader)
     return rows
 
+
 def transform_data(rows):
     for row in rows:
         row['phone'] = row['phone'].replace(" ", "").replace("(","").replace(")","")
@@ -155,39 +156,6 @@ def load_voters(rows):
         )
     return
 
-@job
-def update_point_from_account(account):
-    if not account.address:
-        return
-    try:
-        account.address.longitude
-        account.address.latitude
-    except KeyError:
-        log.error(f'{account.id} lon/lat')
-        return
-    point = Point(
-        account.address.longitude,
-        account.address.latitude,
-    )
-    account.point = point
-    account.save()
-    return
-
-@job
-def update_zone_from_account(account):
-    if not account.point:
-        return
-    try:
-        zone = Zone.objects.get(
-            poly__contains=account.point,
-        )
-    except Zone.DoesNotExist:
-        zone = Zone.objects.get(
-            name='Not in District',
-        )
-    account.zone = zone
-    account.save()
-    return
 
 @job
 def geocode_voter(voter):
@@ -196,9 +164,38 @@ def geocode_voter(voter):
     voter.save()
     return
 
-@job
-def geocode_account(account):
-    result = geocoder.google(str(account.address))
-    account.geocode = result.json
-    account.save()
-    return
+
+def check_precision(voter):
+    if not voter.geocode:
+        return False
+    return all([
+        voter.geocode['accuracy'] == 'ROOFTOP',
+        any([
+            voter.geocode['quality'] == 'premise',
+            voter.geocode['quality'] == 'subpremise',
+            voter.geocode['quality'] == 'street_address',
+        ])
+    ])
+
+
+def denormalize_voter(voter):
+    names = [
+        voter.first_name,
+        voter.middle_name,
+        voter.last_name,
+    ]
+    name = ' '.join(filter(None, names))
+    voter.name = name
+    voter.address = voter.geocode['address']
+    point = Point(
+        voter.geocode['lng'],
+        voter.geocode['lat'],
+    )
+    voter.point = point
+    voter.place = voter.geocode['place']
+    voter.is_precise = check_precision(voter)
+    try:
+        voter.location = f"{voter.geocode['street']}, {voter.geocode['city']}, {voter.geocode['state']}"
+    except KeyError:
+        pass
+    return voter.save()
