@@ -7,7 +7,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('votapi', '0001_initial'),
         ('app', '0066_auto_20210916_1758'),
     ]
 
