@@ -226,6 +226,7 @@ def dashboard(request):
 # Account
 @login_required
 def account(request):
+    issue = Issue.objects.get(status=Issue.STATE.active)
     account = request.user.account
     students = account.students.order_by(
         'grade',
@@ -279,6 +280,7 @@ def account(request):
             'form': form,
             'formset': formset,
             'students': students,
+            'issue': issue,
         },
     )
 
