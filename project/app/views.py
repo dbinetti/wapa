@@ -226,7 +226,7 @@ def dashboard(request):
 # Account
 @login_required
 def account(request):
-    issue = Issue.objects.get(status=Issue.STATE.active)
+    issue = Issue.objects.get(state=Issue.STATE.active)
     account = request.user.account
     students = account.students.order_by(
         'grade',
@@ -255,7 +255,7 @@ def account(request):
                     return redirect('account')
                 messages.warning(
                     request,
-                    mark_safe("Next, please send a comment to the Superintendent!"),
+                    mark_safe("Next, please send a comment."),
                 )
                 return redirect('comments')
             messages.success(
