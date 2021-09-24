@@ -345,7 +345,7 @@ def comments(request):
             if comment.state == Comment.STATE.approved:
                 messages.success(
                     request,
-                    'Comment Sent to Superintendent Bub!',
+                    f'Comment Sent to {comment.issue.recipient_name}!',
                 )
             else:
                 messages.success(

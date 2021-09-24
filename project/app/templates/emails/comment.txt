@@ -1,6 +1,6 @@
 {% autoescape off %}
 
-Dr. Bub, this message was sent by a Member of the
+{{comment.issue.recipient_name}}, this message was sent by a Member of the
 West Ada Parents Association.
 
 Parent: {{account.name}} {% if account.is_spouse %}+ Spouse{%endif%}
