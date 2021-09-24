@@ -195,7 +195,11 @@ def denormalize_voter(voter):
     voter.place = voter.geocode['place']
     voter.is_precise = check_precision(voter)
     try:
-        voter.location = f"{voter.geocode['street']}, {voter.geocode['city']}, {voter.geocode['state']}"
+        mask = "*" * len(voter.geocode['housenumber'])
     except KeyError:
-        pass
+        mask = "*"
+    try:
+        voter.location = f"{mask} {voter.geocode['street']}, {voter.geocode['city']}, {voter.geocode['state']}".upper()
+    except KeyError:
+        voter.location = f"{voter.geocode['address']}"
     return voter.save()

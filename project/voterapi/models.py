@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.contrib.postgres.search import SearchVectorField
 from model_utils import Choices
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -125,6 +126,10 @@ class Voter(models.Model):
     geocode = models.JSONField(
         blank=True,
         null=True,
+    )
+    search_vector = SearchVectorField(
+        null=True,
+        blank=True,
     )
     created = models.DateTimeField(
         auto_now_add=True,

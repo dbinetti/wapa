@@ -26,13 +26,12 @@
           </div>
           <div class='card-text'>
             <p class='lead col-md-8'>
-              While we have registered your private support for the Superintendent, you need to make your name public in order to make a public comment.  You can make this change at your <a href='{% url "account" %}'>Account Page</a>, and then return here to submit a comment.
+              You need to make your name public in order to make a public comment.  You can make this change at your <a href='{% url "account" %}'>Account Page</a>, and then return here to submit a comment.
             </p>
           </div>
         </div>
       </div>
     </section>
-
   {% elif comment.get_state_display == 'Approved' %}
     <section class='col-md-12 mt-5'>
       <div class='card'>
@@ -47,7 +46,7 @@
               <p>
                 "{{comment.content}}"
               </p>
-              <footer class="blockquote-footer">Sent to Superintendent Bub on {{comment.updated}}</footer>
+              <footer class="blockquote-footer">Sent to {{comment.issue.recipient}} on {{comment.updated}}</footer>
             </blockquote>
           </div>
         </div>
@@ -80,7 +79,7 @@
                 Your Comment was Not Approved
               </p>
               <p>
-                We generally only allow comments that are respectful and constrained to the issue at-hand, namely: keeping the schools open and masks-optional.  Please edit your comment according to these guidelines, save, and then we can approve it.
+                We generally only allow comments that are respectful and constrained to the issue at-hand.  Please edit your comment according to these guidelines, save, and then we can approve it.
               </p>
               <ul class='list-styled'>
                 <li>Remain respectful and on-topic.</li>
@@ -162,12 +161,14 @@
           <div class="card-body">
             <div class='card-title'>
               <p class='lead'>
-                We'll post your comment and forward a copy to the Superintendent
+                We'll post your comment and forward a copy to {{comment.issue.recipient}}
               </p>
               <ul class='list-styled'>
-                <li>Ask him to prioritize education.</li>
-                <li>Remind him the ISAT scores are a direct consequence of putting tracing before teaching.</li>
-                <li>Let him know the District should put kids first -- and not serve the needs of private health corporations.</li>
+                <li>Ask her why she is keeping healthy kids home despite saying her "North Star" is in-person education.</li>
+                <li>Ask her why she never disclosed her conflict of interest with her employer, Blue Cross Health Insurance.</li>
+                <li>Ask her why she is taking recommendations from the private health corporations that do business with Blue Cross.</li>
+                <li>Ask her why she didn't put the ISATs on the agenda until we raised the issue.</li>
+                <li>Ask her why she overrode her own Superintendent two days before school.</li>
               </ul>
             </div>
             <div class='card-text'>
