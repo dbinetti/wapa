@@ -338,11 +338,11 @@ def comments(request):
             comment = form.save(commit=False)
             comment.account = account
             comment.issue = issue
-            if account.user.is_verified:
-                try:
-                    comment.approve()
-                except TransitionNotAllowed:
-                    pass
+            # if account.user.is_verified:
+            #     try:
+            #         comment.approve()
+            #     except TransitionNotAllowed:
+            #         pass
             comment.save()
             if comment.state == Comment.STATE.approved:
                 messages.success(
