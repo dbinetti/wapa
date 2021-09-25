@@ -389,6 +389,9 @@ class Comment(models.Model):
                 name='unique_comment',
             )
         ]
+        ordering = (
+            '-created',
+        )
 
     @property
     def wordcount(self):

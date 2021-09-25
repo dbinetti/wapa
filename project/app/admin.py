@@ -336,7 +336,7 @@ class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     list_filter = [
         'state',
         'is_featured',
-        # 'issue',
+        'issue',
     ]
     list_display = [
         '__str__',
