@@ -229,20 +229,19 @@ def send_denial_email(account):
     # comments = account.comments
     email = build_email(
         template='emails/denied.txt',
-        subject='Comment Denied',
+        subject='Comment Not Approved',
         # context={'comments': comments},
         to=[account.user.email],
     )
     return email.send()
 
 @job
-def send_approval_email(account):
-    # comments = account.comments
+def send_approval_email(comment):
     email = build_email(
         template='emails/approved.txt',
         subject='Comment Approved!',
-        # context={'comments': comments},
-        to=[account.user.email],
+        context={'comment': comment},
+        to=[comment.account.user.email],
     )
     return email.send()
 

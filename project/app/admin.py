@@ -324,6 +324,9 @@ class SchoolAdmin(VersionAdmin):
 @admin.register(Comment)
 class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     save_on_top = True
+    search_fields = [
+        'account__name',
+    ]
     fields = [
         'state',
         'is_featured',
