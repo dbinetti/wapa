@@ -84,7 +84,7 @@
               <ul class='list-styled'>
                 <li>Remain respectful and on-topic.</li>
                 <li>Be concise.</li>
-                <li>Don't include links or attachments.</li>
+                <li>No personal attacks.</li>
               </ul>
             </div>
             <div class='card-text'>
@@ -95,7 +95,7 @@
           <div class='card-footer'>
             <ul class='list-inline'>
               <li class='list-inline-item'>
-                {% bootstrap_button "Send!" button_type='submit' size='large' %}</li>
+                {% bootstrap_button "Save!" button_type='submit' size='large' %}</li>
               <li class='list-inline-item'>
                 {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
               </li>
@@ -122,10 +122,7 @@
                 Your Comment is Pending
               </p>
               <p class='col-md-8'>
-                Forgive the delay, but we need to approve comments when the account isn't verified.  Check your email and click on the verification link we sent you to make this automatic next time.
-              </p>
-              <p class='col-md-8'>
-                If you have not yet received your verification link in email, or otherwise are having problems, please <a href='mailto:support@westadaparents.com'>contact support</a> and we'll get things cleared up right away.
+                Due to the highly charged nature of this particular issue we are requiring approval of all comments prior to posting.  Please forgive the delay; we'll do our best to get to each comment as quickly as possible, generally within a day or two.
               </p>
             </div>
             <div class='card-text mt-5 col-md-8'>
@@ -161,16 +158,19 @@
           <div class="card-body">
             <div class='card-title'>
               <p class='lead'>
-                We'll post your comment and forward a copy to {{comment.issue.recipient_name}}
+                We'll post your comment and forward a copy to {{comment.issue.recipient_name}}.  Here are some suggested comments:
               </p>
               <ul class='list-styled'>
-                <li>Ask her why she is keeping healthy kids home despite saying her "North Star" is in-person education.</li>
+                <li>Ask her why she is keeping healthy kids home despite her in-person education "North Star" principle.</li>
                 <li>Ask her why she never disclosed her conflict of interest with her employer, Blue Cross Health Insurance.</li>
                 <li>Ask her why she is taking recommendations from the private health corporations that do business with Blue Cross.</li>
                 <li>Ask her why she didn't put the ISATs on the agenda until we raised the issue.</li>
                 <li>Ask her why she overrode her own Superintendent two days before school.</li>
               </ul>
             </div>
+            <p>
+              <strong>No personal attacks.</strong>  I understand Trustee Johnson inspires passionate responses, but keep to the main issue: conflict of interest.
+            </p>
             <div class='card-text'>
                 {% bootstrap_form_errors form %}
                 {% bootstrap_field form.content show_help=True show_label=False %}

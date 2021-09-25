@@ -343,6 +343,8 @@ def comments(request):
             #         comment.approve()
             #     except TransitionNotAllowed:
             #         pass
+            if comment.state == Comment.STATE.denied:
+                comment.state = Comment.STATE.pending
             comment.save()
             if comment.state == Comment.STATE.approved:
                 messages.success(

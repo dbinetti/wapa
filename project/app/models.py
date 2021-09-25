@@ -423,6 +423,11 @@ class Comment(models.Model):
         return
 
 
+    @transition(field=state, source=[STATE.denied, STATE.approved], target=STATE.pending)
+    def pend(self):
+        return
+
+
 class Student(models.Model):
     id = HashidAutoField(
         primary_key=True,
