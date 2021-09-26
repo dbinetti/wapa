@@ -1,0 +1,53 @@
+{% autoescape off %}
+
+{{first_name}},
+
+*First*, I want to apologize for how late this followup email is; things have
+been moving at a torrid pace and it's difficult to keep up.
+
+*Second*, for those who weren't able to participate in the call itself, the net
+message was: since the challenges we are facing with the School Board are
+fundamentally political in nature, it requires a political response: namely,
+the recall of the Chair of the Board of Trustees, Amy Johnson.
+
+For a detailed explanation for why this extraordinary step is necessary, you can
+visit our main website at:
+
+https://www.recallamyjohnson.com
+
+However, the TL;DR version is that Trustee Johnson has an unresolvable conflict
+of interest due to her role as Director of Strategy for Blue Cross of Idaho.
+Her employer has been very direct and public in their call for vaccinations and
+masking as a necessary precondition for in-person learning, which is a conflict
+which she never disclosed and is fundamentally impossible to separate from her
+role as a public trustee of the schools.  Since she appears to unwilling to
+resign or recuse herself, we must incentivize her to do the right thing by
+recalling her directly.
+
+At the www.recallamyjohnson site you'll be able to sign up as either a signatory
+of the recall petition itself (if you are registered to vote in Zone 2) or as a
+volunteer to help recruit others to sign.  We will be rolling out new features
+and promoting the site more aggressively this week; for now consider this a
+special preview for those who registered for the Zoom call.
+
+*Third*, we will be holding a special in-person meetup to discuss our overall
+strategy, present volunteer opportunities, and answer any questions you may
+have.  This will be tonight, Sunday the 26th, at 6:00PM at Lucky Perk Coffee
+at 1630 S. Eagle Road in Meridian.  Yes, I understand this is very late notice
+and we understand many of you will not be able to attend; still, we hope you
+can make it and for those who can't we'll send updates via the main recall
+website.
+
+---
+
+Thank you again for registering for the Zoom call, and your continued engagement
+to prioritize education over epidemiology.  Together, we're going to do
+everything we can to put our kids first.
+
+Best, Dave
+
+
+
+
+
+{% endautoescape %}
