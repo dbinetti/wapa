@@ -22,9 +22,11 @@
   </section>
   {% endcomment %}
 
+  {% comment %}
   <section class='my-5'>
     <a href='{% url "comments" %}' class='btn btn-lg btn-success'>New!  Comments reset for <em>{{issue.name}}</em> &mdash; sent to {{issue.recipient_name}}!</a>
   </section>
+  {% endcomment %}
 
   <section class='mt-5 col-md-10'>
     <div class='card'>
