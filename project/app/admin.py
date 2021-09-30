@@ -86,6 +86,7 @@ class AccountAdmin(VersionAdmin):
         'is_public',
         'is_spouse',
         'is_steering',
+        'is_out',
         'zone',
         'story',
         # 'notes',
@@ -111,6 +112,7 @@ class AccountAdmin(VersionAdmin):
         'is_steering',
         'is_precise',
         'is_spouse',
+        'is_out',
         'zone',
     ]
     search_fields = [

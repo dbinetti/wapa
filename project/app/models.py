@@ -34,6 +34,9 @@ class Account(models.Model):
     is_public = models.BooleanField(
         default=False,
     )
+    is_out = models.BooleanField(
+        default=False,
+    )
     is_spouse = models.BooleanField(
         default=False,
     )
