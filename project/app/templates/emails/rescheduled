@@ -1,0 +1,26 @@
+{% autoescape off %}
+
+TL;DR The Monday Zoom call is cancelled; a new call is planned for Sunday at 8:00PM.  
+
+You'll need to re-register here:
+
+https://us02web.zoom.us/webinar/register/WN_PhDZGfQoTAqaykvz3r2How
+
+---
+
+Most of you likely received this as part of my WAPA update, but we've planned
+a Rally for Monday at 6:00 PM at the district office, which means we can no
+longer hold the Zoom call as planned.   This means that I needed to cancel
+the Monday meeting and set up a new call for Sunday.
+
+Apologies for the late notice, but I'm afraid there was no way to adequately
+manage two events on the same day.
+
+Thank you again for your interest, and I hope to see you on the call Sunday.
+
+Best, Dave
+
+
+
+
+{% endautoescape %}
