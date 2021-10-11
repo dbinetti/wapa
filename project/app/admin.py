@@ -87,6 +87,7 @@ class AccountAdmin(VersionAdmin):
         'is_spouse',
         'is_steering',
         'is_out',
+        'is_vip',
         'zone',
         'story',
         # 'notes',
@@ -114,6 +115,7 @@ class AccountAdmin(VersionAdmin):
         'is_spouse',
         'is_out',
         'zone',
+        'is_vip',
     ]
     search_fields = [
         'name',
