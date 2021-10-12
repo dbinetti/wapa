@@ -11,22 +11,24 @@
 {% block title %}Account{% endblock title %}
 
 {% block content %}
-  {% comment %}
+
+    {% comment %}
   <section class='mt-5'>
     <h2 class='my-3 col-md-12'>
       Account
     </h2>
     <p class='lead col-md-8'>
-      Please review your information, then <a href='{% url "comments" %}'>Send a Comment to the Superintendent</a>.
+      Please review your information, then <a href='{% url "comments" %}'>Send a Comment to Vice-Chair Rene Ozuna.</a>.
     </p>
   </section>
-  {% endcomment %}
+    {% endcomment %}
 
-  {% comment %}
+
+
   <section class='my-5'>
-    <a href='{% url "comments" %}' class='btn btn-lg btn-success'>New!  Comments reset for <em>{{issue.name}}</em> &mdash; sent to {{issue.recipient_name}}!</a>
+    <a href='{% url "comments" %}' class='btn btn-lg btn-success'>New!  Comments reset for <em>{{issue.name}}</em> &mdash; send a comment to {{issue.recipient_name}}!</a>
   </section>
-  {% endcomment %}
+
 
   <section class='mt-5 col-md-10'>
     <div class='card'>

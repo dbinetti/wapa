@@ -338,11 +338,11 @@ def comments(request):
             comment = form.save(commit=False)
             comment.account = account
             comment.issue = issue
-            # if account.user.is_verified:
-            #     try:
-            #         comment.approve()
-            #     except TransitionNotAllowed:
-            #         pass
+            if account.user.is_verified:
+                try:
+                    comment.approve()
+                except TransitionNotAllowed:
+                    pass
             if comment.state == Comment.STATE.denied:
                 comment.state = Comment.STATE.pending
             comment.save()
@@ -382,6 +382,7 @@ def comments(request):
             'comments': comments,
             'account': account,
             'form': form,
+            'issue': issue,
         },
     )
 
