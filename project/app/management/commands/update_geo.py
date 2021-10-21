@@ -1,9 +1,11 @@
-from app.tasks import update_address_from_account
-from app.tasks import update_point_from_account
-from app.tasks import update_zone_from_account
 from django.apps import apps
 from django.core.management.base import BaseCommand
 from django.db.models import Q
+
+from app.tasks import geocode_account
+from app.tasks import update_address_from_account
+from app.tasks import update_point_from_account
+from app.tasks import update_zone_from_account
 
 Account = apps.get_model("app", "Account")
 
@@ -22,27 +24,15 @@ class Command(BaseCommand):
         self.stdout.write(f"Updated addresses: {csc}")
 
 
-        # Set point when there are addresses
+        # Geocode Account
         ts = Account.objects.filter(
-            point__isnull=True,
-            address__latitude__isnull=False,
-            address__longitude__isnull=False,
+            address__isnull=False,
         )
         tsc = ts.count()
         for t in ts:
-            update_point_from_account(t)
-        self.stdout.write(f"Updated points: {tsc}")
-
-
-        # Set zone when missing
-        fs = Account.objects.filter(
-            zone__isnull=True,
-            point__isnull=False,
-        )
-        fsc = fs.count()
-        for f in fs:
-            update_zone_from_account(f)
-        self.stdout.write(f"Updated zones: {fsc}")
+            account = geocode_account(t)
+            account.save()
+        self.stdout.write(f"Geocoded Accounts: {tsc}")
 
 
         zs = Account.objects.filter(

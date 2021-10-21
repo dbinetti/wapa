@@ -415,9 +415,39 @@ def update_zone_from_account(account):
     return
 
 
+def get_precision(geocode):
+    return all([
+        geocode['accuracy'] == 'ROOFTOP',
+        any([
+            geocode['quality'] == 'premise',
+            geocode['quality'] == 'subpremise',
+            geocode['quality'] == 'street_address',
+        ])
+    ])
+
 @job
 def geocode_account(account):
     result = geocoder.google(str(account.address))
-    account.geocode = result.json
-    account.save()
-    return
+    geocode = result.json
+    is_precise = get_precision(geocode)
+    if is_precise:
+        account.is_precise = True
+        account.point = Point(
+            geocode['lng'],
+            geocode['lat'],
+        )
+        account.place = geocode['place']
+        try:
+            zone = Zone.objects.get(
+                poly__contains=account.point,
+            )
+        except Zone.DoesNotExist:
+            zone = Zone.objects.get(
+                num=0,
+            )
+        account.zone = zone
+    else:
+        geocode['status'] = 'IMPRECISE'
+        account.is_precise = False
+    account.geocode = geocode
+    return account

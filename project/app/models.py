@@ -56,7 +56,7 @@ class Account(models.Model):
         editable=False,
     )
     is_precise = models.BooleanField(
-        default=False,
+        null=True,
     )
     point = models.PointField(
         null=True,
