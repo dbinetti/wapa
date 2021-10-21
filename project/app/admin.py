@@ -86,10 +86,8 @@ class AccountAdmin(VersionAdmin):
         'is_public',
         'is_spouse',
         'is_steering',
-        'is_out',
         'is_vip',
         'zone',
-        'story',
         'user',
         # 'notes',
     ]
@@ -114,7 +112,6 @@ class AccountAdmin(VersionAdmin):
         'is_steering',
         'is_precise',
         'is_spouse',
-        'is_out',
         'zone',
         'is_vip',
     ]

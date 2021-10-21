@@ -26,7 +26,6 @@ from .forms import AccountForm
 from .forms import AttendeeForm
 from .forms import CommentForm
 from .forms import DeleteForm
-from .forms import StoryForm
 from .forms import StudentFormSet
 from .models import Account
 from .models import Attendee
@@ -305,29 +304,6 @@ def delete(request):
     )
 
 @login_required
-def story(request):
-    account = request.user.account
-    if request.POST:
-        form = StoryForm(request.POST, instance=account)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request,
-                mark_safe("Saved!"),
-            )
-            return redirect('story')
-    else:
-        form = StoryForm(instance=account)
-
-    return render(
-        request,
-        'pages/story.html',
-        context={
-            'form': form,
-        },
-    )
-
-@login_required
 def comments(request):
     account = request.user.account
     issue = Issue.objects.get(state=Issue.STATE.active)
@@ -415,29 +391,6 @@ def comment_delete(request, comment_id):
         },
     )
 
-@login_required
-def story_delete(request):
-    account = request.user.account
-    if request.method == "POST":
-        form = DeleteForm(request.POST)
-        if form.is_valid():
-            account.story = ''
-            account.save()
-            messages.error(
-                request,
-                "Story Deleted!",
-            )
-            return redirect('story')
-    else:
-        form = DeleteForm()
-    return render(
-        request,
-        'pages/story_delete.html',
-        context = {
-            'form': form,
-        },
-    )
-
 @csrf_exempt
 @require_POST
 @login_required
@@ -516,20 +469,5 @@ def event(request, event_id):
             'event': event,
             'attendees': attendees,
             'form': form,
-        }
-    )
-
-
-def stories(request):
-    stories = Account.objects.exclude(
-        story='',
-    ).order_by(
-        'updated',
-    ).values_list('story', flat=True)
-    return render(
-        request,
-        'pages/stories.html',
-        context = {
-            'stories': stories,
         }
     )

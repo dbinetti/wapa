@@ -128,25 +128,6 @@ class StudentForm(forms.ModelForm):
             'grade': "Grade for 2021-22.",
         }
 
-class StoryForm(forms.ModelForm):
-    class Meta:
-        model = Account
-        fields = [
-            'story',
-        ]
-        widgets = {
-            'story': forms.Textarea(
-                attrs={
-                    'class': 'form-control h-50',
-                    'placeholder': 'Write your story here in your own words.',
-                    'rows': 20,
-                }
-            ),
-        }
-        help_texts = {
-        }
-
-
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
@@ -155,19 +136,16 @@ class AccountForm(forms.ModelForm):
             'is_public',
             'is_spouse',
             'address',
-            'is_out',
         ]
         labels = {
             "is_public": "I Choose to be Public",
             "is_spouse": "I Represent My Spouse",
-            "is_out": "I Do Not Support the Recall",
         }
         help_texts = {
             'name': mark_safe("Please provide your <strong>real full name</strong>, which remains private unless you explcitly choose to be public."),
             'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
-            'is_out': "If you do not support recalling Amy Johnson but wish to remain in WAPA, click this box and I'll ensure you are not contacted for any recall-based activities.  This information remains private and confidential.",
             'address': mark_safe("We use this to show you're a District Resident.  Your address itself <strong>remains private and confidential</strong>."),
         }
 

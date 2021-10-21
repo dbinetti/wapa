@@ -14,8 +14,6 @@ from model_utils import Choices
 # Local
 from .managers import UserManager
 
-# from model_utils import Choices
-
 
 class Account(models.Model):
     id = HashidAutoField(
@@ -32,9 +30,6 @@ class Account(models.Model):
         default=False,
     )
     is_public = models.BooleanField(
-        default=False,
-    )
-    is_out = models.BooleanField(
         default=False,
     )
     is_spouse = models.BooleanField(
@@ -78,11 +73,6 @@ class Account(models.Model):
     )
     notes = models.TextField(
         max_length=2000,
-        blank=True,
-        default='',
-    )
-    story = models.TextField(
-        max_length=5000,
         blank=True,
         default='',
     )
@@ -161,6 +151,11 @@ class Issue(models.Model):
     )
     def __str__(self):
         return f"{self.name}"
+
+    class Meta:
+        ordering = (
+            '-created',
+        )
 
 
 class Isat(models.Model):

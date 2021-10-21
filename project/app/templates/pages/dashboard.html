@@ -225,22 +225,6 @@
     </div>
   </section>
   {% endcomment %}
-  <section class='my-5'>
-    <div class='col-lg-12'>
-      <div class='card'>
-        <h4 class='card-header'>Quarantine Story&nbsp;&nbsp;<a href='{% url "story" %}' class='btn btn-primary btn-sm'>Update</a></h4>
-        <div class="card-body">
-          <p class='card-text'>
-            {% if account.story %}
-              {{account.story}}
-            {% else %}
-              No story provided.
-            {% endif %}
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 {% endblock content %}
 
 {% block scripts %}

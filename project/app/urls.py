@@ -38,11 +38,6 @@ urlpatterns = [
     path('comments', views.comments, name='comments',),
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
 
-    # Story
-    path('story/', views.story, name='story',),
-    path('story/delete/', views.story_delete, name='story-delete',),
-    path('stories/', views.stories, name='stories',),
-
     # Events
     path('event/<str:event_id>', views.event, name='event',),
     path('events', views.events, name='events',),
