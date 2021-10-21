@@ -90,6 +90,7 @@ class AccountAdmin(VersionAdmin):
         'is_vip',
         'zone',
         'story',
+        'user',
         # 'notes',
     ]
     list_display = [
