@@ -42,6 +42,9 @@ urlpatterns = [
     path('event/<str:event_id>', views.event, name='event',),
     path('events', views.events, name='events',),
 
+    # Updates
+    path('updates/', views.updates, name='updates',),
+
     # Share
     path('share/', TemplateView.as_view(template_name='pages/share.html'), name='share'),
 

@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+
+{% block title %}Updates{% endblock title %}
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Updates
+    </h2>
+  </section>
+  <section class='my-5'>
+    <p class='lead'>
+      Catch up by reading our email updates.
+    </p>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>
+            Date
+          </th>
+          <th>
+            Subject
+          </th>
+          <th>
+            Preview
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for update in updates %}
+        <tr>
+          <td><a href='{{update.long_archive_url}}'>{{update.date|date:"m/d"}}</a></td>
+          <td><a href='{{update.long_archive_url}}'>{{update.settings.subject_line}}</a></td>
+          {# <td>{{update.settings.subject_line}}</td> #}
+          <td>{{update.settings.preview_text}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock content %}

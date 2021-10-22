@@ -27,11 +27,11 @@ from .forms import AttendeeForm
 from .forms import CommentForm
 from .forms import DeleteForm
 from .forms import StudentFormSet
-from .models import Account
 from .models import Attendee
 from .models import Comment
 from .models import Event
 from .models import Issue
+from .tasks import get_mailchimp_client
 from .tasks import send_verification_email
 
 log = logging.getLogger(__name__)
@@ -470,4 +470,23 @@ def event(request, event_id):
             'attendees': attendees,
             'form': form,
         }
+    )
+
+def updates(request):
+    client = get_mailchimp_client()
+    campaigns = client.campaigns.all(
+        list_id=settings.MAILCHIMP_AUDIENCE_ID,
+        sort_field='send_time',
+        count=100,
+    )['campaigns']
+    updates = [x for x in campaigns if x['status'] == 'sent' and 'Re-sent' not in x['settings']['title']]
+    updates.reverse()
+    for u in updates:
+        u['date'] = datetime.datetime.strptime(u['send_time'], '%Y-%m-%dT%H:%M:%S%z')
+    return render(
+        request,
+        'pages/updates.html',
+        context = {
+            'updates': updates,
+        },
     )

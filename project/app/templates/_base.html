@@ -48,6 +48,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class='nav-item mt-1'>
+              <a href="{% url 'updates' %}" class='mr-3'><span class='bi-newspaper'></span>&nbsp;&nbsp;Updates</a>
+            </li>
+            <li class='nav-item mt-1'>
               <a href="{% url 'resources' %}" class='mr-3'><span class='bi-book'></span>&nbsp;&nbsp;Resources</a>
             </li>
             {% if request.user.is_authenticated %}

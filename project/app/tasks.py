@@ -110,7 +110,7 @@ def get_mailchimp_client():
     enabled = not settings.DEBUG
     return MailChimp(
         mc_api=settings.MAILCHIMP_API_KEY,
-        enabled=enabled,
+        # enabled=enabled,
     )
 
 @job
