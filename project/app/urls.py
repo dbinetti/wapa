@@ -19,37 +19,26 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('join', RedirectView.as_view(url='login'), name='join'),
 
-    # Pages
-    path('truenorth/', TemplateView.as_view(template_name='pages/truenorth.html'), name='truenorth',),
-    path('resources/', TemplateView.as_view(template_name='pages/resources.html'), name='resources',),
-    path('quarantine/', TemplateView.as_view(template_name='pages/quarantine.html'), name='quarantine',),
-    path('appeal/', TemplateView.as_view(template_name='pages/appeal.html'), name='appeal'),
-    path('plan/', TemplateView.as_view(template_name='pages/plan.html'), name='plan',),
-    path('compare/', TemplateView.as_view(template_name='pages/compare.html'), name='compare',),
-
-
     # Account
     path('dashboard', views.dashboard, name='dashboard',),
     path('account', views.account, name='account',),
     path('upload-picture', views.upload_picture, name='upload-picture',),
     path('delete-picture', views.delete_picture, name='delete-picture',),
+    path('delete/', views.delete, name='delete',),
 
     # Comments
     path('comments', views.comments, name='comments',),
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
 
-    # Events
-    path('event/<str:event_id>', views.event, name='event',),
-    path('events', views.events, name='events',),
-
-    # Updates
-    path('updates/', views.updates, name='updates',),
-
-    # Share
-    path('share/', TemplateView.as_view(template_name='pages/share.html'), name='share'),
-
-    # Delete
-    path('delete/', views.delete, name='delete',),
+    # Resources
+    path('resources/', TemplateView.as_view(template_name='pages/resources/index.html'), name='resources',),
+    path('resources/updates/', views.updates, name='updates',),
+    path('resources/meetings/', TemplateView.as_view(template_name='pages/resources/meetings/index.html'), name='meetings',),
+    path('resources/plans/', TemplateView.as_view(template_name='pages/resources/plans/index.html'), name='plans',),
+    path('resources/plans/quarantine/', TemplateView.as_view(template_name='pages/resources/plans/quarantine.html'), name='quarantine',),
+    path('resources/plans/truenorth/', TemplateView.as_view(template_name='pages/resources/plans/truenorth.html'), name='truenorth',),
+    path('resources/plans/appeal/', TemplateView.as_view(template_name='pages/resources/plans/appeal.html'), name='appeal'),
+    path('resources/plans/compare/', TemplateView.as_view(template_name='pages/resources/plans/compare.html'), name='compare',),
 
     # Footer
     path('about/', TemplateView.as_view(template_name='footer/about.html'), name='about',),

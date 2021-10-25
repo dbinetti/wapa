@@ -413,64 +413,6 @@ def delete_picture(request):
     account.save()
     return redirect('account')
 
-@login_required
-def events(request):
-    events = Event.objects.filter(
-    ).order_by(
-        'date',
-    )
-    if events.count() == 1:
-        event = events.first()
-        return redirect(
-            'event',
-            event.id,
-        )
-    return render(
-        request,
-        'pages/events.html',
-        context = {
-            'events': events,
-        }
-    )
-
-@login_required
-def event(request, event_id):
-    event = get_object_or_404(
-        Event,
-        pk=event_id,
-    )
-    attendees = event.attendees.filter(
-        is_confirmed=True,
-        account__is_public=True,
-    ).order_by(
-        '-created',
-    )
-    try:
-        attendee = event.attendees.get(account=request.user.account)
-    except Attendee.DoesNotExist:
-        attendee = None
-    if request.method == 'POST':
-        form = AttendeeForm(request.POST, instance=attendee)
-        if form.is_valid():
-            attendee = form.save(commit=False)
-            attendee.account = request.user.account
-            attendee.event = event
-            attendee.save()
-            messages.success(
-                request,
-                'Saved!',
-            )
-            return redirect('event', event_id)
-    form = AttendeeForm(instance=attendee)
-    return render(
-        request,
-        'pages/event.html',
-        context = {
-            'event': event,
-            'attendees': attendees,
-            'form': form,
-        }
-    )
 
 def updates(request):
     client = get_mailchimp_client()
@@ -485,7 +427,7 @@ def updates(request):
         u['date'] = datetime.datetime.strptime(u['send_time'], '%Y-%m-%dT%H:%M:%S%z')
     return render(
         request,
-        'pages/updates.html',
+        'pages/resources/updates/index.html',
         context = {
             'updates': updates,
         },
