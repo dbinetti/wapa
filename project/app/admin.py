@@ -143,6 +143,7 @@ class AccountAdmin(VersionAdmin):
         'place',
     ]
 
+
 @admin.register(Zone)
 class ZoneAdmin(VersionAdmin):
     save_on_top = True
@@ -284,11 +285,14 @@ class IssueAdmin(VersionAdmin):
     autocomplete_fields = [
     ]
 
+
 @admin.register(School)
 class SchoolAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
+        'nurse_name',
+        'nurse_email',
         'full',
         'kind',
         'school_id',
@@ -300,16 +304,20 @@ class SchoolAdmin(VersionAdmin):
     list_display = [
         'id',
         'name',
-        'full',
-        'school_id',
-        'kind',
-        'address_raw'
+        'nurse_name',
+        'nurse_email',
+        # 'full',
+        # 'school_id',
+        # 'kind',
+        # 'address_raw'
     ]
     list_editable = [
         'name',
-        'full',
-        'kind',
-        'school_id',
+        'nurse_name',
+        'nurse_email',
+        # 'full',
+        # 'kind',
+        # 'school_id',
     ]
     list_filter = [
         'kind',
@@ -322,6 +330,7 @@ class SchoolAdmin(VersionAdmin):
         'name',
         '-created',
     ]
+
 
 @admin.register(Comment)
 class CommentAdmin(FSMTransitionMixin, VersionAdmin):

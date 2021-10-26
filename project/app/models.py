@@ -291,6 +291,16 @@ class School(models.Model):
         max_length=100,
         blank=False,
     )
+    nurse_name = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+    )
+    nurse_email = models.EmailField(
+        max_length=255,
+        blank=True,
+        default='',
+    )
     school_id = models.IntegerField(
         null=True,
         blank=True,
@@ -455,6 +465,11 @@ class Student(models.Model):
         choices=GRADE,
         blank=False,
         null=False,
+    )
+    exemption = models.ImageField(
+        null=True,
+        blank=True,
+        default='wapa/exemption',
     )
     account = models.ForeignKey(
         'app.Account',

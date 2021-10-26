@@ -1,0 +1,95 @@
+{% extends '_base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+{% load static %}
+
+{% block title %}Mask Exemptions Information{% endblock title %}
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Medical Exemption Information
+    </h2>
+  </section>
+  <section class='my-5'>
+    
+    <p class='lead'>
+      Medical exemptions follow a three-step process.
+    </p>
+  </section>
+  <section class='my-5 col-lg-8'>
+    <h4>
+      Step One: Secure your Medical Exemption
+    </h4>
+    <p>
+      You must receive documentation from a "medical provider" that clearly indicates the name and date of birth of your child.  No reason need be provided; all that is required is that an exemption has been granted.
+    </p>
+    <p>
+      <strong>The medical provider need not be a pediatrician or medical doctor.</strong>
+    </p>
+    <p>
+      The medical provider definition is outlined in <a href='https://legislature.idaho.gov/statutesrules/idstat/title39/t39ch77/sect39-7702/'>Title 39 of the Idaho Statute</a>, and includes the following health care professionals listed in <a href='https://legislature.idaho.gov/statutesrules/idstat/Title54/'>Idaho Statute, Title 54</a>:
+    </p>
+    <ul class='list-styled'>
+      <li>Psychologists</li>
+      <li>Nurses</li>
+      <li>Speech Pathologists</li>
+      <li>Audiologists</li>
+      <li>Respiratory Therapists</li>
+      <li>Dentists</li>
+      <li>Orthodontists</li>
+      <li>Chiropractors</li>
+      <li>Optometrists</li>
+      <li>Pharmacists</li>
+      <li>Physical Therapists</li>
+      <li>Acupuncturists</li>
+      <li>Nutritionists</li>
+      <li>Massage Therapists</li>
+      <li>Athletic Trainers</li>
+      <li>Midwifes</li>
+      <li>Physicians</li>
+      <li>Physician Assistants</li>
+    </ul>
+    <p>
+      <strong>Again, the medical provider need not be a pediatrician.</strong>  They need only fall into one of above categories and be currently licensed by the State of Idaho.
+    </p>
+    <p>
+      Here is an <a href='{% static "app/redacted_exemption.pdf" %}'>example exemption.</a>
+    </p>
+    <p>
+      You can also provide this <a href='{% static "app/exemption_form_word.docx" %}'>Word Document</a> to the medical provider as a base template.
+    </p>
+    <p>
+      Finally, you can simply "fill in the blanks" of this <a href='{% static "app/exemption_form_blank.pdf" %}'>PDF Document</a>.
+    </p>
+  </section>
+  <section class='my-5 col-lg-8'>
+    <h4>
+      Step Two: File your Exemption with the School Nurse
+    </h4>
+    <p>
+      Your exemption can be filed via email with the School Nurse to take immediate effect.  Simply send the nurse an email with your exemption attached, and that's that.  Here is the list of current school nurses and their contact information.
+    </p>
+    <ul class='list-styled'>
+
+    </ul>
+  </section>
+  <section class='my-5 col-lg-8'>
+    <h4>
+      Step Three: Send your Child to School Mask-Free with a Notice
+    </h4>
+    <p>
+      This step is purely optional, but will assist your child in navigating the school environment itself.
+    </p>
+    <p>
+      In elementary school it's a good idea to simply send a note to the teacher in advance indicating that you have a Medical Exemption on file with the school nurse.
+    </p>
+    <p>
+      For Middle and High School, download and print this letter which your student can show any teacher or administrator who might have questions about their exempted status.
+    </p>
+    <p>
+      <a href='{% static "app/school_notice.pdf" %}'>Medical Exemption Notice</a>
+    </p>
+  </section>
+{% endblock content %}

@@ -31,6 +31,7 @@ urlpatterns = [
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
 
     # Resources
+    path('exemptions', TemplateView.as_view(template_name='pages/exemptions.html'), name='exemptions',),
     path('resources/', TemplateView.as_view(template_name='pages/resources/index.html'), name='resources',),
     path('resources/updates/', views.updates, name='updates',),
     path('resources/meetings/', TemplateView.as_view(template_name='pages/resources/meetings/index.html'), name='meetings',),
