@@ -121,4 +121,58 @@
     </p>
   </section>
 
+  <section class='my-5'>
+    <ul class='list-inline'>
+      <li class='list-inline-item'>
+        {% bootstrap_button "Share on Facebook" button_type='link' size='large' button_class='btn-primary' extra_classes='ml-3 mt-3' id='facebook-share-button'%}
+      </li>
+      <li class='list-inline-item'>
+        {% bootstrap_button "Share via Text" button_type='link' size='large' button_class='btn-success' extra_classes='ml-3 mt-3' id='text-share-button'%}
+      </li>
+    </ul>
+  </section>
+
 {% endblock content %}
+
+{% block scripts %}
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '{% get_env_var "FACEBOOK_CLIENT_ID" %}',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v11.0'
+      });
+    };
+  </script>
+  <script>
+    const FBbutton = document.querySelector('#facebook-share-button');
+    FBbutton.addEventListener('click', async () => {
+      FB.ui({
+        method: "share",
+        title: "Mask-Exemption Monday; Three-Easy Steps",
+        href: "https://www.westadaparents.com/exemptions",
+      }, function(response){});
+    });
+  </script>
+
+  <script>
+    const toShare = {
+      // text: "{{comment.content|escapejs}}",
+      text: "Mask-Exemption Monday; Three-Easy Steps",
+      url: "https://www.westadaparents.com/exemptions",
+    };
+    const button = document.querySelector('#text-share-button');
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.share(toShare); // Will trigger the native "share" feature
+        button.textContent = 'Thank You -- Share Again!';
+      }
+      catch(err) {
+        Sentry.captureException(err);
+        $("#text-share-button").replaceWith( "<p class='align-middle ml-3 mt-3'>Copy/Paste '<strong>https://www.westadaparents.com/exemptions</strong>' in your Text or Email</p>" );
+      }
+    });
+  </script>
+{% endblock scripts %}
