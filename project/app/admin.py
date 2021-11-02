@@ -103,6 +103,7 @@ class AccountAdmin(VersionAdmin):
         # 'notes',
     ]
     list_editable = [
+        'name',
         'address',
     ]
     list_per_page = 10

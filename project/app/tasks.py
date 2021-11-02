@@ -327,6 +327,43 @@ def send_review_from_account(account):
 
 
 
+@job
+def send_zone_one(account):
+    if account.zone.num != 1:
+        return
+    from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
+    first_name = account.name.split(" ")[0]
+    email = build_email(
+        template='emails/zone_one.txt',
+        subject='Lori Frasure for West Ada',
+        context={
+            'first_name': first_name,
+        },
+        from_email=from_email,
+        to=[f'{account.name} <{account.user.email}>'],
+    )
+    return email.send()
+
+
+@job
+def send_zone_three(account):
+    if account.zone.num != 3:
+        return
+    from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
+    first_name = account.name.split(" ")[0]
+    email = build_email(
+        template='emails/zone_three.txt',
+        subject='Angie Redford for West Ada',
+        context={
+            'first_name': first_name,
+        },
+        from_email=from_email,
+        to=[f'{account.name} <{account.user.email}>'],
+    )
+    return email.send()
+
+
+
 def get_letter_from_comment(comment):
     context={
         'comment': comment,
