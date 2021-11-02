@@ -333,6 +333,10 @@ def send_zone_one(account):
         return
     from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
     first_name = account.name.split(" ")[0]
+    if account.name == 'Unknown':
+        to_block = [f'{account.name} <{account.user.email}>']
+    else:
+        to_block = [f'{account.user.email}']
     email = build_email(
         template='emails/zone_one.txt',
         subject='Lori Frasure for West Ada School Board',
@@ -340,7 +344,7 @@ def send_zone_one(account):
             'first_name': first_name,
         },
         from_email=from_email,
-        to=[f'{account.name} <{account.user.email}>'],
+        to=to_block,
     )
     return email.send()
 
@@ -351,6 +355,10 @@ def send_zone_three(account):
         return
     from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
     first_name = account.name.split(" ")[0]
+    if account.name == 'Unknown':
+        to_block = [f'{account.name} <{account.user.email}>']
+    else:
+        to_block = [f'{account.user.email}']
     email = build_email(
         template='emails/zone_three.txt',
         subject='Angie Redford for West Ada School Board',
@@ -358,7 +366,7 @@ def send_zone_three(account):
             'first_name': first_name,
         },
         from_email=from_email,
-        to=[f'{account.name} <{account.user.email}>'],
+        to=to_block,
     )
     return email.send()
 
