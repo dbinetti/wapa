@@ -335,7 +335,7 @@ def send_zone_one(account):
     first_name = account.name.split(" ")[0]
     email = build_email(
         template='emails/zone_one.txt',
-        subject='Lori Frasure for West Ada',
+        subject='Lori Frasure for West Ada School Board',
         context={
             'first_name': first_name,
         },
@@ -353,7 +353,7 @@ def send_zone_three(account):
     first_name = account.name.split(" ")[0]
     email = build_email(
         template='emails/zone_three.txt',
-        subject='Angie Redford for West Ada',
+        subject='Angie Redford for West Ada School Board',
         context={
             'first_name': first_name,
         },

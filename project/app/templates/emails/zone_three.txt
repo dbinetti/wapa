@@ -1,6 +1,7 @@
 {% autoescape off %}
-
+{% if first_name != 'Unknown' %}
 {{first_name}},
+{%endif%}
 
 I'm writing you this personal message asking that you vote for Angie
 Redford today because your vote matters.
