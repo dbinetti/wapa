@@ -92,6 +92,7 @@ class AccountAdmin(VersionAdmin):
         # 'notes',
     ]
     list_display = [
+        'id',
         'name',
         'address',
         'address_raw',
