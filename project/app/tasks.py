@@ -19,8 +19,6 @@ from django_rq import job
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
-from scourgify import normalize_address_record
-from scourgify.exceptions import UnParseableAddressError
 
 from .models import Account
 from .models import School
@@ -404,18 +402,6 @@ def merge_letter_from_comments(comments):
         margin_left='20mm',
     )
     return pdf
-
-@job
-def normalize_address(account):
-    try:
-        address = normalize_address_record(str(account.address))
-    except UnParseableAddressError as e:
-        log.error(e)
-        return
-    address_json = json.dumps(address)
-    account.address_json = address_json
-    account.save()
-    return
 
 @job
 def update_address_from_account(account):
