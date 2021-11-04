@@ -15,6 +15,7 @@ from .models import Comment
 from .models import Isat
 from .models import Student
 from .models import User
+from .widgets import AddressWidget
 
 StudentFormSet = inlineformset_factory(
     Account,
@@ -27,19 +28,6 @@ StudentFormSet = inlineformset_factory(
     extra=1,
 )
 
-
-class AdminAccountForm(forms.ModelForm):
-    class Meta:
-        model = Account
-        fields = '__all__'
-
-        widgets = {
-            # 'voter': AutocompleteSelect(
-            #     Account._meta.get_field('voter'),
-            #     admin.site,
-            #     attrs={'style': "width: 400px;"}
-            # ),
-        }
 
 class DeleteForm(forms.Form):
     confirm = forms.BooleanField(
@@ -128,6 +116,40 @@ class StudentForm(forms.ModelForm):
             'grade': "Grade for 2021-22.",
         }
 
+class AccountAdminForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = [
+        'picture',
+        'name',
+        'address_too',
+        'address_raw',
+        # 'voter',
+        # 'point',
+        # 'is_influential',
+        'geocode',
+        'is_precise',
+        'place',
+        'point',
+        'is_public',
+        'is_spouse',
+        'is_steering',
+        'is_vip',
+        'zone',
+        'user',        ]
+        widgets = {
+            'address_too': AddressWidget(
+                attrs={'style': "width: 600px;"}
+            ),
+        }
+
+        help_texts = {
+            'name': mark_safe("We may have copied this from your Voter Record; feel free to update it to your preferred name."),
+            'address_too': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong> unless we certify."),
+            'email': mark_safe("We do not sell, share, or spam you."),
+        }
+
+
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
@@ -135,8 +157,13 @@ class AccountForm(forms.ModelForm):
             'name',
             'is_public',
             'is_spouse',
-            'address',
+            'address_too',
         ]
+        widgets = {
+            'address_too': AddressWidget(
+                attrs={'style': "width: 600px;"}
+            ),
+        }
         labels = {
             "is_public": "I Choose to be Public",
             "is_spouse": "I Represent My Spouse",
@@ -146,7 +173,7 @@ class AccountForm(forms.ModelForm):
             'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
-            'address': mark_safe("We use this to show you're a District Resident.  Your address itself <strong>remains private and confidential</strong>."),
+            'address_too': mark_safe("We use this to show you're a District Resident.  Your address itself <strong>remains private and confidential</strong>."),
         }
 
     def clean(self):

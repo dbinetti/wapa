@@ -1,7 +1,7 @@
 # Django
 # First-Party
-from address.models import AddressField
-from address.widgets import AddressWidget
+# from address.models import AddressField
+# from address.widgets import AddressWidget
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
@@ -10,7 +10,7 @@ from fsm_admin.mixins import FSMTransitionMixin
 from reversion.admin import VersionAdmin
 
 # Local
-from .forms import AdminAccountForm
+from .forms import AccountAdminForm
 from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .inlines import AccountInline
@@ -26,6 +26,7 @@ from .models import Issue
 from .models import School
 from .models import User
 from .models import Zone
+from .widgets import AddressWidget
 
 
 def approve(modeladmin, request, queryset):
@@ -63,18 +64,22 @@ class AddressFilter(admin.SimpleListFilter):
         # to decide how to filter the queryset.
         if self.value() == 'is_address':
             return queryset.filter(
-                address__isnull=False,
                 point__isnull=True,
+            ).exclude(
+                address_too='',
             )
 
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
-    form = AdminAccountForm
+    def get_changelist_form(self, request, **kwargs):
+        return AccountAdminForm
+
+    form = AccountAdminForm
     save_on_top = True
     fields = [
         'picture',
         'name',
-        'address',
+        'address_too',
         'address_raw',
         # 'voter',
         # 'point',
@@ -94,7 +99,7 @@ class AccountAdmin(VersionAdmin):
     list_display = [
         'id',
         'name',
-        'address',
+        'address_too',
         'address_raw',
         'is_vip',
         # 'is_public',
@@ -105,7 +110,7 @@ class AccountAdmin(VersionAdmin):
     ]
     list_editable = [
         'name',
-        'address',
+        'address_too',
     ]
     list_per_page = 10
     list_filter = [
@@ -132,17 +137,15 @@ class AccountAdmin(VersionAdmin):
     ordering = [
         '-created',
     ]
-    formfield_overrides = {
-        AddressField: {
-            'widget': AddressWidget(
-                attrs={
-                    'size':'50',
-                },
-            )
-        },
-    }
+    # formfield_overrides = {
+    #     AddressField: {
+    #         'widget': AddressWidget(
+    #             attrs={'style': "width: 600px;"}
+    #         )
+    #     },
+    # }
     readonly_fields = [
-        'place',
+        # 'place',
     ]
 
 

@@ -1,11 +1,10 @@
+# from app.tasks import update_point_from_account
+from app.tasks import geocode_account
+from app.tasks import update_address_from_account
+from app.tasks import update_zone_from_account
 from django.apps import apps
 from django.core.management.base import BaseCommand
 from django.db.models import Q
-
-from app.tasks import geocode_account
-from app.tasks import update_address_from_account
-from app.tasks import update_point_from_account
-from app.tasks import update_zone_from_account
 
 Account = apps.get_model("app", "Account")
 
@@ -16,7 +15,8 @@ class Command(BaseCommand):
         # Set address raw for logging
         cs = Account.objects.filter(
             Q(address_raw='') | Q(address_raw='None'),
-            address__isnull=False,
+        ).exclude(
+            address_too='',
         )
         csc = cs.count()
         for c in cs:
@@ -25,8 +25,8 @@ class Command(BaseCommand):
 
 
         # Geocode Account
-        ts = Account.objects.filter(
-            address__isnull=False,
+        ts = Account.objects.exclude(
+            address_too='',
         )
         tsc = ts.count()
         for t in ts:
@@ -36,8 +36,9 @@ class Command(BaseCommand):
 
 
         zs = Account.objects.filter(
-            address__isnull=True,
             zone__isnull=False,
+        ).exclude(
+            address_too='',
         )
         zsc = zs.count()
         zs.update(zone=None)
@@ -45,8 +46,9 @@ class Command(BaseCommand):
 
 
         ps = Account.objects.filter(
-            address__isnull=True,
             point__isnull=False,
+        ).exclude(
+            address_too='',
         )
         psc = ps.count()
         ps.update(point=None)

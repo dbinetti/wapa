@@ -2,6 +2,7 @@
 import datetime
 
 from address.models import AddressField
+# from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.gis.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -58,7 +59,7 @@ class Account(models.Model):
         max_length=255,
         blank=True,
         default='',
-        editable=False,
+        editable=True,
     )
     is_precise = models.BooleanField(
         null=True,

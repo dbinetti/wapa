@@ -298,34 +298,6 @@ def denorm_students(account):
 
 
 @job
-def send_review_from_account(account):
-    from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
-    need_student = bool(account.students.count())
-    need_address = bool(account.address)
-    students_raw = account.students.order_by(
-        'school__kind',
-        'school__name',
-        'grade',
-    )
-    students_comp = [f"{x.school.name} {x.get_grade_display()}" for x in students_raw]
-    students = "; ".join(list(students_comp))
-    email = build_email(
-        template='emails/review.txt',
-        subject='Administrative Request: Account Review',
-        context={
-            'account': account,
-            'need_student': need_student,
-            'need_address': need_address,
-            'students': students,
-        },
-        from_email=from_email,
-        to=[f'{account.name} <{account.user.email}>'],
-    )
-    return email.send()
-
-
-
-@job
 def send_zone_one(account):
     if account.zone.num != 1:
         return
@@ -407,27 +379,27 @@ def merge_letter_from_comments(comments):
 def update_address_from_account(account):
     if not account.address:
         return
-    account.address_raw = str(account.address)
+    account.address_raw = account.address_too
     account.save()
     return
 
-@job
-def update_point_from_account(account):
-    if not account.address:
-        return
-    try:
-        account.address.longitude
-        account.address.latitude
-    except KeyError:
-        log.error(f'{account.id} lon/lat')
-        return
-    point = Point(
-        account.address.longitude,
-        account.address.latitude,
-    )
-    account.point = point
-    account.save()
-    return
+# @job
+# def update_point_from_account(account):
+#     if not account.address:
+#         return
+#     try:
+#         account.address.longitude
+#         account.address.latitude
+#     except KeyError:
+#         log.error(f'{account.id} lon/lat')
+#         return
+#     point = Point(
+#         account.address.longitude,
+#         account.address.latitude,
+#     )
+#     account.point = point
+#     account.save()
+#     return
 
 @job
 def update_zone_from_account(account):
@@ -458,7 +430,7 @@ def get_precision(geocode):
 
 @job
 def geocode_account(account):
-    result = geocoder.google(str(account.address))
+    result = geocoder.google(account.address_too)
     geocode = result.json
     is_precise = get_precision(geocode)
     if is_precise:
