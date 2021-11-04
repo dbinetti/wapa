@@ -42,7 +42,7 @@
   "environments": {
     "test": {
       "addons": [
-        "heroku-postgresql:in-dyno",
+        "heroku-postgresql:hobby",
         "heroku-redis:in-dyno"
       ],
       "env": {
