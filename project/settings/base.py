@@ -267,7 +267,6 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django_rq',
     'reversion',
-    'address',
     'fsm_admin',
     'cloudinary',
     'bootstrap4',

@@ -1,8 +1,6 @@
 # First-Party
 import datetime
 
-from address.models import AddressField
-# from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.gis.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -35,11 +33,6 @@ class Account(models.Model):
     )
     is_spouse = models.BooleanField(
         default=False,
-    )
-    address = AddressField(
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL
     )
     address_too = models.CharField(
         max_length=512,
