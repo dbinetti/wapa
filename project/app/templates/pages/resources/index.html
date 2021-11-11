@@ -32,7 +32,7 @@
       <tbody>
         <tr>
           <td>
-            <a href='{% url "exemptions" %}'><h3 class='bi-folder2'></h3></a>
+            <a href='{% url "exemptions" %}'><h3 class='bi-file-pdf'></h3></a>
           </td>
           <td>
             Read information on how to secure a <a href='{% url "exemptions" %}'>Mask Exemption</a> for your child.
@@ -56,10 +56,10 @@
         </tr>
         <tr>
           <td>
-            <a href='{% url "plans" %}'><h3 class='bi-folder2'></h3></a>
+            <a href='{% static "app/attorney_general_response.pdf" %}'><h3 class='bi-file-pdf'></h3></a>
           </td>
           <td>
-            Read <a href='{% url "plans" %}'>Operational Plans</a> of the WASD and WAPA.
+            The Attorney General Office's response to Amy Johnson's leaked letter.
           </td>
         </tr>
         <tr>
@@ -76,6 +76,14 @@
           </td>
           <td>
             The formal complaint calling for a full, fair, and independent investigation into Amy Johnson's Conflict of Interest.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href='{% url "plans" %}'><h3 class='bi-folder2'></h3></a>
+          </td>
+          <td>
+            Read <a href='{% url "plans" %}'>Operational Plans</a> of the WASD and WAPA.
           </td>
         </tr>
         <tr>
