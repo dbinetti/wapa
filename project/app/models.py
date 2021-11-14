@@ -48,6 +48,10 @@ class Account(models.Model):
         blank=True,
         null=True,
     )
+    voter_json = models.JSONField(
+        blank=True,
+        null=True,
+    )
     place = models.CharField(
         max_length=255,
         blank=True,

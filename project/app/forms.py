@@ -1,4 +1,5 @@
 # Django
+from dal import autocomplete
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.widgets import AutocompleteSelect
@@ -150,7 +151,16 @@ class AccountAdminForm(forms.ModelForm):
         }
 
 
+# def get_choice_list():
+#     return [model.test for model in TModel.objects.all()]
+
+
 class AccountForm(forms.ModelForm):
+    # voter_json = autocomplete.Select2ListCreateChoiceField(
+    #     choice_list=get_choice_list,
+    #     required=False,
+    #     widget=autocomplete.ListSelect2(url='select2_list')
+    # )
     class Meta:
         model = Account
         fields = [
@@ -158,6 +168,7 @@ class AccountForm(forms.ModelForm):
             'is_public',
             'is_spouse',
             'address_too',
+            'voter_json',
         ]
         widgets = {
             'address_too': AddressWidget(

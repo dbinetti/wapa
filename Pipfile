@@ -45,6 +45,8 @@ django-fsm-admin = "*"
 python-magic = "*"
 python-pdf = "*"
 geocoder = "*"
+django-autocomplete-light = "*"
+
 
 [requires]
 python_version = "3.9"

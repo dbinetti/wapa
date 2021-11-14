@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block formmedia %}
+  {{ form.media }}
+{% endblock formmedia %}
+
+
+{% block content %}
+<div>
+    <form>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" />
+    </form>
+</div>
+{% endblock %}

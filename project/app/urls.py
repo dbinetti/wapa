@@ -26,6 +26,9 @@ urlpatterns = [
     path('delete-picture', views.delete_picture, name='delete-picture',),
     path('delete/', views.delete, name='delete',),
 
+    path('search', views.search, name='search',),
+    path('test', views.Select2ListViewAutocomplete.as_view(), name='select2_list',),
+
     # Comments
     path('comments', views.comments, name='comments',),
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),

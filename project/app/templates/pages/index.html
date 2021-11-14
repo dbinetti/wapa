@@ -7,16 +7,16 @@
 {% block content %}
   <section class='jumbotron'>
     <div class='wistia mb-5'>
-      <script src="https://fast.wistia.com/embed/medias/6vujamcxb1.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_6vujamcxb1 popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
+      <script src="https://fast.wistia.com/embed/medias/z8rp09l9x8.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_6vujamcxb1 popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
     </div>
     <a href='{% url "login" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
       Click to <strong>Join <span id='member-count'></span> Parents<br>in the West Ada Parents Association</strong>
     </a>
-    <a class="btn btn-outline-dark btn-lg btn-block mt-3" data-toggle="collapse" href="#readmore" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Read More
-    </a>
+    {# <a class="btn btn-outline-dark btn-lg btn-block mt-3" data-toggle="collapse" href="#readmore" role="button" aria-expanded="false" aria-controls="collapseExample"> #}
+      {# Read More #}
+    {# </a> #}
   </section>
-
+  {% comment %}
   <section class='m-3 col-lg-7 collapse' id='readmore'>
     <h3>
       Special Board Meeting Today
@@ -130,8 +130,8 @@
       We’ll see what they decide.
     </p>
   </section>
+{% endcomment %}
 
-  {% comment %}
   <section class='m-3'>
     <table class='table'>
       <thead>
@@ -180,7 +180,7 @@
       </tbody>
     </table>
   </section>
-  {% endcomment %}
+
 {% endblock content %}
 {% block scripts %}
   <script>
