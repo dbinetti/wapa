@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load app_tags %}
 
 {% block styles %}
   <style>
@@ -38,7 +39,11 @@
         return;
       }
       let list = '';
-      fetch('http://localhost:8080/search?q=' + val).then(
+      fetch('{% get_env_var "VOTER_API_HOST" %}' + '/search?q=' + val, {
+       headers: new Headers({
+         'Authorization': 'Token ' + '{% get_env_var "VOTER_API_KEY" %}',
+       })
+      }).then(
        function (response) {
          return response.json();
        }).then(function (data) {

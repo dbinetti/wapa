@@ -441,9 +441,13 @@ def search(request):
 # @login_required
 def confirm(request, voter_pk):
     account = request.user.account
-    url = f'http://localhost:8080/voter/{voter_pk}'
+    url = f'{settings.VOTER_API_HOST}/voter/{voter_pk}'
+    headers={
+        'Authorization': f'Token {settings.VOTER_API_KEY}'
+    }
     response = requests.get(
         url,
+        headers=headers,
     )
     voter_json = response.json()
     form = ConfirmForm(request.POST or None)
