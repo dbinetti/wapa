@@ -28,6 +28,7 @@ urlpatterns = [
 
     # Comments
     path('search', views.search, name='search',),
+    path('confirm/<voter_pk>', views.confirm, name='confirm',),
 
     # Comments
     path('comments', views.comments, name='comments',),

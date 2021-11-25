@@ -437,3 +437,26 @@ def search(request):
         request,
         'pages/search.html',
     )
+
+# @login_required
+def confirm(request, voter_pk):
+    account = request.user.account
+    url = f'http://localhost:8080/voter/{voter_pk}'
+    response = requests.get(
+        url,
+    )
+    voter_json = response.json()
+    form = ConfirmForm(request.POST or None)
+    if form.is_valid():
+        account.voter_json = voter_json
+        account.save()
+        # account = denormalize_account(account)
+        return redirect('account')
+    return render(
+        request,
+        'pages/confirm.html',
+        context = {
+            'form': form,
+            'voter': voter_json,
+        },
+    )

@@ -1,10 +1,32 @@
 {% extends '_base.html' %}
 
+{% block styles %}
+  <style>
+    #result {
+      border: 1px dotted #ccc;
+      padding: 3px;
+    }
+    #result ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    #result ul li {
+      padding: 5px 0;
+    }
+    #result ul li:hover {
+      background: #eee;
+    }
+  </style>
+{% endblock styles %}
+
 {% block content %}
-  <form autocomplete="off">
-    <input type="text" name="q" id="q" onKeyUp="showResults(this.value)" />
-    <div id="result"></div>
-  </form>
+  <div class='form-control'>
+    <form autocomplete="off">
+      <input type="text" name="q" id="q" onKeyUp="showResults(this.value)" />
+      <div id="result"></div>
+    </form>
+  </div>
 {% endblock content %}
 
 {% block scripts %}
@@ -20,9 +42,8 @@
        function (response) {
          return response.json();
        }).then(function (data) {
-        console.log(data.results);
          for (i=0; i<data.results.length; i++) {
-           list += '<li><a href=' + data.results[i].url +  '>'  + data.results[i].name + '</a></li>';
+           list += '<li><a href="http://localhost:8000/confirm/' + data.results[i].pk +  '">'  + data.results[i].name + '</a></li>';
          }
          res.innerHTML = '<ul>' + list + '</ul>';
          return true;

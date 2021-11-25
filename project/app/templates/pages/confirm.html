@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Confirm Voter Record{% endblock title %}
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Confirm Voter Record
+    </h2>
+  </section>
+  {% comment %}
+  <section>
+    <p class='lead'>
+      Please confirm the following voter record.
+    </p>
+  </section>
+  {% endcomment %}
+  <section class-'my-5 col-lg-6'>
+    <div class='card'>
+      <div class='card-body'>
+        <ul class='list-unstyled'>
+          <li>{{voter.name}}</li>
+          <li>{{voter.address|upper}}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class='my-5'>
+    <form method='post' role='form'>
+      {% csrf_token %}
+      {% bootstrap_form_errors form %}
+      {% bootstrap_field form.confirm %}
+      <ul class='list-inline'>
+        <li class='list-inline-item mb-3 pr-3'>{% bootstrap_button "I Confirm This is My Voter Record" button_type='submit' button_class='btn btn-success btn-lg' %}</li>
+        {% url "search" as search_url %}
+        <li class='list-inline-item'>{% bootstrap_button "This Isn't Me -- Search Again" button_type='link' href=search_url size='large' button_class='btn-outline-dark' %}</li>
+      </ul>
+    </form>
+  </section>
+  {% comment %}
+  <section class='my-5 col-lg-6'>
+    <p class='text-danger'>
+      WARNING: Any person who supplies any information to impersonate a registered voter is guilty of perjury which is punishable by imprisonment and a fine of up to $50,000.
+    </p>
+  </section>
+  {% endcomment %}
+
+{% endblock content %}
+
