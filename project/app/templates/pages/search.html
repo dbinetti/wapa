@@ -48,7 +48,7 @@
          return response.json();
        }).then(function (data) {
          for (i=0; i<data.results.length; i++) {
-           list += '<li><a href="http://localhost:8000/confirm/' + data.results[i].pk +  '">'  + data.results[i].name + '</a></li>';
+           list += '<li><a href="confirm/' + data.results[i].pk +  '">'  + data.results[i].name + '</a></li>';
          }
          res.innerHTML = '<ul>' + list + '</ul>';
          return true;
