@@ -30,7 +30,7 @@ StudentFormSet = inlineformset_factory(
 )
 
 
-class DeleteForm(forms.Form):
+class ConfirmForm(forms.Form):
     confirm = forms.BooleanField(
         required=True,
     )

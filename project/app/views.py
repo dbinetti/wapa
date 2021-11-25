@@ -284,7 +284,7 @@ def account(request):
 @login_required
 def delete(request):
     if request.method == "POST":
-        form = DeleteForm(request.POST)
+        form = ConfirmForm(request.POST)
         if form.is_valid():
             user = request.user
             user.delete()
@@ -294,7 +294,7 @@ def delete(request):
             )
             return redirect('index')
     else:
-        form = DeleteForm()
+        form = ConfirmForm()
     return render(
         request,
         'pages/delete.html',
@@ -370,7 +370,7 @@ def comment_delete(request, comment_id):
     except Comment.DoesNotExist:
         return PermissionDenied("You can not delete others' comments")
     if request.method == "POST":
-        form = DeleteForm(request.POST)
+        form = ConfirmForm(request.POST)
         if form.is_valid():
             comment.delete()
             messages.error(
@@ -379,7 +379,7 @@ def comment_delete(request, comment_id):
             )
             return redirect('comments')
     else:
-        form = DeleteForm()
+        form = ConfirmForm()
     return render(
         request,
         'pages/comment_delete.html',
