@@ -430,3 +430,10 @@ def updates(request):
             'updates': updates,
         },
     )
+
+
+def search(request):
+    return render(
+        request,
+        'pages/search.html',
+    )
