@@ -24,7 +24,7 @@ from django_fsm import TransitionNotAllowed
 
 from .forms import AccountForm
 from .forms import CommentForm
-from .forms import DeleteForm
+from .forms import ConfirmForm
 from .forms import StudentFormSet
 from .models import Comment
 from .models import Event
