@@ -196,30 +196,6 @@ def logout(request):
     )
     return redirect(logout_url)
 
-def search(request):
-    return render(
-        request,
-        'pages/search.html',
-    )
-
-class Select2ListViewAutocomplete(Select2ListView):
-    def get_list(self):
-        items_response = requests.get(
-            "http://localhost:8080/voter", params=dict(search=self.q)
-        )
-        items_response.raise_for_status()
-        data = items_response.json()['results']
-        # items = [item["label"] for item in data["results"]]
-        return data
-
-
-# class Select2ProvidedValueListViewAutocomplete(Select2ListView):
-#     def create(self, text):
-#         return text
-
-#     def get_list(self):
-#         return get_choice_list_with_id()
-
 # Dashboard
 @login_required
 def dashboard(request):
