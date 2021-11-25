@@ -432,13 +432,14 @@ def updates(request):
     )
 
 
+@login_required
 def search(request):
     return render(
         request,
         'pages/search.html',
     )
 
-# @login_required
+@login_required
 def confirm(request, voter_pk):
     account = request.user.account
     url = f'{settings.VOTER_API_HOST}/voter/{voter_pk}'
