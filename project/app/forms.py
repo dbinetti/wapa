@@ -125,9 +125,6 @@ class AccountAdminForm(forms.ModelForm):
         'name',
         'address_too',
         'address_raw',
-        # 'voter',
-        # 'point',
-        # 'is_influential',
         'geocode',
         'is_precise',
         'place',
@@ -156,11 +153,6 @@ class AccountAdminForm(forms.ModelForm):
 
 
 class AccountForm(forms.ModelForm):
-    # voter_json = autocomplete.Select2ListCreateChoiceField(
-    #     choice_list=get_choice_list,
-    #     required=False,
-    #     widget=autocomplete.ListSelect2(url='select2_list')
-    # )
     class Meta:
         model = Account
         fields = [

@@ -79,9 +79,6 @@ class AccountAdmin(VersionAdmin):
         'name',
         'address_too',
         'address_raw',
-        # 'voter',
-        # 'point',
-        # 'is_influential',
         'geocode',
         'is_precise',
         'place',
@@ -126,7 +123,6 @@ class AccountAdmin(VersionAdmin):
     ]
     autocomplete_fields = [
         'user',
-        # 'voter',
     ]
     inlines = [
         StudentInline,

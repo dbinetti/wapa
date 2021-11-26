@@ -91,14 +91,6 @@ class Account(models.Model):
         related_name='account',
         unique=True,
     )
-    # voter = models.OneToOneField(
-    #     'voterapi.Voter',
-    #     on_delete=models.SET_NULL,
-    #     related_name='account',
-    #     unique=True,
-    #     null=True,
-    #     blank=True,
-    # )
     zone = models.ForeignKey(
         'app.Zone',
         on_delete=models.SET_NULL,
