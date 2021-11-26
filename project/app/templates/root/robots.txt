@@ -1,4 +1,6 @@
 User-Agent: *
+Disallow: /login
+Disallow: /join
 Allow: /
 
 Sitemap: https://www.westadaparents.com/sitemap.txt

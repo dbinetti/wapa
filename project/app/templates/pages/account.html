@@ -4,6 +4,10 @@
 {% load cloudinary %}
 {% load app_tags %}
 
+{% block robots %}
+  <meta name="ROBOTS" content="NOINDEX" />
+{% endblock robots %}
+
 {% block formmedia %}
   {{ form.media }}
 {% endblock formmedia %}
