@@ -32,14 +32,6 @@
       <tbody>
         <tr>
           <td>
-            <a href='{% url "exemptions" %}'><h3 class='bi-file-pdf'></h3></a>
-          </td>
-          <td>
-            Read information on how to secure a <a href='{% url "exemptions" %}'>Mask Exemption</a> for your child.
-          </td>
-        </tr>
-        <tr>
-          <td>
             <a href='{% url "updates" %}'><h3 class='bi-folder2'></h3></a>
           </td>
           <td>
@@ -54,30 +46,7 @@
             Review <a href='{% url "meetings" %}'>Board Meeting</a> agendas, minutes, transcripts, and analyses.
           </td>
         </tr>
-        <tr>
-          <td>
-            <a href='{% static "app/attorney_general_response.pdf" %}'><h3 class='bi-file-pdf'></h3></a>
-          </td>
-          <td>
-            The Attorney General Office's response to Amy Johnson's leaked letter.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href='{% static "app/Trustee_Johnson_Complaint_10_17_21.pdf" %}'><h3 class='bi-file-pdf'></h3></a>
-          </td>
-          <td>
-            The complaint following Trustee Johnson's deception at the 13 October 2021 Board Meeting.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href='{% static "app/Trustee_Johnson_Complaint.pdf" %}'><h3 class='bi-file-pdf'></h3></a>
-          </td>
-          <td>
-            The formal complaint calling for a full, fair, and independent investigation into Amy Johnson's Conflict of Interest.
-          </td>
-        </tr>
+        {% comment %}
         <tr>
           <td>
             <a href='{% url "plans" %}'><h3 class='bi-folder2'></h3></a>
@@ -86,12 +55,13 @@
             Read <a href='{% url "plans" %}'>Operational Plans</a> of the WASD and WAPA.
           </td>
         </tr>
+        {% endcomment %}
         <tr>
           <td>
-            <a href='https://www.slideshare.net/westadaconcernedpare/west-ada-isat-scores-2021'><h3 class='bi-file-easel'></h3></a>
+            <a href='{% url "complaints" %}'><h3 class='bi-folder2'></h3></a>
           </td>
           <td>
-            A detailed analysis of the ISAT scores from 2019 to 2021 for the West Ada School District.
+            Review the <a href='{% url "complaints" %}'>Complaints</a> process against Trustee Amy Johnson.
           </td>
         </tr>
       </tbody>

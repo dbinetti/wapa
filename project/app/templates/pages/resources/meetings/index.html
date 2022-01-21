@@ -1,11 +1,14 @@
 {% extends '_base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+{% load static %}
 
 {% block title %}Board Meetings{% endblock title %}
 
 {% block content %}
   <section class='my-5'>
     <h2>
-      Board Meetings
+      Board Meetings 21-22 School Year
     </h2>
   </section>
   <section class='my-5'>
@@ -33,6 +36,183 @@
         </tr>
       </thead>
       <tbody>
+        {% comment %}
+        <tr>
+          <td>
+            June 13, 2022
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            May 23, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            May 9, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            April 25, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            April 11, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            March 14, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            February 28, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            February 14, 2021
+          </td>
+          <td>
+            {# <a href=''>Agenda</a> #}
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        {% endcomment %}
+        <tr>
+          <td>
+            January 24, 2021
+          </td>
+          <td>
+            <a href='https://www.westada.org/Page/169#calendar131/20220124/event/797174'>Agenda</a>
+          </td>
+          <td>
+            {# <a href=''>Transcript</a> #}
+          </td>
+          <td>
+            {# <a href=''>Minutes</a> #}
+          </td>
+          <td>
+            {# <a href=''>Analysis</a> #}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            January 10, 2021
+          </td>
+          <td>
+            <a href='https://www.westada.org/Page/169#calendar131/20220120/event/795401'>Agenda</a>
+          </td>
+          <td>
+            <a href='https://www.rev.com/transcript-editor/shared/dg8IccxUaHDu13m9TdbLOnO8PJDWSiphbgrEghQtxsCVfVI6SQwB4NO9qDRuYz4WIo4OGurSOyEru2EkEJ7Hg54wQd8?loadFrom=SharedLink'>Transcript</a>
+          </td>
+          <td>
+            <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2022/1-24-22/Regular%20Board%20Meeting%20-%2001-10-2022%20-%20Meeting%20Minutes.pdf'>Minutes</a>
+          </td>
+          <td>
+            <a href='{% static "app/open_meeting_12_13_2021.pdf" %}'>Analysis</a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan=5 class='text-center'>
+            (New Board Composition)
+          </td>
+        </tr>
         <tr>
           <td>
             December 13, 2021
@@ -47,7 +227,7 @@
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2022/1-10-22/Regular%20Board%20Meeting%20%20-%2012-13-2021%20-%20Meeting%20Minutes.pdf'>Minutes</a>
           </td>
           <td>
-            {# <a href=''>Analysis</a> #}
+            <a href='{% static "app/open_meeting_complaint_12_13_2021.pdf" %}'>Analysis</a>
           </td>
         </tr>
         <tr>
@@ -81,7 +261,7 @@
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2021/12-13-21/November%2011%202021%20Minutes.pdf'>Minutes</a>
           </td>
           <td>
-            {# <a href=''>Analysis</a> #}
+            <a href='{% url "analysis-2021-11-13" %}'>Analysis</a>
           </td>
         </tr>
         <tr>

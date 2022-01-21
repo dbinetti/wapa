@@ -35,11 +35,15 @@ urlpatterns = [
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
 
     # Resources
-    path('exemption/', RedirectView.as_view(url='exemptions'), name='exemption'),
-    path('exemptions/', TemplateView.as_view(template_name='pages/exemptions.html'), name='exemptions',),
+    path('resources/plans/exemptions/', TemplateView.as_view(template_name='pages/resources/plans/exemptions.html'), name='exemptions',),
     path('resources/', TemplateView.as_view(template_name='pages/resources/index.html'), name='resources',),
     path('resources/updates/', views.updates, name='updates',),
     path('resources/meetings/', TemplateView.as_view(template_name='pages/resources/meetings/index.html'), name='meetings',),
+    path('resources/meetings/analyses/2021_11_13', TemplateView.as_view(template_name='pages/resources/meetings/analyses/2021_11_13.html'), name='analysis-2021-11-13',),
+    path('resources/meetings/analyses/2021_12_13', TemplateView.as_view(template_name='pages/resources/meetings/analyses/2021_12_13.html'), name='analysis-2021-12-13',),
+    path('resources/complaints/', TemplateView.as_view(template_name='pages/resources/complaints/index.html'), name='complaints',),
+    path('resources/complaints/response-one', TemplateView.as_view(template_name='pages/resources/complaints/response_one.html'), name='response-one',),
+    path('resources/complaints/response-two', TemplateView.as_view(template_name='pages/resources/complaints/response_two.html'), name='response-two',),
     path('resources/plans/', TemplateView.as_view(template_name='pages/resources/plans/index.html'), name='plans',),
     path('resources/plans/quarantine/', TemplateView.as_view(template_name='pages/resources/plans/quarantine.html'), name='quarantine',),
     path('resources/plans/truenorth/', TemplateView.as_view(template_name='pages/resources/plans/truenorth.html'), name='truenorth',),
