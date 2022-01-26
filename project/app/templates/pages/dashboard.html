@@ -13,9 +13,11 @@
       Dashboard
     </h2>
   </section>
+  {% comment %}
   <section class='my-5'>
     <a href='{% url "comments" %}' class='btn btn-lg btn-success'>New!  Comments reset for <em>{{issue.name}}</em> &mdash; send a comment to {{issue.recipient_name}}!</a>
   </section>
+  {% endcomment %}
   <section class='my-5'>
     <div class='col-lg-12'>
       <div class='card'>
@@ -129,12 +131,16 @@
   <section class='my-5'>
     <div class='col-lg-12'>
       <div class='card'>
-        <h4 class='card-header'>Comments&nbsp;&nbsp;<a href='{% url "comments" %}' class='btn btn-primary btn-sm'>Update</a></h4>
+        <h4 class='card-header'>Comments</h4>
+        {% comment %}
+          &nbsp;&nbsp;<a href='{% url "comments" %}' class='btn btn-primary btn-sm'>Update</a></h4>
+        {% endcomment %}
         <div class="card-body">
           <div class='card-title'>
           </div>
           <div class='card-text'>
             <dl class="row">
+              {% comment %}
               <dt class="col-sm-4">
                 Current on Comments?
               </dt>
@@ -145,6 +151,7 @@
                   <a role='button' class='btn-success btn btm-small' href='{% url "comments" %}'>Make a New Comment</a>
                 {% endif %}
               </dd>
+              {% endcomment %}
               <p class='my-5'>
               </p>
               {% for comment in comments %}
