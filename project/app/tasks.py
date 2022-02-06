@@ -248,6 +248,17 @@ def send_approval_email(comment):
 def send_super_email(comment):
     account = comment.account
     from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
+    if comment.issue.recipient_emails:
+        to_emails = comment.issue.recipient_emails
+    else:
+        if account.zone:
+            to_emails = [
+                f"{account.zone.trustee_name} <{account.zone.trustee_email}>",
+            ]
+        else:
+            to_emails = [
+                "Board Trustees <board@westadaparents.com>",
+            ]
     email = build_email(
         template='emails/comment.txt',
         subject=f'{comment.issue.name}',
@@ -256,7 +267,7 @@ def send_super_email(comment):
             'account': account,
         },
         from_email=from_email,
-        to=comment.issue.recipient_emails,
+        to=to_emails,
         cc=[account.user.email],
     )
     return email.send()
