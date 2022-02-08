@@ -25,9 +25,9 @@ from django_fsm import TransitionNotAllowed
 from .forms import AccountForm
 from .forms import CommentForm
 from .forms import ConfirmForm
+from .forms import SearchForm
 from .forms import StudentFormSet
 from .models import Comment
-from .models import Event
 from .models import Issue
 from .tasks import get_mailchimp_client
 from .tasks import send_verification_email
@@ -432,11 +432,30 @@ def updates(request):
     )
 
 
+@csrf_exempt
 @login_required
 def search(request):
+    form = SearchForm(request.POST or None)
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        url = f'{settings.VOTER_API_HOST}/search?q={query}'
+        headers={
+            'Authorization': f'Token {settings.VOTER_API_KEY}'
+        }
+        response = requests.get(
+            url,
+            headers=headers,
+        )
+        results = response.json()['results']
+    else:
+        results = []
     return render(
         request,
         'pages/search.html',
+        context = {
+            'form': form,
+            'results': results,
+        }
     )
 
 @login_required

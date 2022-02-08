@@ -1,8 +1,5 @@
 # Django
-from dal import autocomplete
 from django import forms
-from django.contrib import admin
-from django.contrib.admin.widgets import AutocompleteSelect
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
@@ -35,6 +32,7 @@ class ConfirmForm(forms.Form):
         required=True,
     )
 
+
 class AttendeeForm(forms.ModelForm):
     class Meta:
         model = Attendee
@@ -46,6 +44,7 @@ class AttendeeForm(forms.ModelForm):
         labels = {
             "is_confirmed": "Yes I'll Attend",
         }
+
 
 class IsatForm(forms.ModelForm):
     class Meta:
@@ -64,6 +63,7 @@ class IsatForm(forms.ModelForm):
             'below',
             'school',
         ]
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -94,6 +94,7 @@ class CommentForm(forms.ModelForm):
                 )
         return content
 
+
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
@@ -116,6 +117,15 @@ class StudentForm(forms.ModelForm):
             'school': "School attending 2021-22.",
             'grade': "Grade for 2021-22.",
         }
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField(
+        required=True,
+        max_length=200,
+    )
+
+
 
 class AccountAdminForm(forms.ModelForm):
     class Meta:
@@ -146,10 +156,6 @@ class AccountAdminForm(forms.ModelForm):
             'address_too': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong> unless we certify."),
             'email': mark_safe("We do not sell, share, or spam you."),
         }
-
-
-# def get_choice_list():
-#     return [model.test for model in TModel.objects.all()]
 
 
 class AccountForm(forms.ModelForm):
