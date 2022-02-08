@@ -13,7 +13,7 @@ pytest-django = "*"
 pylint = "*"
 
 [packages]
-django = "*"
+django = "==3.2.10"
 django-environ = "*"
 psycopg2 = "*"
 whitenoise = "*"
@@ -45,8 +45,6 @@ django-fsm-admin = "*"
 python-magic = "*"
 python-pdf = "*"
 geocoder = "*"
-django-autocomplete-light = "*"
-
 
 [requires]
 python_version = "3.9"
