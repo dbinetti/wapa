@@ -79,6 +79,5 @@ def import_isat(filename, year):
                 if form.is_valid():
                     form.save()
                 else:
-                    # print(form.errors.as_json())
                     continue
     return

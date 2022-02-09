@@ -4,7 +4,6 @@ import logging
 
 import jwt
 import requests
-from dal.autocomplete import Select2ListView
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -30,6 +29,7 @@ from .forms import StudentFormSet
 from .models import Comment
 from .models import Issue
 from .tasks import get_mailchimp_client
+from .tasks import link_account
 from .tasks import send_verification_email
 
 log = logging.getLogger(__name__)
@@ -471,9 +471,7 @@ def confirm(request, voter_pk):
     voter_json = response.json()
     form = ConfirmForm(request.POST or None)
     if form.is_valid():
-        account.voter_json = voter_json
-        account.save()
-        # account = denormalize_account(account)
+        account = link_account(account, voter_json)
         return redirect('account')
     return render(
         request,

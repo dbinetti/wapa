@@ -272,6 +272,26 @@ def send_super_email(comment):
     )
     return email.send()
 
+@job
+def link_account(account, voter_json):
+    account.voter_json = voter_json
+    account.name = voter_json['name']
+    account.address = voter_json['address']
+    account.point = Point(
+        voter_json['point']['longitude'],
+        voter_json['point']['latitude'],
+    )
+    districts = [x['name'] for x in voter_json['constituents']]
+    for district in districts:
+        if 'West Ada School District' in district:
+            num = int(district[-1])
+            zone = Zone.objects.get(num=num)
+            account.zone = zone
+            break
+    account.save()
+    return account
+
+
 def denorm_students(account):
     schools = School.objects.filter(
         students__account=account
