@@ -15,28 +15,52 @@
       Voter Record Search
     </h2>
   </section>
-  <section class='col-lg-6'>
+
+  <section class='col-lg-6 my-3'>
+    <p class='lead'>
+      Make your account more powerful by showing you're a registered voter in the District.
+    </p>
+    <p>
+      You can <a href='{% url "account" %}'>skip this step</a> if you're not registered to vote.
+    </p>
+  </section>
+
+  <section class='col-lg-6 my-5'>
     <form method='post' role='form'>
       {% csrf_token %}
       {% bootstrap_form_errors form %}
       <div class='input-group input-group-lg'>
-        <input class='form-control' type='text' name='query' maxlength="200" required id='id_query'>
+        <input class='form-control' type='text' name='query' maxlength="200" required id='id_query' placeholder='Enter your name and/or address...' value='{{form.cleaned_data.query}}'>
         <div class='input-group-append'>
           {% bootstrap_button "Search" button_type='submit' button_class='btn btn-success btn-lg' %}
         </div>
       </div>
     </form>
   </section>
+
   <section class='col-lg-12'>
-    <table class='table table-borderless table-hover my-5'>
-      <tbody>
-        {% for result in results %}
-          <tr class='py-3'>
-            <td><a href='{% url "confirm" result.pk %}'>{{result.name}}&nbsp;&nbsp;&mdash;&nbsp;&nbsp;{{result.location}}</a></td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    {% if response %}
+      <table class='table table-borderless table-hover my-5'>
+        <tbody>
+          {% for result in response.results %}
+            <tr class='py-3'>
+              <td><a href='{% url "confirm" result.pk %}'>{{result.name}}&nbsp;&nbsp;&mdash;&nbsp;&nbsp;{{result.location}}</a></td>
+            </tr>
+          {% empty %}
+            <tr class='py-5'>
+              <td class='my-5'>
+                <p>
+                  Sorry, we couldn't find your voter record!
+                </p>
+                <p>
+                  Try searching again, <a href='mailto:support@westadaparents.com'>contact support</a>, or <a href='{% url "account" %}'>skip this step</a>.
+                </p>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
   </section>
 {% endblock content %}
 

@@ -432,7 +432,6 @@ def updates(request):
     )
 
 
-@csrf_exempt
 @login_required
 def search(request):
     form = SearchForm(request.POST or None)
@@ -445,18 +444,18 @@ def search(request):
         response = requests.get(
             url,
             headers=headers,
-        )
-        results = response.json()['results']
+        ).json()
     else:
-        results = []
+        response = None
     return render(
         request,
         'pages/search.html',
         context = {
             'form': form,
-            'results': results,
+            'response': response,
         }
     )
+
 
 @login_required
 def confirm(request, voter_pk):
