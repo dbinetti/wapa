@@ -18,7 +18,7 @@ ACCOUNT INFORMATION
 Name: {{account.name}}
 Listed Publicly? {{account.is_public|yesno|title}}
 Representing Spouse? {{account.is_spouse|yesno|title}}
-Address (PRIVATE AND CONFIDENTIAL):  {{account.address_too|default:'(No Address Provided)'}}
+Address (PRIVATE AND CONFIDENTIAL):  {{account.address|default:'(No Address Provided)'}}
 Zone: {{account.zone|default:'(No Zone Available)'}}
 Students:  {{students}}
 

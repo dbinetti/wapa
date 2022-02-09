@@ -133,8 +133,7 @@ class AccountAdminForm(forms.ModelForm):
         fields = [
         'picture',
         'name',
-        'address_too',
-        'address_raw',
+        'address',
         'geocode',
         'is_precise',
         'place',
@@ -146,14 +145,14 @@ class AccountAdminForm(forms.ModelForm):
         'zone',
         'user',        ]
         widgets = {
-            'address_too': AddressWidget(
+            'address': AddressWidget(
                 attrs={'style': "width: 600px;"}
             ),
         }
 
         help_texts = {
             'name': mark_safe("We may have copied this from your Voter Record; feel free to update it to your preferred name."),
-            'address_too': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong> unless we certify."),
+            'address': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong> unless we certify."),
             'email': mark_safe("We do not sell, share, or spam you."),
         }
 
@@ -165,11 +164,11 @@ class AccountForm(forms.ModelForm):
             'name',
             'is_public',
             'is_spouse',
-            'address_too',
+            'address',
             'voter_json',
         ]
         widgets = {
-            'address_too': AddressWidget(
+            'address': AddressWidget(
                 attrs={'style': "width: 600px;"}
             ),
         }
@@ -182,7 +181,7 @@ class AccountForm(forms.ModelForm):
             'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
-            'address_too': mark_safe("We use this to show you're a District Resident.  Your address itself <strong>remains private and confidential</strong>."),
+            'address': mark_safe("We use this to show you're a District Resident.  Your address itself <strong>remains private and confidential</strong>."),
         }
 
     def clean(self):

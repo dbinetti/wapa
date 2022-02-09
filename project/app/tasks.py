@@ -406,14 +406,6 @@ def merge_letter_from_comments(comments):
     )
     return pdf
 
-@job
-def update_address_from_account(account):
-    if not account.address:
-        return
-    account.address_raw = account.address_too
-    account.save()
-    return
-
 # @job
 # def update_point_from_account(account):
 #     if not account.address:
@@ -461,7 +453,7 @@ def get_precision(geocode):
 
 @job
 def geocode_account(account):
-    result = geocoder.google(account.address_too)
+    result = geocoder.google(account.address)
     geocode = result.json
     is_precise = get_precision(geocode)
     if is_precise:

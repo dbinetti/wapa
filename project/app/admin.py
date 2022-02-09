@@ -64,7 +64,7 @@ class AddressFilter(admin.SimpleListFilter):
             return queryset.filter(
                 point__isnull=True,
             ).exclude(
-                address_too='',
+                address='',
             )
 
 @admin.register(Account)
@@ -77,8 +77,7 @@ class AccountAdmin(VersionAdmin):
     fields = [
         'picture',
         'name',
-        'address_too',
-        'address_raw',
+        'address',
         'geocode',
         'is_precise',
         'place',
@@ -94,8 +93,7 @@ class AccountAdmin(VersionAdmin):
     list_display = [
         'id',
         'name',
-        'address_too',
-        'address_raw',
+        'address',
         'is_vip',
         # 'is_public',
         # 'is_spouse',
@@ -105,7 +103,7 @@ class AccountAdmin(VersionAdmin):
     ]
     list_editable = [
         'name',
-        'address_too',
+        'address',
     ]
     list_per_page = 10
     list_filter = [
@@ -308,7 +306,6 @@ class SchoolAdmin(VersionAdmin):
         # 'full',
         # 'school_id',
         # 'kind',
-        # 'address_raw'
     ]
     list_editable = [
         'name',

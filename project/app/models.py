@@ -34,19 +34,10 @@ class Account(models.Model):
     is_spouse = models.BooleanField(
         default=False,
     )
-    address_too = models.CharField(
+    address = models.CharField(
         max_length=512,
         blank=True,
         default='',
-    )
-    address_raw = models.CharField(
-        max_length=512,
-        blank=True,
-        default='',
-    )
-    address_json = models.JSONField(
-        blank=True,
-        null=True,
     )
     voter_json = models.JSONField(
         blank=True,
