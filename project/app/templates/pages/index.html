@@ -144,7 +144,7 @@
     </p>
   </section>
 {% endcomment %}
-  {% comment %}
+
   <section class='m-3'>
     <table class='table'>
       <thead>
@@ -159,7 +159,10 @@
             <td class='col-5'>
               <ul class='list-inline'>
                 <li class='list-inline-item align-top'>
-                  {% cloudinary comment.account.picture.name AVATAR %}
+                  {% cloudinary comment.account.picture.name AVATAR %}<br>
+                  {% if comment.account.voter_json %}
+                    <small class='badge badge-warning badge-pill badge-sm'>Zone {{comment.account.zone.num}} Voter</small>
+                  {% endif %}
                 </li>
                 <li class='list-inline-item'>
                   <strong>{{comment.account.name}}</strong><br>
@@ -193,7 +196,7 @@
       </tbody>
     </table>
   </section>
-  {% endcomment %}
+
 {% endblock content %}
 {% block scripts %}
   <script>
