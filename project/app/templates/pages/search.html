@@ -18,10 +18,10 @@
 
   <section class='col-lg-6 my-3'>
     <p class='lead'>
-      Make your account more powerful by showing you're a registered voter in the District.
+      Make your voice more powerful by adding a <small class='badge badge-warning badge-pill'>Zone {{account.zone.num}} Voter</small> Badge to your Account.
     </p>
     <p>
-      You can <a href='{% url "account" %}'>skip this step</a> if you're not registered to vote.
+      You can <a href='{% url "zone" %}'>skip this step</a> if you're not registered to vote.
     </p>
   </section>
 
@@ -30,7 +30,7 @@
       {% csrf_token %}
       {% bootstrap_form_errors form %}
       <div class='input-group input-group-lg'>
-        <input class='form-control' type='text' name='query' maxlength="200" required id='id_query' placeholder='Enter your name and/or address...' value='{{form.cleaned_data.query}}'>
+        <input class='form-control' type='text' name='query' maxlength="200" required id='id_query' placeholder='Enter your legal name...' value='{{form.cleaned_data.query}}'>
         <div class='input-group-append'>
           {% bootstrap_button "Search" button_type='submit' button_class='btn btn-success btn-lg' %}
         </div>
@@ -53,7 +53,7 @@
                   Sorry, we couldn't find your voter record!
                 </p>
                 <p>
-                  Try searching again, <a href='mailto:support@westadaparents.com'>contact support</a>, or <a href='{% url "account" %}'>skip this step</a>.
+                  Try searching again, <a href='mailto:support@westadaparents.com'>contact support</a>, or <a href='{% url "zone" %}'>skip this step</a>.
                 </p>
               </td>
             </tr>

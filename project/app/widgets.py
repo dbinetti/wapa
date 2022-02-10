@@ -51,7 +51,10 @@ class AddressWidget(forms.TextInput):
     def render(self, name, value, attrs=None, **kwargs):
         # Can accept None, a dictionary of values, or a str
         p = re.compile('(?<!\\\\)\'')
-        value = p.sub('\"', value)
+        try:
+            value = p.sub('\"', value)
+        except TypeError:
+            value = None
         if value in (None, ""):
             ad = {}
         else:

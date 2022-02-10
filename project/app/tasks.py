@@ -275,7 +275,8 @@ def send_super_email(comment):
 @job
 def link_account(account, voter_json):
     account.voter_json = voter_json
-    account.name = voter_json['name']
+    if not account.name:
+        account.name = voter_json['name']
     account.address = voter_json['address']
     account.point = Point(
         voter_json['point']['longitude'],
@@ -291,6 +292,12 @@ def link_account(account, voter_json):
     account.save()
     return account
 
+@job
+def unlink_account(account):
+    account.voter_json = None
+    account.point = None
+    account.save()
+    return account
 
 def denorm_students(account):
     schools = School.objects.filter(

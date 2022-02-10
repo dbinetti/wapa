@@ -126,6 +126,14 @@ class SearchForm(forms.Form):
     )
 
 
+class ZoneForm(forms.Form):
+    address = forms.CharField(
+        required=True,
+        # widget=AddressWidget(
+        #     attrs={'style': "width: 600px;"}
+        # ),
+    )
+
 
 class AccountAdminForm(forms.ModelForm):
     class Meta:
@@ -164,24 +172,17 @@ class AccountForm(forms.ModelForm):
             'name',
             'is_public',
             'is_spouse',
-            'address',
-            'voter_json',
+            'zone',
         ]
-        widgets = {
-            'address': AddressWidget(
-                attrs={'style': "width: 600px;"}
-            ),
-        }
         labels = {
             "is_public": "I Choose to be Public",
             "is_spouse": "I Represent My Spouse",
         }
         help_texts = {
             'name': mark_safe("Please provide your <strong>real full name</strong>, which remains private unless you explcitly choose to be public."),
-            'notes': "Any notes to share.",
             'is_public': mark_safe("Making your name public enables <a href='/comments'>Comments</a>."),
             'is_spouse': "If your spouse shares your position, click here and we'll double your support.",
-            'address': mark_safe("We use this to show you're a District Resident.  Your address itself <strong>remains private and confidential</strong>."),
+            'zone': mark_safe("Indicating your Zone helps us direct your comment to the right Trustee.  <a href='#' data-toggle='modal' data-target='#zoneMap'>Zone Map</a>."),
         }
 
     def clean(self):

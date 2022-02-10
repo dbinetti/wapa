@@ -583,9 +583,12 @@ class Zone(models.Model):
         auto_now=True,
     )
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name}  {self.trustee_name}"
 
-
+    class Meta:
+        ordering = (
+            'num',
+        )
 class User(AbstractBaseUser):
     id = HashidAutoField(
         primary_key=True,

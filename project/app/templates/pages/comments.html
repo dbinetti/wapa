@@ -210,13 +210,16 @@
                   <td class='col-5'>
                     <ul class='list-inline'>
                       <li class='list-inline-item align-top'>
-                        {% cloudinary comment.account.picture.name AVATAR %}
+                        {% cloudinary comment.account.picture.name AVATAR %}<br>
+                        {% if comment.account.voter_json %}
+                          <small class='badge badge-warning badge-pill badge-sm'>Zone {{comment.account.zone.num}} Voter</small>
+                        {% endif %}
                       </li>
                       <li class='list-inline-item'>
                         <strong>{{comment.account.name}}</strong><br>
                         {% for student in comment.account.students.all %}
                           {% if student.school.get_kind_display == 'Elementary School' %}
-                            <span class='badge badge-warning badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                            <span class='badge badge-danger badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
                           {% elif student.school.get_kind_display == 'Middle School' %}
                             <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
                           {% elif student.school.get_kind_display == 'High School' %}

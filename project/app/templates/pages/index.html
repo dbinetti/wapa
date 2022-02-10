@@ -165,7 +165,7 @@
                   <strong>{{comment.account.name}}</strong><br>
                   {% for student in comment.account.students.all %}
                     {% if student.school.get_kind_display == 'Elementary School' %}
-                      <span class='badge badge-warning badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                      <span class='badge badge-danger badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
                     {% elif student.school.get_kind_display == 'Middle School' %}
                       <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
                     {% elif student.school.get_kind_display == 'High School' %}

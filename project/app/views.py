@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 
+import geocoder
 import jwt
 import requests
 from django.conf import settings
@@ -10,6 +11,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
+from django.contrib.gis.geos import Point
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -26,11 +28,15 @@ from .forms import CommentForm
 from .forms import ConfirmForm
 from .forms import SearchForm
 from .forms import StudentFormSet
+from .forms import ZoneForm
 from .models import Comment
 from .models import Issue
+from .models import Zone
 from .tasks import get_mailchimp_client
+from .tasks import get_precision
 from .tasks import link_account
 from .tasks import send_verification_email
+from .tasks import unlink_account
 
 log = logging.getLogger(__name__)
 
@@ -457,6 +463,7 @@ def search(request):
     )
 
 
+
 @login_required
 def confirm(request, voter_pk):
     account = request.user.account
@@ -471,6 +478,10 @@ def confirm(request, voter_pk):
     voter_json = response.json()
     form = ConfirmForm(request.POST or None)
     if form.is_valid():
+        messages.success(
+            request,
+            "Your voter registration status has been confirmed!",
+        )
         account = link_account(account, voter_json)
         return redirect('account')
     return render(
@@ -480,4 +491,24 @@ def confirm(request, voter_pk):
             'form': form,
             'voter': voter_json,
         },
+    )
+
+@login_required
+def unlink(request):
+    if request.method == "POST":
+        form = ConfirmForm(request.POST)
+        if form.is_valid():
+            account = request.user.account
+            account = unlink_account(account)
+            messages.error(
+                request,
+                "Voter Record Unlinked!",
+            )
+            return redirect('account')
+    else:
+        form = ConfirmForm()
+    return render(
+        request,
+        'pages/unlink.html',
+        {'form': form,},
     )
