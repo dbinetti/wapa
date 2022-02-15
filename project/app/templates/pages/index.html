@@ -145,58 +145,59 @@
   </section>
 {% endcomment %}
 
-  <section class='m-3'>
-    <table class='table'>
-      <thead>
-        <tr class='row'>
-          <th scope='col' class='col-5'>Name</th>
-          <th scope='col' class='col-7'>Comments</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for comment in comments %}
+  {% if issue %}
+    <section class='m-3'>
+      <table class='table'>
+        <thead>
           <tr class='row'>
-            <td class='col-5'>
-              <ul class='list-inline'>
-                <li class='list-inline-item align-top'>
-                  {% cloudinary comment.account.picture.name AVATAR %}<br>
-                  {% if comment.account.voter_json %}
-                    <small class='badge badge-warning badge-pill badge-sm'>Zone {{comment.account.zone.num}} Voter</small>
-                  {% endif %}
-                </li>
-                <li class='list-inline-item'>
-                  <strong>{{comment.account.name}}</strong><br>
-                  {% for student in comment.account.students.all %}
-                    {% if student.school.get_kind_display == 'Elementary School' %}
-                      <span class='badge badge-danger badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
-                    {% elif student.school.get_kind_display == 'Middle School' %}
-                      <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
-                    {% elif student.school.get_kind_display == 'High School' %}
-                      <span class='badge badge-info badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
-                    {% endif %}
-                  {% endfor %}
-                </li>
-              </ul>
-            </td>
-            <td class='col-7'>
-              {% if comment.wordcount < 60 %}
-                {{comment.content}}
-              {% else %}
-                <div class="collapse show" id="comment-{{comment.id}}">
-                  {{comment.content|truncatewords:60}}
-                </div>
-                <div class="collapse" id="comment-{{comment.id}}">
-                  {{comment.content}}
-                </div>
-                <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
-              {% endif %}
-            </td>
+            <th scope='col' class='col-5'>Name</th>
+            <th scope='col' class='col-7'>Comments</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
-
+        </thead>
+        <tbody>
+          {% for comment in comments %}
+            <tr class='row'>
+              <td class='col-5'>
+                <ul class='list-inline'>
+                  <li class='list-inline-item align-top'>
+                    {% cloudinary comment.account.picture.name AVATAR %}<br>
+                    {% if comment.account.voter_json %}
+                      <small class='badge badge-warning badge-pill badge-sm'>Zone {{comment.account.zone.num}} Voter</small>
+                    {% endif %}
+                  </li>
+                  <li class='list-inline-item'>
+                    <strong>{{comment.account.name}}</strong><br>
+                    {% for student in comment.account.students.all %}
+                      {% if student.school.get_kind_display == 'Elementary School' %}
+                        <span class='badge badge-danger badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                      {% elif student.school.get_kind_display == 'Middle School' %}
+                        <span class='badge badge-success badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                      {% elif student.school.get_kind_display == 'High School' %}
+                        <span class='badge badge-info badge-pill'>{{ student.school.name }} {{student.ord|default:"" }}</span><br>
+                      {% endif %}
+                    {% endfor %}
+                  </li>
+                </ul>
+              </td>
+              <td class='col-7'>
+                {% if comment.wordcount < 60 %}
+                  {{comment.content}}
+                {% else %}
+                  <div class="collapse show" id="comment-{{comment.id}}">
+                    {{comment.content|truncatewords:60}}
+                  </div>
+                  <div class="collapse" id="comment-{{comment.id}}">
+                    {{comment.content}}
+                  </div>
+                  <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  {% endif %}
 {% endblock content %}
 {% block scripts %}
   <script>

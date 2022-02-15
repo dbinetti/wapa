@@ -30,7 +30,9 @@
 
 
   <section class='my-5'>
-    <a href='{% url "comments" %}' class='btn btn-lg btn-success'>New!  Comments reset for <em>{{issue.name}}</em> &mdash; send a comment to your Trustee!</a>
+    {% if issue %}
+      <a href='{% url "comments" %}' class='btn btn-lg btn-success'>New!  Comments reset for <em>{{issue.name}}</em> &mdash; send a comment to your Trustee!</a>
+    {% endif %}
   </section>
 
 

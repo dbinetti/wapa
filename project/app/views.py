@@ -43,7 +43,12 @@ log = logging.getLogger(__name__)
 
 # Root
 def index(request):
-    issue = Issue.objects.get(state=Issue.STATE.active)
+    try:
+        issue = Issue.objects.get(
+            state=Issue.STATE.active,
+        )
+    except Issue.DoesNotExist:
+        issue = None
     comments = Comment.objects.filter(
         account__is_public=True,
         state=Comment.STATE.approved,
@@ -63,6 +68,7 @@ def index(request):
         'pages/index.html',
         context = {
             'comments': comments,
+            'issue': issue,
         },
     )
 
@@ -209,9 +215,12 @@ def dashboard(request):
     comments = account.comments.order_by(
         '-created',
     )
-    issue = Issue.objects.get(
-        state=Issue.STATE.active,
-    )
+    try:
+        issue = Issue.objects.get(
+            state=Issue.STATE.active,
+        )
+    except Issue.DoesNotExist:
+        issue = None
     is_current = comments.filter(
         issue=issue,
     )
@@ -229,7 +238,12 @@ def dashboard(request):
 # Account
 @login_required
 def account(request):
-    issue = Issue.objects.get(state=Issue.STATE.active)
+    try:
+        issue = Issue.objects.get(
+            state=Issue.STATE.active,
+        )
+    except Issue.DoesNotExist:
+        issue = None
     account = request.user.account
     students = account.students.order_by(
         'grade',
@@ -310,7 +324,12 @@ def delete(request):
 @login_required
 def comments(request):
     account = request.user.account
-    issue = Issue.objects.get(state=Issue.STATE.active)
+    try:
+        issue = Issue.objects.get(
+            state=Issue.STATE.active,
+        )
+    except Issue.DoesNotExist:
+        issue = None
     comment = account.comments.filter(issue=issue).first()
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)

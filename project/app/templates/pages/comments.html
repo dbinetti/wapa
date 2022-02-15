@@ -19,176 +19,177 @@
     </h2>
   </section>
   {% endcomment %}
-  {% if not account.is_public %}
-    <section class='col-md-12 mt-5'>
-      <div class='card'>
-        <h4 class='card-header'>
-          Private Account
-        </h4>
-        <div class="card-body">
-          <div class='card-title'>
-          </div>
-          <div class='card-text'>
-            <p class='lead col-md-8'>
-              You need to make your name public in order to make a public comment.  You can make this change at your <a href='{% url "account" %}'>Account Page</a>, and then return here to submit a comment.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  {% elif comment.get_state_display == 'Approved' %}
-    <section class='col-md-12 mt-5'>
-      <div class='card'>
-        <h4 class='card-header'>
-          Your Comment
-        </h4>
-        <div class="card-body">
-          <div class='card-title'>
-          </div>
-          <div class='card-text'>
-            <blockquote class="blockquote mb-0">
-              <p>
-                "{{comment.content}}"
+  {% if issue %}
+    {% if not account.is_public %}
+      <section class='col-md-12 mt-5'>
+        <div class='card'>
+          <h4 class='card-header'>
+            Private Account
+          </h4>
+          <div class="card-body">
+            <div class='card-title'>
+            </div>
+            <div class='card-text'>
+              <p class='lead col-md-8'>
+                You need to make your name public in order to make a public comment.  You can make this change at your <a href='{% url "account" %}'>Account Page</a>, and then return here to submit a comment.
               </p>
-              <footer class="blockquote-footer">Sent to {{comment.issue.recipient_name}} on {{comment.updated}}</footer>
-            </blockquote>
+            </div>
           </div>
         </div>
-        <div class='card-footer'>
-          <ul class='list-inline'>
-            <li class='list-inline-item'>
-              {% bootstrap_button "Share Your Comment on Facebook" button_type='link' size='small' button_class='btn-primary' extra_classes='ml-3 mt-3' id='facebook-share-button'%}
-            </li>
-            <li class='list-inline-item'>
-              {% bootstrap_button "Share Your Comment via Text" button_type='link' size='small' button_class='btn-success' extra_classes='ml-3 mt-3' id='text-share-button'%}
-            </li>
-          </ul>
-        </div>
-      </div>
-      <p class='float-right'>
-        <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
-      </p>
-    </section>
-  {% elif comment.get_state_display == 'Denied' %}
-    <section class='col-md-12 mt-5'>
-      <form method='post'>
-        {% csrf_token %}
+      </section>
+    {% elif comment.get_state_display == 'Approved' %}
+      <section class='col-md-12 mt-5'>
         <div class='card'>
           <h4 class='card-header'>
             Your Comment
           </h4>
           <div class="card-body">
             <div class='card-title'>
-              <p class='lead'>
-                Your Comment was Not Approved
-              </p>
-              <p>
-                We generally only allow comments that are respectful and constrained to the issue at-hand.  Please edit your comment according to these guidelines, save, and then we can approve it.
-              </p>
-              <ul class='list-styled'>
-                <li>Remain respectful and on-topic.</li>
-                <li>Be concise.</li>
-                <li>No personal attacks.</li>
-              </ul>
             </div>
             <div class='card-text'>
-                {% bootstrap_form_errors form %}
-                {% bootstrap_field form.content show_help=True show_label=False %}
+              <blockquote class="blockquote mb-0">
+                <p>
+                  "{{comment.content}}"
+                </p>
+                <footer class="blockquote-footer">Sent to {{comment.issue.recipient_name}} on {{comment.updated}}</footer>
+              </blockquote>
             </div>
           </div>
           <div class='card-footer'>
             <ul class='list-inline'>
               <li class='list-inline-item'>
-                {% bootstrap_button "Save!" button_type='submit' size='large' %}</li>
+                {% bootstrap_button "Share Your Comment on Facebook" button_type='link' size='small' button_class='btn-primary' extra_classes='ml-3 mt-3' id='facebook-share-button'%}
+              </li>
               <li class='list-inline-item'>
-                {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+                {% bootstrap_button "Share Your Comment via Text" button_type='link' size='small' button_class='btn-success' extra_classes='ml-3 mt-3' id='text-share-button'%}
               </li>
             </ul>
           </div>
         </div>
-      </form>
-      <p class='float-right'>
-        <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
-      </p>
-    </section>
-  {% elif comment.get_state_display == 'Archived' %}
-  {% elif comment.get_state_display == 'Pending' %}
-    <section class='col-md-12 mt-5'>
-      <form method='post'>
-        {% csrf_token %}
-        <div class='card'>
-          <h4 class='card-header'>
-            Your Comment
-          </h4>
-          <div class="card-body">
-            <div class='card-title'>
-              <p class='lead'>
-                Your Comment is Pending
-              </p>
-              <p class='col-md-8'>
-                Due to the highly charged nature of this particular issue we are requiring approval of all comments prior to posting.  Please forgive the delay; we'll do our best to get to each comment as quickly as possible, generally within a day or two.
-              </p>
+        <p class='float-right'>
+          <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
+        </p>
+      </section>
+    {% elif comment.get_state_display == 'Denied' %}
+      <section class='col-md-12 mt-5'>
+        <form method='post'>
+          {% csrf_token %}
+          <div class='card'>
+            <h4 class='card-header'>
+              Your Comment
+            </h4>
+            <div class="card-body">
+              <div class='card-title'>
+                <p class='lead'>
+                  Your Comment was Not Approved
+                </p>
+                <p>
+                  We generally only allow comments that are respectful and constrained to the issue at-hand.  Please edit your comment according to these guidelines, save, and then we can approve it.
+                </p>
+                <ul class='list-styled'>
+                  <li>Remain respectful and on-topic.</li>
+                  <li>Be concise.</li>
+                  <li>No personal attacks.</li>
+                </ul>
+              </div>
+              <div class='card-text'>
+                  {% bootstrap_form_errors form %}
+                  {% bootstrap_field form.content show_help=True show_label=False %}
+              </div>
             </div>
-            <div class='card-text mt-5 col-md-8'>
-                {% bootstrap_form_errors form %}
-                {% bootstrap_field form.content show_help=True show_label=False %}
-            </div>
-          </div>
-          <div class='card-footer'>
-            <div class='col-md-12'>
+            <div class='card-footer'>
               <ul class='list-inline'>
                 <li class='list-inline-item'>
-                  {% bootstrap_button "Save" button_type='submit' size='large' %}</li>
+                  {% bootstrap_button "Save!" button_type='submit' size='large' %}</li>
+                <li class='list-inline-item'>
+                  {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+        <p class='float-right'>
+          <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
+        </p>
+      </section>
+    {% elif comment.get_state_display == 'Archived' %}
+    {% elif comment.get_state_display == 'Pending' %}
+      <section class='col-md-12 mt-5'>
+        <form method='post'>
+          {% csrf_token %}
+          <div class='card'>
+            <h4 class='card-header'>
+              Your Comment
+            </h4>
+            <div class="card-body">
+              <div class='card-title'>
+                <p class='lead'>
+                  Your Comment is Pending
+                </p>
+                <p class='col-md-8'>
+                  Due to the highly charged nature of this particular issue we are requiring approval of all comments prior to posting.  Please forgive the delay; we'll do our best to get to each comment as quickly as possible, generally within a day or two.
+                </p>
+              </div>
+              <div class='card-text mt-5 col-md-8'>
+                  {% bootstrap_form_errors form %}
+                  {% bootstrap_field form.content show_help=True show_label=False %}
+              </div>
+            </div>
+            <div class='card-footer'>
+              <div class='col-md-12'>
+                <ul class='list-inline'>
+                  <li class='list-inline-item'>
+                    {% bootstrap_button "Save" button_type='submit' size='large' %}</li>
+                  <li class='list-inline-item'>
+                {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p class='float-right'>
+          <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
+        </p>
+      </section>
+    {% else %}
+      <section class='col-md-12 mt-5'>
+        <form method='post'>
+          {% csrf_token %}
+          <div class='card'>
+            <h4 class='card-header'>
+              Submit Comment
+            </h4>
+            <div class="card-body">
+              <div class='card-title'>
+                <p class='lead'>
+                  We'll post your comment and forward a copy to {{issue.recipient_name}}.  Here are some suggestions:
+                </p>
+                <ul class='list-styled'>
+                  {{issue.description|safe}}
+                </ul>
+              </div>
+              <p>
+                And as always: <strong>No personal attacks.</strong>  Remain respectful and on-topic.  Be concise.
+              </p>
+              <div class='card-text'>
+                  {% bootstrap_form_errors form %}
+                  {% bootstrap_field form.content show_help=True show_label=False %}
+              </div>
+            </div>
+            <div class='card-footer'>
+              <ul class='list-inline'>
+                <li class='list-inline-item'>
+                  {% bootstrap_button "Send!" button_type='submit' size='large' %}</li>
                 <li class='list-inline-item'>
               {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
                 </li>
               </ul>
             </div>
           </div>
-        </div>
-      </form>
-      <p class='float-right'>
-        <a class='text-danger align-bottom' href='{% url "comment-delete" comment.id %}'><small>Delete Comment</small></a>
-      </p>
-    </section>
-  {% else %}
-    <section class='col-md-12 mt-5'>
-      <form method='post'>
-        {% csrf_token %}
-        <div class='card'>
-          <h4 class='card-header'>
-            Submit Comment
-          </h4>
-          <div class="card-body">
-            <div class='card-title'>
-              <p class='lead'>
-                We'll post your comment and forward a copy to {{issue.recipient_name}}.  Here are some suggestions:
-              </p>
-              <ul class='list-styled'>
-                {{issue.description|safe}}
-              </ul>
-            </div>
-            <p>
-              And as always: <strong>No personal attacks.</strong>  Remain respectful and on-topic.  Be concise.
-            </p>
-            <div class='card-text'>
-                {% bootstrap_form_errors form %}
-                {% bootstrap_field form.content show_help=True show_label=False %}
-            </div>
-          </div>
-          <div class='card-footer'>
-            <ul class='list-inline'>
-              <li class='list-inline-item'>
-                {% bootstrap_button "Send!" button_type='submit' size='large' %}</li>
-              <li class='list-inline-item'>
-            {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </form>
-    </section>
-  {% endif %}
+        </form>
+      </section>
+    {% endif %}
 
   <section class='my-5 col-md-12'>
     <div class='card'>
@@ -250,7 +251,19 @@
       </div>
     </div>
   </section>
+  {% else %}
+  <section class='my-5'>
+    <h2>
+      Comments
+    </h2>
+  </section>
+  <section class='my-5'>
 
+    <p class='lead col-lg-8'>
+      Currently there are no open issues available for comments.  To see your past comments, please visit your <a href='{% url "account" }'>Dashboard</a> page.
+    </p>
+
+  {% endif %}
 {% endblock content %}
 
 {% block scripts %}
