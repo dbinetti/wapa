@@ -40,6 +40,7 @@ urlpatterns = [
     path('resources/', TemplateView.as_view(template_name='pages/resources/index.html'), name='resources',),
     path('resources/updates/', views.updates, name='updates',),
     path('resources/meetings/', TemplateView.as_view(template_name='pages/resources/meetings/index.html'), name='meetings',),
+    path('board/', TemplateView.as_view(template_name='pages/resources/meetings/index.html'), name='board',),
     path('resources/meetings/analyses/2021_11_15', TemplateView.as_view(template_name='pages/resources/meetings/analyses/2021_11_15.html'), name='analysis-2021-11-15',),
     path('resources/meetings/analyses/2021_12_13', TemplateView.as_view(template_name='pages/resources/meetings/analyses/2021_12_13.html'), name='analysis-2021-12-13',),
     path('resources/meetings/analyses/2022_01_10', TemplateView.as_view(template_name='pages/resources/meetings/analyses/2022_01_10.html'), name='analysis-2021-01-10',),
