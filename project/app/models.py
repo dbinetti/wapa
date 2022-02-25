@@ -407,7 +407,7 @@ class Comment(models.Model):
         from .tasks import send_approval_email
         from .tasks import send_comment
         send_approval_email.delay(self)
-        if self.comment.account.zone:
+        if self.account.zone and self.account.zone.num !=2:
             send_comment.delay(self)
         return
 
