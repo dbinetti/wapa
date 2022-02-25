@@ -118,13 +118,13 @@ class Issue(models.Model):
     )
     recipient_name = models.CharField(
         max_length=100,
-        blank=False,
+        blank=True,
     )
     recipient_emails = ArrayField(
         models.EmailField(
         ),
         null=True,
-        blank=False,
+        blank=True,
     )
     date = models.DateField(
         default=datetime.date.today,
@@ -405,9 +405,10 @@ class Comment(models.Model):
     @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
     def approve(self):
         from .tasks import send_approval_email
-        from .tasks import send_super_email
+        from .tasks import send_comment
         send_approval_email.delay(self)
-        send_super_email.delay(self)
+        if self.comment.account.zone:
+            send_comment.delay(self)
         return
 
     @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
@@ -589,6 +590,8 @@ class Zone(models.Model):
         ordering = (
             'num',
         )
+
+
 class User(AbstractBaseUser):
     id = HashidAutoField(
         primary_key=True,

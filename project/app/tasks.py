@@ -245,20 +245,17 @@ def send_approval_email(comment):
 
 
 @job
-def send_super_email(comment):
+def send_comment(comment):
     account = comment.account
+    if not account.zone:
+        return
     from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
     if comment.issue.recipient_emails:
         to_emails = comment.issue.recipient_emails
     else:
-        if account.zone:
-            to_emails = [
-                f"{account.zone.trustee_name} <{account.zone.trustee_email}>",
-            ]
-        else:
-            to_emails = [
-                "Board Trustees <board@westadaparents.com>",
-            ]
+        to_emails = [
+            f"{account.zone.trustee_name} <{account.zone.trustee_email}>",
+        ]
     email = build_email(
         template='emails/comment.txt',
         subject=f'{comment.issue.name}',

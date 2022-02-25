@@ -346,9 +346,10 @@ def comments(request):
                 comment.state = Comment.STATE.pending
             comment.save()
             if comment.state == Comment.STATE.approved:
+                recipient_name = comment.issue.recipient_name if comment.issue.recipient_name else "Your Trustee"
                 messages.success(
                     request,
-                    f'Comment Sent to {comment.issue.recipient_name}!',
+                    f'Comment Sent to {recipient_name}!',
                 )
             else:
                 messages.success(

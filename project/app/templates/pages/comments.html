@@ -163,7 +163,7 @@
             <div class="card-body">
               <div class='card-title'>
                 <p class='lead'>
-                  We'll post your comment and forward a copy to {{issue.recipient_name}}.  Here are some suggestions:
+                  We'll post your comment and forward a copy to {{issue.recipient_name|default:'your Trustee'}}.  Here are some suggestions:
                 </p>
                 <ul class='list-styled'>
                   {{issue.description|safe}}

@@ -1,7 +1,7 @@
 {% autoescape off %}
 
 Your comment has been approved, and now appears on the West Ada Parents
-Association Homepage and has been forward to {{comment.issue.recipient_name}}.
+Association Homepage.
 
 Thank you for getting involved!
 
