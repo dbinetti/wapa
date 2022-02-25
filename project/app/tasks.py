@@ -250,12 +250,9 @@ def send_comment(comment):
     if not account.zone:
         return
     from_email = f"{account.name} (WAPA) <{account.id}@westadaparents.com>"
-    if comment.issue.recipient_emails:
-        to_emails = comment.issue.recipient_emails
-    else:
-        to_emails = [
-            f"{account.zone.trustee_name} <{account.zone.trustee_email}>",
-        ]
+    to_emails = [
+        f"{account.zone.trustee_name} <{account.zone.trustee_email}>",
+    ]
     email = build_email(
         template='emails/comment.txt',
         subject=f'{comment.issue.name}',

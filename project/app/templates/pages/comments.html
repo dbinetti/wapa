@@ -51,7 +51,7 @@
                 <p>
                   "{{comment.content}}"
                 </p>
-                <footer class="blockquote-footer">Sent to {{comment.issue.recipient_name}} on {{comment.updated}}</footer>
+                <footer class="blockquote-footer">Posted on {{comment.updated}}</footer>
               </blockquote>
             </div>
           </div>
@@ -163,7 +163,7 @@
             <div class="card-body">
               <div class='card-title'>
                 <p class='lead'>
-                  We'll post your comment and forward a copy to {{issue.recipient_name|default:'your Trustee'}}.  Here are some suggestions:
+                  We'll post your comment and forward a copy to your Zone Trustee.  Here are some suggestions:
                 </p>
                 <ul class='list-styled'>
                   {{issue.description|safe}}
