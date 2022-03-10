@@ -76,7 +76,7 @@ def index(request):
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
     next_url = request.GET.get('next', '/account')
-    state = f"{get_random_string()}|{next_url}"
+    state = f"{get_random_string(12)}|{next_url}"
     request.session['state'] = state
     params = {
         'client_id': settings.AUTH0_CLIENT_ID,

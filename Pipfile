@@ -13,7 +13,7 @@ pytest-django = "*"
 pylint = "*"
 
 [packages]
-django = "==3.2.10"
+django = "*"
 django-environ = "*"
 psycopg2 = "*"
 whitenoise = "*"
@@ -41,7 +41,7 @@ django-reversion = "*"
 django-cloudinary-storage = "*"
 pillow = "*"
 django-fsm = "*"
-django-fsm-admin = "*"
+django-fsm-admin = {editable = true, ref = "refs/pull/92/merge", git = "https://github.com/gadventures/django-fsm-admin"}
 python-magic = "*"
 python-pdf = "*"
 geocoder = "*"
