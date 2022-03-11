@@ -22,12 +22,6 @@ class Account(models.Model):
         max_length=100,
         blank=False,
     )
-    is_vip = models.BooleanField(
-        default=False,
-    )
-    is_steering = models.BooleanField(
-        default=False,
-    )
     is_public = models.BooleanField(
         default=False,
     )
@@ -88,6 +82,175 @@ class Account(models.Model):
         related_name='account',
         null=True,
         blank=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Attendee(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    is_confirmed = models.BooleanField(
+        default=False,
+    )
+    account = models.ForeignKey(
+        'app.Account',
+        on_delete=models.CASCADE,
+        related_name='attendees',
+        null=False,
+        blank=False,
+    )
+    event = models.ForeignKey(
+        'app.Event',
+        on_delete=models.CASCADE,
+        related_name='attendees',
+        null=False,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    def __str__(self):
+        return f"{self.id}"
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=[
+                    'account',
+                    'event',
+                ],
+                name='unique_attendee',
+            )
+        ]
+
+
+class Comment(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    STATE = Choices(
+        (-10, 'denied', 'Denied'),
+        (-5, 'archived', 'Archived'),
+        (0, 'pending', 'Pending'),
+        (10, 'approved', 'Approved'),
+    )
+    state = FSMIntegerField(
+        choices=STATE,
+        default=STATE.pending,
+    )
+    is_featured = models.BooleanField(
+        default=False,
+    )
+    content = models.TextField(
+        max_length=2000,
+        blank=False,
+    )
+    account = models.ForeignKey(
+        'app.Account',
+        on_delete=models.CASCADE,
+        related_name='comments',
+        null=False,
+        blank=False,
+    )
+    issue = models.ForeignKey(
+        'app.Issue',
+        on_delete=models.CASCADE,
+        related_name='comments',
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=[
+                    'account',
+                    'issue',
+                ],
+                name='unique_comment',
+            )
+        ]
+        ordering = (
+            '-created',
+        )
+
+    @property
+    def wordcount(self):
+        words = self.content.split(" ")
+        return len(words)
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.account.name}"
+
+    @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
+    def approve(self):
+        from .tasks import send_approval_email
+        from .tasks import send_comment
+        send_approval_email.delay(self)
+        if self.account.zone and self.account.zone.num !=2:
+            send_comment.delay(self)
+        return
+
+    @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
+    def deny(self):
+        from .tasks import send_denial_email
+        send_denial_email.delay(self.account)
+        return
+
+
+    @transition(field=state, source=[STATE.denied, STATE.approved], target=STATE.pending)
+    def pend(self):
+        return
+
+
+class Event(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    description = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    datetime = models.DateTimeField(
+        null=True,
+        blank=False,
+    )
+    location = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+    )
+    notes = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
     )
 
     def __str__(self):
@@ -224,47 +387,6 @@ class Isat(models.Model):
         return f"{self.id}"
 
 
-class Event(models.Model):
-    id = HashidAutoField(
-        primary_key=True,
-    )
-    name = models.CharField(
-        max_length=100,
-        blank=False,
-    )
-    description = models.TextField(
-        max_length=2000,
-        blank=True,
-        default='',
-    )
-    date = models.DateField(
-        default=datetime.date.today,
-    )
-    datetime = models.DateTimeField(
-        null=True,
-        blank=False,
-    )
-    location = models.CharField(
-        max_length=100,
-        blank=True,
-        default='',
-    )
-    notes = models.TextField(
-        max_length=2000,
-        blank=True,
-        default='',
-    )
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-    )
-
-    def __str__(self):
-        return f"{self.name}"
-
-
 class School(models.Model):
     id = HashidAutoField(
         primary_key=True,
@@ -276,16 +398,6 @@ class School(models.Model):
     name = models.CharField(
         max_length=100,
         blank=False,
-    )
-    nurse_name = models.CharField(
-        max_length=100,
-        blank=True,
-        default='',
-    )
-    nurse_email = models.EmailField(
-        max_length=255,
-        blank=True,
-        default='',
     )
     school_id = models.IntegerField(
         null=True,
@@ -337,100 +449,9 @@ class School(models.Model):
         )
 
 
-class Comment(models.Model):
-    id = HashidAutoField(
-        primary_key=True,
-    )
-    STATE = Choices(
-        (-10, 'denied', 'Denied'),
-        (-5, 'archived', 'Archived'),
-        (0, 'pending', 'Pending'),
-        (10, 'approved', 'Approved'),
-    )
-    state = FSMIntegerField(
-        choices=STATE,
-        default=STATE.pending,
-    )
-    is_featured = models.BooleanField(
-        default=False,
-    )
-    content = models.TextField(
-        max_length=2000,
-        blank=False,
-    )
-    account = models.ForeignKey(
-        'app.Account',
-        on_delete=models.CASCADE,
-        related_name='comments',
-        null=False,
-        blank=False,
-    )
-    issue = models.ForeignKey(
-        'app.Issue',
-        on_delete=models.CASCADE,
-        related_name='comments',
-        null=False,
-        blank=False,
-    )
-
-    class Meta:
-        constraints = [
-            UniqueConstraint(
-                fields=[
-                    'account',
-                    'issue',
-                ],
-                name='unique_comment',
-            )
-        ]
-        ordering = (
-            '-created',
-        )
-
-    @property
-    def wordcount(self):
-        words = self.content.split(" ")
-        return len(words)
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-    )
-
-    def __str__(self):
-        return f"{self.account.name}"
-
-    @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
-    def approve(self):
-        from .tasks import send_approval_email
-        from .tasks import send_comment
-        send_approval_email.delay(self)
-        if self.account.zone and self.account.zone.num !=2:
-            send_comment.delay(self)
-        return
-
-    @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
-    def deny(self):
-        from .tasks import send_denial_email
-        send_denial_email.delay(self.account)
-        return
-
-
-    @transition(field=state, source=[STATE.denied, STATE.approved], target=STATE.pending)
-    def pend(self):
-        return
-
-
 class Student(models.Model):
     id = HashidAutoField(
         primary_key=True,
-    )
-    name = models.CharField(
-        max_length=100,
-        blank=True,
-        default='',
     )
     GRADE = Choices(
         (-1, 'prek', 'Pre-K'),
@@ -452,11 +473,6 @@ class Student(models.Model):
         choices=GRADE,
         blank=False,
         null=False,
-    )
-    exemption = models.ImageField(
-        null=True,
-        blank=True,
-        default='wapa/exemption',
     )
     account = models.ForeignKey(
         'app.Account',
@@ -507,48 +523,6 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.school.name} {self.get_grade_display()} Grade"
-
-
-class Attendee(models.Model):
-    id = HashidAutoField(
-        primary_key=True,
-    )
-    is_confirmed = models.BooleanField(
-        default=False,
-    )
-    account = models.ForeignKey(
-        'app.Account',
-        on_delete=models.CASCADE,
-        related_name='attendees',
-        null=False,
-        blank=False,
-    )
-    event = models.ForeignKey(
-        'app.Event',
-        on_delete=models.CASCADE,
-        related_name='attendees',
-        null=False,
-        blank=False,
-    )
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-    )
-    def __str__(self):
-        return f"{self.id}"
-
-    class Meta:
-        constraints = [
-            UniqueConstraint(
-                fields=[
-                    'account',
-                    'event',
-                ],
-                name='unique_attendee',
-            )
-        ]
 
 
 class Zone(models.Model):

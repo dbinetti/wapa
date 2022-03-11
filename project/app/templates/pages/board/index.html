@@ -30,13 +30,10 @@
           <th>
             Minutes
           </th>
-          <th>
-            Analysis
-          </th>
         </tr>
       </thead>
       <tbody>
-
+        {% comment %}
         <tr>
           <td>
             June 13, 2022
@@ -49,9 +46,6 @@
           </td>
           <td>
             {# <a href=''>Minutes</a> #}
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
         <tr>
@@ -67,9 +61,6 @@
           <td>
             {# <a href=''>Minutes</a> #}
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -83,9 +74,6 @@
           </td>
           <td>
             {# <a href=''>Minutes</a> #}
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
         <tr>
@@ -101,9 +89,6 @@
           <td>
             {# <a href=''>Minutes</a> #}
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -118,25 +103,20 @@
           <td>
             {# <a href=''>Minutes</a> #}
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
+        {% endcomment %}
         <tr>
           <td>
             March 14, 2021
           </td>
           <td>
-            {# <a href=''>Agenda</a> #}
+            <a href='https://www.westada.org/Page/169#calendar131/20220311/event/796422'>Agenda</a>
           </td>
           <td>
             {# <a href=''>Transcript</a> #}
           </td>
           <td>
             {# <a href=''>Minutes</a> #}
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
         <tr>
@@ -150,10 +130,7 @@
             <a href='https://www.rev.com/transcript-editor/shared/vP1LXeZa-gFjH01fJflzgGrD8pmUxNvPuRM2zUo1ss3Aw_QHgddy3xMcCK-9ujvLlIug0rL_sHEnWUutxw5i_WsLDHw?loadFrom=SharedLink'>Transcript</a>
           </td>
           <td>
-            {# <a href=''>Minutes</a> #}
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
+            <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Regular%20Board%20Meeting%20-%2002-28-2022%20-%20Meeting%20Minutes.pdf'>Minutes</a>
           </td>
         </tr>
         <tr>
@@ -169,9 +146,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Special%20Board%20Meeting%20-%2002-18-2022%20-%20Meeting%20Minutes.pdf'>Minutes</a>
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -185,9 +159,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Regular%20Board%20Meeting%20-%2002-14-2022%20-%20Meeting%20Minutes.pdf'>Minutes</a>
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
 
@@ -204,9 +175,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Regular%20Board%20Meeting%20-%2001-24-2022%20-%20Meeting%20Minutes.pdf'>Minutes</a>
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -220,9 +188,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2022/1-24-22/Regular%20Board%20Meeting%20-%2001-10-2022%20-%20Meeting%20Minutes.pdf'>Minutes</a>
-          </td>
-          <td>
-            <a href='{% url  "analysis-2021-01-10" %}'>Analysis</a>
           </td>
         </tr>
         <tr>
@@ -243,9 +208,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2022/1-10-22/Regular%20Board%20Meeting%20%20-%2012-13-2021%20-%20Meeting%20Minutes.pdf'>Minutes</a>
           </td>
-          <td>
-            <a href='{% static "app/open_meeting_complaint_12_13_2021.pdf" %}'>Analysis</a>
-          </td>
         </tr>
         <tr>
           <td>
@@ -259,9 +221,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2021/12-13-21/November%2015%202021%20Minutes.pdf'>Minutes</a>
-          </td>
-          <td>
-            <a href='{% url "analysis-2021-11-15" %}'>Analysis</a>
           </td>
         </tr>
         <tr>
@@ -277,9 +236,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/domain/79/board%20agendas/2021/12-13-21/November%2011%202021%20Minutes.pdf'>Minutes</a>
           </td>
-          <td>
-            <a href='{% url "complaints" %}'>Analysis</a>
-          </td>
         </tr>
         <tr>
           <td>
@@ -293,9 +249,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/11_15_21/October%2025%20meeting%20notes.pdf'>Minutes</a>
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
         <tr>
@@ -311,9 +264,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/11_15_21/October%2013%20meeting%20notes.pdf'>Minutes</a>
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -327,9 +277,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/10_25_21/Min.%20101121.pdf'>Minutes</a>
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
         <tr>
@@ -345,9 +292,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/10_11_21/min%20092821.pdf'>Minutes</a>
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -361,9 +305,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/09_27_21/min%20080821.pdf'>Minutes</a>
-          </td>
-          <td>
-            <a href='https://www.rev.com/transcript-editor/shared/V0YgaihK9qsEDxpTqk3jMn0j7tFTpnvev9vbxR0WOWKjIv9DUOgsVVB1yfjEu4RwQooknjfET7dx5Ioal7WsUZgEAkQ?loadFrom=SharedLink'>Analysis Part One;</a>&nbsp;&nbsp;<a href='https://www.rev.com/transcript-editor/shared/8eozq18LmisnLxS9PN8hk6Bb8eAqwKgwajb4ksT2piKq_HqCfxCBEvednDZC_m7q1mAICL8mc3kwIQP2f2EvEYG2GmY?loadFrom=SharedLink'>Analysis Part Two</a>
           </td>
         </tr>
         <tr>
@@ -379,9 +320,6 @@
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/09_08_21/min%20082421.pdf'>Minutes</a>
           </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
-          </td>
         </tr>
         <tr>
           <td>
@@ -395,9 +333,6 @@
           </td>
           <td>
             <a href='https://www.westada.org/cms/lib/ID01904074/Centricity/Domain/79/Board%20Agendas/2021/08_24_21/min%20081021.pdf'>Minutes</a>
-          </td>
-          <td>
-            {# <a href=''>Analysis</a> #}
           </td>
         </tr>
       </tbody>

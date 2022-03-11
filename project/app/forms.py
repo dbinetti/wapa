@@ -99,7 +99,6 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = [
-            'name',
             'school',
             'grade',
         ]
@@ -113,7 +112,6 @@ class StudentForm(forms.ModelForm):
             # ),
         }
         help_texts = {
-            'name': "Provide first name/initials.",
             'school': "School attending 2021-22.",
             'grade': "Grade for 2021-22.",
         }
@@ -148,8 +146,6 @@ class AccountAdminForm(forms.ModelForm):
         'point',
         'is_public',
         'is_spouse',
-        'is_steering',
-        'is_vip',
         'zone',
         'user',        ]
         widgets = {

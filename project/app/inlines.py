@@ -10,27 +10,24 @@ from .models import School
 from .models import Student
 
 
-class StudentInline(admin.TabularInline):
-    model = Student
+class AccountInline(admin.TabularInline):
+    model = Account
     fields = [
         'name',
-        'account',
-        'school',
-        'grade',
-        'exemption',
     ]
     readonly_fields = [
     ]
     ordering = (
+        'name',
     )
     show_change_link = True
     extra = 0
     classes = [
-        # 'collapse',
+        'collapse',
     ]
     autocomplete_fields = [
-        'account',
-        'school',
+        'zone',
+        # 'issue',
     ]
 
 
@@ -53,6 +50,7 @@ class AttendeeInline(admin.TabularInline):
         'account',
         'event',
     ]
+
 
 class CommentInline(admin.TabularInline):
     model = Comment
@@ -97,23 +95,24 @@ class SchoolInline(admin.TabularInline):
         # 'issue',
     ]
 
-class AccountInline(admin.TabularInline):
-    model = Account
+
+class StudentInline(admin.TabularInline):
+    model = Student
     fields = [
-        'name',
-        'is_vip',
+        'account',
+        'school',
+        'grade',
     ]
     readonly_fields = [
     ]
     ordering = (
-        'name',
     )
     show_change_link = True
     extra = 0
     classes = [
-        'collapse',
+        # 'collapse',
     ]
     autocomplete_fields = [
-        'zone',
-        # 'issue',
+        'account',
+        'school',
     ]

@@ -2,7 +2,6 @@ import datetime
 import json
 import logging
 
-import geocoder
 import jwt
 import requests
 from django.conf import settings
@@ -11,7 +10,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
-from django.contrib.gis.geos import Point
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -28,12 +26,9 @@ from .forms import CommentForm
 from .forms import ConfirmForm
 from .forms import SearchForm
 from .forms import StudentFormSet
-from .forms import ZoneForm
 from .models import Comment
 from .models import Issue
-from .models import Zone
 from .tasks import get_mailchimp_client
-from .tasks import get_precision
 from .tasks import link_account
 from .tasks import send_verification_email
 from .tasks import unlink_account
@@ -480,7 +475,6 @@ def search(request):
             'response': response,
         }
     )
-
 
 
 @login_required

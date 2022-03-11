@@ -24,7 +24,6 @@ WSGI_APPLICATION = 'wsgi.application'
 ADMINS = [
     ('admin', env("DEFAULT_FROM_EMAIL")),
 ]
-USE_L10N = True
 SILENCED_SYSTEM_CHECKS = [
     'models.W042',
 ]
