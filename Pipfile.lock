@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "43ee1b412056f3a06f00b324aad3b6fdfc9f86979a9fb6e39179f6062852e7ea"
+            "sha256": "aa53e6e6355f122f015cc8b6b43f62fc47f5c99e567b17a24b70285b109b2b1f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -313,11 +313,11 @@
         },
         "django-fsm-admin": {
             "editable": true,
-            "git": "https://github.com/gadventures/django-fsm-admin",
+            "git": "https://github.com/prosehair/django-fsm-admin",
             "hashes": [
                 "sha256:b10a75688bbd3714aef97db03121218b9a5963436c7805e1524bbd48a0e6c0a4"
             ],
-            "ref": "19d4d1b52a61abf172354200990c740585cc8111"
+            "ref": "ce4cd3dae861132b03fbe731dd8de10dcc18883d"
         },
         "django-hashid-field": {
             "hashes": [
@@ -494,11 +494,11 @@
         },
         "phonenumberslite": {
             "hashes": [
-                "sha256:adfb3a2e710b0475c75abb5b8e53fa9d578764284a1d0393a7583792b1ecd6dc",
-                "sha256:f4b19deb32e0f4b80ae61b78764ec4b54dd05e15c7fa6c03f169e6784509b812"
+                "sha256:1e7a2659d0ecd5017c4d0edd18d75dbe307909646a800ecda26865ad08bf2f00",
+                "sha256:ebfe83dd6c3eb8c2487cc135ebff2c246ee3888069ca0a83ab4dac63a24df077"
             ],
             "index": "pypi",
-            "version": "==8.12.44"
+            "version": "==8.12.45"
         },
         "pickleshare": {
             "hashes": [
