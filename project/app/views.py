@@ -445,7 +445,7 @@ def updates(request):
         u['date'] = datetime.datetime.strptime(u['send_time'], '%Y-%m-%dT%H:%M:%S%z')
     return render(
         request,
-        'pages/resources/updates/index.html',
+        'pages/updates/index.html',
         context = {
             'updates': updates,
         },

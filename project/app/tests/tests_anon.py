@@ -44,6 +44,11 @@ def test_board(anon_client):
     response = anon_client.get(path)
     assert response.status_code == 200
 
+def test_updates(anon_client):
+    path = reverse('updates')
+    response = anon_client.get(path)
+    assert response.status_code == 200
+
 def test_comments(anon_client):
     path = reverse('comments')
     response = anon_client.get(path)
