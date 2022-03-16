@@ -69,24 +69,25 @@ DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 # Cache
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": env("REDIS_URL"),
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "CONNECTION_POOL_KWARGS": {
-                "max_connections": 20,
-            },
-            "REDIS_CLIENT_KWARGS": {
-                "ssl_cert_reqs": None,
-            },
-        }
+        # "BACKEND": "django_redis.cache.RedisCache",
+        # "OPTIONS": {
+        #     "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        #     "CONNECTION_POOL_KWARGS": {
+        #         "max_connections": 20,
+        #     },
+        #     "REDIS_CLIENT_KWARGS": {
+        #         "ssl_cert_reqs": None,
+        #     },
+        # }
     },
 }
 
 # RQ
 RQ_QUEUES = {
     'default': {
-        'USE_REDIS_CACHE': 'default',
+        'URL': env("REDIS_URL"),
         'ASYNC': True,
     },
 }
