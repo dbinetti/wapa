@@ -1,0 +1,23 @@
+{% autoescape off %}
+
+This is a one-time message from the West Ada Parents Association to
+notify you about a recent Zone change in the West Ada School District.
+
+Last year, the Board of Trustees updated the boundaries of the West
+Ada School District Zones, as required by Idaho State Law.  This
+process is called "redistricting", and it's designed to balance out
+any population changes since the last Census.
+
+As a result, your Board Trustee representative changed as of January.
+Previously, you were in {{account.zone.name}}.  Now, you are currently in
+{{new.name}}, and are represented by Trustee {{new.trustee_name}}.
+
+The updated Districts can be found here:
+https://westadaschools.maps.arcgis.com/apps/webappviewer/index.html?id=b35822da05084a77a2e3db09fcc51b13
+
+If you have any questions about this change -- or believe this information
+is inaccurate -- please let me know.
+
+Best, Dave
+
+{% endautoescape %}

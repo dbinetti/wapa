@@ -374,6 +374,24 @@ def send_zone_three(account):
 
 
 
+@job
+def zone_change(account, new):
+    from_email = "David Binetti (WAPA) <dbinetti@westadaparents.com>"
+    to_block = [f'{account.user.email}']
+    email = build_email(
+        template='emails/change.txt',
+        subject='Notification of West Ada Zone Change',
+        context={
+            'new': new,
+            'account': account,
+        },
+        from_email=from_email,
+        to=to_block,
+    )
+    return email.send()
+
+
+
 def get_letter_from_comment(comment):
     context={
         'comment': comment,

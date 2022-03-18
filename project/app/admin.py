@@ -35,7 +35,7 @@ approve.short_description = 'Approve Comment'
 
 
 @admin.register(Account)
-class AccountAdmin(VersionAdmin):
+class AccountAdmin(VersionAdmin, GISModelAdmin):
     def get_changelist_form(self, request, **kwargs):
         return AccountAdminForm
 
@@ -252,7 +252,7 @@ class IssueAdmin(VersionAdmin):
 
 
 @admin.register(School)
-class SchoolAdmin(VersionAdmin):
+class SchoolAdmin(VersionAdmin, GISModelAdmin):
     save_on_top = True
     fields = [
         'name',
