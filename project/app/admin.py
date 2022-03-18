@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
+from django.contrib.gis.admin.options import GISModelAdmin
 from fsm_admin.mixins import FSMTransitionMixin
 from reversion.admin import VersionAdmin
 
@@ -290,12 +291,13 @@ class SchoolAdmin(VersionAdmin):
 
 
 @admin.register(Zone)
-class ZoneAdmin(VersionAdmin):
+class ZoneAdmin(VersionAdmin, GISModelAdmin):
     save_on_top = True
     fields = [
         'name',
         'trustee_name',
         'trustee_email',
+        'poly',
     ]
     list_display = [
         'name',
