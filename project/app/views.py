@@ -242,7 +242,6 @@ def account(request):
     account = request.user.account
     students = account.students.order_by(
         'grade',
-        'name',
     )
     comments = account.comments.filter(
         issue__state=10,
