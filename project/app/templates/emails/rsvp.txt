@@ -1,0 +1,19 @@
+{% autoescape off %}
+
+Just a quick reminder that the WAPA general meeting is
+tonight, Monday the 28th, starting at 6PM.  The event will take
+place in the Payette Room of the District Office, located at 1303
+E Central Drive in Meridian (enter on the East side of the building.)
+
+If you have any questions, please feel free to reach out via cell/text at
+208.713.4599.
+
+Hope to see you tonight!
+
+
+Best,
+Dave
+
+
+
+{% endautoescape %}
