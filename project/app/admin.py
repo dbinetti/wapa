@@ -316,7 +316,7 @@ class ZoneAdmin(VersionAdmin, GISModelAdmin):
     ]
     inlines = [
         SchoolInline,
-        AccountInline,
+        # AccountInline,
     ]
     autocomplete_fields = [
     ]
