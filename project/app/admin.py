@@ -23,6 +23,7 @@ from .models import Event
 from .models import Isat
 from .models import Issue
 from .models import School
+from .models import Staff
 from .models import User
 from .models import Zone
 
@@ -143,6 +144,35 @@ class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     ]
 
 
+@admin.register(Staff)
+class StaffAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+        'position',
+        'school_raw',
+        'school',
+    ]
+    list_filter = [
+    ]
+    list_display = [
+        'name',
+        'position',
+        'school_raw',
+        'school',
+    ]
+    ordering = [
+        '-created',
+    ]
+    autocomplete_fields = [
+        'school',
+        # 'issue',
+    ]
+    list_select_related = [
+        'school',
+    ]
+
+
 @admin.register(Event)
 class EventAdmin(VersionAdmin):
     save_on_top = True
@@ -258,6 +288,7 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
         'name',
         'full',
         'kind',
+        'location_id',
         'school_id',
         'point',
         'address_raw',
@@ -267,12 +298,15 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
     list_display = [
         'id',
         'name',
+        'location_id',
         # 'full',
         # 'school_id',
         # 'kind',
     ]
     list_editable = [
         'name',
+        'location_id',
+
         # 'full',
         # 'kind',
         # 'school_id',

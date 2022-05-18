@@ -4,6 +4,7 @@ import csv
 from app.forms import IsatForm
 from app.models import Isat
 from app.models import School
+from app.models import Staff
 
 
 def clean_stat(stat):
@@ -80,4 +81,46 @@ def import_isat(filename, year):
                     form.save()
                 else:
                     continue
+    return
+
+
+def import_staff(filename):
+    with open(filename) as f:
+        reader = csv.reader(
+            f,
+            skipinitialspace=True,
+        )
+        rows = [row for row in reader]
+        for row in rows:
+            name = str(row[0]).strip()
+            position = str(row[1]).strip()
+            school_raw = str(row[2]).strip()
+            staff = Staff(
+                name=name,
+                postition=position,
+                school_raw=school_raw,
+            )
+            staff.save()
+    return
+
+
+def import_locations(filename):
+    with open(filename) as f:
+        reader = csv.reader(
+            f,
+            skipinitialspace=True,
+        )
+        next(reader)
+        rows = [row for row in reader]
+        for row in rows:
+            location_id = int(row[0])
+            name = str(row[1]).strip()
+            try:
+                school = School.objects.get(
+                    full__iexact=name,
+                )
+            except School.DoesNotExist:
+                print(name)
+            except School.MultipleObjectsReturned:
+                print('Multi', name)
     return

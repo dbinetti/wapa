@@ -403,6 +403,10 @@ class School(models.Model):
         null=True,
         blank=True,
     )
+    location_id = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     KIND = Choices(
         (10, 'elementary', 'Elementary School'),
         (20, 'middle', 'Middle School'),
@@ -426,10 +430,57 @@ class School(models.Model):
         null=True,
         blank=True,
     )
+    enrollment = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    capacity = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     zone = models.ForeignKey(
         'app.Zone',
         on_delete=models.SET_NULL,
-        related_name='school',
+        related_name='schools',
+        null=True,
+        blank=True,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        ordering = (
+            'name',
+        )
+
+
+class Staff(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    position = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    school_raw = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    school = models.ForeignKey(
+        'app.School',
+        on_delete=models.SET_NULL,
+        related_name='staffs',
         null=True,
         blank=True,
     )
