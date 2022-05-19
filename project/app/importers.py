@@ -133,3 +133,33 @@ def import_locations(filename):
             except School.MultipleObjectsReturned:
                 print('Multi', name)
     return
+
+
+def import_enrollment(filename):
+    with open(filename) as f:
+        reader = csv.reader(
+            f,
+            skipinitialspace=True,
+        )
+        next(reader)
+        rows = [row for row in reader]
+        miss = []
+        for row in rows:
+            name = str(row[0]).strip()
+            enrollment = int(row[1])
+            capacity = int(row[2])
+            try:
+                school = School.objects.get(
+                    full=name,
+                )
+            except School.DoesNotExist:
+                location_id = int(row[4])
+                school = School.objects.get(
+                    location_id=location_id,
+                )
+            except School.MultipleObjectsReturned:
+                print('Multi', name)
+            school.enrollment = enrollment
+            school.capacity = capacity
+            school.save()
+    return
