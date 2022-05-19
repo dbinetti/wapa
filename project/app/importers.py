@@ -93,12 +93,21 @@ def import_staff(filename):
         rows = [row for row in reader]
         for row in rows:
             name = str(row[0]).strip()
-            position = str(row[1]).strip()
-            school_raw = str(row[2]).strip()
+            position = str(row[2]).strip()
+            school_raw = str(row[1]).strip()
+            location_id = int(row[3])
+            try:
+                school = School.objects.get(
+                    location_id=location_id,
+                )
+            except School.DoesNotExist:
+                school = None
+
             staff = Staff(
                 name=name,
-                postition=position,
+                position=position,
                 school_raw=school_raw,
+                school=school,
             )
             staff.save()
     return
@@ -117,7 +126,7 @@ def import_locations(filename):
             name = str(row[1]).strip()
             try:
                 school = School.objects.get(
-                    full__iexact=name,
+                    location_id=location_id,
                 )
             except School.DoesNotExist:
                 print(name)
