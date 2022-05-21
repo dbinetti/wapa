@@ -434,7 +434,7 @@ def delete_picture(request):
 def updates(request):
     client = get_mailchimp_client()
     campaigns = client.campaigns.all(
-        list_id=settings.MAILCHIMP_AUDIENCE_ID,
+        # list_id=settings.MAILCHIMP_AUDIENCE_ID,
         sort_field='send_time',
         count=100,
     )['campaigns']
@@ -447,6 +447,7 @@ def updates(request):
         'pages/updates/index.html',
         context = {
             'updates': updates,
+            # 'smiles': smiles,
         },
     )
 
