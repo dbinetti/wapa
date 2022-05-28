@@ -434,7 +434,11 @@ class School(models.Model):
         null=True,
         blank=True,
     )
-    capacity = models.IntegerField(
+    size = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    capacity = models.FloatField(
         null=True,
         blank=True,
     )
