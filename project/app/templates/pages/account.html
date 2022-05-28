@@ -58,13 +58,6 @@
             </ul>
           </div>
           <div class='card-text'>
-            <div class='form-group'>
-              {% if account.voter_json %}
-                Your <small class='badge badge-warning badge-pill'>Voter Badge</small> will now appear on your comments to the Board. <a href='{% url "unlink" %}'><small class='text-danger'>Remove Badge</small></a>
-              {% else %}
-                <strong>New:</strong> Add a <a href='{% url "search" %}'><span class='badge badge-warning badge-pill'>Voter Badge</span></a> to your Account.
-              {% endif %}
-            </div>
             {% bootstrap_form_errors form %}
             {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
             {% bootstrap_field form.is_public show_help=True show_label=False %}

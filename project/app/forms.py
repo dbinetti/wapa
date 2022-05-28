@@ -155,7 +155,7 @@ class AccountAdminForm(forms.ModelForm):
         }
 
         help_texts = {
-            'name': mark_safe("We may have copied this from your Voter Record; feel free to update it to your preferred name."),
+            'name': mark_safe("Please update to your full, real name."),
             'address': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong> unless we certify."),
             'email': mark_safe("We do not sell, share, or spam you."),
         }

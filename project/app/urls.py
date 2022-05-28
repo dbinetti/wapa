@@ -27,9 +27,9 @@ urlpatterns = [
     path('delete', views.delete, name='delete',),
 
     # Voter
-    path('search', views.search, name='search',),
-    path('confirm/<voter_pk>', views.confirm, name='confirm',),
-    path('unlink', views.unlink, name='unlink',),
+    # path('search', views.search, name='search',),
+    # path('confirm/<voter_pk>', views.confirm, name='confirm',),
+    # path('unlink', views.unlink, name='unlink',),
 
     # Comments
     path('comments', views.comments, name='comments',),

@@ -3,7 +3,6 @@
 This message was sent by a Member of the West Ada Parents Association.
 
 Parent: {{account.name}} {% if account.is_spouse %}+ Spouse{%endif%}
-{% if account.voter_json %}Registered Voter{% endif %}
 {% if account.students.count %}
 Student(s) at:
 {% endif %}
