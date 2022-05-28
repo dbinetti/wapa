@@ -284,17 +284,21 @@ class IssueAdmin(VersionAdmin):
 @admin.register(School)
 class SchoolAdmin(VersionAdmin, GISModelAdmin):
     save_on_top = True
-    fields = [
+    fields = (
         'name',
         'full',
-        'kind',
+        'kind', (
+            'enrollment',
+            'size',
+            'capacity',
+        ),
         'location_id',
         'school_id',
         'point',
         'address_raw',
         'phone_raw',
         'zone',
-    ]
+    )
     list_display = [
         'id',
         'name',
