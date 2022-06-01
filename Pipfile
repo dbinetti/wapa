@@ -41,6 +41,7 @@ django-reversion = "*"
 django-cloudinary-storage = "*"
 pillow = "*"
 django-fsm = "*"
+django-fsm-log = "*"
 django-fsm-admin = {editable = true, ref = "prosehair-dev", git = "https://github.com/prosehair/django-fsm-admin"}
 python-magic = "*"
 python-pdf = "*"

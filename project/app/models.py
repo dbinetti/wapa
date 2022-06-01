@@ -7,6 +7,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db.models.constraints import UniqueConstraint
 from django_fsm import FSMIntegerField
 from django_fsm import transition
+from django_fsm_log.decorators import fsm_log_by
 from hashid_field import HashidAutoField
 from model_utils import Choices
 
@@ -195,6 +196,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.account.name}"
 
+    @fsm_log_by
     @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
     def approve(self):
         from .tasks import send_approval_email
@@ -204,6 +206,7 @@ class Comment(models.Model):
             send_comment.delay(self)
         return
 
+    @fsm_log_by
     @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
     def deny(self):
         from .tasks import send_denial_email
@@ -211,6 +214,7 @@ class Comment(models.Model):
         return
 
 
+    @fsm_log_by
     @transition(field=state, source=[STATE.denied, STATE.approved], target=STATE.pending)
     def pend(self):
         return

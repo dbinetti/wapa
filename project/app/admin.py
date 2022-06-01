@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from django.contrib.gis.admin.options import GISModelAdmin
+from django_fsm_log.admin import StateLogInline
 from fsm_admin.mixins import FSMTransitionMixin
 from reversion.admin import VersionAdmin
 
@@ -141,6 +142,9 @@ class CommentAdmin(FSMTransitionMixin, VersionAdmin):
     ]
     actions = [
         approve,
+    ]
+    inlines = [
+        StateLogInline,
     ]
 
 
