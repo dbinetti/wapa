@@ -308,14 +308,14 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
     list_display = [
         'id',
         'name',
-        'gis_id',
+        # 'gis_id',
         # 'full',
         # 'school_id',
         # 'kind',
     ]
     list_editable = [
         'name',
-        'gis_id',
+        # 'gis_id',
 
         # 'full',
         # 'kind',
