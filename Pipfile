@@ -11,6 +11,8 @@ faker = "*"
 pytest = "*"
 pytest-django = "*"
 pylint = "*"
+notebook = "*"
+django-extensions = "*"
 
 [packages]
 django = "*"
