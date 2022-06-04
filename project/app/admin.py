@@ -303,6 +303,7 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
         'address_raw',
         'phone_raw',
         'zone',
+        'poly',
     )
     list_display = [
         'id',
