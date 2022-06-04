@@ -411,6 +411,10 @@ class School(models.Model):
         null=True,
         blank=True,
     )
+    gis_id = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     KIND = Choices(
         (10, 'elementary', 'Elementary School'),
         (20, 'middle', 'Middle School'),
@@ -443,6 +447,10 @@ class School(models.Model):
         blank=True,
     )
     capacity = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    poly = models.PolygonField(
         null=True,
         blank=True,
     )

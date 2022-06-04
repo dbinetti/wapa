@@ -297,6 +297,7 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
             'capacity',
         ),
         'location_id',
+        'gis_id',
         'school_id',
         'point',
         'address_raw',
@@ -306,14 +307,14 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
     list_display = [
         'id',
         'name',
-        'location_id',
+        'gis_id',
         # 'full',
         # 'school_id',
         # 'kind',
     ]
     list_editable = [
         'name',
-        'location_id',
+        'gis_id',
 
         # 'full',
         # 'kind',
