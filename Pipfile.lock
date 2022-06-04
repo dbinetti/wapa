@@ -736,11 +736,11 @@
         },
         "redis": {
             "hashes": [
-                "sha256:b30a2dc3f27cab69284829d6d423643beee88f279967c42e9014a2ffb7c2a84c",
-                "sha256:b989406ea786a9d151066a683b32a437a48f043c3ffd3795ec5ad9d344ee9e8c"
+                "sha256:2f7a57cf4af15cd543c4394bcbe2b9148db2606a37edba755368836e3a1d053e",
+                "sha256:f57f8df5d238a8ecf92f499b6b21467bfee6c13d89953c27edf1e2bc673622e7"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==4.3.2"
+            "version": "==4.3.3"
         },
         "requests": {
             "hashes": [
@@ -1160,7 +1160,7 @@
                 "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc",
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
-            "markers": "python_version < '3.11'",
+            "markers": "python_version >= '3.7'",
             "version": "==2.0.1"
         },
         "tomlkit": {
