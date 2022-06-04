@@ -303,19 +303,19 @@ class SchoolAdmin(VersionAdmin, GISModelAdmin):
         'address_raw',
         'phone_raw',
         'zone',
-        # 'poly',
+        'poly',
     )
     list_display = [
         'id',
         'name',
-        # 'gis_id',
+        'gis_id',
         # 'full',
         # 'school_id',
         # 'kind',
     ]
     list_editable = [
         'name',
-        # 'gis_id',
+        'gis_id',
 
         # 'full',
         # 'kind',
