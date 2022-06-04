@@ -286,7 +286,7 @@ class IssueAdmin(VersionAdmin):
 
 
 @admin.register(School)
-class SchoolAdmin(GISModelAdmin):
+class SchoolAdmin(VersionAdmin, GISModelAdmin):
     save_on_top = True
     fields = (
         'name',
