@@ -8,9 +8,8 @@ from django.contrib.gis.admin.options import GISModelAdmin
 from django_fsm_log.admin import StateLogInline
 from fsm_admin.mixins import FSMTransitionMixin
 from leaflet.admin import LeafletGeoAdminMixin
-from reversion.admin import VersionAdmin
-
 from leaflet_admin_list.admin import LeafletAdminListMixin
+from reversion.admin import VersionAdmin
 
 # Local
 from .forms import AccountAdminForm
@@ -303,10 +302,10 @@ class SchoolAdmin(LeafletAdminListMixin, LeafletGeoAdminMixin, VersionAdmin):
         'gis_id',
         'school_id',
         'point',
+        'boundary',
         'address_raw',
         'phone_raw',
         'zone',
-        'poly',
     )
     list_display = [
         'id',

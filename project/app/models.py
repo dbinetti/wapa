@@ -450,7 +450,7 @@ class School(models.Model):
         null=True,
         blank=True,
     )
-    poly = models.PolygonField(
+    boundary = models.MultiPolygonField(
         null=True,
         blank=True,
     )

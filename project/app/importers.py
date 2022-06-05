@@ -1,10 +1,12 @@
 # Django
 import csv
+import json
 
 from app.forms import IsatForm
 from app.models import Isat
 from app.models import School
 from app.models import Staff
+from django.contrib.gis.geos import GEOSGeometry
 
 
 def clean_stat(stat):
@@ -161,5 +163,34 @@ def import_enrollment(filename):
                 print('Multi', name)
             school.enrollment = enrollment
             school.capacity = capacity
+            school.save()
+    return
+
+
+def import_highschool_boundaries(filename='highschool.geojson'):
+    with open(filename) as f:
+        geojson = json.loads(f.read())
+        for feature in geojson['features']:
+            school = School.objects.get(gis_id=feature['properties']['TYPEID'])
+            geometry = feature['geometry']
+            geometry['type'] = 'MultiPolygon'
+            geometry['coordinates'] = [geometry['coordinates']]
+            geom = GEOSGeometry(str(feature['geometry']))
+            school.boundary = geom
+            school.save()
+    return
+
+
+def import_elementary_boundaries(filename='elementary.geojson'):
+    with open(filename) as f:
+        geojson = json.loads(f.read())
+        for feature in geojson['features']:
+            school = School.objects.get(gis_id=feature['properties']['PS'])
+            geometry = feature['geometry']
+            if geometry['type'] == 'Polygon':
+                geometry['type'] = 'MultiPolygon'
+                geometry['coordinates'] = [geometry['coordinates']]
+            geom = GEOSGeometry(str(feature['geometry']))
+            school.boundary = geom
             school.save()
     return
