@@ -7,8 +7,6 @@ from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from django.contrib.gis.admin.options import GISModelAdmin
 from django_fsm_log.admin import StateLogInline
 from fsm_admin.mixins import FSMTransitionMixin
-from leaflet.admin import LeafletGeoAdminMixin
-from leaflet_admin_list.admin import LeafletAdminListMixin
 from reversion.admin import VersionAdmin
 
 # Local

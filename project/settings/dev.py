@@ -46,5 +46,4 @@ DEBUG_TOOLBAR_PANELS = [
 INSTALLED_APPS += [
     'debug_toolbar',
     'whitenoise.runserver_nostatic',
-    'django_extensions',
 ]
