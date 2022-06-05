@@ -270,6 +270,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'django.contrib.gis',
+    'leaflet',
+    'leaflet_admin_list',
     'django_rq',
     'reversion',
     'fsm_admin',

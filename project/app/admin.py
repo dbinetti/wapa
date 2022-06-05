@@ -7,7 +7,10 @@ from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from django.contrib.gis.admin.options import GISModelAdmin
 from django_fsm_log.admin import StateLogInline
 from fsm_admin.mixins import FSMTransitionMixin
+from leaflet.admin import LeafletGeoAdminMixin
 from reversion.admin import VersionAdmin
+
+from leaflet_admin_list.admin import LeafletAdminListMixin
 
 # Local
 from .forms import AccountAdminForm
@@ -286,7 +289,7 @@ class IssueAdmin(VersionAdmin):
 
 
 @admin.register(School)
-class SchoolAdmin(VersionAdmin, GISModelAdmin):
+class SchoolAdmin(LeafletAdminListMixin, LeafletGeoAdminMixin, VersionAdmin):
     save_on_top = True
     fields = (
         'name',
