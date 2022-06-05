@@ -415,6 +415,9 @@ class School(models.Model):
         null=True,
         blank=True,
     )
+    is_traditional = models.BooleanField(
+        default=False,
+    )
     KIND = Choices(
         (10, 'elementary', 'Elementary School'),
         (20, 'middle', 'Middle School'),

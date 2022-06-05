@@ -288,7 +288,7 @@ class IssueAdmin(VersionAdmin):
 
 
 @admin.register(School)
-class SchoolAdmin(LeafletAdminListMixin, LeafletGeoAdminMixin, VersionAdmin):
+class SchoolAdmin(VersionAdmin, GISModelAdmin):
     save_on_top = True
     fields = (
         'name',
@@ -298,6 +298,7 @@ class SchoolAdmin(LeafletAdminListMixin, LeafletGeoAdminMixin, VersionAdmin):
             'size',
             'capacity',
         ),
+        'is_traditional',
         'location_id',
         'gis_id',
         'school_id',
@@ -310,14 +311,12 @@ class SchoolAdmin(LeafletAdminListMixin, LeafletGeoAdminMixin, VersionAdmin):
     list_display = [
         'id',
         'name',
-        'gis_id',
         # 'full',
         # 'school_id',
         # 'kind',
     ]
     list_editable = [
         'name',
-        'gis_id',
 
         # 'full',
         # 'kind',
@@ -325,6 +324,7 @@ class SchoolAdmin(LeafletAdminListMixin, LeafletGeoAdminMixin, VersionAdmin):
     ]
     list_filter = [
         'kind',
+        'is_traditional',
     ]
     search_fields = [
         'name',
