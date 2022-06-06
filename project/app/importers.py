@@ -171,7 +171,7 @@ def import_highschool_boundaries(filename='highschool.geojson'):
     with open(filename) as f:
         geojson = json.loads(f.read())
         for feature in geojson['features']:
-            school = School.objects.get(gis_id=feature['properties']['TYPEID'])
+            school = School.objects.get(id=feature['id'])
             geometry = feature['geometry']
             geometry['type'] = 'MultiPolygon'
             geometry['coordinates'] = [geometry['coordinates']]
@@ -185,7 +185,21 @@ def import_elementary_boundaries(filename='elementary.geojson'):
     with open(filename) as f:
         geojson = json.loads(f.read())
         for feature in geojson['features']:
-            school = School.objects.get(gis_id=feature['properties']['PS'])
+            school = School.objects.get(id=feature['id'])
+            geometry = feature['geometry']
+            if geometry['type'] == 'Polygon':
+                geometry['type'] = 'MultiPolygon'
+                geometry['coordinates'] = [geometry['coordinates']]
+            geom = GEOSGeometry(str(feature['geometry']))
+            school.boundary = geom
+            school.save()
+    return
+
+def import_middle_boundaries(filename='middle.geojson'):
+    with open(filename) as f:
+        geojson = json.loads(f.read())
+        for feature in geojson['features']:
+            school = School.objects.get(id=feature['id'])
             geometry = feature['geometry']
             if geometry['type'] == 'Polygon':
                 geometry['type'] = 'MultiPolygon'
