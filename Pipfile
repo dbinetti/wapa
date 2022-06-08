@@ -13,6 +13,9 @@ pytest-django = "*"
 pylint = "*"
 notebook = "*"
 folium = "*"
+geopandas = "*"
+django-extensions = "*"
+matplotlib = "*"
 
 [packages]
 django = "*"
@@ -48,6 +51,7 @@ django-fsm-admin = {editable = true, ref = "prosehair-dev", git = "https://githu
 python-magic = "*"
 python-pdf = "*"
 geocoder = "*"
+
 
 [requires]
 python_version = "3.10"
