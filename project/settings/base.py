@@ -115,14 +115,8 @@ MEDIA_ROOT = root('mediafiles')
 MEDIA_URL = '/media/'
 CLOUDINARY_URL = env("CLOUDINARY_URL")
 
-
 # Google
 GOOGLE_API_KEY = env("GOOGLE_API_KEY")
-
-# Voter API
-VOTER_API_KEY = env("VOTER_API_KEY")
-VOTER_API_HOST = env("VOTER_API_HOST")
-
 
 # Facebook
 FACEBOOK_CLIENT_ID = env("FACEBOOK_CLIENT_ID")
