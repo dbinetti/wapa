@@ -91,7 +91,7 @@ def create_account_from_user(user):
             picture = cloudinary.uploader.unsigned_upload(
                 file,
                 'picture',
-                folder=f'{settings.CLOUDINARY_PREFIX}/pictures/',
+                folder=f'pictures',
                 public_id=str(user.account.id),
                 resource_type='image',
             )
