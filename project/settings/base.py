@@ -114,6 +114,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_ROOT = root('mediafiles')
 MEDIA_URL = '/media/'
 CLOUDINARY_URL = env("CLOUDINARY_URL")
+CLOUDINARY_NAME = CLOUDINARY_URL.rpartition("@")[2]
 
 # Google
 GOOGLE_API_KEY = env("GOOGLE_API_KEY")

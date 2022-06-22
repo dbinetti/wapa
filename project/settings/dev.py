@@ -18,6 +18,11 @@ MIDDLEWARE += [
     'querycount.middleware.QueryCountMiddleware',
 ]
 
+# Cloudinary
+CLOUDINARY_PREFIX = 'wapa-dev'
+CLOUDINARY_STORAGE = {
+    'PREFIX': CLOUDINARY_PREFIX,
+}
 
 # Async settings
 RQ_QUEUES['default']['ASYNC'] = False
