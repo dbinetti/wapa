@@ -52,7 +52,7 @@ python-magic = "*"
 python-pdf = "*"
 pypdf2 = "*"
 geocoder = "*"
-
+pdfplumber = "*"
 
 [requires]
 python_version = "3.10"

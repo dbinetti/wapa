@@ -16,25 +16,34 @@
 
 {% block content %}
   <section class='jumbotron'>
+    {% comment %}
     <div class='wistia mb-3'>
         <script src="https://fast.wistia.com/embed/medias/vf6zi89kl5.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_vf6zi89kl5 popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
     </div>
-    {% comment %}
+    {% endcomment %}
     <section class='px-5 py-2'>
-      <h3>
-        Amy Johnson Resigns
+      <h3 class='mb-3'>
+        New Leadership for WAPA
       </h3>
       <p>
-        At the conclusion of the Board Meeting on February 14, 2022, Amy Johnson announced her resignation from the West Ada School Board of Trustees.
+        Given my new position as School Board Trustee I’ve been seeking a replacement to lead the West Ada Parents Association. And while it’s taken me longer than expected to accomplish that goal, I’m nonetheless excited to announce that Jared Lucas will be taking things over from here.
       </p>
       <p>
-        Public Service is a noble calling, and perhaps noblest of all are those who volunteer their time, energy, and effort to represent the voters on behalf of our children.  Our policy differences with Amy &mdash; and there were many such differences that we faced respectfully yet resolutely &mdash; does not diminish the fact that she served, and that is to be acknowledged and appreciated.
+        Jared fought hard for our kids from the beginning, with a clear, level-headed and unwavering dedication to the cause. Few have done as much as he to bring about normalcy in West Ada, and I can think of no better person to lead WAPA moving forward. I’m so appreciative he’s agreed to take the reins.
       </p>
       <p>
-        We thank her for that service, and wish her the very best in all her future endeavors.
+        Jared’s voice and style are different that mine, but he does intend to maintain most of the same priorities: keeping parents updated through the newsletter, helping individual parents on school matters, and holding our Board Members accountable (and yes, that includes me most of all.)  <a href='{% url "login" %}'>Join us</a> for access to this and more.
       </p>
+      <p>
+        It's been an honor to lead WAPA for the past year, and I'm excited for this next chapter to unfold.  Thank you Jared!  I know you will do great things with WAPA moving forward.
+      </p>
+      <br>
+      <p>
+        <strong>David Binetti</strong><br>
+        <strong>Founder, West Ada Parents Association</strong>
+      </p>
+      <br>
     </section>
-    {% endcomment %}
     <a href='{% url "login" %}' class="btn btn-success btn-block btn-lg p-3 shadow-lg">
       Click to <strong>Join <span id='member-count'></span> Parents<br>in the West Ada Parents Association</strong>
     </a>

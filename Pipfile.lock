@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c221aedb03e3c0e74b72448c2bd90b6320b5dd2d78599b4a9abdc6b37b0c6b5f"
+            "sha256": "35071364cd153cc507a6d0242ecd1dba033695a240083e8004ddb098e16c0de0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -270,6 +270,7 @@
                 "sha256:f7a6de3e98771e183645181b3627e2563dcde3ce94a9e42a3f427d2255190327",
                 "sha256:f8c0a6e9e1dd3eb0414ba320f85da6b0dcbd543126e30fcc546e7372a7fbf3b9"
             ],
+            "markers": "python_version >= '3.6'",
             "version": "==37.0.4"
         },
         "decorator": {
@@ -562,6 +563,22 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==0.8.3"
+        },
+        "pdfminer.six": {
+            "hashes": [
+                "sha256:5a64c924410ac48501d6060b21638bf401db69f5b1bd57207df7fbc070ac8ae2",
+                "sha256:7e19b857ec76bcbd35665909ad8965a481ad48d9bdff6c45f8522ee66f8a7aab"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==20220524"
+        },
+        "pdfplumber": {
+            "hashes": [
+                "sha256:75d4b5d1fa6d7893fe36830dd85c32f9869bb03dcc64ef70bce24260cfbe9fa3",
+                "sha256:eef1a22c0df779777990018a566f002fae1ffff9be80660175ffb0677272c057"
+            ],
+            "index": "pypi",
+            "version": "==0.7.1"
         },
         "pexpect": {
             "hashes": [
@@ -876,6 +893,13 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_version < '4'",
             "version": "==1.26.10"
+        },
+        "wand": {
+            "hashes": [
+                "sha256:716abd099350a88a2dfd07d3e3656d25e98936b16d8101b75d947e8ad57eb072",
+                "sha256:7dd08b71a312314f438936d58f583f6d4a5b8dfd927e6852cd2035e785d5d3a6"
+            ],
+            "version": "==0.6.8"
         },
         "wcwidth": {
             "hashes": [

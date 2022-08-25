@@ -53,9 +53,11 @@
             <li class='nav-item mt-1'>
               <a href="{% url 'updates' %}" class='mr-3'><span class='bi-newspaper'></span>&nbsp;&nbsp;Updates</a>
             </li>
+            {% comment %}
             <li class='nav-item mt-1'>
               <a href="{% url 'board' %}" class='mr-3'><span class='bi-mortarboard'></span>&nbsp;&nbsp;Board</a>
             </li>
+            {% endcomment %}
             {% if request.user.is_authenticated %}
               <li class='nav-item mt-1'>
                 <a href="{% url 'dashboard' %}" class='align-bottom bi-speedometer2 mr-3'>&nbsp;Dashboard</a>
