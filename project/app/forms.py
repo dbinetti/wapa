@@ -112,8 +112,8 @@ class StudentForm(forms.ModelForm):
             # ),
         }
         help_texts = {
-            'school': "School attending 2021-22.",
-            'grade': "Grade for 2021-22.",
+            'school': "School attending 2022-23.",
+            'grade': "Grade for 2022-23.",
         }
 
 
@@ -156,7 +156,7 @@ class AccountAdminForm(forms.ModelForm):
 
         help_texts = {
             'name': mark_safe("Please update to your full, real name."),
-            'address': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong> unless we certify."),
+            'address': mark_safe("Please provide your <strong>residence address</strong>, which will remain <strong>private and confidential</strong>."),
             'email': mark_safe("We do not sell, share, or spam you."),
         }
 
